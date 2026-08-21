@@ -1,0 +1,23 @@
+{
+  "canonical": {
+    "post_path": "docs/blog/posts/2026-08-17.md",
+    "release_id": "canonical-2026-08-17-2026-08-20T045616+0000-729610a6",
+    "state": "published",
+    "updated_at": "2026-08-20T04:56:18+00:00"
+  },
+  "collection": {
+    "event_count": 1,
+    "repository_count": 1,
+    "state": "ready",
+    "updated_at": "2026-08-20T04:56:16+00:00"
+  },
+  "editorial": {
+    "attempts": [],
+    "state": "pending",
+    "updated_at": "2026-08-20T04:56:16+00:00"
+  },
+  "evidence_path": "data/daily/2026-08-17.json",
+  "report_date": "2026-08-17",
+  "schema_version": 1,
+  "updated_at": "2026-08-20T04:56:18+00:00"
+}

@@ -1,0 +1,394 @@
+{
+  "commit_enrichment_errors": [],
+  "coverage_note": "Public GitHub Events API is bounded and is not complete commit history.",
+  "events": [
+    {
+      "created_at": "2026-08-12T12:33:13Z",
+      "id": "17480636555",
+      "local_time": "2026-08-12T07:33:13-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/super-bowling",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-12T12:38:54Z",
+      "id": "17481009974",
+      "local_time": "2026-08-12T07:38:54-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/bkchem-oasa",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-12T12:52:50Z",
+      "id": "17481975655",
+      "local_time": "2026-08-12T07:52:50-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-12T12:58:10Z",
+      "id": "17482371452",
+      "local_time": "2026-08-12T07:58:10-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-12T13:33:33Z",
+      "id": "17484981909",
+      "local_time": "2026-08-12T08:33:33-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-12T14:05:08Z",
+      "id": "17487328319",
+      "local_time": "2026-08-12T09:05:08-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/starter-repo-template",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-12T14:08:21Z",
+      "id": "17487578383",
+      "local_time": "2026-08-12T09:08:21-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-12T14:37:57Z",
+      "id": "17489831157",
+      "local_time": "2026-08-12T09:37:57-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-12T14:39:09Z",
+      "id": "17489924709",
+      "local_time": "2026-08-12T09:39:09-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-12T21:58:46Z",
+      "id": "17517298351",
+      "local_time": "2026-08-12T16:58:46-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/battery-control",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-13T00:14:31Z",
+      "id": "17523145414",
+      "local_time": "2026-08-12T19:14:31-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-13T04:10:02Z",
+      "id": "17532687613",
+      "local_time": "2026-08-12T23:10:02-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/battery-control",
+      "type": "PushEvent"
+    }
+  ],
+  "max_pages": 3,
+  "pages_fetched": 1,
+  "report_date": "2026-08-12",
+  "repositories": [
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/super-bowling/commits?since=2026-08-12T05%3A00%3A00Z&until=2026-08-13T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "## 2026-08-12\n- The one-time live collision subject now anchors to the first authoritative ball-pin centroid,\n  keeping the locally predicted 496- and 990-pin neighborhood through the cascade while the pre-imp...\n- Simplified the audited camera and evidence path by removing fragile cache, timing, request-ID,\n  and magic-threshold tests and test hooks; deleted dead configuration, state, and projection facad...\n- Refreshed evidence citations, reproduction guidance, the source file map, and M10 wording. The\n  impulse-only dense-rack cascade expansion remains a measured evidence blocker, not a shipped came...\n- Refreshed all 19 managed documentation visuals from the built production app after the\n  authoritative collision-zone correction. The updated 990-pin travel, first-impact, opening-wave, ...\n- Fresh built-browser 496- and 990-pin captures and focused independent reviews passed. The\n  retained evidence checks ball readability through renderable travel and impact, local collision f...\n## 2026-08-11\n- Corrected durable camera documentation to distinguish complete-rack establish\n  and settled-result context from normal-motion local collision-zone framing. The records now state...\n- Repaired the real-browser audio-cascade shot setup to use the visible, source-valid ten-pin\n  pocket controls (a -2.5-board start and maximum regular power). The test now waits for the matchi...\n- Kept the shipped dense-rack raster path after an interleaved production-Canvas comparison.\n  The optional development profiler finds repeated 496/990 pin-body composition, not a missing pin-...\n- Preserved the first-ball-pin local collision hold and the authoritative settled-result handoff.\n  Collision-zone capture projection is now an explicit `camera-diagnostics` query opt-in, keeping i...\n- Fixed the live launch handoff so the camera consumes the exact accepted public-worker preview\n  path before reactive aiming-preview churn can clear it. Production browser evidence now observes ...\n- Replaced the live camera's instantaneous ball-to-entry-pin zoom limiter with a pure forward\n  envelope derived from the committed public-worker path still ahead of the authoritative ball and ...\n- Reframed the live camera around the accepted collision-zone center instead of the complete-rack",
+          "committed_at": "2026-08-12T07:33:09-05:00",
+          "full_message": "The one-time live collision subject now anchors to the fir... (+18 more)\n\n## 2026-08-12\n- The one-time live collision subject now anchors to the first authoritative ball-pin centroid,\n  keeping the locally predicted 496- and 990-pin neighborhood through the cascade while the pre-imp...\n- Simplified the audited camera and evidence path by removing fragile cache, timing, request-ID,\n  and magic-threshold tests and test hooks; deleted dead configuration, state, and projection facad...\n- Refreshed evidence citations, reproduction guidance, the source file map, and M10 wording. The\n  impulse-only dense-rack cascade expansion remains a measured evidence blocker, not a shipped came...\n- Refreshed all 19 managed documentation visuals from the built production app after the\n  authoritative collision-zone correction. The updated 990-pin travel, first-impact, opening-wave, ...\n- Fresh built-browser 496- and 990-pin captures and focused independent reviews passed. The\n  retained evidence checks ball readability through renderable travel and impact, local collision f...\n## 2026-08-11\n- Corrected durable camera documentation to distinguish complete-rack establish\n  and settled-result context from normal-motion local collision-zone framing. The records now state...\n- Repaired the real-browser audio-cascade shot setup to use the visible, source-valid ten-pin\n  pocket controls (a -2.5-board start and maximum regular power). The test now waits for the matchi...\n- Kept the shipped dense-rack raster path after an interleaved production-Canvas comparison.\n  The optional development profiler finds repeated 496/990 pin-body composition, not a missing pin-...\n- Preserved the first-ball-pin local collision hold and the authoritative settled-result handoff.\n  Collision-zone capture projection is now an explicit `camera-diagnostics` query opt-in, keeping i...\n- Fixed the live launch handoff so the camera consumes the exact accepted public-worker preview\n  path before reactive aiming-preview churn can clear it. Production browser evidence now observes ...\n- Replaced the live camera's instantaneous ball-to-entry-pin zoom limiter with a pure forward\n  envelope derived from the committed public-worker path still ahead of the authoritative ball and ...\n- Reframed the live camera around the accepted collision-zone center instead of the complete-rack",
+          "html_url": "https://github.com/vosslab/super-bowling/commit/6deaac073f36583e1bbee5647f8fe757dd72dbaf",
+          "sha": "6deaac073f36583e1bbee5647f8fe757dd72dbaf",
+          "subject": "The one-time live collision subject now anchors to the fir... (+18 more)"
+        }
+      ],
+      "description": "An original browser bowling game for friends sharing one keyboard, where technique-driven shots curve through regulation-inspired lanes toward triangular racks from 10 to 990 pins.",
+      "event_count": 1,
+      "language": "TypeScript",
+      "repo": "vosslab/super-bowling",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/bkchem-oasa/commits?since=2026-08-12T05%3A00%3A00Z&until=2026-08-13T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "- Routed Arrow and geometric property patches through the same lxml-authorized\n  complete-CDML parser before constructing their detached compatibility DOM.\n- Moved effective Arrow, Text, Plus, Wavy, geometric, and bracket appearance\n  resolution into immutable OASA projection facts. Qt projection and Configure paths now consume th...\n- Corrected the retained Tk one-time smoke launch path so it imports the\n  package from `packages/bkchem-app` rather than constructing a nonexistent nested `packages/bkchem...\n- Reduced the permanent Tk and Qt suites using the repository pytest checklist.\n  Deprecated native-Tk window scripts, migration-parity matrices, Qt visual diagnostics, action inv...\n- Applied the final six-perspective audit's documentation, comment, test, and\n  architecture findings. A small fixture-free Qt adapter contract now proves immutable OASA project...",
+          "committed_at": "2026-08-12T07:38:50-05:00",
+          "full_message": "Routed Arrow and geometric property patches through the sam... (+4 more)\n\n- Routed Arrow and geometric property patches through the same lxml-authorized\n  complete-CDML parser before constructing their detached compatibility DOM.\n- Moved effective Arrow, Text, Plus, Wavy, geometric, and bracket appearance\n  resolution into immutable OASA projection facts. Qt projection and Configure paths now consume th...\n- Corrected the retained Tk one-time smoke launch path so it imports the\n  package from `packages/bkchem-app` rather than constructing a nonexistent nested `packages/bkchem...\n- Reduced the permanent Tk and Qt suites using the repository pytest checklist.\n  Deprecated native-Tk window scripts, migration-parity matrices, Qt visual diagnostics, action inv...\n- Applied the final six-perspective audit's documentation, comment, test, and\n  architecture findings. A small fixture-free Qt adapter contract now proves immutable OASA project...",
+          "html_url": "https://github.com/vosslab/bkchem-oasa/commit/f8fd0e6fbd67d40e48c4d6e38116524e85a6d8ed",
+          "sha": "f8fd0e6fbd67d40e48c4d6e38116524e85a6d8ed",
+          "subject": "Routed Arrow and geometric property patches through the sam... (+4 more)"
+        }
+      ],
+      "description": "BKChem is a GUI for drawing chemical structures. OASA (Open Architecture for Sketching Atoms and Molecules) is the chemistry library that powers structure conversion and analysis. This repository is the primary home for both projects.",
+      "event_count": 1,
+      "language": "Python",
+      "repo": "vosslab/bkchem-oasa",
+      "stars": 1,
+      "topics": []
+    },
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/ferrum-chemical-forge/commits?since=2026-08-12T05%3A00%3A00Z&until=2026-08-13T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "- Narrowed the native RDKit policy to the implemented GraphMol kekulization ABI. It\n  retains only pinned RDKit, configure-time Catch2, Better Enums required for a generated GraphMol ...\n- Removed the test-only native build-marker export from Ferrum-Chem before release.\n  The ABI-2 surface now contains only its version, chemistry operation, and owned response lifecycl...\n- Made the public Ferrum-Chem header the sole numeric authority for bond wire values\n  as well as the ABI constants. Rust derives its private wire constants from that header, preventin...\n- Documented the native kekulization boundary: a safe Rust `ChemEngine`,\n  Ferrum-owned graph records, the version-2 C ABI, explicit operation defaults, sealed native input...\n- Completed the narrow native kekulization milestone on macOS arm64. The source E2E\n  installed ABI 2 with its exact five-library closure, then verified alternating benzene bond order...\n- Recorded the one-time isolated RDKit orientation measurement on an asymmetric\n  molecule. Explicit `canonOrient=false` and `canonOrient=true` diverge; future Ferrum layout will ...\n- Declared CMake and upstream LLVM in the root `Brewfile` so `brew bundle`\n  installs the native Ferrum-Chem/RDKit build system and FOSS compiler frontend instead of relying ...\n- Declared unpinned Maturin in the root development requirements because the\n  native-wheel builder invokes its command directly; compatibility is established by the build gate...\n- Selected current Boost 1.91.0 headers for the reproducible native profile. Ferrum\n  neither builds nor bundles compiled Boost libraries; the source digest prevents ambient dependenc...\n- Completed the macOS arm64 native-wheel packaging and LGPL relink proof. The\n  hash-verified source build installs a minimal wheel in a scrubbed environment, then loads a repla...\n- Added JSON-only native-wheel evidence recording source hashes, CMake/LLVM/Rustup\n  provenance, the Apple SDK platform boundary, actual unpinned Maturin version, wheel digest, closu...\n- Removed Python RDKit from the root development environment. The Rust backend uses\n  the pinned C++ source build, while Python RDKit remains isolated with the historical oracle under...\n- Made Ferrum the sole owner of the packaged Mach-O closure: Maturin packages without",
+          "committed_at": "2026-08-12T07:52:46-05:00",
+          "full_message": "Narrowed the native RDKit policy to the implemented GraphM... (+22 more)\n\n- Narrowed the native RDKit policy to the implemented GraphMol kekulization ABI. It\n  retains only pinned RDKit, configure-time Catch2, Better Enums required for a generated GraphMol ...\n- Removed the test-only native build-marker export from Ferrum-Chem before release.\n  The ABI-2 surface now contains only its version, chemistry operation, and owned response lifecycl...\n- Made the public Ferrum-Chem header the sole numeric authority for bond wire values\n  as well as the ABI constants. Rust derives its private wire constants from that header, preventin...\n- Documented the native kekulization boundary: a safe Rust `ChemEngine`,\n  Ferrum-owned graph records, the version-2 C ABI, explicit operation defaults, sealed native input...\n- Completed the narrow native kekulization milestone on macOS arm64. The source E2E\n  installed ABI 2 with its exact five-library closure, then verified alternating benzene bond order...\n- Recorded the one-time isolated RDKit orientation measurement on an asymmetric\n  molecule. Explicit `canonOrient=false` and `canonOrient=true` diverge; future Ferrum layout will ...\n- Declared CMake and upstream LLVM in the root `Brewfile` so `brew bundle`\n  installs the native Ferrum-Chem/RDKit build system and FOSS compiler frontend instead of relying ...\n- Declared unpinned Maturin in the root development requirements because the\n  native-wheel builder invokes its command directly; compatibility is established by the build gate...\n- Selected current Boost 1.91.0 headers for the reproducible native profile. Ferrum\n  neither builds nor bundles compiled Boost libraries; the source digest prevents ambient dependenc...\n- Completed the macOS arm64 native-wheel packaging and LGPL relink proof. The\n  hash-verified source build installs a minimal wheel in a scrubbed environment, then loads a repla...\n- Added JSON-only native-wheel evidence recording source hashes, CMake/LLVM/Rustup\n  provenance, the Apple SDK platform boundary, actual unpinned Maturin version, wheel digest, closu...\n- Removed Python RDKit from the root development environment. The Rust backend uses\n  the pinned C++ source build, while Python RDKit remains isolated with the historical oracle under...\n- Made Ferrum the sole owner of the packaged Mach-O closure: Maturin packages without",
+          "html_url": "https://github.com/vosslab/ferrum-chemical-forge/commit/e86db4459a979ceabe6656cabf1a76c9a75d9e43",
+          "sha": "e86db4459a979ceabe6656cabf1a76c9a75d9e43",
+          "subject": "Narrowed the native RDKit policy to the implemented GraphM... (+22 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-12T07:58:01-05:00",
+          "full_message": "update version",
+          "html_url": "https://github.com/vosslab/ferrum-chemical-forge/commit/d1f7d6a59d712ddaf732b60173fd6223b3cd5003",
+          "sha": "d1f7d6a59d712ddaf732b60173fd6223b3cd5003",
+          "subject": "update version"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-12T08:33:26-05:00",
+          "full_message": "formatting",
+          "html_url": "https://github.com/vosslab/ferrum-chemical-forge/commit/b9ed3b7c327a134ccd5147d0eed63db860280c10",
+          "sha": "b9ed3b7c327a134ccd5147d0eed63db860280c10",
+          "subject": "formatting"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-12T09:39:06-05:00",
+          "full_message": "intermediate",
+          "html_url": "https://github.com/vosslab/ferrum-chemical-forge/commit/0fae092abb0235f42652f0d1db636d038e43ebf4",
+          "sha": "0fae092abb0235f42652f0d1db636d038e43ebf4",
+          "subject": "intermediate"
+        }
+      ],
+      "description": "A pre-alpha CDML chemical drawing platform for scientists and educators that combines a retained PySide6 desktop editor with a planned Rust chemistry backend for durable document ownership.",
+      "event_count": 4,
+      "language": "Python",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/starter-repo-template/commits?since=2026-08-12T05%3A00%3A00Z&until=2026-08-13T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "- `templates/rust/docs/RUST_STYLE.md`: defined a security-focused Cargo version policy. New direct\n  dependencies use the manager-selected repository form: wildcard `*` for every stable version, or ...\n- Set the Rust toolchain policy to the latest stable compiler with the current manifest floor\n  written as `rust-version = \"1.97.1\"`, matching the installed `rustc 1.97.1 (8bab26f4f 2026-07-14)...\n- Reformatted the Rust examples in `templates/rust/docs/RUST_STYLE.md` with rustfmt's four-space\n  indentation instead of tabs, aligning the examples with the guide's own formatting rule.\n- Rephrased Rust directives around the desired implementation behavior: explicit imports, safe\n  Rust boundaries, concrete library errors, lifetime elision, and behavior-focused tests.\n- Baked the repository's source-file ceiling into `templates/rust/docs/RUST_STYLE.md`: use 999\n  physical lines as the inclusive maximum and keep generic crate roots, module roots, and test inde...\n- Applied the six-pass audit corrections: added a canonical Rust filename map, identified\n  `docs.rs` as the hosted documentation service, directed reusable binary behavior into focused lib...\n- Condensed the new toolchain and dependency policy to its executable contract: current compiler,\n  latest stable direct dependencies, the manager-selected `*` or `>=LATEST` form, lockfile refresh,...\n- Aligned the guide with the `rust-code-expert` reference workflow. Existing-project work now names\n  the owning crate and module, callers, features, target triple, error contract, and value flow; gr...\n- Completed a whole-document Rust review against the skill references and current official sources.\n  Corrected modern module paths and the private-module `pub use` example; narrowed Python-style car...\n- Split Python binding guidance into `templates/rust/docs/RUST_PYO3_STYLE.md` so\n  `RUST_STYLE.md` stays focused on Rust. The new guide owns PyO3 boundary architecture, extension a...\n- Added `templates/rust/docs/RUST_WASM_STYLE.md` for the browser and WASI boundary. It covers\n  target and tool selection, a Rust-core/thin-export architecture, `wasm-bindgen` API design, JavaS...\n- Rotated `docs/CHANGELOG.md` after it crossed 1000 lines. Kept the two newest day blocks active\n  and moved the 2026-08-07 through 2026-06-30 blocks into `docs/CHANGELOG-2026-08a.md`.\n- Confirmed the documented compiler floor against",
+          "committed_at": "2026-08-12T09:05:02-05:00",
+          "full_message": "`templates/rust/docs/RUST_STYLE.md`: defined a security-fo... (+13 more)\n\n- `templates/rust/docs/RUST_STYLE.md`: defined a security-focused Cargo version policy. New direct\n  dependencies use the manager-selected repository form: wildcard `*` for every stable version, or ...\n- Set the Rust toolchain policy to the latest stable compiler with the current manifest floor\n  written as `rust-version = \"1.97.1\"`, matching the installed `rustc 1.97.1 (8bab26f4f 2026-07-14)...\n- Reformatted the Rust examples in `templates/rust/docs/RUST_STYLE.md` with rustfmt's four-space\n  indentation instead of tabs, aligning the examples with the guide's own formatting rule.\n- Rephrased Rust directives around the desired implementation behavior: explicit imports, safe\n  Rust boundaries, concrete library errors, lifetime elision, and behavior-focused tests.\n- Baked the repository's source-file ceiling into `templates/rust/docs/RUST_STYLE.md`: use 999\n  physical lines as the inclusive maximum and keep generic crate roots, module roots, and test inde...\n- Applied the six-pass audit corrections: added a canonical Rust filename map, identified\n  `docs.rs` as the hosted documentation service, directed reusable binary behavior into focused lib...\n- Condensed the new toolchain and dependency policy to its executable contract: current compiler,\n  latest stable direct dependencies, the manager-selected `*` or `>=LATEST` form, lockfile refresh,...\n- Aligned the guide with the `rust-code-expert` reference workflow. Existing-project work now names\n  the owning crate and module, callers, features, target triple, error contract, and value flow; gr...\n- Completed a whole-document Rust review against the skill references and current official sources.\n  Corrected modern module paths and the private-module `pub use` example; narrowed Python-style car...\n- Split Python binding guidance into `templates/rust/docs/RUST_PYO3_STYLE.md` so\n  `RUST_STYLE.md` stays focused on Rust. The new guide owns PyO3 boundary architecture, extension a...\n- Added `templates/rust/docs/RUST_WASM_STYLE.md` for the browser and WASI boundary. It covers\n  target and tool selection, a Rust-core/thin-export architecture, `wasm-bindgen` API design, JavaS...\n- Rotated `docs/CHANGELOG.md` after it crossed 1000 lines. Kept the two newest day blocks active\n  and moved the 2026-08-07 through 2026-06-30 blocks into `docs/CHANGELOG-2026-08a.md`.\n- Confirmed the documented compiler floor against",
+          "html_url": "https://github.com/vosslab/starter-repo-template/commit/bed0bf551e09097792a89495071a4f4ff7af8347",
+          "sha": "bed0bf551e09097792a89495071a4f4ff7af8347",
+          "subject": "`templates/rust/docs/RUST_STYLE.md`: defined a security-fo... (+13 more)"
+        }
+      ],
+      "description": "Starter repository template for my projects. Includes style guides, AGENTS.md, agent skills, and a small set of reusable development scripts to bootstrap new repos with consistent structure and workflow.",
+      "event_count": 1,
+      "language": "Python",
+      "repo": "vosslab/starter-repo-template",
+      "stars": 1,
+      "topics": []
+    },
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/peptidyle-learning-engine/commits?since=2026-08-12T05%3A00%3A00Z&until=2026-08-13T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "- Removed the pre-production PLE flat-question JSON v1 reader, compiler, family registration,\n  private-payload branch, current fixtures, and authoring contract. Native flat content now accepts...\n- Replaced the UI walkthrough's inherited hidden Python `PLE_*` run switches\n  with documented `argparse` choices and a single explicit, schema-versioned private input file for...\n- Decoupled the persistent-volume canonical UI walkthrough from the Chapter 1\n  all-eight learner sweep. Its default lifecycle now remains J11/J12/J13 then J1/J2/J3/J4/J5/J8 aga...",
+          "committed_at": "2026-08-12T09:08:17-05:00",
+          "full_message": "Removed the pre-production PLE flat-question JSON v1 reader... (+2 more)\n\n- Removed the pre-production PLE flat-question JSON v1 reader, compiler, family registration,\n  private-payload branch, current fixtures, and authoring contract. Native flat content now accepts...\n- Replaced the UI walkthrough's inherited hidden Python `PLE_*` run switches\n  with documented `argparse` choices and a single explicit, schema-versioned private input file for...\n- Decoupled the persistent-volume canonical UI walkthrough from the Chapter 1\n  all-eight learner sweep. Its default lifecycle now remains J11/J12/J13 then J1/J2/J3/J4/J5/J8 aga...",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/548e3389d61c6a970ff7e4bb77b0168b97d6095a",
+          "sha": "548e3389d61c6a970ff7e4bb77b0168b97d6095a",
+          "subject": "Removed the pre-production PLE flat-question JSON v1 reader... (+2 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-12T09:37:49-05:00",
+          "full_message": "intermediate",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/2d0c99f7e4a7446a4b5523e4475a6055cf3e1e14",
+          "sha": "2d0c99f7e4a7446a4b5523e4475a6055cf3e1e14",
+          "subject": "intermediate"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- Accepted the bounded human-guidance workflow after rerunning its real boundaries rather than\n  relying on stale plan checkboxes. The clean-stack no-email teaching loop now covers visible four-...\n- Restored the fast TypeScript codebase gate without weakening its contracts. Prefetched successor\n  acceptance now has one typed receipt-binding policy that checks every descriptor available before...\n- Reduced Rust development storage after a measured broad-gate workload grew `target/` to 136 GB:\n  the shared dev profile now disables incremental compilation and retains line-table debug informat...\n- Tightened the shared learner and instructor visual hierarchy so course pages read as compact\n  academic workspaces instead of nested padded cards. Course identity is now a narrow color rail on...\n- Removed the synthetic one-question WebWork course from normal and canonical local-stack seeding.\n  The launcher now publishes only the reviewed Genetics and Biochemistry Chapter 1 teaching corpus,...\n- Expanded the protected flat-question authoring surface across all eight version 2 families while\n  keeping accepted answers and feedback out of the learner-equivalent preview. MC, MA, FIB, MULTI-F...\n- Restored the reviewed Cargo dependency-policy boundary: direct registry dependencies may use\n  `version = \"*\"` or an audited open `version = \">=LATEST\"` minimum, while caret, exact, tilde, and...",
+          "committed_at": "2026-08-12T19:14:28-05:00",
+          "full_message": "Accepted the bounded human-guidance workflow after rerunnin... (+6 more)\n\n- Accepted the bounded human-guidance workflow after rerunning its real boundaries rather than\n  relying on stale plan checkboxes. The clean-stack no-email teaching loop now covers visible four-...\n- Restored the fast TypeScript codebase gate without weakening its contracts. Prefetched successor\n  acceptance now has one typed receipt-binding policy that checks every descriptor available before...\n- Reduced Rust development storage after a measured broad-gate workload grew `target/` to 136 GB:\n  the shared dev profile now disables incremental compilation and retains line-table debug informat...\n- Tightened the shared learner and instructor visual hierarchy so course pages read as compact\n  academic workspaces instead of nested padded cards. Course identity is now a narrow color rail on...\n- Removed the synthetic one-question WebWork course from normal and canonical local-stack seeding.\n  The launcher now publishes only the reviewed Genetics and Biochemistry Chapter 1 teaching corpus,...\n- Expanded the protected flat-question authoring surface across all eight version 2 families while\n  keeping accepted answers and feedback out of the learner-equivalent preview. MC, MA, FIB, MULTI-F...\n- Restored the reviewed Cargo dependency-policy boundary: direct registry dependencies may use\n  `version = \"*\"` or an audited open `version = \">=LATEST\"` minimum, while caret, exact, tilde, and...",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/9967a39300fb7401210002ec0406ff8a4b1f217b",
+          "sha": "9967a39300fb7401210002ec0406ff8a4b1f217b",
+          "subject": "Accepted the bounded human-guidance workflow after rerunnin... (+6 more)"
+        }
+      ],
+      "description": "An open platform for mastery teaching across question formats. Students retry varied problems until they can solve them consistently, then keep practicing fresh versions after completion, while grading and answer keys stay securely on the server",
+      "event_count": 3,
+      "language": "Rust",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/battery-control/commits?since=2026-08-12T05%3A00%3A00Z&until=2026-08-13T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-12T16:58:45-05:00",
+          "full_message": "Add 20 hourly data rows through 2026-08-12 15:00",
+          "html_url": "https://github.com/vosslab/battery-control/commit/f4b8cb90d0054f37b48287f5ddb64588e4c7e11e",
+          "sha": "f4b8cb90d0054f37b48287f5ddb64588e4c7e11e",
+          "subject": "Add 20 hourly data rows through 2026-08-12 15:00"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-12T23:10:00-05:00",
+          "full_message": "Add 7 hourly data rows through 2026-08-12 22:00",
+          "html_url": "https://github.com/vosslab/battery-control/commit/8f08ca1704f00c11a2f70fa3c84e1f9ded956461",
+          "sha": "8f08ca1704f00c11a2f70fa3c84e1f9ded956461",
+          "subject": "Add 7 hourly data rows through 2026-08-12 22:00"
+        }
+      ],
+      "description": "Battery arbitrage controller for ComEd real-time pricing with EP Cube and WeMo-controlled battery systems. Manages two physically separate batteries (EP Cube 20 kWh via cloud API, WeMo-controlled battery via smart plugs), making charge/discharge/hold decisions every 3 minutes based on real-time electricity prices and solar production.",
+      "event_count": 2,
+      "language": "Python",
+      "repo": "vosslab/battery-control",
+      "stars": 0,
+      "topics": []
+    }
+  ],
+  "retrieved_at": "2026-08-13T07:00:25+00:00",
+  "schema_version": 3,
+  "screenshots": [
+    {
+      "filename": "classic_ball_in_motion.png",
+      "media_path": "assets/screenshots/2026-08-12/super-bowling-classic_ball_in_motion.png",
+      "relative_path": "../../assets/screenshots/2026-08-12/super-bowling-classic_ball_in_motion.png",
+      "repo": "vosslab/super-bowling",
+      "source_path": "https://github.com/vosslab/super-bowling/raw/6deaac073f36583e1bbee5647f8fe757dd72dbaf/docs%2Fscreenshots%2Fclassic_ball_in_motion.png"
+    },
+    {
+      "filename": "five_hundred_pin_cascade.png",
+      "media_path": "assets/screenshots/2026-08-12/super-bowling-five_hundred_pin_cascade.png",
+      "relative_path": "../../assets/screenshots/2026-08-12/super-bowling-five_hundred_pin_cascade.png",
+      "repo": "vosslab/super-bowling",
+      "source_path": "https://github.com/vosslab/super-bowling/raw/6deaac073f36583e1bbee5647f8fe757dd72dbaf/docs%2Fscreenshots%2Ffive_hundred_pin_cascade.png"
+    },
+    {
+      "filename": "five_hundred_pin_first_impact.png",
+      "media_path": "assets/screenshots/2026-08-12/super-bowling-five_hundred_pin_first_impact.png",
+      "relative_path": "../../assets/screenshots/2026-08-12/super-bowling-five_hundred_pin_first_impact.png",
+      "repo": "vosslab/super-bowling",
+      "source_path": "https://github.com/vosslab/super-bowling/raw/6deaac073f36583e1bbee5647f8fe757dd72dbaf/docs%2Fscreenshots%2Ffive_hundred_pin_first_impact.png"
+    },
+    {
+      "filename": "five_hundred_pin_outside_impact.png",
+      "media_path": "assets/screenshots/2026-08-12/super-bowling-five_hundred_pin_outside_impact.png",
+      "relative_path": "../../assets/screenshots/2026-08-12/super-bowling-five_hundred_pin_outside_impact.png",
+      "repo": "vosslab/super-bowling",
+      "source_path": "https://github.com/vosslab/super-bowling/raw/6deaac073f36583e1bbee5647f8fe757dd72dbaf/docs%2Fscreenshots%2Ffive_hundred_pin_outside_impact.png"
+    },
+    {
+      "filename": "hundred_pin_cascade.png",
+      "media_path": "assets/screenshots/2026-08-12/super-bowling-hundred_pin_cascade.png",
+      "relative_path": "../../assets/screenshots/2026-08-12/super-bowling-hundred_pin_cascade.png",
+      "repo": "vosslab/super-bowling",
+      "source_path": "https://github.com/vosslab/super-bowling/raw/6deaac073f36583e1bbee5647f8fe757dd72dbaf/docs%2Fscreenshots%2Fhundred_pin_cascade.png"
+    },
+    {
+      "filename": "hundred_pin_cascade_demo.gif",
+      "media_path": "assets/screenshots/2026-08-12/super-bowling-hundred_pin_cascade_demo.gif",
+      "relative_path": "../../assets/screenshots/2026-08-12/super-bowling-hundred_pin_cascade_demo.gif",
+      "repo": "vosslab/super-bowling",
+      "source_path": "https://github.com/vosslab/super-bowling/raw/6deaac073f36583e1bbee5647f8fe757dd72dbaf/docs%2Fscreenshots%2Fhundred_pin_cascade_demo.gif"
+    },
+    {
+      "filename": "hundred_pin_first_impact.png",
+      "media_path": "assets/screenshots/2026-08-12/super-bowling-hundred_pin_first_impact.png",
+      "relative_path": "../../assets/screenshots/2026-08-12/super-bowling-hundred_pin_first_impact.png",
+      "repo": "vosslab/super-bowling",
+      "source_path": "https://github.com/vosslab/super-bowling/raw/6deaac073f36583e1bbee5647f8fe757dd72dbaf/docs%2Fscreenshots%2Fhundred_pin_first_impact.png"
+    },
+    {
+      "filename": "thousand_pin_approach.png",
+      "media_path": "assets/screenshots/2026-08-12/super-bowling-thousand_pin_approach.png",
+      "relative_path": "../../assets/screenshots/2026-08-12/super-bowling-thousand_pin_approach.png",
+      "repo": "vosslab/super-bowling",
+      "source_path": "https://github.com/vosslab/super-bowling/raw/6deaac073f36583e1bbee5647f8fe757dd72dbaf/docs%2Fscreenshots%2Fthousand_pin_approach.png"
+    },
+    {
+      "filename": "thousand_pin_cascade.png",
+      "media_path": "assets/screenshots/2026-08-12/super-bowling-thousand_pin_cascade.png",
+      "relative_path": "../../assets/screenshots/2026-08-12/super-bowling-thousand_pin_cascade.png",
+      "repo": "vosslab/super-bowling",
+      "source_path": "https://github.com/vosslab/super-bowling/raw/6deaac073f36583e1bbee5647f8fe757dd72dbaf/docs%2Fscreenshots%2Fthousand_pin_cascade.png"
+    },
+    {
+      "filename": "thousand_pin_collision_field.png",
+      "media_path": "assets/screenshots/2026-08-12/super-bowling-thousand_pin_collision_field.png",
+      "relative_path": "../../assets/screenshots/2026-08-12/super-bowling-thousand_pin_collision_field.png",
+      "repo": "vosslab/super-bowling",
+      "source_path": "https://github.com/vosslab/super-bowling/raw/6deaac073f36583e1bbee5647f8fe757dd72dbaf/docs%2Fscreenshots%2Fthousand_pin_collision_field.png"
+    },
+    {
+      "filename": "thousand_pin_deck.png",
+      "media_path": "assets/screenshots/2026-08-12/super-bowling-thousand_pin_deck.png",
+      "relative_path": "../../assets/screenshots/2026-08-12/super-bowling-thousand_pin_deck.png",
+      "repo": "vosslab/super-bowling",
+      "source_path": "https://github.com/vosslab/super-bowling/raw/6deaac073f36583e1bbee5647f8fe757dd72dbaf/docs%2Fscreenshots%2Fthousand_pin_deck.png"
+    },
+    {
+      "filename": "thousand_pin_first_impact.png",
+      "media_path": "assets/screenshots/2026-08-12/super-bowling-thousand_pin_first_impact.png",
+      "relative_path": "../../assets/screenshots/2026-08-12/super-bowling-thousand_pin_first_impact.png",
+      "repo": "vosslab/super-bowling",
+      "source_path": "https://github.com/vosslab/super-bowling/raw/6deaac073f36583e1bbee5647f8fe757dd72dbaf/docs%2Fscreenshots%2Fthousand_pin_first_impact.png"
+    },
+    {
+      "filename": "thousand_pin_impact_wave.png",
+      "media_path": "assets/screenshots/2026-08-12/super-bowling-thousand_pin_impact_wave.png",
+      "relative_path": "../../assets/screenshots/2026-08-12/super-bowling-thousand_pin_impact_wave.png",
+      "repo": "vosslab/super-bowling",
+      "source_path": "https://github.com/vosslab/super-bowling/raw/6deaac073f36583e1bbee5647f8fe757dd72dbaf/docs%2Fscreenshots%2Fthousand_pin_impact_wave.png"
+    },
+    {
+      "filename": "thousand_pin_outside_impact.png",
+      "media_path": "assets/screenshots/2026-08-12/super-bowling-thousand_pin_outside_impact.png",
+      "relative_path": "../../assets/screenshots/2026-08-12/super-bowling-thousand_pin_outside_impact.png",
+      "repo": "vosslab/super-bowling",
+      "source_path": "https://github.com/vosslab/super-bowling/raw/6deaac073f36583e1bbee5647f8fe757dd72dbaf/docs%2Fscreenshots%2Fthousand_pin_outside_impact.png"
+    },
+    {
+      "filename": "thousand_pin_result.png",
+      "media_path": "assets/screenshots/2026-08-12/super-bowling-thousand_pin_result.png",
+      "relative_path": "../../assets/screenshots/2026-08-12/super-bowling-thousand_pin_result.png",
+      "repo": "vosslab/super-bowling",
+      "source_path": "https://github.com/vosslab/super-bowling/raw/6deaac073f36583e1bbee5647f8fe757dd72dbaf/docs%2Fscreenshots%2Fthousand_pin_result.png"
+    }
+  ],
+  "source_mode": "github_public_events_snapshot",
+  "source_url": "https://api.github.com/users/vosslab/events/public?per_page=100&page=1",
+  "timezone": "America/Chicago",
+  "username": "vosslab"
+}

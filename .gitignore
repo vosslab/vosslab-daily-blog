@@ -1,0 +1,16 @@
+.venv/
+site/
+site
+__pycache__/
+*.pyc
+data/run/
+generated/
+
+# === UNIVERSAL ===
+.DS_Store
+report_*.txt
+output*/
+/graphify-out/
+_temp*.?*
+/OTHER_REPOS/
+/LOCAL_ONLY/

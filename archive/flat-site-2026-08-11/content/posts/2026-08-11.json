@@ -1,0 +1,53 @@
+{
+  "date": "2026-08-11",
+  "title": "The local work log is online",
+  "summary": "A private LAN blog is now available as the independent home for dated Vosslab work notes.",
+  "sections": [
+    {
+      "heading": "Purpose",
+      "paragraphs": [
+        "This is the new local home for concise, dated notes about Vosslab's development work. The site is independent of the podcast repository and is deliberately small: static pages, local assets, and visible source links.",
+        "The next enhancement is a validated daily GitHub commit collector. Until that collector proves attribution, pagination, and source provenance, this site labels public activity snapshots as preliminary rather than calling them complete daily work reports."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "Public GitHub activity snapshot",
+      "paragraphs": [
+        "A read-only query of Vosslab's public GitHub event feed observed these five PushEvent records on 2026-08-11. They are activity signals from GitHub's public feed, not a validated enumeration of all commits authored that day."
+      ],
+      "bullets": [
+        {
+          "text": "22:20:50Z - PushEvent in vosslab/peptidyle-learning-engine",
+          "url": "https://github.com/vosslab/peptidyle-learning-engine"
+        },
+        {
+          "text": "22:16:44Z - PushEvent in vosslab/bkchem-oasa",
+          "url": "https://github.com/vosslab/bkchem-oasa"
+        },
+        {
+          "text": "22:00:48Z - PushEvent in vosslab/bkchem-oasa",
+          "url": "https://github.com/vosslab/bkchem-oasa"
+        },
+        {
+          "text": "21:42:12Z - PushEvent in vosslab/super-bowling",
+          "url": "https://github.com/vosslab/super-bowling"
+        },
+        {
+          "text": "21:07:56Z - PushEvent in vosslab/peptidyle-learning-engine",
+          "url": "https://github.com/vosslab/peptidyle-learning-engine"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "Vosslab public GitHub event feed, queried 2026-08-11",
+      "url": "https://api.github.com/users/vosslab/events/public?per_page=5"
+    },
+    {
+      "label": "Vosslab GitHub profile",
+      "url": "https://github.com/vosslab"
+    }
+  ]
+}

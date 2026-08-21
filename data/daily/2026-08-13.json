@@ -1,0 +1,228 @@
+{
+  "commit_enrichment_errors": [],
+  "coverage_note": "Public GitHub Events API is bounded and is not complete commit history.",
+  "events": [
+    {
+      "created_at": "2026-08-13T13:51:03Z",
+      "id": "17573483553",
+      "local_time": "2026-08-13T08:51:03-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-13T23:09:17Z",
+      "id": "17608321863",
+      "local_time": "2026-08-13T18:09:17-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/vosslab-skills",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-14T00:47:04Z",
+      "id": "17612187449",
+      "local_time": "2026-08-13T19:47:04-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/vosslab-skills",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-14T02:33:17Z",
+      "id": "17616494816",
+      "local_time": "2026-08-13T21:33:17-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-14T02:34:28Z",
+      "id": "17616540907",
+      "local_time": "2026-08-13T21:34:28-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    }
+  ],
+  "max_pages": 3,
+  "pages_fetched": 1,
+  "report_date": "2026-08-13",
+  "repositories": [
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/peptidyle-learning-engine/commits?since=2026-08-13T05%3A00%3A00Z&until=2026-08-14T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "## 2026-08-13\n- Reclassified plan validation under the permanent-test checklist. Removed ten fast-suite pytests\n  that inspected current shell, Compose, Containerfile, Caddy, SQL, or dated walkthrough artifacts,...\n- Repaired four browser regressions without weakening the application boundary. Course-banner\n  tests now exercise protected `POST /api/assets/{id}/delivery` authorization before loading the re...\n## 2026-08-12\n- Closed the human role model to Student, Instructor, and Sysadmin and added\n  `docs/USER_ROLES.md` as its canonical reference. Publishing is an Instructor or Sysadmin action b...\n- Added the repository-owned `./check_rust.sh` front door so the complete offline Cargo gate is\n  memorable and cannot be removed when the vendored TypeScript `check_codebase.sh` is refreshed. It...\n- Applied the permanent-test checklist to the security rebuild. Removed temporary Python and Rust\n  scans that froze retired storage strings, exact container UIDs/tmpfs sizes, drain constants, migr...\n- Applied the six-pass pre-merge audit. Corrected remaining Manager/Administrator role wording to\n  the closed Student, Instructor, and Sysadmin model; repaired the documented root and E2E test com...\n- Completed the end-to-end security architecture audit and replaced the dated active audit with a\n  current threat model, trust-boundary map, finding ledger, evidence tiers, and explicit live activ...",
+          "committed_at": "2026-08-13T08:50:58-05:00",
+          "full_message": "Reclassified plan validation under the permanent-test check... (+6 more)\n\n## 2026-08-13\n- Reclassified plan validation under the permanent-test checklist. Removed ten fast-suite pytests\n  that inspected current shell, Compose, Containerfile, Caddy, SQL, or dated walkthrough artifacts,...\n- Repaired four browser regressions without weakening the application boundary. Course-banner\n  tests now exercise protected `POST /api/assets/{id}/delivery` authorization before loading the re...\n## 2026-08-12\n- Closed the human role model to Student, Instructor, and Sysadmin and added\n  `docs/USER_ROLES.md` as its canonical reference. Publishing is an Instructor or Sysadmin action b...\n- Added the repository-owned `./check_rust.sh` front door so the complete offline Cargo gate is\n  memorable and cannot be removed when the vendored TypeScript `check_codebase.sh` is refreshed. It...\n- Applied the permanent-test checklist to the security rebuild. Removed temporary Python and Rust\n  scans that froze retired storage strings, exact container UIDs/tmpfs sizes, drain constants, migr...\n- Applied the six-pass pre-merge audit. Corrected remaining Manager/Administrator role wording to\n  the closed Student, Instructor, and Sysadmin model; repaired the documented root and E2E test com...\n- Completed the end-to-end security architecture audit and replaced the dated active audit with a\n  current threat model, trust-boundary map, finding ledger, evidence tiers, and explicit live activ...",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/cebde071fb27050cb237c64eae7c530fdceec8ad",
+          "sha": "cebde071fb27050cb237c64eae7c530fdceec8ad",
+          "subject": "Reclassified plan validation under the permanent-test check... (+6 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- Added `local_stack.py`, a Python controller for the rootless local Podman\n  Compose stack. It provides read-only diagnostics, project discovery, status, scoped logs, normal ...\n- Added the PLE interface design guide and an active dependency-ordered UI workstream. The durable\n  contract now centers dense instructor work at 1280 by 800, keeps student questions responsively c...\n- Added one non-sequential Crockford Base32 Question ID per current question, including server-only\n  HMAC validation, durable secret configuration, a 100,000,000-question cap, canonical input normal...\n- Added the implemented page-level interface review with canonical instructor, tablet, phone,\n  standard-theme, and increased-contrast evidence. Shared `--ple-*` density tokens now own the shel...\n- Added a dedicated 13-page instructor visual corpus using one coherent simulated course, assignment,\n  roster, gradebook, library, workspace, and account data set. The reproducible 1280 by 800 capture...\n- Added a concise repository TODO and an execution-ready pre-production database roadmap. They keep\n  the current 28-file SQLx history unchanged during feature acceptance, require one reviewed clean-...\n- Defined the plan-scoped Validation test suite as a mandatory goal-completion contract. A goal now\n  remains incomplete until every named permanent, integration, live, one-time acceptance, and indep...\n- Superseded the older universal high-contrast and oversized-target assumptions. Standard\n  presentation retains semantic accessibility and a 5.5:1 ordinary-text target without forcing them...\n- Superseded instructor-facing numbered/versioned question identities. Original-owner corrections\n  retain the Question ID, archive the replaced snapshot, and advance future assignment definitions;...\n- Revisited all 15 course palettes without rewriting their stored three-color anchors. A centralized\n  palette recipe now projects the full canvas plus distinct work, grouping, reading-card, text, act...\n- Repaired the unaccepted account-presentation preference source in place: account\n  contrast now derives exclusively from a live 32-byte account-session hash through two narrow `SEC...\n- Added forward migration `2026080935_owner_correction_authority.sql` and an explicit\n  server-only owner-correction publication authority. Ordinary publication now rejects a revision; ...\n- Corrected the unaccepted `2026080918_workspace_flat_question_assets.sql`",
+          "committed_at": "2026-08-13T21:34:24-05:00",
+          "full_message": "Added `local_stack.py`, a Python controller for the rootle... (+22 more)\n\n- Added `local_stack.py`, a Python controller for the rootless local Podman\n  Compose stack. It provides read-only diagnostics, project discovery, status, scoped logs, normal ...\n- Added the PLE interface design guide and an active dependency-ordered UI workstream. The durable\n  contract now centers dense instructor work at 1280 by 800, keeps student questions responsively c...\n- Added one non-sequential Crockford Base32 Question ID per current question, including server-only\n  HMAC validation, durable secret configuration, a 100,000,000-question cap, canonical input normal...\n- Added the implemented page-level interface review with canonical instructor, tablet, phone,\n  standard-theme, and increased-contrast evidence. Shared `--ple-*` density tokens now own the shel...\n- Added a dedicated 13-page instructor visual corpus using one coherent simulated course, assignment,\n  roster, gradebook, library, workspace, and account data set. The reproducible 1280 by 800 capture...\n- Added a concise repository TODO and an execution-ready pre-production database roadmap. They keep\n  the current 28-file SQLx history unchanged during feature acceptance, require one reviewed clean-...\n- Defined the plan-scoped Validation test suite as a mandatory goal-completion contract. A goal now\n  remains incomplete until every named permanent, integration, live, one-time acceptance, and indep...\n- Superseded the older universal high-contrast and oversized-target assumptions. Standard\n  presentation retains semantic accessibility and a 5.5:1 ordinary-text target without forcing them...\n- Superseded instructor-facing numbered/versioned question identities. Original-owner corrections\n  retain the Question ID, archive the replaced snapshot, and advance future assignment definitions;...\n- Revisited all 15 course palettes without rewriting their stored three-color anchors. A centralized\n  palette recipe now projects the full canvas plus distinct work, grouping, reading-card, text, act...\n- Repaired the unaccepted account-presentation preference source in place: account\n  contrast now derives exclusively from a live 32-byte account-session hash through two narrow `SEC...\n- Added forward migration `2026080935_owner_correction_authority.sql` and an explicit\n  server-only owner-correction publication authority. Ordinary publication now rejects a revision; ...\n- Corrected the unaccepted `2026080918_workspace_flat_question_assets.sql`",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/23dce408a1e8983028e587c36bc841dfefdcf084",
+          "sha": "23dce408a1e8983028e587c36bc841dfefdcf084",
+          "subject": "Added `local_stack.py`, a Python controller for the rootle... (+22 more)"
+        }
+      ],
+      "description": "An open platform for mastery teaching across question formats. Students retry varied problems until they can solve them consistently, then keep practicing fresh versions after completion, while grading and answer keys stay securely on the server",
+      "event_count": 2,
+      "language": "Rust",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/vosslab-skills/commits?since=2026-08-13T05%3A00%3A00Z&until=2026-08-14T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-13T18:09:13-05:00",
+          "full_message": "new skill folder",
+          "html_url": "https://github.com/vosslab/vosslab-skills/commit/e16f0bc0e5d75bf99e843dfa7bc2f254fed92646",
+          "sha": "e16f0bc0e5d75bf99e843dfa7bc2f254fed92646",
+          "subject": "new skill folder"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- Organized every tracked public and deprecated skill under one of six\n  workflow-role categories: `orient`, `plan`, `manage`, `experts`, `docs`, and `quality`. Moved all...\n- Made `skills/<category>/<skill-name>/` the enforced public layout. Shared\n  discovery now rejects flat skills, unknown categories, and deeper category nesting, while continu...\n- Grouped the generated skills index by category and taught the loaded-skill\n  listing, metadata gates, expert-parity gate, path-boundary checks, and supporting tests to discov...\n- Made `experts` the single home for all 16 domain specialist skills so its\n  contents are governed directly by the shared expert-skill parity standard.\n- Updated active documentation, examples, archived changelog links, script\n  output, and test module paths to the categorized skill locations.\n- Registered the intentional `ideonomy-plain` / `ideonomy-rich` presentation\n  pair as a naming-prefix exception with explicit activation boundaries, and scoped the ASCII hygie...\n- Moved `color-accessibility-expert` compatibility metadata under the standard\n  `metadata` frontmatter key so every moved skill passes the bundled validator.\n- Centralized repository and skill-script import paths in `tests/conftest.py`\n  so plain `pytest tests/` owns its environment instead of relying on shell `PYTHONPATH` edits in i...\n- Regenerated `docs/SKILLS_INDEX.md` and all Claude, Codex, Cursor, and OpenCode\n  plugin artifacts. Both `tools/build_skills_index.py --check` and `tools/build_plugin_manifest.py ...\n- Validated all 40 categorized skill folders with `quick_validate.py`.\n- Passed all 2872 repository tests with six advisory or dependency warnings by\n  running plain `pytest tests/`; `pymupdf4llm` remains absent from the current environment but is r...",
+          "committed_at": "2026-08-13T19:47:00-05:00",
+          "full_message": "Organized every tracked public and deprecated skill under ... (+10 more)\n\n- Organized every tracked public and deprecated skill under one of six\n  workflow-role categories: `orient`, `plan`, `manage`, `experts`, `docs`, and `quality`. Moved all...\n- Made `skills/<category>/<skill-name>/` the enforced public layout. Shared\n  discovery now rejects flat skills, unknown categories, and deeper category nesting, while continu...\n- Grouped the generated skills index by category and taught the loaded-skill\n  listing, metadata gates, expert-parity gate, path-boundary checks, and supporting tests to discov...\n- Made `experts` the single home for all 16 domain specialist skills so its\n  contents are governed directly by the shared expert-skill parity standard.\n- Updated active documentation, examples, archived changelog links, script\n  output, and test module paths to the categorized skill locations.\n- Registered the intentional `ideonomy-plain` / `ideonomy-rich` presentation\n  pair as a naming-prefix exception with explicit activation boundaries, and scoped the ASCII hygie...\n- Moved `color-accessibility-expert` compatibility metadata under the standard\n  `metadata` frontmatter key so every moved skill passes the bundled validator.\n- Centralized repository and skill-script import paths in `tests/conftest.py`\n  so plain `pytest tests/` owns its environment instead of relying on shell `PYTHONPATH` edits in i...\n- Regenerated `docs/SKILLS_INDEX.md` and all Claude, Codex, Cursor, and OpenCode\n  plugin artifacts. Both `tools/build_skills_index.py --check` and `tools/build_plugin_manifest.py ...\n- Validated all 40 categorized skill folders with `quick_validate.py`.\n- Passed all 2872 repository tests with six advisory or dependency warnings by\n  running plain `pytest tests/`; `pymupdf4llm` remains absent from the current environment but is r...",
+          "html_url": "https://github.com/vosslab/vosslab-skills/commit/b9fef3b0b1ac381e78072b017d485c5ebca2e4d5",
+          "sha": "b9fef3b0b1ac381e78072b017d485c5ebca2e4d5",
+          "subject": "Organized every tracked public and deprecated skill under ... (+10 more)"
+        }
+      ],
+      "description": "Reusable workflow skills for refactoring plans, code review, repository maintenance, and education content production. Intended for maintainers who curate skill definitions and for users who inspect or reuse SKILL.md instructions across Claude and Codex environments.",
+      "event_count": 2,
+      "language": "Python",
+      "repo": "vosslab/vosslab-skills",
+      "stars": 2,
+      "topics": []
+    },
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/ferrum-chemical-forge/commits?since=2026-08-13T05%3A00%3A00Z&until=2026-08-14T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "## 2026-08-13\n- Added M16 Stage A1's closed direct-glycosidic Haworth authoring receipt in\n  `ferrum-domain`. Its one factory accepts only one borrowed source molecule, a supplied topology c...\n- Added M14's pure direct-glycosidic Haworth depiction-spec receipt in\n  `ferrum-domain`. From one checked fragment it owns exact selected coordinates, bounds, identities...\n- Isolated the ordinary M16 Ferrum-Qt startup closure from OASA. The public\n  `MainWindow` and normal `ferrum-qt` route now use the Rust-native host and create an empty Ferrum...\n- Added M15's Rust-owned historical peptide-template SMILES profile. Given a validated\n  `PeptideSequence`, it creates an owned deterministic template for `ACDEFGHIKLMNQRSTVWY`, includin...\n- Added M15's first public peptide slice: `inspect_peptide_sequence_v1()` is a\n  pure in-process Ferrum API for one strict canonical uppercase one-letter sequence. Its owned V1 r...\n- Started the M16 ordinary-window native-first lifecycle. `MainWindow` now\n  creates a revision-zero Ferrum-Chem baseline in a native tab at startup and for File > New, witho...\n- Stabilized that M16 host boundary. The ordinary `MainWindow` remains the\n  native-first root: it owns one Rust empty-document tab, has no registered legacy sessions, and ke...\n- Added M14's first public Haworth slice: a read-only `ferrum-api` observation\n  accepts one revision/digest-bound session observation and one explicit direct molecule C/O ring r...\n- Added the Rust-owned `DocumentSession.create_empty_document_v1()` baseline and\n  its PyO3 binding. It creates a clean revision-zero canonical-namespace CDML root at version 26.07...\n- Made M13's fixed V1 miter limit material at the renderer boundary. Every\n  issued vector and molecule stroke now carries the fixed 4.0 bevel-fallback ratio through the priv...\n- Added M13's private borrowed draw stream inside `ferrum-render`. One fallible\n  lowerer now owns ordered page traversal, exclusions, molecule anchor scopes, opaque masks and tex...\n- Added Edit > Delete Selected Bond with Ferrum to the ordinary window's explicit\n  Rust-native tab. It is enabled only for one selected durable bond and asks the revision-bound Rus...",
+          "committed_at": "2026-08-13T21:33:13-05:00",
+          "full_message": "Added M16 Stage A1's closed direct-glycosidic Haworth auth... (+85 more)\n\n## 2026-08-13\n- Added M16 Stage A1's closed direct-glycosidic Haworth authoring receipt in\n  `ferrum-domain`. Its one factory accepts only one borrowed source molecule, a supplied topology c...\n- Added M14's pure direct-glycosidic Haworth depiction-spec receipt in\n  `ferrum-domain`. From one checked fragment it owns exact selected coordinates, bounds, identities...\n- Isolated the ordinary M16 Ferrum-Qt startup closure from OASA. The public\n  `MainWindow` and normal `ferrum-qt` route now use the Rust-native host and create an empty Ferrum...\n- Added M15's Rust-owned historical peptide-template SMILES profile. Given a validated\n  `PeptideSequence`, it creates an owned deterministic template for `ACDEFGHIKLMNQRSTVWY`, includin...\n- Added M15's first public peptide slice: `inspect_peptide_sequence_v1()` is a\n  pure in-process Ferrum API for one strict canonical uppercase one-letter sequence. Its owned V1 r...\n- Started the M16 ordinary-window native-first lifecycle. `MainWindow` now\n  creates a revision-zero Ferrum-Chem baseline in a native tab at startup and for File > New, witho...\n- Stabilized that M16 host boundary. The ordinary `MainWindow` remains the\n  native-first root: it owns one Rust empty-document tab, has no registered legacy sessions, and ke...\n- Added M14's first public Haworth slice: a read-only `ferrum-api` observation\n  accepts one revision/digest-bound session observation and one explicit direct molecule C/O ring r...\n- Added the Rust-owned `DocumentSession.create_empty_document_v1()` baseline and\n  its PyO3 binding. It creates a clean revision-zero canonical-namespace CDML root at version 26.07...\n- Made M13's fixed V1 miter limit material at the renderer boundary. Every\n  issued vector and molecule stroke now carries the fixed 4.0 bevel-fallback ratio through the priv...\n- Added M13's private borrowed draw stream inside `ferrum-render`. One fallible\n  lowerer now owns ordered page traversal, exclusions, molecule anchor scopes, opaque masks and tex...\n- Added Edit > Delete Selected Bond with Ferrum to the ordinary window's explicit\n  Rust-native tab. It is enabled only for one selected durable bond and asks the revision-bound Rus...",
+          "html_url": "https://github.com/vosslab/ferrum-chemical-forge/commit/26a8e1cae5b6fca73e26b53b469bb872bcf42118",
+          "sha": "26a8e1cae5b6fca73e26b53b469bb872bcf42118",
+          "subject": "Added M16 Stage A1's closed direct-glycosidic Haworth auth... (+85 more)"
+        }
+      ],
+      "description": "A pre-alpha CDML chemical drawing platform for scientists and educators that combines a retained PySide6 desktop editor with a planned Rust chemistry backend for durable document ownership.",
+      "event_count": 1,
+      "language": "Python",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "stars": 0,
+      "topics": []
+    }
+  ],
+  "retrieved_at": "2026-08-14T07:00:14+00:00",
+  "schema_version": 3,
+  "screenshots": [
+    {
+      "filename": "instructor_page_account_security.png",
+      "media_path": "assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_account_security.png",
+      "relative_path": "../../assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_account_security.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_path": "https://github.com/vosslab/peptidyle-learning-engine/raw/23dce408a1e8983028e587c36bc841dfefdcf084/docs%2Fscreenshots%2Finstructor_page_account_security.png"
+    },
+    {
+      "filename": "instructor_page_assignment_create.png",
+      "media_path": "assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_assignment_create.png",
+      "relative_path": "../../assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_assignment_create.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_path": "https://github.com/vosslab/peptidyle-learning-engine/raw/23dce408a1e8983028e587c36bc841dfefdcf084/docs%2Fscreenshots%2Finstructor_page_assignment_create.png"
+    },
+    {
+      "filename": "instructor_page_assignment_edit.png",
+      "media_path": "assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_assignment_edit.png",
+      "relative_path": "../../assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_assignment_edit.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_path": "https://github.com/vosslab/peptidyle-learning-engine/raw/23dce408a1e8983028e587c36bc841dfefdcf084/docs%2Fscreenshots%2Finstructor_page_assignment_edit.png"
+    },
+    {
+      "filename": "instructor_page_assignment_overview.png",
+      "media_path": "assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_assignment_overview.png",
+      "relative_path": "../../assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_assignment_overview.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_path": "https://github.com/vosslab/peptidyle-learning-engine/raw/23dce408a1e8983028e587c36bc841dfefdcf084/docs%2Fscreenshots%2Finstructor_page_assignment_overview.png"
+    },
+    {
+      "filename": "instructor_page_course_appearance.png",
+      "media_path": "assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_course_appearance.png",
+      "relative_path": "../../assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_course_appearance.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_path": "https://github.com/vosslab/peptidyle-learning-engine/raw/23dce408a1e8983028e587c36bc841dfefdcf084/docs%2Fscreenshots%2Finstructor_page_course_appearance.png"
+    },
+    {
+      "filename": "instructor_page_course_assignments.png",
+      "media_path": "assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_course_assignments.png",
+      "relative_path": "../../assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_course_assignments.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_path": "https://github.com/vosslab/peptidyle-learning-engine/raw/23dce408a1e8983028e587c36bc841dfefdcf084/docs%2Fscreenshots%2Finstructor_page_course_assignments.png"
+    },
+    {
+      "filename": "instructor_page_courses.png",
+      "media_path": "assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_courses.png",
+      "relative_path": "../../assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_courses.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_path": "https://github.com/vosslab/peptidyle-learning-engine/raw/23dce408a1e8983028e587c36bc841dfefdcf084/docs%2Fscreenshots%2Finstructor_page_courses.png"
+    },
+    {
+      "filename": "instructor_page_gradebook.png",
+      "media_path": "assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_gradebook.png",
+      "relative_path": "../../assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_gradebook.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_path": "https://github.com/vosslab/peptidyle-learning-engine/raw/23dce408a1e8983028e587c36bc841dfefdcf084/docs%2Fscreenshots%2Finstructor_page_gradebook.png"
+    },
+    {
+      "filename": "instructor_page_library.png",
+      "media_path": "assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_library.png",
+      "relative_path": "../../assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_library.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_path": "https://github.com/vosslab/peptidyle-learning-engine/raw/23dce408a1e8983028e587c36bc841dfefdcf084/docs%2Fscreenshots%2Finstructor_page_library.png"
+    },
+    {
+      "filename": "instructor_page_question_detail.png",
+      "media_path": "assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_question_detail.png",
+      "relative_path": "../../assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_question_detail.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_path": "https://github.com/vosslab/peptidyle-learning-engine/raw/23dce408a1e8983028e587c36bc841dfefdcf084/docs%2Fscreenshots%2Finstructor_page_question_detail.png"
+    },
+    {
+      "filename": "instructor_page_question_editor.png",
+      "media_path": "assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_question_editor.png",
+      "relative_path": "../../assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_question_editor.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_path": "https://github.com/vosslab/peptidyle-learning-engine/raw/23dce408a1e8983028e587c36bc841dfefdcf084/docs%2Fscreenshots%2Finstructor_page_question_editor.png"
+    },
+    {
+      "filename": "instructor_page_roster.png",
+      "media_path": "assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_roster.png",
+      "relative_path": "../../assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_roster.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_path": "https://github.com/vosslab/peptidyle-learning-engine/raw/23dce408a1e8983028e587c36bc841dfefdcf084/docs%2Fscreenshots%2Finstructor_page_roster.png"
+    },
+    {
+      "filename": "instructor_page_workspace.png",
+      "media_path": "assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_workspace.png",
+      "relative_path": "../../assets/screenshots/2026-08-13/peptidyle-learning-engine-instructor_page_workspace.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_path": "https://github.com/vosslab/peptidyle-learning-engine/raw/23dce408a1e8983028e587c36bc841dfefdcf084/docs%2Fscreenshots%2Finstructor_page_workspace.png"
+    }
+  ],
+  "source_mode": "github_public_events_snapshot",
+  "source_url": "https://api.github.com/users/vosslab/events/public?per_page=100&page=1",
+  "timezone": "America/Chicago",
+  "username": "vosslab"
+}

@@ -1,0 +1,27 @@
+[Unit]
+Description=Vosslab Daily Blog (private LAN port 8016)
+Documentation=http://aella.local:8016
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/vosslab/nsh/vosslab-daily-blog
+ExecStart=/usr/bin/python3 -m http.server 8016 --bind 192.168.2.13 --directory /home/vosslab/nsh/vosslab-daily-blog/site
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=full
+ProtectHome=read-only
+ProtectControlGroups=yes
+ProtectKernelLogs=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+UMask=027
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

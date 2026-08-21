@@ -1,0 +1,125 @@
+{
+  "commit_enrichment_errors": [],
+  "coverage_note": "Public GitHub Events API is bounded and is not complete commit history.",
+  "events": [
+    {
+      "created_at": "2026-08-14T12:52:32Z",
+      "id": "17651477065",
+      "local_time": "2026-08-14T07:52:32-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-14T14:51:44Z",
+      "id": "17661758357",
+      "local_time": "2026-08-14T09:51:44-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-14T16:30:23Z",
+      "id": "17669243807",
+      "local_time": "2026-08-14T11:30:23-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-14T16:35:41Z",
+      "id": "17669604186",
+      "local_time": "2026-08-14T11:35:41-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-14T19:09:34Z",
+      "id": "17680454524",
+      "local_time": "2026-08-14T14:09:34-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "type": "PushEvent"
+    }
+  ],
+  "max_pages": 3,
+  "pages_fetched": 1,
+  "report_date": "2026-08-14",
+  "repositories": [
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/peptidyle-learning-engine/commits?since=2026-08-14T05%3A00%3A00Z&until=2026-08-15T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "- Relocated the local Podman controller from root-level scripts into `local_stack_control/` to keep...\n  repository root focused. The only public lifecycle and aggregate acceptance surface is now `sourc...\n- Strengthened disposable lifecycle ownership. Every closed owner now uses the one required\n  `podman-compose --in-pod false` boundary, preventing unlabelled pods from escaping label-driven c...\n- Repaired the live Chapter 1 browser journey at the actual UI boundaries. Sign-in waits for the\n  role-specific course workspace, course opening waits for the mounted assignment surface, and the ...\n- Completed the local-stack controller Validation suite on the final material tree. The five pure\n  controller modules passed 42 cases, the full fast pytest suite passed 4,799 cases, the repository...\n- Live lifecycle evidence proved a rootless default stop retaining its three named volumes, an exact\n  confirmed reset followed by a clean launcher rebuild, stateless renderer recreation, replica repl...",
+          "committed_at": "2026-08-14T07:52:23-05:00",
+          "full_message": "Relocated the local Podman controller from root-level scrip... (+4 more)\n\n- Relocated the local Podman controller from root-level scripts into `local_stack_control/` to keep...\n  repository root focused. The only public lifecycle and aggregate acceptance surface is now `sourc...\n- Strengthened disposable lifecycle ownership. Every closed owner now uses the one required\n  `podman-compose --in-pod false` boundary, preventing unlabelled pods from escaping label-driven c...\n- Repaired the live Chapter 1 browser journey at the actual UI boundaries. Sign-in waits for the\n  role-specific course workspace, course opening waits for the mounted assignment surface, and the ...\n- Completed the local-stack controller Validation suite on the final material tree. The five pure\n  controller modules passed 42 cases, the full fast pytest suite passed 4,799 cases, the repository...\n- Live lifecycle evidence proved a rootless default stop retaining its three named volumes, an exact\n  confirmed reset followed by a clean launcher rebuild, stateless renderer recreation, replica repl...",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/7780ec5c8d2ba48c732ed8c594b02e272c19b68e",
+          "sha": "7780ec5c8d2ba48c732ed8c594b02e272c19b68e",
+          "subject": "Relocated the local Podman controller from root-level scrip... (+4 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-14T09:51:39-05:00",
+          "full_message": "new plans",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/f975264c00f84c66e5bb428a06d2cff385115a60",
+          "sha": "f975264c00f84c66e5bb428a06d2cff385115a60",
+          "subject": "new plans"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- Accepted WP-R0 catalog discovery evidence: exclusive valid Question ID lookup, normalized lexical\n  relevance with typo recovery, deterministic ranked keyset paging, HMAC-bound snapshot cursors, im...\n- WP-R0 final evidence is accepted on the final material tree: 91 Memory library tests, 3 server\n  catalog tests, 1,173 source-line cases, and a clean PostgreSQL 17 baseline with all 32 migrations...",
+          "committed_at": "2026-08-14T11:30:19-05:00",
+          "full_message": "Accepted WP-R0 catalog discovery evidence: exclusive valid ... (+1 more)\n\n- Accepted WP-R0 catalog discovery evidence: exclusive valid Question ID lookup, normalized lexical\n  relevance with typo recovery, deterministic ranked keyset paging, HMAC-bound snapshot cursors, im...\n- WP-R0 final evidence is accepted on the final material tree: 91 Memory library tests, 3 server\n  catalog tests, 1,173 source-line cases, and a clean PostgreSQL 17 baseline with all 32 migrations...",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/5563d1f0d6cc02da8d9ab5879379c3ad8ea0d33f",
+          "sha": "5563d1f0d6cc02da8d9ab5879379c3ad8ea0d33f",
+          "subject": "Accepted WP-R0 catalog discovery evidence: exclusive valid ... (+1 more)"
+        }
+      ],
+      "description": "An open platform for mastery teaching across question formats. Students retry varied problems until they can solve them consistently, then keep practicing fresh versions after completion, while grading and answer keys stay securely on the server",
+      "event_count": 3,
+      "language": "Rust",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/ferrum-chemical-forge/commits?since=2026-08-14T05%3A00%3A00Z&until=2026-08-15T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "## 2026-08-14\n- Added a repository-local account-switch handoff for the active migration run, including accepted\n  linear-form layers, the unaccepted PyO3 checkpoint, fixed architecture decisions, and the exact r...\n- Reconciled current Ferrum identity documentation: ordinary `ferrum-qt` is native first,\n  QSettings use `Ferrum` / `Ferrum-Qt`, and templates use `~/.ferrum/templates` without a legacy BK...\n- Added provisional `ferrum cdml render {svg,pdf,png}` commands under one\n  extensible render namespace rather than a format-specific `render-svg` verb. The command admits o...\n- Added ordinary OASA-free `Chemistry -> Export Molfile V2000...` and `Export\n  Molfile V3000...` for selected atoms or bonds that resolve globally to one durable direct-root mo...\n- Added ordinary OASA-free `Chemistry -> Export SDF Record V2000...` and\n  `Export SDF Record V3000...` for one selected durable direct-root molecule. Rust authenticates th...\n- Added ordinary OASA-free `Edit -> Document Drawing Defaults...` for the seven\n  document defaults the current Ferrum renderer consumes: line width, atom-label size, line/text co...\n- Added ordinary OASA-free `Edit -> Copy` for the current Rust-native selection.\n  A same-molecule atom/bond selection becomes one connected structural fragment; selected bonds clo...\n- Added ordinary OASA-free `Options -> Theme` to the native-first product\n  window. It reuses the retained Ferrum theme chooser and application-owned `ThemeManager`; an acce...\n- Added retained mouse-wheel and keyboard zoom to ordinary Rust-native document tabs. A\n  tab-owned `QGraphicsView` subclass applies the existing 1.15-per-notch behavior within the retain...\n- Added ordinary OASA-free `Export Standard InChI File...` and `Export Fixed-H\n  InChI File...`. Rust now returns the existing exact-observation identifier as one owned receipt a...\n- Added provisional `ferrum smiles canonicalize --adapter LIBRARY SMILES` so the\n  runnable Rust CLI can parse and re-emit one complete graph through the same optional canonical-is...\n- Added ordinary OASA-free `Chemistry -> Export SMILES` and `Export SMILES\n  File...` for selected atoms or bonds that resolve globally to exactly one durable direct-root mol...",
+          "committed_at": "2026-08-14T11:35:37-05:00",
+          "full_message": "Added a repository-local account-switch handoff for the ac... (+23 more)\n\n## 2026-08-14\n- Added a repository-local account-switch handoff for the active migration run, including accepted\n  linear-form layers, the unaccepted PyO3 checkpoint, fixed architecture decisions, and the exact r...\n- Reconciled current Ferrum identity documentation: ordinary `ferrum-qt` is native first,\n  QSettings use `Ferrum` / `Ferrum-Qt`, and templates use `~/.ferrum/templates` without a legacy BK...\n- Added provisional `ferrum cdml render {svg,pdf,png}` commands under one\n  extensible render namespace rather than a format-specific `render-svg` verb. The command admits o...\n- Added ordinary OASA-free `Chemistry -> Export Molfile V2000...` and `Export\n  Molfile V3000...` for selected atoms or bonds that resolve globally to one durable direct-root mo...\n- Added ordinary OASA-free `Chemistry -> Export SDF Record V2000...` and\n  `Export SDF Record V3000...` for one selected durable direct-root molecule. Rust authenticates th...\n- Added ordinary OASA-free `Edit -> Document Drawing Defaults...` for the seven\n  document defaults the current Ferrum renderer consumes: line width, atom-label size, line/text co...\n- Added ordinary OASA-free `Edit -> Copy` for the current Rust-native selection.\n  A same-molecule atom/bond selection becomes one connected structural fragment; selected bonds clo...\n- Added ordinary OASA-free `Options -> Theme` to the native-first product\n  window. It reuses the retained Ferrum theme chooser and application-owned `ThemeManager`; an acce...\n- Added retained mouse-wheel and keyboard zoom to ordinary Rust-native document tabs. A\n  tab-owned `QGraphicsView` subclass applies the existing 1.15-per-notch behavior within the retain...\n- Added ordinary OASA-free `Export Standard InChI File...` and `Export Fixed-H\n  InChI File...`. Rust now returns the existing exact-observation identifier as one owned receipt a...\n- Added provisional `ferrum smiles canonicalize --adapter LIBRARY SMILES` so the\n  runnable Rust CLI can parse and re-emit one complete graph through the same optional canonical-is...\n- Added ordinary OASA-free `Chemistry -> Export SMILES` and `Export SMILES\n  File...` for selected atoms or bonds that resolve globally to exactly one durable direct-root mol...",
+          "html_url": "https://github.com/vosslab/ferrum-chemical-forge/commit/1f158fb08bb190e46edcbb022976d5c80a5d56bf",
+          "sha": "1f158fb08bb190e46edcbb022976d5c80a5d56bf",
+          "subject": "Added a repository-local account-switch handoff for the ac... (+23 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- Added the M16/M22 OASA runtime ownership ledger. It separates OASA's CDML-contract\n  and oracle work from the newer BKChem-Qt interface improvements, which Ferrum should assess and p...\n- Added ordinary OASA-free `Edit -> Copy as SVG` for exact current durable\n  selections. Rust maps selected atoms, bonds, or durable molecule selectors to complete molecule r...\n- Added ordinary OASA-free `Edit -> Cut` as a recoverable Copy-then-delete\n  transaction. Rust prepares one insertion-valid clipboard fragment together with an exact source-r...\n- Added ordinary OASA-free `Edit -> Paste` beside the existing native Copy route.\n  Rust now owns the stable `ferrum-document-clipboard-paste-v1` fragment grammar, reuses the named ...\n- Adopted BKChem-Qt's frequent-action toolbar as a native FQ-020 interface\n  improvement without adopting its duplicate callback or document owners. The ordinary window now p...\n- Adopted BKChem-Qt's Properties dock as a native read-only projection client rather\n  than porting its OASA model or local undo ownership. Each tab now issues one frozen current-revis...\n- Split the growing native-tab and PyO3 registry modules along their actual owners.\n  Clipboard Paste selection/install behavior now lives in a dedicated tab mixin, property inspectio...\n- Applied the repository's `PYTEST_STYLE.md` permanence checklist to the new\n  linear-form, clipboard Copy/Cut/Paste, zoom, toolbar, and Properties coverage. Permanent tests no...\n- Adopted BKChem-Qt's continuous status-bar zoom improvement in the ordinary native\n  window without reviving its legacy view owner. The accessible 10%-1000% slider is a display-only ...\n- Added ordinary OASA-free `Chemistry -> Convert selection to linear form` for exact\n  durable atom/bond selections that map to one direct molecule root. Qt expands selected bonds to t...\n- Removed the tracked\n  `ferrum_qt/legacy/pycache/compatibility_main_window.cpython-312.pyc` artifact added by the interm...\n- Removed inert `typing.TYPE_CHECKING` imports from the native document-publication and\n  recovery-export owners. Their runtime annotations already use built-in/quoted forms, so the modul...\n- Applied the permanent-test checklist to the oversized installed document-binding",
+          "committed_at": "2026-08-14T14:09:30-05:00",
+          "full_message": "Added the M16/M22 OASA runtime ownership ledger. It separa... (+14 more)\n\n- Added the M16/M22 OASA runtime ownership ledger. It separates OASA's CDML-contract\n  and oracle work from the newer BKChem-Qt interface improvements, which Ferrum should assess and p...\n- Added ordinary OASA-free `Edit -> Copy as SVG` for exact current durable\n  selections. Rust maps selected atoms, bonds, or durable molecule selectors to complete molecule r...\n- Added ordinary OASA-free `Edit -> Cut` as a recoverable Copy-then-delete\n  transaction. Rust prepares one insertion-valid clipboard fragment together with an exact source-r...\n- Added ordinary OASA-free `Edit -> Paste` beside the existing native Copy route.\n  Rust now owns the stable `ferrum-document-clipboard-paste-v1` fragment grammar, reuses the named ...\n- Adopted BKChem-Qt's frequent-action toolbar as a native FQ-020 interface\n  improvement without adopting its duplicate callback or document owners. The ordinary window now p...\n- Adopted BKChem-Qt's Properties dock as a native read-only projection client rather\n  than porting its OASA model or local undo ownership. Each tab now issues one frozen current-revis...\n- Split the growing native-tab and PyO3 registry modules along their actual owners.\n  Clipboard Paste selection/install behavior now lives in a dedicated tab mixin, property inspectio...\n- Applied the repository's `PYTEST_STYLE.md` permanence checklist to the new\n  linear-form, clipboard Copy/Cut/Paste, zoom, toolbar, and Properties coverage. Permanent tests no...\n- Adopted BKChem-Qt's continuous status-bar zoom improvement in the ordinary native\n  window without reviving its legacy view owner. The accessible 10%-1000% slider is a display-only ...\n- Added ordinary OASA-free `Chemistry -> Convert selection to linear form` for exact\n  durable atom/bond selections that map to one direct molecule root. Qt expands selected bonds to t...\n- Removed the tracked\n  `ferrum_qt/legacy/pycache/compatibility_main_window.cpython-312.pyc` artifact added by the interm...\n- Removed inert `typing.TYPE_CHECKING` imports from the native document-publication and\n  recovery-export owners. Their runtime annotations already use built-in/quoted forms, so the modul...\n- Applied the permanent-test checklist to the oversized installed document-binding",
+          "html_url": "https://github.com/vosslab/ferrum-chemical-forge/commit/4430772e63144785e7ce1cb1ae052bb4b41c7539",
+          "sha": "4430772e63144785e7ce1cb1ae052bb4b41c7539",
+          "subject": "Added the M16/M22 OASA runtime ownership ledger. It separa... (+14 more)"
+        }
+      ],
+      "description": "A pre-alpha CDML chemical drawing platform for scientists and educators that combines a retained PySide6 desktop editor with a planned Rust chemistry backend for durable document ownership.",
+      "event_count": 2,
+      "language": "Rust",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "stars": 0,
+      "topics": []
+    }
+  ],
+  "retrieved_at": "2026-08-17T00:57:24+00:00",
+  "schema_version": 3,
+  "screenshots": [],
+  "source_mode": "github_public_events_snapshot",
+  "source_url": "https://api.github.com/users/vosslab/events/public?per_page=100&page=1",
+  "timezone": "America/Chicago",
+  "username": "vosslab"
+}

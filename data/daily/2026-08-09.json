@@ -1,0 +1,63 @@
+{
+  "commit_enrichment_errors": [],
+  "coverage_note": "Public GitHub Events API is bounded and is not complete commit history.",
+  "events": [
+    {
+      "created_at": "2026-08-09T06:21:55Z",
+      "id": "17169417690",
+      "local_time": "2026-08-09T01:21:55-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-09T21:24:56Z",
+      "id": "17227991413",
+      "local_time": "2026-08-09T16:24:56-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    }
+  ],
+  "max_pages": 3,
+  "pages_fetched": 2,
+  "report_date": "2026-08-09",
+  "repositories": [
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/peptidyle-learning-engine/commits?since=2026-08-09T05%3A00%3A00Z&until=2026-08-10T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-09T01:21:51-05:00",
+          "full_message": "updated doc",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/b6094300dec05ae0cbaaba831de504fe7a27d2be",
+          "sha": "b6094300dec05ae0cbaaba831de504fe7a27d2be",
+          "subject": "updated doc"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "## 2026-08-09\n- Completed WP-QTI-10 author UI over the accepted server DTOs. The existing workspace route now\n  composes a feature-local, same-origin QTI import panel with the existing flat editor; it adds no ...\n- Completed WP-QTI-9 server ingress, report, conversion, and publication orchestration. An author\n  upload retains an exact bounded ZIP in a deterministic private workspace object and enqueues one ...\n- Added an execution-ready bot-traffic cost-containment plan for M6. It separates a tiny, API-free\n  public landing host from the authenticated PLE application; keeps app APIs same-origin with host-...\n- Added a formal project status report and refreshed the README status surfaces. They now separate\n  implemented and verified capabilities from accepted plans, identify WP-QTI-9 as the next active p...\n- Completed a focused frontend/backend security pass. Learner response recovery now uses only\n  `sessionStorage` and clears the active buffer on run exit; file-upload answers fail closed until ...\n- Completed WP-QTI-8 Memory/PostgreSQL provenance-aware conversion. A closed staged profile-\n  evidence type closes H2 and binds conversion to the committed accepted result's exact `sourceIden...\n- Refreshed durable human guidance in the owner's wording: use GPT-5.6 agents,\n  favor positive prompting and parallel atomic tasks, support the eight named PLE QTI-JSON question...\n- Recorded the owner's Blackboard-inspired course appearance guidance and added an execution-ready\n  M3 plan. The plan keeps 15 measured three-color biome/habitat themes, consolidates only `woodland...\n- Refreshed WP-QTI-7 schema/RLS/object-binding implementation evidence after the choice-map checksum\n  repair. A dedicated `NOLOGIN`, `NOINHERIT`, `NOBYPASSRLS` provenance broker owns narrow protected...\n- Completed Q4/WP-QTI-6 provenance contract and archive-object identity. The adapter now emits a\n  versioned private ordered choice-map payload with a fixed binary encoding and checksum; the stora...\n- Added the pure server-only QTI-to-flat bridge. It routes a private mapped\n  Canvas or Blackboard v1 item through native validation, canonicalization, and existing public/pri...\n- Added the bounded Blackboard Original QTI 2.1 static-pool parser. It accepts\n  only static single-choice items, keeps the exact inert `SCORE` declaration as compatibility prove...",
+          "committed_at": "2026-08-09T16:24:52-05:00",
+          "full_message": "Completed WP-QTI-10 author UI over the accepted server DTO... (+79 more)\n\n## 2026-08-09\n- Completed WP-QTI-10 author UI over the accepted server DTOs. The existing workspace route now\n  composes a feature-local, same-origin QTI import panel with the existing flat editor; it adds no ...\n- Completed WP-QTI-9 server ingress, report, conversion, and publication orchestration. An author\n  upload retains an exact bounded ZIP in a deterministic private workspace object and enqueues one ...\n- Added an execution-ready bot-traffic cost-containment plan for M6. It separates a tiny, API-free\n  public landing host from the authenticated PLE application; keeps app APIs same-origin with host-...\n- Added a formal project status report and refreshed the README status surfaces. They now separate\n  implemented and verified capabilities from accepted plans, identify WP-QTI-9 as the next active p...\n- Completed a focused frontend/backend security pass. Learner response recovery now uses only\n  `sessionStorage` and clears the active buffer on run exit; file-upload answers fail closed until ...\n- Completed WP-QTI-8 Memory/PostgreSQL provenance-aware conversion. A closed staged profile-\n  evidence type closes H2 and binds conversion to the committed accepted result's exact `sourceIden...\n- Refreshed durable human guidance in the owner's wording: use GPT-5.6 agents,\n  favor positive prompting and parallel atomic tasks, support the eight named PLE QTI-JSON question...\n- Recorded the owner's Blackboard-inspired course appearance guidance and added an execution-ready\n  M3 plan. The plan keeps 15 measured three-color biome/habitat themes, consolidates only `woodland...\n- Refreshed WP-QTI-7 schema/RLS/object-binding implementation evidence after the choice-map checksum\n  repair. A dedicated `NOLOGIN`, `NOINHERIT`, `NOBYPASSRLS` provenance broker owns narrow protected...\n- Completed Q4/WP-QTI-6 provenance contract and archive-object identity. The adapter now emits a\n  versioned private ordered choice-map payload with a fixed binary encoding and checksum; the stora...\n- Added the pure server-only QTI-to-flat bridge. It routes a private mapped\n  Canvas or Blackboard v1 item through native validation, canonicalization, and existing public/pri...\n- Added the bounded Blackboard Original QTI 2.1 static-pool parser. It accepts\n  only static single-choice items, keeps the exact inert `SCORE` declaration as compatibility prove...",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/b2978083c57c6232164eb0f30117002798636b4d",
+          "sha": "b2978083c57c6232164eb0f30117002798636b4d",
+          "subject": "Completed WP-QTI-10 author UI over the accepted server DTO... (+79 more)"
+        }
+      ],
+      "description": "An open platform for mastery teaching across question formats. Students retry varied problems until they can solve them consistently, then keep practicing fresh versions after completion, while grading and answer keys stay securely on the server",
+      "event_count": 2,
+      "language": "Rust",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "stars": 0,
+      "topics": []
+    }
+  ],
+  "retrieved_at": "2026-08-20T18:37:26+00:00",
+  "schema_version": 3,
+  "screenshots": [],
+  "source_mode": "github_public_events_snapshot",
+  "source_url": "https://api.github.com/users/vosslab/events/public?per_page=100&page=1",
+  "timezone": "America/Chicago",
+  "username": "vosslab"
+}

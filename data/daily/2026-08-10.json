@@ -1,0 +1,362 @@
+{
+  "commit_enrichment_errors": [],
+  "coverage_note": "Public GitHub Events API is bounded and is not complete commit history.",
+  "events": [
+    {
+      "created_at": "2026-08-10T05:40:16Z",
+      "id": "17254271319",
+      "local_time": "2026-08-10T00:40:16-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/starter-repo-template",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-10T05:45:57Z",
+      "id": "17254626120",
+      "local_time": "2026-08-10T00:45:57-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/qti-package-maker",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-10T06:43:20Z",
+      "id": "17258891209",
+      "local_time": "2026-08-10T01:43:20-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-10T14:13:23Z",
+      "id": "17297517701",
+      "local_time": "2026-08-10T09:13:23-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-10T16:40:51Z",
+      "id": "17311094454",
+      "local_time": "2026-08-10T11:40:51-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-10T22:39:51Z",
+      "id": "17339830732",
+      "local_time": "2026-08-10T17:39:51-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-10T23:59:30Z",
+      "id": "17344763241",
+      "local_time": "2026-08-10T18:59:30-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/vosslab-skills",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-11T01:39:09Z",
+      "id": "17350129742",
+      "local_time": "2026-08-10T20:39:09-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/starter-repo-template",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-11T01:42:43Z",
+      "id": "17350336685",
+      "local_time": "2026-08-10T20:42:43-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-11T01:50:45Z",
+      "id": "17350812199",
+      "local_time": "2026-08-10T20:50:45-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/vosslab-skills",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-11T02:09:51Z",
+      "id": "17351941634",
+      "local_time": "2026-08-10T21:09:51-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/starter-repo-template",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-11T02:23:57Z",
+      "id": "17352646770",
+      "local_time": "2026-08-10T21:23:57-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-11T02:27:15Z",
+      "id": "17352802483",
+      "local_time": "2026-08-10T21:27:15-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/vosslab-skills",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-11T02:41:32Z",
+      "id": "17353475221",
+      "local_time": "2026-08-10T21:41:32-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/battery-control",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-11T03:01:48Z",
+      "id": "17354481575",
+      "local_time": "2026-08-10T22:01:48-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-11T03:20:05Z",
+      "id": "17355454492",
+      "local_time": "2026-08-10T22:20:05-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-11T03:21:51Z",
+      "id": "17355544555",
+      "local_time": "2026-08-10T22:21:51-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    }
+  ],
+  "max_pages": 3,
+  "pages_fetched": 1,
+  "report_date": "2026-08-10",
+  "repositories": [
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/starter-repo-template/commits?since=2026-08-10T05%3A00%3A00Z&until=2026-08-11T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "- Added the universal `tests/test_source_file_line_limit.py` hygiene gate. It scans Git-tracked\n  authored source files through `file_utils.discover_files`, accepts 999 physical lines, fails at 1...\n- Added the optional manager-owned `tests/source_file_line_limit_overrides.txt` contract for exact\n  paths to tracked sources outside local control, such as a downloaded normative specification. Bla...\n- Untracked `local-only/` reference books need no path exception because hygiene discovery already\n  uses `git ls-files`. The source selector deliberately does not exclude that directory, preventing...\n- Added an explicit boundary case proving that 999 lines passes and 1000 lines fails.\n- Added an inline `tmp_path` behavior case proving the optional override list loads an exact path\n  while ignoring comments and blank lines.\n- The boundary cases pass, and direct pyflakes validation is clean. The complete new gate reports\n  four existing source debts instead of weakening the rule: `devel/bump_version.py` (1329), `repoli...",
+          "committed_at": "2026-08-10T00:40:13-05:00",
+          "full_message": "Added the universal `tests/test_source_file_line_limit.py` ... (+5 more)\n\n- Added the universal `tests/test_source_file_line_limit.py` hygiene gate. It scans Git-tracked\n  authored source files through `file_utils.discover_files`, accepts 999 physical lines, fails at 1...\n- Added the optional manager-owned `tests/source_file_line_limit_overrides.txt` contract for exact\n  paths to tracked sources outside local control, such as a downloaded normative specification. Bla...\n- Untracked `local-only/` reference books need no path exception because hygiene discovery already\n  uses `git ls-files`. The source selector deliberately does not exclude that directory, preventing...\n- Added an explicit boundary case proving that 999 lines passes and 1000 lines fails.\n- Added an inline `tmp_path` behavior case proving the optional override list loads an exact path\n  while ignoring comments and blank lines.\n- The boundary cases pass, and direct pyflakes validation is clean. The complete new gate reports\n  four existing source debts instead of weakening the rule: `devel/bump_version.py` (1329), `repoli...",
+          "html_url": "https://github.com/vosslab/starter-repo-template/commit/3763edc0d06d94d10fe6284f9dd5ac70f67826fb",
+          "sha": "3763edc0d06d94d10fe6284f9dd5ac70f67826fb",
+          "subject": "Added the universal `tests/test_source_file_line_limit.py` ... (+5 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- `devel/bump_version.py patch` now prepares the next patch release. It treats repo versions such\n  as `26.08` and Cargo versions such as `26.8.0` as the same release, previews the affected files, ...\n- Shortened source file line-limit report entries to `path: N lines`; the report header carries\n  the shared policy context once.\n- Promoted PyPI packaging from the file-presence-driven `templates/python/_pypi/` conditional\n  overlay to the real `pypi` repo type under `templates/pypi/`. The inheritance declaration `pypi: ...\n- Added template-local pytest import paths so `pytest tests/` resolves the template's helper\n  modules without adding `PYTHONPATH` or custom commands to the downstream `source_me.sh` seed.\n- Removed the fragile reset self-propagation pytest; the whole reset workflow remains in the\n  clone-based E2E runner.\n- Removed the unused `repolib.files.safe_walk` helper and corrected release-routing documentation.\n- Condensed the source-file-size rules to the boundary, scope owner, and override path.\n- Reduced `reset_repo.py` to an executable CLI stub. Filesystem mutation and orchestration now\n  live in `repolib/reset.py`, while interview and JSON-answer resolution live in `repolib/reset_ans...\n- Split propagation planning from file mutation: `repolib/files.py` retains file and merge\n  operations, and `repolib/plan.py` owns plan construction, typed overlays, and source buckets.\n- Split the version command into the small `devel/bump_version.py` CLI,\n  `devel/version_lib.py` for shared version behavior, and `devel/version_files.py` for repository d...\n- Split PyPI authentication/repository resolution and console/subprocess helpers into\n  `pypi_auth.py` and `pypi_support.py`. All three files propagate together into a package repo's `d...\n- Extracted shared overlay routing into `repolib/plan.py`.\n- Extracted reset cleanup and completion phases into focused helpers.\n- Clarified reset answer parsing and aligned the extracted helpers with repository style.\n- Resolved all four debts above without overrides. The largest replacement module is now\n  `templates/pypi/devel/submit_to_pypi.py` at 988 lines. The complete pytest suite passes with 1727...",
+          "committed_at": "2026-08-10T20:39:04-05:00",
+          "full_message": "`devel/bump_version.py patch` now prepares the next patch ... (+15 more)\n\n- `devel/bump_version.py patch` now prepares the next patch release. It treats repo versions such\n  as `26.08` and Cargo versions such as `26.8.0` as the same release, previews the affected files, ...\n- Shortened source file line-limit report entries to `path: N lines`; the report header carries\n  the shared policy context once.\n- Promoted PyPI packaging from the file-presence-driven `templates/python/_pypi/` conditional\n  overlay to the real `pypi` repo type under `templates/pypi/`. The inheritance declaration `pypi: ...\n- Added template-local pytest import paths so `pytest tests/` resolves the template's helper\n  modules without adding `PYTHONPATH` or custom commands to the downstream `source_me.sh` seed.\n- Removed the fragile reset self-propagation pytest; the whole reset workflow remains in the\n  clone-based E2E runner.\n- Removed the unused `repolib.files.safe_walk` helper and corrected release-routing documentation.\n- Condensed the source-file-size rules to the boundary, scope owner, and override path.\n- Reduced `reset_repo.py` to an executable CLI stub. Filesystem mutation and orchestration now\n  live in `repolib/reset.py`, while interview and JSON-answer resolution live in `repolib/reset_ans...\n- Split propagation planning from file mutation: `repolib/files.py` retains file and merge\n  operations, and `repolib/plan.py` owns plan construction, typed overlays, and source buckets.\n- Split the version command into the small `devel/bump_version.py` CLI,\n  `devel/version_lib.py` for shared version behavior, and `devel/version_files.py` for repository d...\n- Split PyPI authentication/repository resolution and console/subprocess helpers into\n  `pypi_auth.py` and `pypi_support.py`. All three files propagate together into a package repo's `d...\n- Extracted shared overlay routing into `repolib/plan.py`.\n- Extracted reset cleanup and completion phases into focused helpers.\n- Clarified reset answer parsing and aligned the extracted helpers with repository style.\n- Resolved all four debts above without overrides. The largest replacement module is now\n  `templates/pypi/devel/submit_to_pypi.py` at 988 lines. The complete pytest suite passes with 1727...",
+          "html_url": "https://github.com/vosslab/starter-repo-template/commit/fcfaedca8b83231531fb3230674280efe650d2c7",
+          "sha": "fcfaedca8b83231531fb3230674280efe650d2c7",
+          "subject": "`devel/bump_version.py patch` now prepares the next patch ... (+15 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- Split repository classification from repository style: `meta/docs/REPO_TYPE.md` now owns\n  marker format, names, inheritance, and multi-type behavior, while `docs/REPO_STYLE.md` contains n...\n- Recorded plan-gate guidance: ground exactness and performance requirements in measured product\n  contracts, separate one-time implementation probes from permanent tests, and apply the permanent-...\n- `tests/test_shebangs.py` now treats exact `#!perl` lines in `.conf` files as WeBWorK\n  configuration markers rather than executable shebangs, covered with inline `tmp_path` input.",
+          "committed_at": "2026-08-10T21:09:48-05:00",
+          "full_message": "Split repository classification from repository style: `met... (+2 more)\n\n- Split repository classification from repository style: `meta/docs/REPO_TYPE.md` now owns\n  marker format, names, inheritance, and multi-type behavior, while `docs/REPO_STYLE.md` contains n...\n- Recorded plan-gate guidance: ground exactness and performance requirements in measured product\n  contracts, separate one-time implementation probes from permanent tests, and apply the permanent-...\n- `tests/test_shebangs.py` now treats exact `#!perl` lines in `.conf` files as WeBWorK\n  configuration markers rather than executable shebangs, covered with inline `tmp_path` input.",
+          "html_url": "https://github.com/vosslab/starter-repo-template/commit/5935a45282ca5e90c47f029c559a1222772e239b",
+          "sha": "5935a45282ca5e90c47f029c559a1222772e239b",
+          "subject": "Split repository classification from repository style: `met... (+2 more)"
+        }
+      ],
+      "description": "Starter repository template for my projects. Includes style guides, AGENTS.md, agent skills, and a small set of reusable development scripts to bootstrap new repos with consistent structure and workflow.",
+      "event_count": 3,
+      "language": "Python",
+      "repo": "vosslab/starter-repo-template",
+      "stars": 1,
+      "topics": []
+    },
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/qti-package-maker/commits?since=2026-08-10T05%3A00%3A00Z&until=2026-08-11T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-10T00:45:53-05:00",
+          "full_message": "plan to port to rust",
+          "html_url": "https://github.com/vosslab/qti-package-maker/commit/29fdd3674c3a6363f7d6bf20512a576e31bb8bb8",
+          "sha": "29fdd3674c3a6363f7d6bf20512a576e31bb8bb8",
+          "subject": "plan to port to rust"
+        }
+      ],
+      "description": "A Python package and CLI that converts Blackboard Question Upload (BBQ) text files into QTI packages and other formats (Canvas, Blackboard, human-readable text, HTML self-tests). For instructors and developers moving assessments across LMSs.",
+      "event_count": 1,
+      "language": "Python",
+      "repo": "vosslab/qti-package-maker",
+      "stars": 4,
+      "topics": []
+    },
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/peptidyle-learning-engine/commits?since=2026-08-10T05%3A00%3A00Z&until=2026-08-11T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "## 2026-08-10\n- Accepted the implementation-ready secure grading payload decision before WP-RC5. Learner\n  submission authority is the authenticated attempt plus idempotency key; each selectable rendered ...\n- Replaced mutable local PostgreSQL, MinIO, and MinIO Client image tags with required immutable\n  digest settings. A networkless, read-only pre-start guard now refuses a retained PostgreSQL data ...\n- Converted the remaining source-ownership debt into WP-ARCH1 rather than leaving a general\n  refactoring note. The package inventories 26 maintained files at 1,000 lines or more, assigns per...\n- Refreshed the newcomer and contributor documentation set. README, architecture, installation,\n  usage, and file-structure guidance now describe the current local stack and the pending live WeBW...\n- Corrected the local-stack operator contract and stale planning navigation found during the\n  documentation audit. The launcher now prints the complete WebWork overlay/profile teardown comman...\n- Rotated the 2026-08-06 through 2026-08-08 history into `docs/CHANGELOG-2026-08a.md` with the\n  maintained changelog tool. The active changelog retains the two newest date blocks as required by...\n## 2026-08-09\n- Implemented the static portion of WP-RC3, which is not yet accepted or released. The shipped\n  WeBWorK `/render_rpc` adapter now has hardened form/RPC handling, exact RadioButtons projection, ...\n- Completed WP-RC2 production-seam closure. The H5P import, QTI parser, and WeBWorK renderer\n  contract now use concrete production module names; the empty native renderer declaration is gone;...\n- Completed WP-CA6, WP-CA7, and WP-RC1 course appearance. Instructors now have a production-backed,\n  keyboard-complete settings route for 15 measured themes, exact wide/narrow banner previews, decor...\n- Replaced every known implementation-plan deferral with a binary version 1 decision and a\n  dispatchable release package. The new release-completion plan owns WP-RC1 through WP-RC12 with ex...\n- Completed WP-CA5 course-scoped Solid theming and changed the pre-data default to Grass at the\n  owner's direction. The Grass anchors are Roosevelt-inspired `#BDDEB1`, `#73C167`, and `#008852`; ...\n- Completed a focused no-mouse accessibility pass across every student browser surface. A built",
+          "committed_at": "2026-08-10T01:43:16-05:00",
+          "full_message": "Accepted the implementation-ready secure grading payload d... (+21 more)\n\n## 2026-08-10\n- Accepted the implementation-ready secure grading payload decision before WP-RC5. Learner\n  submission authority is the authenticated attempt plus idempotency key; each selectable rendered ...\n- Replaced mutable local PostgreSQL, MinIO, and MinIO Client image tags with required immutable\n  digest settings. A networkless, read-only pre-start guard now refuses a retained PostgreSQL data ...\n- Converted the remaining source-ownership debt into WP-ARCH1 rather than leaving a general\n  refactoring note. The package inventories 26 maintained files at 1,000 lines or more, assigns per...\n- Refreshed the newcomer and contributor documentation set. README, architecture, installation,\n  usage, and file-structure guidance now describe the current local stack and the pending live WeBW...\n- Corrected the local-stack operator contract and stale planning navigation found during the\n  documentation audit. The launcher now prints the complete WebWork overlay/profile teardown comman...\n- Rotated the 2026-08-06 through 2026-08-08 history into `docs/CHANGELOG-2026-08a.md` with the\n  maintained changelog tool. The active changelog retains the two newest date blocks as required by...\n## 2026-08-09\n- Implemented the static portion of WP-RC3, which is not yet accepted or released. The shipped\n  WeBWorK `/render_rpc` adapter now has hardened form/RPC handling, exact RadioButtons projection, ...\n- Completed WP-RC2 production-seam closure. The H5P import, QTI parser, and WeBWorK renderer\n  contract now use concrete production module names; the empty native renderer declaration is gone;...\n- Completed WP-CA6, WP-CA7, and WP-RC1 course appearance. Instructors now have a production-backed,\n  keyboard-complete settings route for 15 measured themes, exact wide/narrow banner previews, decor...\n- Replaced every known implementation-plan deferral with a binary version 1 decision and a\n  dispatchable release package. The new release-completion plan owns WP-RC1 through WP-RC12 with ex...\n- Completed WP-CA5 course-scoped Solid theming and changed the pre-data default to Grass at the\n  owner's direction. The Grass anchors are Roosevelt-inspired `#BDDEB1`, `#73C167`, and `#008852`; ...\n- Completed a focused no-mouse accessibility pass across every student browser surface. A built",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/93d887d999cc81b010f6c8cd3464525faa4f1706",
+          "sha": "93d887d999cc81b010f6c8cd3464525faa4f1706",
+          "subject": "Accepted the implementation-ready secure grading payload d... (+21 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- Added PLE flat-question JSON v2 as the closed internal source contract for multiple choice,\n  multiple answer, fill-in-the-blank, multi-blank, numerical entry, matching, ordering, and image h...\n- Added the durable PLE no-mouse accessibility contract. It makes the platform path primary: Tab and\n  Shift+Tab move focus, Space selects choices and activates visible buttons, and the complete cours...\n- Completed WP-ARCH1's implementation and integrated validation without claiming independent\n  acceptance. Twenty-six oversized maintained sources now use capability-sized persistence, server,...\n- Accepted WP-ARCH1 and WP-RC3 after independent review. The permanent source-size gate reports no\n  maintained source at 1,000 lines or more and passes 582 tests; `./check_codebase.sh` passes all 1...\n- Ran the source-pinned upstream WeBWorK profile through the complete PLE live acceptance on Podman...\n  by same-attempt cache hits, full and zero server-owned grading, idempotent replay, renderer-outag...\n- Corrected the disposable PostgreSQL baseline after the source decomposition revealed a stale\n  root-level exact test filter. The runner now executes the complete flat-import provenance integra...",
+          "committed_at": "2026-08-10T09:13:18-05:00",
+          "full_message": "Added PLE flat-question JSON v2 as the closed internal sour... (+5 more)\n\n- Added PLE flat-question JSON v2 as the closed internal source contract for multiple choice,\n  multiple answer, fill-in-the-blank, multi-blank, numerical entry, matching, ordering, and image h...\n- Added the durable PLE no-mouse accessibility contract. It makes the platform path primary: Tab and\n  Shift+Tab move focus, Space selects choices and activates visible buttons, and the complete cours...\n- Completed WP-ARCH1's implementation and integrated validation without claiming independent\n  acceptance. Twenty-six oversized maintained sources now use capability-sized persistence, server,...\n- Accepted WP-ARCH1 and WP-RC3 after independent review. The permanent source-size gate reports no\n  maintained source at 1,000 lines or more and passes 582 tests; `./check_codebase.sh` passes all 1...\n- Ran the source-pinned upstream WeBWorK profile through the complete PLE live acceptance on Podman...\n  by same-attempt cache hits, full and zero server-owned grading, idempotent replay, renderer-outag...\n- Corrected the disposable PostgreSQL baseline after the source decomposition revealed a stale\n  root-level exact test filter. The runner now executes the complete flat-import provenance integra...",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/4141bb3024413f9255702fbf0b8a36cde0cc2771",
+          "sha": "4141bb3024413f9255702fbf0b8a36cde0cc2771",
+          "subject": "Added PLE flat-question JSON v2 as the closed internal sour... (+5 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- Added the decision-complete secure learner file-upload plan while preserving the current\n  fail-closed route and widget. The plan replaces browser-supplied object keys with one opaque atte...\n- Consolidated durable platform decisions and contracts into a navigable documentation set: design\n  decisions; assessment lifecycle; API, authorization, identity, data, storage, concurrency, backen...\n- Added the proposed enrollment design after confirming the current HTTP gap and comparing the\n  LibreTexts ADAPT roster workflow. The target gives instructors one course-level roster action whi...\n- Added the dated 2026-08-10 project status report and retained the Aug. 9 report as historical\n  context. The new snapshot separates accepted RC3/WP-ARCH1 evidence from WP-RC4's implemented but ...\n- Completed the offline WeBWorK replay-persistence slice without claiming the secure-payload\n  cutover accepted. Issuance now converts private durable choice mappings to presentation-scoped re...\n- Repaired the two post-WP-ARCH1 persistence size regressions by extracting complete attempt-issuance\n  capabilities into paired in-memory and PostgreSQL owners. Presentation binding, prefetch promotio...",
+          "committed_at": "2026-08-10T11:40:46-05:00",
+          "full_message": "Added the decision-complete secure learner file-upload plan... (+5 more)\n\n- Added the decision-complete secure learner file-upload plan while preserving the current\n  fail-closed route and widget. The plan replaces browser-supplied object keys with one opaque atte...\n- Consolidated durable platform decisions and contracts into a navigable documentation set: design\n  decisions; assessment lifecycle; API, authorization, identity, data, storage, concurrency, backen...\n- Added the proposed enrollment design after confirming the current HTTP gap and comparing the\n  LibreTexts ADAPT roster workflow. The target gives instructors one course-level roster action whi...\n- Added the dated 2026-08-10 project status report and retained the Aug. 9 report as historical\n  context. The new snapshot separates accepted RC3/WP-ARCH1 evidence from WP-RC4's implemented but ...\n- Completed the offline WeBWorK replay-persistence slice without claiming the secure-payload\n  cutover accepted. Issuance now converts private durable choice mappings to presentation-scoped re...\n- Repaired the two post-WP-ARCH1 persistence size regressions by extracting complete attempt-issuance\n  capabilities into paired in-memory and PostgreSQL owners. Presentation binding, prefetch promotio...",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/8bde3327bd0425b553cc32a80c523fd8f5422f17",
+          "sha": "8bde3327bd0425b553cc32a80c523fd8f5422f17",
+          "subject": "Added the decision-complete secure learner file-upload plan... (+5 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- Implemented the WP-RC8 passwordless identity and enrollment slice with acceptance still open.\n  PLE-owned opaque accounts now support uniform browser-bound email authentication, discoverable We...\n- Explored and then rejected a separate course-scoped account-recovery design. Because verified\n  email is PLE's canonical registration and sign-in path, passkeys are optional conveniences rather...\n- Removed the unaccepted REC1/REC2 account-transfer foundation before it became a durable schema or\n  HTTP contract. Account sessions no longer persist an authentication-method distinction with no re...\n- Corrected the permanent source-size gate for a preserved dirty index: an indexed path deleted from\n  the working tree is no longer opened as though source bytes still exist. The gate continues to re...\n- Hardened the in-progress WP-RC8 PostgreSQL identity and roster slice without claiming passwordless\n  enrollment complete. Roster writers now acquire one course, roster-state, then invitation/member ...",
+          "committed_at": "2026-08-10T17:39:45-05:00",
+          "full_message": "Implemented the WP-RC8 passwordless identity and enrollment... (+4 more)\n\n- Implemented the WP-RC8 passwordless identity and enrollment slice with acceptance still open.\n  PLE-owned opaque accounts now support uniform browser-bound email authentication, discoverable We...\n- Explored and then rejected a separate course-scoped account-recovery design. Because verified\n  email is PLE's canonical registration and sign-in path, passkeys are optional conveniences rather...\n- Removed the unaccepted REC1/REC2 account-transfer foundation before it became a durable schema or\n  HTTP contract. Account sessions no longer persist an authentication-method distinction with no re...\n- Corrected the permanent source-size gate for a preserved dirty index: an indexed path deleted from\n  the working tree is no longer opened as though source bytes still exist. The gate continues to re...\n- Hardened the in-progress WP-RC8 PostgreSQL identity and roster slice without claiming passwordless\n  enrollment complete. Roster writers now acquire one course, roster-state, then invitation/member ...",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/5e567b2d12ed35029583e5723feed6c5171cb41c",
+          "sha": "5e567b2d12ed35029583e5723feed6c5171cb41c",
+          "subject": "Implemented the WP-RC8 passwordless identity and enrollment... (+4 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-10T20:42:32-05:00",
+          "full_message": "from upstream",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/9fcc253e8f6a109b7400bdfb28219e81172d7447",
+          "sha": "9fcc253e8f6a109b7400bdfb28219e81172d7447",
+          "subject": "from upstream"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- Removed SMTP as a prerequisite for single-student invitation handoff without weakening email\n  authentication. An authorized instructor now receives one no-store, same-origin, fragment-based r...\n- Completed the standalone WeBWorK renderer cutover without making the repository a second\n  assignment platform. The normal local stack now consumes the external `webwork-pg-renderer` image...\n- Clarified the three WeBWorK project boundaries and corrected the release direction. `openwebwork/pg`\n  is the PG/PGML render-and-grade engine, `vosslab/webwork-pg-renderer` is PLE's required private H...",
+          "committed_at": "2026-08-10T21:23:53-05:00",
+          "full_message": "Removed SMTP as a prerequisite for single-student invitatio... (+2 more)\n\n- Removed SMTP as a prerequisite for single-student invitation handoff without weakening email\n  authentication. An authorized instructor now receives one no-store, same-origin, fragment-based r...\n- Completed the standalone WeBWorK renderer cutover without making the repository a second\n  assignment platform. The normal local stack now consumes the external `webwork-pg-renderer` image...\n- Clarified the three WeBWorK project boundaries and corrected the release direction. `openwebwork/pg`\n  is the PG/PGML render-and-grade engine, `vosslab/webwork-pg-renderer` is PLE's required private H...",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/d2a77ce3f7be757f3661289bd31ab030c7121eb7",
+          "sha": "d2a77ce3f7be757f3661289bd31ab030c7121eb7",
+          "subject": "Removed SMTP as a prerequisite for single-student invitatio... (+2 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "only a tenant-scoped `ple_session`; invitation redemption requires a persisted PLE account and `p...",
+          "committed_at": "2026-08-10T22:01:45-05:00",
+          "full_message": "Documented the local identity boundary used by enrollment walkthrough...\n\nonly a tenant-scoped `ple_session`; invitation redemption requires a persisted PLE account and `p...",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/799ab54e8d955764612c8cc4c4a5bea09f02cbd8",
+          "sha": "799ab54e8d955764612c8cc4c4a5bea09f02cbd8",
+          "subject": "Documented the local identity boundary used by enrollment walkthrough..."
+        },
+        {
+          "account_login": "vosslab",
+          "body": "public product vocabulary. The README now opens with the mastery teaching model: students work th...",
+          "committed_at": "2026-08-10T22:20:02-05:00",
+          "full_message": "Refreshed newcomer and durable documentation without treating interna...\n\npublic product vocabulary. The README now opens with the mastery teaching model: students work th...",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/c0c9ecebaa5a874d22a6d98737dc9e812e7fb8b7",
+          "sha": "c0c9ecebaa5a874d22a6d98737dc9e812e7fb8b7",
+          "subject": "Refreshed newcomer and durable documentation without treating interna..."
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-10T22:21:44-05:00",
+          "full_message": "updated",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/93d84339d7ccbbd33b6492c6d9f7c97e71a81613",
+          "sha": "93d84339d7ccbbd33b6492c6d9f7c97e71a81613",
+          "subject": "updated"
+        }
+      ],
+      "description": "An open platform for mastery teaching across question formats. Students retry varied problems until they can solve them consistently, then keep practicing fresh versions after completion, while grading and answer keys stay securely on the server",
+      "event_count": 9,
+      "language": "Rust",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/vosslab-skills/commits?since=2026-08-10T05%3A00%3A00Z&until=2026-08-11T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "The Claude hook guide is now one brief, conditional read for Claude instead of required context a...",
+          "committed_at": "2026-08-10T18:59:27-05:00",
+          "full_message": "Refocused `repo-rules-reader` on repository rules used by every codin...\n\nThe Claude hook guide is now one brief, conditional read for Claude instead of required context a...",
+          "html_url": "https://github.com/vosslab/vosslab-skills/commit/ca5c42a07e4a474051eea2869a857998caa8cb00",
+          "sha": "ca5c42a07e4a474051eea2869a857998caa8cb00",
+          "subject": "Refocused `repo-rules-reader` on repository rules used by every codin..."
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- Added a semantic Pandoc filter to `book-to-markdown` for HTML and EPUB inputs.\n  It removes presentation wrappers and decorative anchors, preserves links, code, captions, and tab...\n- Added `epub_structure.py` to measure EPUB body landmarks, native headings,\n  navigation coverage, and prominent CSS paragraph classes, then promote selected class or exact-te...\n- Added `archive_processed_sources.py` with a dry-run default and explicit move\n  mode. It validates Markdown, maps `source` metadata, preserves relative source folders under `don...\n- Replaced standard-library EPUB XML parsing with hardened `lxml` parsing that\n  disables DTD loading, entity resolution, network access, recovery, and huge-tree mode, and reject...\n- Protected Markdown inline-code spans during book HTML cleanup and delivery\n  validation so literal examples such as `<div>` remain readable technical text.\n- Excluded indented compiler diagnostics from malformed-table detection so Rust\n  error guide lines remain protected code.\n- Kept standalone numeric output from EPUB, HTML, and document sources while\n  retaining the page-label gate for PDF-derived Markdown.\n- Established the PDF metadata title as the canonical Markdown H1 so PDF and\n  structured-format conversions share the same one-title delivery contract.\n- Converted Pandoc and publisher HTML figure containers to caption prose while\n  discarding decorative wrappers and internal asset labels.\n- Converted publisher `pre` wrappers into fenced code while retaining their\n  complete command and program listings.\n- Removed hidden publisher build comments and listing wrappers so they cannot\n  masquerade as Markdown headings or visible book content.\n- Split PDF seam prose from closing code fences so later headings and examples\n  retain their intended Markdown structure.\n- Removed embedded video and error-fallback figure wrappers from semantic HTML",
+          "committed_at": "2026-08-10T20:50:42-05:00",
+          "full_message": "Added a semantic Pandoc filter to `book-to-markdown` for H... (+18 more)\n\n- Added a semantic Pandoc filter to `book-to-markdown` for HTML and EPUB inputs.\n  It removes presentation wrappers and decorative anchors, preserves links, code, captions, and tab...\n- Added `epub_structure.py` to measure EPUB body landmarks, native headings,\n  navigation coverage, and prominent CSS paragraph classes, then promote selected class or exact-te...\n- Added `archive_processed_sources.py` with a dry-run default and explicit move\n  mode. It validates Markdown, maps `source` metadata, preserves relative source folders under `don...\n- Replaced standard-library EPUB XML parsing with hardened `lxml` parsing that\n  disables DTD loading, entity resolution, network access, recovery, and huge-tree mode, and reject...\n- Protected Markdown inline-code spans during book HTML cleanup and delivery\n  validation so literal examples such as `<div>` remain readable technical text.\n- Excluded indented compiler diagnostics from malformed-table detection so Rust\n  error guide lines remain protected code.\n- Kept standalone numeric output from EPUB, HTML, and document sources while\n  retaining the page-label gate for PDF-derived Markdown.\n- Established the PDF metadata title as the canonical Markdown H1 so PDF and\n  structured-format conversions share the same one-title delivery contract.\n- Converted Pandoc and publisher HTML figure containers to caption prose while\n  discarding decorative wrappers and internal asset labels.\n- Converted publisher `pre` wrappers into fenced code while retaining their\n  complete command and program listings.\n- Removed hidden publisher build comments and listing wrappers so they cannot\n  masquerade as Markdown headings or visible book content.\n- Split PDF seam prose from closing code fences so later headings and examples\n  retain their intended Markdown structure.\n- Removed embedded video and error-fallback figure wrappers from semantic HTML",
+          "html_url": "https://github.com/vosslab/vosslab-skills/commit/0c432b526e6ae8bfb5f532047d3bc30f91903cca",
+          "sha": "0c432b526e6ae8bfb5f532047d3bc30f91903cca",
+          "subject": "Added a semantic Pandoc filter to `book-to-markdown` for H... (+18 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- Added `css-creative-expert`, a book-backed CSS craft specialist for layout,\n  cascade structure, responsive design, accessible color design, themes, backgrounds, effects, and ...\n- Added `podman-expert`, a rootless-first, book-backed container specialist for\n  Containerfile and Buildah builds, images and registries, Skopeo, pods, volumes, networking, compo...\n- Derived book-backed expert membership from the committed\n  `reference_survey.md` and `local_books.md` pair. Presence of either now requires both, so adding ...\n- Replaced the hand-maintained book-backed roster instead of extending it with\n  two more names. The committed survey/source-map pair is the durable evidence; the ignored `local-...\n- Kept corpus counts, survey grep replay, routing review, and forward-use probes\n  as one-time implementation evidence rather than permanent content tests. All 32 unique survey rou...\n- Fresh-context read-only forward uses routed an existing CSS page through a\n  mobile/dark-mode visual contract and an existing Podman setup through a rootless macOS build-then...\n- Validated both skill folders with `quick_validate.py`; the ten expert gates\n  passed 894 tests, and the full repository suite passed 2479 tests with only the existing SWIG dep...",
+          "committed_at": "2026-08-10T21:27:10-05:00",
+          "full_message": "Added `css-creative-expert`, a book-backed CSS craft specia... (+6 more)\n\n- Added `css-creative-expert`, a book-backed CSS craft specialist for layout,\n  cascade structure, responsive design, accessible color design, themes, backgrounds, effects, and ...\n- Added `podman-expert`, a rootless-first, book-backed container specialist for\n  Containerfile and Buildah builds, images and registries, Skopeo, pods, volumes, networking, compo...\n- Derived book-backed expert membership from the committed\n  `reference_survey.md` and `local_books.md` pair. Presence of either now requires both, so adding ...\n- Replaced the hand-maintained book-backed roster instead of extending it with\n  two more names. The committed survey/source-map pair is the durable evidence; the ignored `local-...\n- Kept corpus counts, survey grep replay, routing review, and forward-use probes\n  as one-time implementation evidence rather than permanent content tests. All 32 unique survey rou...\n- Fresh-context read-only forward uses routed an existing CSS page through a\n  mobile/dark-mode visual contract and an existing Podman setup through a rootless macOS build-then...\n- Validated both skill folders with `quick_validate.py`; the ten expert gates\n  passed 894 tests, and the full repository suite passed 2479 tests with only the existing SWIG dep...",
+          "html_url": "https://github.com/vosslab/vosslab-skills/commit/f6e94b7fc3264a43d98e3c514d00620da920f90b",
+          "sha": "f6e94b7fc3264a43d98e3c514d00620da920f90b",
+          "subject": "Added `css-creative-expert`, a book-backed CSS craft specia... (+6 more)"
+        }
+      ],
+      "description": "Reusable workflow skills for refactoring plans, code review, repository maintenance, and education content production. Intended for maintainers who curate skill definitions and for users who inspect or reuse SKILL.md instructions across Claude and Codex environments.",
+      "event_count": 3,
+      "language": "Python",
+      "repo": "vosslab/vosslab-skills",
+      "stars": 2,
+      "topics": []
+    },
+    {
+      "commit_source_url": "https://api.github.com/repos/vosslab/battery-control/commits?since=2026-08-10T05%3A00%3A00Z&until=2026-08-11T05%3A00%3A00Z&per_page=100",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-10T21:41:30-05:00",
+          "full_message": "Add 168 hourly data rows through 2026-08-10 20:00",
+          "html_url": "https://github.com/vosslab/battery-control/commit/77f4d6bcc6207c1ede68486a4fcddc06c53346eb",
+          "sha": "77f4d6bcc6207c1ede68486a4fcddc06c53346eb",
+          "subject": "Add 168 hourly data rows through 2026-08-10 20:00"
+        }
+      ],
+      "description": "Battery arbitrage controller for ComEd real-time pricing with EP Cube and WeMo-controlled battery systems. Manages two physically separate batteries (EP Cube 20 kWh via cloud API, WeMo-controlled battery via smart plugs), making charge/discharge/hold decisions every 3 minutes based on real-time electricity prices and solar production.",
+      "event_count": 1,
+      "language": "Python",
+      "repo": "vosslab/battery-control",
+      "stars": 0,
+      "topics": []
+    }
+  ],
+  "retrieved_at": "2026-08-12T18:08:28+00:00",
+  "schema_version": 3,
+  "screenshots": [],
+  "source_mode": "github_public_events_snapshot",
+  "source_url": "https://api.github.com/users/vosslab/events/public?per_page=100&page=1",
+  "timezone": "America/Chicago",
+  "username": "vosslab"
+}

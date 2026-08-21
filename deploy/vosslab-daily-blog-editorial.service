@@ -1,0 +1,25 @@
+[Unit]
+Description=Vosslab Daily Blog editorial reconciliation
+Documentation=http://aella.local:8016/operations/
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/vosslab/nsh/vosslab-daily-blog
+Environment=HERMES_HOME=/home/vosslab/.hermes
+ExecStart=/home/vosslab/nsh/vosslab-daily-blog/.venv/bin/python /home/vosslab/nsh/vosslab-daily-blog/scripts/reconcile_editorial.py --limit 1
+TimeoutStartSec=25min
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=full
+ProtectHome=read-only
+ReadWritePaths=/home/vosslab/nsh/vosslab-daily-blog /home/vosslab/.hermes
+ProtectControlGroups=yes
+ProtectKernelLogs=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+UMask=027
+StandardOutput=journal
+StandardError=journal
