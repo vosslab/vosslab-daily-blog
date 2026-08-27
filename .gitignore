@@ -1,16 +1,22 @@
+# === LOCAL REPOSITORY RULES === [ADD CUSTOM IGNORES HERE]
+# Propagation preserves this section.
+
 .venv/
 site/
 site
-__pycache__/
 *.pyc
 data/run/
 generated/
 
-# === UNIVERSAL ===
+# === UNIVERSAL === [PROPAGATED - LOCAL EDITS OVERWRITTEN]
 .DS_Store
-report_*.txt
-output*/
+/node_modules/
+/.env
+/report_*.txt
+/output*/
+/generated/
 /graphify-out/
 _temp*.?*
+/temp/
 /OTHER_REPOS/
 /LOCAL_ONLY/

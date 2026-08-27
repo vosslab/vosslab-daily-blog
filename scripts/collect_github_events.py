@@ -10,7 +10,6 @@ import datetime as dt
 import json
 import os
 import re
-import shutil
 import subprocess
 import sys
 import urllib.parse
@@ -408,6 +407,8 @@ def request_commit_screenshot_files(
         for item in changed:
             if not isinstance(item, dict):
                 continue
+            if str(item.get("status", "")) == "removed":
+                continue
             filename = str(item.get("filename", ""))
             if not filename.startswith("docs/screenshots/"):
                 continue
@@ -421,7 +422,15 @@ def request_commit_screenshot_files(
                 + "/"
                 + filename
             )
-            files[filename] = {"filename": filename, "url": commit_url, "commit": sha}
+            blob_sha = str(item.get("sha", ""))
+            if not blob_sha:
+                continue
+            files[filename] = {
+                "filename": filename,
+                "url": commit_url,
+                "commit": sha,
+                "blob_sha": blob_sha,
+            }
     return [files[name] for name in sorted(files)]
 
 
@@ -554,6 +563,8 @@ def collect_repository_screenshots(
                     "filename": relative_source.name,
                     "repo": repo,
                     "source_path": source_path,
+                    "source_commit": commit,
+                    "source_blob_sha": str(source["blob_sha"]),
                     "relative_path": str(
                         Path("../../assets/screenshots") / target.isoformat() / destination_name
                     ),
@@ -561,38 +572,6 @@ def collect_repository_screenshots(
                 }
             )
     return discovered
-
-
-# ============================================
-def scan_screenshots(report_date_str: str) -> list[dict[str, str]]:
-    """Copy legacy dated blog captures into the MkDocs media tree.
-
-    Repository screenshots are the primary source.  This retains the existing
-    ``data/screenshots/YYYY-MM-DD`` convention as a compatible local source.
-    """
-    root = Path(__file__).resolve().parents[1]
-    screenshot_dir = root / "data" / "screenshots" / report_date_str
-    if not screenshot_dir.is_dir():
-        return []
-    destination = root / "docs" / "assets" / "screenshots" / report_date_str
-    found: list[dict[str, str]] = []
-    for ext in (".png", ".jpg", ".jpeg", ".gif", ".webp"):
-        for path in sorted(screenshot_dir.glob(f"*{ext}")):
-            copied = destination / path.name
-            copied.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(path, copied)
-            found.append(
-                {
-                    "filename": path.name,
-                    "repo": "daily capture",
-                    "source_path": str(path),
-                    "relative_path": str(
-                        Path("../../assets/screenshots") / report_date_str / path.name
-                    ),
-                    "media_path": str(copied.relative_to(root / "docs")),
-                }
-            )
-    return found
 
 
 # ============================================
@@ -641,15 +620,14 @@ def build_repository_evidence(
             result["commits"] = commits
         except RuntimeError as exc:
             local_errors.append(f"commits {repo}: {exc}")
-        if result["commits"] or event_count:
+        evidence_commit = str(result["commits"][-1].get("sha", "")) if result["commits"] else ""
+        if evidence_commit:
             try:
                 checkout = resolve_repo_checkout(repo)
-                default_branch = str(result.get("default_branch", ""))
-                evidence_commit = str(result["commits"][-1].get("sha", "")) if result["commits"] else ""
                 readme = (
                     read_mirror_document(checkout, "README.md", evidence_commit)
-                    if checkout is not None and evidence_commit
-                    else request_repo_document(repo, "README.md", default_branch)
+                    if checkout is not None
+                    else request_repo_document(repo, "README.md", evidence_commit)
                 )
                 if readme:
                     summary = readme_context(readme["text"])
@@ -664,7 +642,7 @@ def build_repository_evidence(
                 changelog = (
                     read_mirror_document(checkout, "docs/CHANGELOG.md", evidence_commit)
                     if checkout is not None and evidence_commit
-                    else request_repo_document(repo, "docs/CHANGELOG.md", default_branch)
+                    else request_repo_document(repo, "docs/CHANGELOG.md", evidence_commit)
                 )
                 if changelog:
                     entries = changelog_entries_for_date(changelog["text"], target)
@@ -902,7 +880,7 @@ def main() -> int:
         API_URL.format(username=urllib.parse.quote(username, safe=""))
         + "?per_page=100&page=1"
     )
-    screenshots = scan_screenshots(target.isoformat())
+    screenshots: list[dict[str, str]] = []
     screenshot_destination = (
         root / "docs" / "assets" / "screenshots" / target.isoformat()
     )

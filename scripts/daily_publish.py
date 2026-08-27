@@ -53,7 +53,11 @@ def collection_failure(report_date: str, failure_kind: str) -> int:
     publication.collection_failed(state, failure_kind)
     publication.save_state(state, ROOT)
     publish_status(f"collection-failed-{report_date}")
-    print(f"Collection failed for {report_date}; publication status updated.", file=sys.stderr)
+    print(
+        f"Collection failed for {report_date} ({failure_kind}); "
+        "the existing published release remains served and the status page was updated.",
+        file=sys.stderr,
+    )
     return 2
 
 

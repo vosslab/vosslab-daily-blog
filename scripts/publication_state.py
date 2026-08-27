@@ -71,10 +71,11 @@ def save_state(record: dict[str, object], root: Path = ROOT) -> None:
 
 
 def collection_ready(record: dict[str, object], evidence_path: Path, evidence: dict[str, object]) -> None:
-    """Record an immutable collection result that is ready for canonical rendering."""
+    """Record a re-creatable collection result ready for canonical rendering."""
     record["evidence_path"] = str(evidence_path.relative_to(ROOT))
+    has_commit_activity = any(repository.get("commits") for repository in evidence["repositories"])
     record["collection"] = {
-        "state": "empty" if not evidence.get("events") else "ready",
+        "state": "ready" if evidence["events"] or has_commit_activity else "empty",
         "updated_at": utc_now(),
         "event_count": len(evidence.get("events", [])),
         "repository_count": len(evidence.get("repositories", [])),

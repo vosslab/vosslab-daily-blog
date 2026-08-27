@@ -8,6 +8,7 @@ from scripts.run_layered_editorial import (
     compression_prompt,
     draft_prompt,
     enforce_excerpt_contract,
+    finalize_article,
     polish_prompt,
     referee_prompt,
     slug_prompt,
@@ -68,6 +69,30 @@ class EditorialPromptContractTests(unittest.TestCase):
         preview, _separator, remainder = repaired.partition("<!-- more -->")
         self.assertIn("Opening paragraph.", preview)
         self.assertIn("## Details", remainder)
+
+    def test_excerpt_repair_moves_a_following_heading_out_of_the_preview(self) -> None:
+        article = "# Title\n\nOpening paragraph.\n## Details\n\nMore detail.\n"
+
+        repaired = enforce_excerpt_contract(article)
+
+        preview, _separator, remainder = repaired.partition("<!-- more -->")
+        self.assertNotIn("## Details", preview)
+        self.assertIn("## Details", remainder)
+
+    def test_finalizer_embeds_one_evidence_screenshot_when_editorial_text_omits_it(self) -> None:
+        packet = {
+            **PACKET,
+            "screenshots": [
+                {
+                    "filename": "evidence.png",
+                    "relative_path": "../../assets/screenshots/2026-08-20/evidence.png",
+                }
+            ],
+        }
+
+        finalized = finalize_article("# Title\n\nOpening paragraph.\n", packet)
+
+        self.assertIn("../../assets/screenshots/2026-08-20/evidence.png", finalized)
 
     def test_slug_prompt_has_a_machine_readable_contract(self) -> None:
         prompt = slug_prompt(PACKET, "# Article")

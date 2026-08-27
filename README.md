@@ -21,11 +21,24 @@ Site builds stage under `generated/staging/`, promote into `generated/releases/`
 
 ## Mirror-backed evidence
 
-The canonical scheduler first runs `/home/vosslab/repo-mirrors/vosslab/update-all.sh`. That cache contains depth-1 working checkouts of Vosslab's public repositories. For an account-linked commit, the collector reads `README.md`, `docs/CHANGELOG.md`, and commit-selected `docs/screenshots/` blobs as `commit:path` Git objects, then records the source commit and blob SHA. This prevents a newer checkout tip or local working-tree edit from changing historical evidence. A missing matching mirror uses the public GitHub API as an explicit bounded fallback.
+`vosslab-daily-blog-mirrors.timer` refreshes a cache of depth-1 Vosslab public-repository checkouts independently of canonical publication. For an account-linked commit, the collector reads `README.md`, `docs/CHANGELOG.md`, and commit-selected `docs/screenshots/` blobs as `commit:path` Git objects, then records the source commit and blob SHA. This prevents a newer checkout tip or local working-tree edit from changing historical evidence. The canonical publisher never waits for the whole cache refresh: it fetches an exact needed commit from an available mirror, and a missing matching mirror uses the bounded public GitHub API fallback.
+
+## Local setup
+
+```bash
+cd ~/nsh/vosslab-daily-blog
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt -r pip_requirements-dev.txt
+```
+
+Collection requires `GITHUB_TOKEN` in the Hermes environment file consumed by the scheduler wrapper. The defaults are `vosslab` for the GitHub owner, `America/Chicago` for the report timezone, and `/home/vosslab/repo-mirrors/vosslab` for synchronized depth-1 mirrors. Editorial reconciliation also requires the configured Hermes runtime.
 
 ## Commands
 
 ```bash
+# Process one completed date: mirror sync, canonical publication, then editorial reconciliation
+scripts/process_day.sh 2026-08-19
+
 # Collect and publish the canonical post for the previous completed Central day
 .venv/bin/python scripts/daily_publish.py
 

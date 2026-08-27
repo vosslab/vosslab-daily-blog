@@ -2,10 +2,11 @@
 
 This is a standalone MkDocs Material site. It is not part of `vosslab-podcast`.
 
-## Daily writer checklist
+## Manual post-edit checklist
 
 - [ ] Read `data/daily/latest.json`, then the referenced date-specific JSON source artifact.
-- [ ] Modify only the corresponding `docs/blog/posts/YYYY-MM-DD.md` and `docs/status.md` unless a build fix is necessary.
+- [ ] Modify the corresponding `docs/blog/posts/YYYY-MM-DD.md` only when a human directs a prose correction.
+- [ ] Leave generated evidence, publication-state records, screenshot assets, and `docs/status.md` to the publisher.
 - [ ] Keep the YAML `date.created` value and one H1.
 - [ ] State only facts directly supported by the source artifact.
 - [ ] Describe the source as a **bounded public GitHub evidence packet**: public Events, account-wide public-repository commits, and commit-pinned README, report-date changelog, and screenshot evidence when available.

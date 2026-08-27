@@ -97,6 +97,9 @@ def enforce_excerpt_contract(article: str) -> str:
         return article
     insert_at = len(lines)
     for i in range(paragraph_start + 1, len(lines)):
+        if lines[i].startswith("## "):
+            insert_at = i
+            break
         if not lines[i].strip():
             insert_at = i
             break
@@ -167,6 +170,29 @@ def canonical_source_footer(packet: dict[str, object]) -> str:
     )
 
 
+def ensure_evidence_screenshot(article: str, packet: dict[str, object]) -> str:
+    """Add one evidence-backed image when editorial prose omitted all screenshots."""
+    raw_screenshots = packet.get("screenshots", [])
+    screenshots: list[dict[str, object]] = (
+        [item for item in raw_screenshots if isinstance(item, dict)]
+        if isinstance(raw_screenshots, list)
+        else []
+    )
+    paths = [
+        str(item.get("relative_path", "")).strip()
+        for item in screenshots
+        if str(item.get("relative_path", "")).strip()
+    ]
+    if not paths or any(path in article for path in paths):
+        return article
+    first = next(
+        item for item in screenshots
+        if isinstance(item, dict) and str(item.get("relative_path", "")).strip()
+    )
+    label = markdown_text(first.get("filename", "evidence view"))
+    return article.rstrip() + f"\n\n## Supporting view\n\n![{label}]({paths[0]})\n"
+
+
 def finalize_article(article: str, packet: dict[str, object]) -> str:
     """Own the deterministic coverage and source-boundary portions of an article."""
     without_footer = re.sub(
@@ -176,6 +202,7 @@ def finalize_article(article: str, packet: dict[str, object]) -> str:
         article,
     )
     narrative = re.sub(r"\n## Project coverage\n.*\Z", "\n", without_footer, flags=re.DOTALL).rstrip()
+    narrative = ensure_evidence_screenshot(narrative, packet)
     covered = ensure_repository_coverage(narrative, packet).rstrip()
     return covered + "\n\n" + canonical_source_footer(packet) + "\n"
 

@@ -1,0 +1,792 @@
+{
+  "commit_enrichment_errors": [],
+  "coverage_note": "Public GitHub Events API is bounded; every public repository owned by the account is checked for account-linked commits, README context, and dated docs/CHANGELOG.md entries when available.",
+  "events": [
+    {
+      "created_at": "2026-08-22T11:55:55Z",
+      "id": "18505390126",
+      "local_time": "2026-08-22T06:55:55-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-22T11:56:18Z",
+      "id": "18505420135",
+      "local_time": "2026-08-22T06:56:18-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-22T12:09:01Z",
+      "id": "18506493550",
+      "local_time": "2026-08-22T07:09:01-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/track-runner-virtual-dolly-cam",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-23T04:11:48Z",
+      "id": "18572727565",
+      "local_time": "2026-08-22T23:11:48-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-23T04:12:07Z",
+      "id": "18572751711",
+      "local_time": "2026-08-22T23:12:07-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-23T04:14:59Z",
+      "id": "18572967473",
+      "local_time": "2026-08-22T23:14:59-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/battery-control",
+      "type": "PushEvent"
+    }
+  ],
+  "max_pages": 3,
+  "pages_fetched": 1,
+  "report_date": "2026-08-22",
+  "repositories": [
+    {
+      "changelog": {
+        "commit": "d8c9a0955bfad8ce169c381da1c11cb879220cd3",
+        "entries": [
+          "### Fixes and Maintenance\n\n- Split the canonical browser-suite owner into explicit launch, visible-scenario execution,\n  cleanup, receipt, and screenshot-transfer responsibilities. Shared Playwright helpers now own\n  timeout setup, relative dates, and origin receipts instead of duplicating those contracts across\n  production-stack scenarios.\n- Made build-mode local lifecycle startup self-sufficient after image pruning: it reconstructs the\n  canonical reviewed renderer from the maintained sibling checkout, or pulls a published renderer\n  only by immutable digest. Production-auth topology inspection remains read-only and renderer OCI\n  identity is still proven before any renderer container starts.\n- Applied the six-pass post-acceptance audit cleanup: removed unused controller parameters, made\n  permanent comments and developer callback contracts describe current behavior, documented each\n  production Playwright selector contract, pruned replica pytest assertions tied to SQL layout, and\n  routed the course-appearance audit through the canonical browser and screenshot front doors.\n- Made the external-SMTP overlay the sole Compose owner of the invitation-delivery worker. The\n  canonical non-SMTP browser stack now reconciles only services it can launch, while SMTP-selected\n  stacks retain the worker's complete runtime, security, network, and cleanup contract.\n- Started the persistent developer live-demo supervisor in its own session so the fixed\n  ple-live-demo-browser owner continues after the short-lived root start command exits.\n- Made the developer live-demo parent reap an early-exited process-like supervisor immediately\n  when it has not published its authenticated readiness receipt, then run the established exact\n  fixed-owner recovery sequence instead of consuming the full start budget.\n- Derived the live-demo developer start and supervisor-termination budgets from the canonical\n  240-second lifecycle launch budget plus a bounded handoff/cleanup margin, while retaining the\n  20-second authenticated stop budget so a clean production build can finish before recovery owns\n  its fixed disposable stack.\n- Added root run_live_demo.sh shortcut for the canonical production build,\n  readiness, HTTPS open, headless start, and owner-scoped stop commands.\n- Pinned the live-demo service-owner child environments to unbuffered Python with bytecode writing\n  disabled, preserving the closed runtime allowlist while preventing aggregate service oracles from\n  recreating repository __pycache__ artifacts.\n- Accepted WP-PROF-T3: the preview plane now authorizes the direct Instructor before decoding an\n  identity-free learner-derived subject, evaluates through the accepted S5 -> S3 -> S4 chain, and\n  atomically appends the sole successful PII-minimal audit event. Memory and PostgreSQL prove that\n  audit/no-mutation boundary; the fixed serial DATABASE_BASELINE profile under\n  ple-live-demo-browser applied and verified 46 migrations. The focused preview_plane scenario\n  exercised the production browser at the real HTTPS origin. The 63-image canonical corpus includes\n  12 nested T3 images from that same origin with full origin and empty-cleanup receipts; architecture,\n  security, HCI, and documentation reviews found no unresolved P0-P3 issue. Screenshot publication is\n  the explicit capture_screenshots.sh gate; all_test.sh validates the same system without\n  rewriting published artifacts. Final Validation passed: Rust, codebase (5/5), pytest (6,417), ten\n  production-browser scenarios at one HTTPS origin, WebWork, replica restart, and every lane's exact\n  cleanup receipt are green.\n- Audited permanent-test admission against the repository test-style rules. The evidence model now\n  separates stable callable behavior checks from one-time source, migration, and screenshot-coverage\n  closure evidence; the active plan and test guidance describe the same boundary, and obsolete\n  mock-browser inventory language is no longer a permanent-test requirement.\n- Completed the post-acceptance audit: preview UI state is namespaced, the obsolete wrapper, synthetic\n  source, and QTI snapshot are retired, and current documentation routes validation and browser\n  evidence to their canonical plans. The exact Wasm secrecy gate remains preserved while the Base\n  Course boundary stays adaptable.\n- Accepted WP-PROF-BS1: Playwright, canonical screenshot capture, direct browser development, and\n  aggregate acceptance now share one production  browser and the fixed disposable\n  ple-live-demo-browser HTTPS stack. The real Rust API, PostgreSQL, MinIO, worker, renderer,\n  production account/session authentication, authorization, and seeded live-demo baseline are the\n  sole connected browser path. Focused scenarios receive a fresh installation; the complete catalog\n  shares one stack and creates namespaced product state through visible PLE workflows.\n- Retired the alternate test-only browser artifact, mock transport/runtime graph, local-file\n  authentication and local-teaching activation, random browser/service owners, and superseded\n  walkthrough/Chapter One browser lanes. run_playwright_tests.sh, capture_screenshots.sh,\n  local_stack.py acceptance, and the four-gate all_test.sh front door now converge on the fixed\n  owner. Browser-free WebWork and two-API/one-PostgreSQL restart oracles remain only for their distinct\n  service claims and run serially after the one browser invocation.\n- Corrected the learner assignment-summary boundary discovered by the real UI journey. An entitled\n  learner with no materialized receipt now receives a key-free, read-only noActivity projection;\n  current entitlement and disclosure policy are still evaluated, denied and unknown assignments stay\n  concealed, and summary reads create no enrollment. A materialized enrollment without its required\n  summary remains a service failure rather than a valid empty state.\n- Published the JSON-authoritative 51-image screenshot corpus into nested role and journey folders\n  from the production HTTPS origin. The atomic publisher records production-bundle identity, scenario,\n  viewport, privacy checks, and SHA-256 for every artifact. Automated image review found one saved-\n  appearance timing defect; recapture now visibly includes Course appearance saved. and the selected\n  Forest theme, and the re-review closed the finding.\n- Hardened fixed-target Compose inspection around a closed SafeLoader subclass that retains only the\n  required !reset tag and rejects Python object constructors. The instructor guide now references the\n  manifest-owned active-roster capture, and the migrated-browser inventory checks meaningful visible\n  feedback sections without freezing their incidental order.\n- The complete nine-scenario browser catalog passed with same-origin receipts and exact cleanup. The\n  aggregate connected gate then passed the browser catalog, WebWork render/grade/cache/outage/redaction\n  oracle, and replica restart with two API replicas sharing one PostgreSQL instance. Final validation\n  completed the required four-command sequence twice on the recorded tree."
+        ],
+        "path": "docs/CHANGELOG.md",
+        "sha": "07e67ea47baaed2d2171c36d584be440c44a8f00",
+        "source": "mirror"
+      },
+      "commit_source_url": "https://api.github.com/repos/vosslab/peptidyle-learning-engine/commits?since=2026-08-22T05%3A00%3A00Z&until=2026-08-23T05%3A00%3A00Z&per_page=100&page=1",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "## 2026-08-22\n- Audited permanent-test admission against the repository test-style rules. The evidence model now\n  separates stable callable behavior checks from one-time source, migration, and screenshot-coverag...\n- Accepted `WP-PROF-BS1`: Playwright, canonical screenshot capture, direct browser development, and\n  aggregate acceptance now share one production `dist/` browser and the fixed disposable `ple-live-...\n- Retired the alternate test-only browser artifact, mock transport/runtime graph, local-file\n  authentication and local-teaching activation, random browser/service owners, and superseded walkt...\n- Corrected the learner assignment-summary boundary discovered by the real UI journey. An entitled\n  learner with no materialized receipt now receives a key-free, read-only `noActivity` projection; ...\n- Published the JSON-authoritative 51-image screenshot corpus into nested role and journey folders\n  from the production HTTPS origin. The atomic publisher records production-bundle identity, scenar...\n- Hardened fixed-target Compose inspection around a closed `SafeLoader` subclass that retains only the\n  required `!reset` tag and rejects Python object constructors. The instructor guide now references...\n- The complete nine-scenario browser catalog passed with same-origin receipts and exact cleanup. The\n  aggregate connected gate then passed the browser catalog, WebWork render/grade/cache/outage/redac...\n## 2026-08-21\n- Retired the obsolete mock UI-walkthrough/simulator browser graph and its aggregate acceptance\n  lane. The three proven narrow utilities now live under `tests/support/` with Node ownership; simu...\n- Accepted `WP-PROF-BS1-I1`: the real production-browser instructor-authoring journey uses visible\n  PLE controls to create and publish a namespaced question, course, assignment, and roster invitati...\n- Accepted `WP-PROF-BS1-L1`: the real production-browser learner journey creates its namespaced\n  instructor prerequisites through visible PLE controls, then lets Mary visibly claim the invitatio...\n- Accepted `WP-PROF-BS1-B1`: the unclaimed visible Sysadmin setup child now exports one strictly\n  validated, mode-0600 WebAuthn continuation; a fresh claimed child imports it into a new virtual a...\n- Accepted `WP-PROF-BS1-B2`: every browser invocation now owns the exact",
+          "committed_at": "2026-08-22T06:55:48-05:00",
+          "full_message": "Audited permanent-test admission against the repository te... (+17 more)\n\n## 2026-08-22\n- Audited permanent-test admission against the repository test-style rules. The evidence model now\n  separates stable callable behavior checks from one-time source, migration, and screenshot-coverag...\n- Accepted `WP-PROF-BS1`: Playwright, canonical screenshot capture, direct browser development, and\n  aggregate acceptance now share one production `dist/` browser and the fixed disposable `ple-live-...\n- Retired the alternate test-only browser artifact, mock transport/runtime graph, local-file\n  authentication and local-teaching activation, random browser/service owners, and superseded walkt...\n- Corrected the learner assignment-summary boundary discovered by the real UI journey. An entitled\n  learner with no materialized receipt now receives a key-free, read-only `noActivity` projection; ...\n- Published the JSON-authoritative 51-image screenshot corpus into nested role and journey folders\n  from the production HTTPS origin. The atomic publisher records production-bundle identity, scenar...\n- Hardened fixed-target Compose inspection around a closed `SafeLoader` subclass that retains only the\n  required `!reset` tag and rejects Python object constructors. The instructor guide now references...\n- The complete nine-scenario browser catalog passed with same-origin receipts and exact cleanup. The\n  aggregate connected gate then passed the browser catalog, WebWork render/grade/cache/outage/redac...\n## 2026-08-21\n- Retired the obsolete mock UI-walkthrough/simulator browser graph and its aggregate acceptance\n  lane. The three proven narrow utilities now live under `tests/support/` with Node ownership; simu...\n- Accepted `WP-PROF-BS1-I1`: the real production-browser instructor-authoring journey uses visible\n  PLE controls to create and publish a namespaced question, course, assignment, and roster invitati...\n- Accepted `WP-PROF-BS1-L1`: the real production-browser learner journey creates its namespaced\n  instructor prerequisites through visible PLE controls, then lets Mary visibly claim the invitatio...\n- Accepted `WP-PROF-BS1-B1`: the unclaimed visible Sysadmin setup child now exports one strictly\n  validated, mode-0600 WebAuthn continuation; a fresh claimed child imports it into a new virtual a...\n- Accepted `WP-PROF-BS1-B2`: every browser invocation now owns the exact",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/bc728045b0d828866e16ee17539fe697bdf91482",
+          "sha": "bc728045b0d828866e16ee17539fe697bdf91482",
+          "subject": "Audited permanent-test admission against the repository te... (+17 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- Split the canonical browser-suite owner into explicit launch, visible-scenario execution,\n  cleanup, receipt, and screenshot-transfer responsibilities. Shared Playwright helpers now own tim...\n- Made build-mode local lifecycle startup self-sufficient after image pruning: it reconstructs the\n  canonical reviewed renderer from the maintained sibling checkout, or pulls a published renderer o...\n- Applied the six-pass post-acceptance audit cleanup: removed unused controller parameters, made\n  permanent comments and developer callback contracts describe current behavior, documented each pr...\n- Made the external-SMTP overlay the sole Compose owner of the invitation-delivery worker. The\n  canonical non-SMTP browser stack now reconciles only services it can launch, while SMTP-selected ...\n- Started the persistent developer live-demo supervisor in its own session so the fixed\n  `ple-live-demo-browser` owner continues after the short-lived root start command exits.\n- Made the developer live-demo parent reap an early-exited process-like supervisor immediately\n  when it has not published its authenticated readiness receipt, then run the established exact fix...\n- Derived the live-demo developer start and supervisor-termination budgets from the canonical\n  240-second lifecycle launch budget plus a bounded handoff/cleanup margin, while retaining the 20-...\n- Added root `run_live_demo.sh` shortcut for the canonical production build,\n  readiness, HTTPS open, headless start, and owner-scoped stop commands.\n- Pinned the live-demo service-owner child environments to unbuffered Python with bytecode writing\n  disabled, preserving the closed runtime allowlist while preventing aggregate service oracles from...\n- Accepted `WP-PROF-T3`: the preview plane now authorizes the direct Instructor before decoding an\n  identity-free learner-derived subject, evaluates through the accepted S5 -> S3 -> S4 chain, and a...\n- Completed the post-acceptance audit: preview UI state is namespaced, the obsolete wrapper, synthetic\n  source, and QTI snapshot are retired, and current documentation routes validation and browser evi...",
+          "committed_at": "2026-08-22T23:11:43-05:00",
+          "full_message": "Split the canonical browser-suite owner into explicit laun... (+10 more)\n\n- Split the canonical browser-suite owner into explicit launch, visible-scenario execution,\n  cleanup, receipt, and screenshot-transfer responsibilities. Shared Playwright helpers now own tim...\n- Made build-mode local lifecycle startup self-sufficient after image pruning: it reconstructs the\n  canonical reviewed renderer from the maintained sibling checkout, or pulls a published renderer o...\n- Applied the six-pass post-acceptance audit cleanup: removed unused controller parameters, made\n  permanent comments and developer callback contracts describe current behavior, documented each pr...\n- Made the external-SMTP overlay the sole Compose owner of the invitation-delivery worker. The\n  canonical non-SMTP browser stack now reconciles only services it can launch, while SMTP-selected ...\n- Started the persistent developer live-demo supervisor in its own session so the fixed\n  `ple-live-demo-browser` owner continues after the short-lived root start command exits.\n- Made the developer live-demo parent reap an early-exited process-like supervisor immediately\n  when it has not published its authenticated readiness receipt, then run the established exact fix...\n- Derived the live-demo developer start and supervisor-termination budgets from the canonical\n  240-second lifecycle launch budget plus a bounded handoff/cleanup margin, while retaining the 20-...\n- Added root `run_live_demo.sh` shortcut for the canonical production build,\n  readiness, HTTPS open, headless start, and owner-scoped stop commands.\n- Pinned the live-demo service-owner child environments to unbuffered Python with bytecode writing\n  disabled, preserving the closed runtime allowlist while preventing aggregate service oracles from...\n- Accepted `WP-PROF-T3`: the preview plane now authorizes the direct Instructor before decoding an\n  identity-free learner-derived subject, evaluates through the accepted S5 -> S3 -> S4 chain, and a...\n- Completed the post-acceptance audit: preview UI state is namespaced, the obsolete wrapper, synthetic\n  source, and QTI snapshot are retired, and current documentation routes validation and browser evi...",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/d8c9a0955bfad8ce169c381da1c11cb879220cd3",
+          "sha": "d8c9a0955bfad8ce169c381da1c11cb879220cd3",
+          "subject": "Split the canonical browser-suite owner into explicit laun... (+10 more)"
+        }
+      ],
+      "default_branch": "main",
+      "description": "An open platform for mastery teaching across question formats. Students retry varied problems until they can solve them consistently, then keep practicing fresh versions after completion, while grading and answer keys stay securely on the server",
+      "event_count": 2,
+      "language": "Rust",
+      "readme": {
+        "commit": "d8c9a0955bfad8ce169c381da1c11cb879220cd3",
+        "path": "README.md",
+        "sha": "9bcc73665c8ef9e30d6e3d4f541f548baee8572d",
+        "source": "mirror",
+        "summary": "An open platform for mastery teaching across question formats. Students retry varied problems until they can solve them consistently, then keep practicing fresh versions after completion, while grading and answer keys stay securely on the server."
+      },
+      "repo": "vosslab/peptidyle-learning-engine",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "changelog": {
+        "commit": "cb23d2919fbc8f6f2728b0517580fb98baae6668",
+        "entries": [
+          "### Fixes and Maintenance\n\n- Corrected the atom-chemistry-facts contract to omit an oxidation result that is not yet exposed\n  through a public protocol, local CLI, PyO3 binding, or Qt route.\n\n- Made native SMARTS receipt retirement authoritative before Qt overlay cleanup. A failed\n  native retirement now retains every local query owner; a failed visual cleanup fails closed\n  for refresh rather than partially clearing the transaction.\n\n- Narrowed SMARTS transaction recovery to expected RuntimeError failures from native\n  retirement calls and Qt visual detachment. Contract drift and programming failures now\n  surface instead of being converted into ordinary recovery state.\n\n- Repaired SMARTS reveal recovery so a failed native receipt retirement blocks new queries while\n  retaining local ownership and offers an explicit accessible retry through Clear results.\n\n- Moved durable presentation-ID allocation to DocumentSession transactional\n  PendingCreatePresentationV1 reservations. Terminal Electron, Retro, and\n  Curved Normal arrows, Curved Equilibrium arrows, incremental\n  Polyline/Polygon paths, and presentation vectors install their ID sequence\n  only with the successful document mutation; previews and refused candidates\n  receive no durable ID. Renderer and route-local durable counters are retired.\n- Replaced three package-local E2E scripts that created current-directory\n  artifacts with registered, lease-backed root E2Es for vector authoring and\n  template-catalog authoring. The permanent coverage exercises public\n  workflows only.\n- Preserved explicit terminal SMARTS user outcomes during control refresh. A\n  successful clear remains visibly confirmed after the eligibility state is\n  recalculated.\n- Hardened the shared E2E workspace parent trust boundary before sweep-lock\n  acquisition. The helper now accepts only a direct, current-user directory\n  with no group or other permissions, so recovery never acts through a\n  pre-existing shared or substituted parent.\n- Made the Arrow E2E workspace lease return its verified physical directory.\n  This keeps its macOS temporary path compatible with Rust publication's\n  intentional no-symlink parent policy. Qt now presents a typed rejected\n  destination as a save that did not start, rather than one that may have\n  completed.\n- Established the canonical ferrum-document authoring-capability authority\n  for every supported live opaque receipt. DocumentSession owns one\n  allocation-identity AuthoringCapabilityIssuerV1; text placement, straight\n  presentation, catalog V1/V2 authority, presentation vectors, DirectBond,\n  terminal/equilibrium arrows, presentation paths, and reaction\n  create/lifecycle/translation now carry its nonserializable\n  AuthoringCapabilityV1. The Available -> Claimed -> Consumed RAII lifecycle\n  preserves typed foreign, replay, owner-retry, rollback, and final-handle\n  release semantics while keeping catalog preview leases and durable IDs\n  separate. Renderer-private gesture capability state and raw bridge-origin\n  access are retired. Programmatic DirectBond now receives the same capability\n  only after its candidate materializes; its retired independent origin,\n  gesture-capability, and counter authorities are removed.\n- Moved catalog durable-ID authority fully into DocumentSession. System\n  catalog recipes lower to MoleculeInsertionV1, and the document's opaque\n  pending candidate allocates molecule, atom, and bond IDs. Its tentative\n  generated-ID sequences install only after a successful transaction, so\n  discarded or refused preparation cannot advance durable IDs.\n- Preserved presentation-vector and curved-arrow prepared receipts across every\n  typed owner-side commit refusal. Their temporary capability claim now consumes\n  only after the document transaction succeeds; candidate, fence, digest, and\n  transaction errors restore the exact receipt so the owner can correct a\n  transient validation condition and retry.\n- Made the arrow-authoring E2E lease a lock-backed invocation workspace under\n  a private parent. A held advisory lock on its fixed regular marker proves\n  ownership; parent sweeping reclaims only abandoned marked regular children\n  whose owner lock it can acquire. Normal cleanup preserves a primary scenario\n  failure, and marker-acquisition failures remove only the newly allocated\n  child. The registered Arrow E2E provides the permanent workflow coverage;\n  kill/concurrency proof remains a one-time operating-system lifecycle check.\n- Bound the shared Curved Electron, Retro, and Curved Normal terminal-arrow\n  gesture and prepared-receipt lifecycle to its opaque originating document\n  session. Byte-identical foreign sessions now return typed\n  ForeignSession / RefreshAndRestart outcomes before geometry or candidate\n  work; a foreign commit leaves the owner's receipt redeemable and an owner\n  commit consumes it only after the transaction succeeds.\n- Preserved typed M3.P7 presentation-path resource recovery across the native\n  and PyO3 boundary: resource exhaustion now returns ReduceRequest, while\n  other invalid geometry continues to return ChangeGeometry.\n- Tightened the native Polyline/Polygon path contract so every repeated vertex,\n  including a non-adjacent or closing duplicate, is refused as degenerate before\n  the canonical renderer-preflighted gesture lifecycle can prepare a candidate.\n  That lifecycle now accepts one opaque scene point at a time, returns\n  Rust-derived progress and immutable optional-hover overlays whose persistent\n  geometry contains accepted vertices only. Cancellation has its own typed\n  Cancelled / DocumentUnchanged outcome. PyO3 now uses the canonical opaque\n  incremental route, and the obsolete full-vector preview bridge is retired.\n  Draw Polyline and Draw Polygon now complete the accepted local Qt route:\n  Qt supplies scene conversion, events, and wording, while Rust owns accepted\n  geometry, optional-hover overlay appearance, validation, preparation, and\n  commit. Qt retains only a transient accepted-press coordinate to de-duplicate\n  real and QTest double-click delivery; it is never geometry or validation.\n- Hardened the public native-Rust-only neutral direct-bond mutation seam with\n  an opaque materialization-session origin fence. Byte-identical foreign\n  sessions now return typed ForeignSession before mutation; external consumer\n  coverage proves successful one-step history transition plus foreign, replay,\n  invalid, and unsupported nonmutation behavior. The M3.P6 contracts now\n  distinguish this renderer-neutral programmatic seam from the sole public V3\n  Qt/Python pointer lifecycle.\n\n### Removals and Deprecations\n\n- Retired Python DirectBondGestureCategoryV1 and\n  DirectBondGestureRecoveryV1, including the obsolete Qt admission fallback.\n  Invalid DirectBondSnapPolicyV1 construction now raises ValueError; the\n  policy remains V3-shared configuration and V1 commit category/recovery names\n  remain the V3 commit-result taxonomy.\n- Retired the breaking public Rust V2 direct-bond begin/admit/commit lifecycle.\n  ferrum-document now exposes only neutral materialize/commit mutation\n  operations, while the public interactive lifecycle remains V3 in\n  ferrum-document-render.\n- Removed the obsolete generated GRAPH_REPORT.md snapshot. Canonical\n  Graphify output is GRAPH_REPORT.md.\n\n### Behavior or Interface Changes\n\n- Corrected the V1 protocol references and local CLI examples. The contract now\n  includes bounded document.molecule.smarts.query.v1 refusal semantics, names\n  document command presentation.author.v1, and documents fenced authoring and\n  catalog insertion, including the typed stale catalog refusal.\n- Corrected the pre-production catalog.insert.v1 public CLI/protocol chain.\n  Success now returns only canonical changed document, created identifier,\n  observed committed_revision, and reusable document_fence; catalog-specific\n  input/next-input revision and digest result fields are retired. The returned\n  fence has revision zero and derives its digest from the returned CDML, while a\n  stale request is a typed refusal with no partial outcome.\n- Made document.inspect return the canonical document_fence from its\n  admitted snapshot: expected_revision and expected_digest_hex. A caller\n  can place those plain facts in a later request-owned\n  presentation.author.v1 operation; human inspection remains report-only.\n- Added the closed presentation.author.v1 CLI/protocol command for one\n  request-owned presentation mutation. It replaces the vector-only route and\n  admits typed Vector, terminal Electron/Retro/Normal, Curved Equilibrium,\n  Polyline/Polygon, and explicit-endpoint DirectBond requests. Document-owned\n  capabilities and reservations remain internal. Appearance accepts validated\n  RGB/bounded-width values; stale, refused, and abandoned presentation\n  reservations retain their tentative ID until a successful mutation advances\n  the allocator. The nested-modal root text-authoring E2E was retired rather\n  than skipped: its synchronous offscreen orchestration is not durable\n  permanent-test evidence. Focused rich-text and text-placement contract tests\n  remain the authoritative evidence. Redundant package-local E2Es are retired,\n  and a public Qt widget regression covers visible SMARTS terminal status after\n  control refresh.\n\n- Corrected the in-progress M3.P6 directed-stereobond documentation to the\n  public Rust V3 pointer-probe lifecycle: begin_direct_bond_gesture_v3,\n  admit_direct_bond_candidate_v3, and\n  commit_direct_bond_admission_v3. Qt now contributes only finite scene and\n  view facts plus exact hit evidence; Rust owns endpoint resolution, snapping,\n  ambiguity, fencing, candidate construction, renderer preflight, and issued\n  operations. The resolved V2 endpoint values and lifecycle are internal Rust\n  implementation details, and the obsolete raw preview surface is retired.\n- Documented the separate typed V3 probe-error and post-resolution\n  admission-refusal paths with their closed nonmodal recovery. A valid\n  same-existing-atom gesture is self_loop / adjust_endpoint, not malformed\n  pointer input. This bullet records the historical in-progress M3.P6 state;\n  the later Developer Tests and Notes entry records its completed closure.\n\n### Developer Tests and Notes\n\n- Rotated the complete 2026-08-20 and older changelog history to\n  CHANGELOG-2026-08d.md, retaining the two newest\n  dated blocks in this active changelog.\n- Accepted the bounded M3.P7 Polyline/Polygon slice after a fresh local build\n  and all_test.sh; focused public binding and Qt behavior evidence covered\n  the declared workflow. Generic splines, broader path grammar, property\n  editing, association, and factory semantics remain separate work.\n- Closed M3.P6 as supported after a fresh local build and all_test.sh.\n\n### Fixes and Maintenance\n\n- Routed typed V3 direct-bond begin refusals through the same nonmodal Qt\n  recovery as admission-time refusals. Mouse and keyboard starts now retire\n  transient authoring state and show the closed actionable recovery without a\n  V1 fallback.\n- Extended M3.P6 V3 directed-wedge durability coverage across ExistingExisting,\n  ExistingNew, NewExisting, and NewNew forms. Solid and hashed wedges now prove\n  one history transition, undo/redo behavior, and persisted tip-to-base endpoint\n  identity categories after reopening.\n- Added durable M3.P6 V3 contract coverage for all four directed endpoint forms\n  and normal, solid-wedge, and hashed-wedge presentations. Directed w1 and\n  h1 commits now prove undo, redo, save/reopen retention; stale-digest and\n  duplicate-bond post-resolution refusals prove revision, digest, and CDML\n  remain unchanged.\n- Added public Qt M3.P6 coverage for directed ExistingNew solid and hashed\n  wedges: a clicked existing atom remains the CDML tip/start and the released\n  blank-canvas endpoint becomes the base/end.\n- Corrected the CDML directed-wedge authoring description to identify the\n  public V3 pointer-probe lifecycle rather than internal V2 endpoint intents.\n  The durable w1/h1 pointer direction remains CDML start tip to end\n  base.\n- Corrected begin_direct_bond_gesture_v3 error translation so V2 document\n  and operation failures retain their typed admission or document-gesture\n  category instead of being mislabeled as invalid_hit_evidence. Pointer\n  evidence failures continue to use DirectBondPointerProbeErrorV3.\n- Corrected Qt Contract wording that described directed direct-bond authoring\n  as future work and incorrectly narrowed Bond Properties. The bounded\n  Normal/Solid-wedge/Hashed-wedge vocabulary applies to M3.P6 drawing actions;\n  the existing properties editor retains its independently supported broader\n  Rust-owned style vocabulary."
+        ],
+        "path": "docs/CHANGELOG.md",
+        "sha": "7961331d3ea94def3c70fd945500a55dd5a50091",
+        "source": "mirror"
+      },
+      "commit_source_url": "https://api.github.com/repos/vosslab/ferrum-chemical-forge/commits?since=2026-08-22T05%3A00%3A00Z&until=2026-08-23T05%3A00%3A00Z&per_page=100&page=1",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "## 2026-08-21\n- Current acceptance is the runnable staged local runtime under `build/`. Older\n  same-day wheel and installed-site receipts below are retained only as historical development reco...\n- Renamed the extension's internal runtime boundary from wheel terminology to\n  the staged local extension model. `PyInit` still captures the admitted module path exactly once a...\n- Retired the obsolete `output_native_wheel/` publication tree and wheel-only\n  metadata. `./build.sh` removes that fixed legacy root before its checkout budget check; the suppo...\n- Removed the retired wheel-artifact receipt route from the local native runtime builder. Its\n  immutable input manifest and Mach-O closure checks now use local-runtime terminology and a versio...\n- Added the public Ferrum `Draw Curved Electron Arrow` action. Qt captures only\n  start, control, and end points; the Rust-owned renderer issues the quadratic curve and arrowhead ...\n- Added Rust-owned multi-point Polyline and Polygon authoring. Ferrum now validates ordered finite ...\n- Added Rust-owned selected-root multi-record SDF V2000/V3000 export. The local\n  `ferrum document export-sdf` command accepts repeated `--molecule-id` values and atomically publi...\n- Added registry-owned CML, CML1, and CML2 input support to `ferrum convert`.\n  The closed Rust interchange profile now decodes bounded CML before acquiring the chemistry engine...\n- Added Rust-owned v2 Draw Bond admission for existing and blank canvas endpoints, including atomic...\n- Routed the Qt Draw Bond pointer flow through the shared endpoint classifier at both press and rel...\n- Added `ferrum haworth`, a Rust-only direct-glycosidic Haworth SVG vertical slice. It accepts one ...\n- Implemented the P0.1 normal-order authoring lanes without closing the milestone. Rust and PyO3 no...\n- Defined the next P0.1 normal-order completion contract. The existing Draw Bond action now has one...\n- Accepted the bounded direct normal-bond drawing slice. Rust performs pure candidate admission and...\n- Added one isolated dual-wheel, offscreen Draw Bond E2E. It loads only the supplied native and Qt ...\n- Accepted the bounded selected-atom `Change Element` slice in the capability ledger. It commits Ru...\n- Added the selected-atom `Change Element` vertical slice. The Edit-menu action rechecks one durabl...",
+          "committed_at": "2026-08-22T06:56:14-05:00",
+          "full_message": "Current acceptance is the runnable staged local runtime u... (+116 more)\n\n## 2026-08-21\n- Current acceptance is the runnable staged local runtime under `build/`. Older\n  same-day wheel and installed-site receipts below are retained only as historical development reco...\n- Renamed the extension's internal runtime boundary from wheel terminology to\n  the staged local extension model. `PyInit` still captures the admitted module path exactly once a...\n- Retired the obsolete `output_native_wheel/` publication tree and wheel-only\n  metadata. `./build.sh` removes that fixed legacy root before its checkout budget check; the suppo...\n- Removed the retired wheel-artifact receipt route from the local native runtime builder. Its\n  immutable input manifest and Mach-O closure checks now use local-runtime terminology and a versio...\n- Added the public Ferrum `Draw Curved Electron Arrow` action. Qt captures only\n  start, control, and end points; the Rust-owned renderer issues the quadratic curve and arrowhead ...\n- Added Rust-owned multi-point Polyline and Polygon authoring. Ferrum now validates ordered finite ...\n- Added Rust-owned selected-root multi-record SDF V2000/V3000 export. The local\n  `ferrum document export-sdf` command accepts repeated `--molecule-id` values and atomically publi...\n- Added registry-owned CML, CML1, and CML2 input support to `ferrum convert`.\n  The closed Rust interchange profile now decodes bounded CML before acquiring the chemistry engine...\n- Added Rust-owned v2 Draw Bond admission for existing and blank canvas endpoints, including atomic...\n- Routed the Qt Draw Bond pointer flow through the shared endpoint classifier at both press and rel...\n- Added `ferrum haworth`, a Rust-only direct-glycosidic Haworth SVG vertical slice. It accepts one ...\n- Implemented the P0.1 normal-order authoring lanes without closing the milestone. Rust and PyO3 no...\n- Defined the next P0.1 normal-order completion contract. The existing Draw Bond action now has one...\n- Accepted the bounded direct normal-bond drawing slice. Rust performs pure candidate admission and...\n- Added one isolated dual-wheel, offscreen Draw Bond E2E. It loads only the supplied native and Qt ...\n- Accepted the bounded selected-atom `Change Element` slice in the capability ledger. It commits Ru...\n- Added the selected-atom `Change Element` vertical slice. The Edit-menu action rechecks one durabl...",
+          "html_url": "https://github.com/vosslab/ferrum-chemical-forge/commit/efb310d35987f85bff7b16b1ad073d35820dde49",
+          "sha": "efb310d35987f85bff7b16b1ad073d35820dde49",
+          "subject": "Current acceptance is the runnable staged local runtime u... (+116 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "## 2026-08-22\n- Corrected the atom-chemistry-facts contract to omit an oxidation result that is not yet exposed\n  through a public protocol, local CLI, PyO3 binding, or Qt route.\n- Made native SMARTS receipt retirement authoritative before Qt overlay cleanup. A failed\n  native retirement now retains every local query owner; a failed visual cleanup fails closed for r...\n- Narrowed SMARTS transaction recovery to expected `RuntimeError` failures from native\n  retirement calls and Qt visual detachment. Contract drift and programming failures now surface in...\n- Repaired SMARTS reveal recovery so a failed native receipt retirement blocks new queries while\n  retaining local ownership and offers an explicit accessible retry through `Clear results`.\n- Moved durable presentation-ID allocation to `DocumentSession` transactional\n  `PendingCreatePresentationV1` reservations. Terminal Electron, Retro, and Curved Normal arrows, C...\n- Replaced three package-local E2E scripts that created current-directory\n  artifacts with registered, lease-backed root E2Es for vector authoring and template-catalog autho...\n- Preserved explicit terminal SMARTS user outcomes during control refresh. A\n  successful clear remains visibly confirmed after the eligibility state is recalculated.\n- Hardened the shared E2E workspace parent trust boundary before sweep-lock\n  acquisition. The helper now accepts only a direct, current-user directory with no group or other ...\n- Made the Arrow E2E workspace lease return its verified physical directory.\n  This keeps its macOS temporary path compatible with Rust publication's intentional no-symlink par...\n- Established the canonical `ferrum-document` authoring-capability authority\n  for every supported live opaque receipt. `DocumentSession` owns one allocation-identity `Authorin...\n- Moved catalog durable-ID authority fully into `DocumentSession`. System\n  catalog recipes lower to `MoleculeInsertionV1`, and the document's opaque pending candidate alloc...\n- Preserved presentation-vector and curved-arrow prepared receipts across every\n  typed owner-side commit refusal. Their temporary capability claim now consumes only after the doc...",
+          "committed_at": "2026-08-22T23:12:03-05:00",
+          "full_message": "Corrected the atom-chemistry-facts contract to omit an oxi... (+53 more)\n\n## 2026-08-22\n- Corrected the atom-chemistry-facts contract to omit an oxidation result that is not yet exposed\n  through a public protocol, local CLI, PyO3 binding, or Qt route.\n- Made native SMARTS receipt retirement authoritative before Qt overlay cleanup. A failed\n  native retirement now retains every local query owner; a failed visual cleanup fails closed for r...\n- Narrowed SMARTS transaction recovery to expected `RuntimeError` failures from native\n  retirement calls and Qt visual detachment. Contract drift and programming failures now surface in...\n- Repaired SMARTS reveal recovery so a failed native receipt retirement blocks new queries while\n  retaining local ownership and offers an explicit accessible retry through `Clear results`.\n- Moved durable presentation-ID allocation to `DocumentSession` transactional\n  `PendingCreatePresentationV1` reservations. Terminal Electron, Retro, and Curved Normal arrows, C...\n- Replaced three package-local E2E scripts that created current-directory\n  artifacts with registered, lease-backed root E2Es for vector authoring and template-catalog autho...\n- Preserved explicit terminal SMARTS user outcomes during control refresh. A\n  successful clear remains visibly confirmed after the eligibility state is recalculated.\n- Hardened the shared E2E workspace parent trust boundary before sweep-lock\n  acquisition. The helper now accepts only a direct, current-user directory with no group or other ...\n- Made the Arrow E2E workspace lease return its verified physical directory.\n  This keeps its macOS temporary path compatible with Rust publication's intentional no-symlink par...\n- Established the canonical `ferrum-document` authoring-capability authority\n  for every supported live opaque receipt. `DocumentSession` owns one allocation-identity `Authorin...\n- Moved catalog durable-ID authority fully into `DocumentSession`. System\n  catalog recipes lower to `MoleculeInsertionV1`, and the document's opaque pending candidate alloc...\n- Preserved presentation-vector and curved-arrow prepared receipts across every\n  typed owner-side commit refusal. Their temporary capability claim now consumes only after the doc...",
+          "html_url": "https://github.com/vosslab/ferrum-chemical-forge/commit/cb23d2919fbc8f6f2728b0517580fb98baae6668",
+          "sha": "cb23d2919fbc8f6f2728b0517580fb98baae6668",
+          "subject": "Corrected the atom-chemistry-facts contract to omit an oxi... (+53 more)"
+        }
+      ],
+      "default_branch": "main",
+      "description": "A pre-alpha CDML chemical drawing platform for scientists and educators that combines a retained PySide6 desktop editor with a planned Rust chemistry backend for durable document ownership.",
+      "event_count": 2,
+      "language": "Rust",
+      "readme": {
+        "commit": "cb23d2919fbc8f6f2728b0517580fb98baae6668",
+        "path": "README.md",
+        "sha": "b41a3390ec4f9eda9a173cebb4cfaa3c6c092ffe",
+        "source": "mirror",
+        "summary": "Ferrum is a Rust chemical-document tool for inspecting, validating, rewriting, rendering,\nconverting, and drawing durable CDML records."
+      },
+      "repo": "vosslab/ferrum-chemical-forge",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "changelog": {
+        "commit": "e30656a458cdcdbb2bc251b42c484e4577ff6131",
+        "entries": [
+          "### Fixes and Maintenance\n\n- **Schema-15 audit removed obsolete seams:** fixed debug-sidecar key drift, removed unreachable\n  helpers/callback injection, archived the plan and five records, and retained length exceptions.\n\n### Developer Tests and Notes\n\n- **Six audits found one runtime seam:** fixed; no affine or fixture drift; 3,885 tests passed."
+        ],
+        "path": "docs/CHANGELOG.md",
+        "sha": "024eb887bf9a1b703b05ab2a5a9dd00cc384d090",
+        "source": "mirror"
+      },
+      "commit_source_url": "https://api.github.com/repos/vosslab/track-runner-virtual-dolly-cam/commits?since=2026-08-22T05%3A00%3A00Z&until=2026-08-23T05%3A00%3A00Z&per_page=100&page=1",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "## 2026-08-22\n- Schema-15 audit removed obsolete seams: fixed debug-sidecar key drift, removed unreachable\n  helpers/callback injection, archived the plan and five records, and retained length exceptions.\n- Six audits found one runtime seam: fixed; no affine or fixture drift; 3,885 tests passed.\n## 2026-08-21\n- Schema 15 solve artifacts own detected race-start state\n  (`track_runner/race_start.py` and `track_runner/modes/`): state travels only in `torso_box_coords...\n- Schema 15 compacts ordinary interval paths\n  (`track_runner/torso_box_coords_io.py` and `track_runner/trajectory_confidence.py`): uint8 confid...\n- WP-19/20 corpus: 11 stems reached schema 15; Lyra-Wheeling proved default bin 2.\n  Jason failed frame 36042 before Stage 1 at its documented decode boundary: `pre_existing`.\n- Stage-4 promotion is risk-ranked and budgeted\n  (`track_runner/scoring.py` and `track_runner/interval_solver.py`): promotion counts five predicat...\n- Standard target rebuilds ranking from durable solve artifacts\n  (`track_runner/modes/target.py`, `track_runner/review.py`, and `track_runner/scoring.py`): stored...\n- Pair-local interpolation uses one canonical size policy\n  (`track_runner/velocity_model.py` and `track_runner/interval_analytical.py`): centers are linear ...\n- Size consistency is zoom-invariant in scene space\n  (`track_runner/scoring.py`): scoring projects observed SOURCE boxes into scene space and compares...\n- Video identity now reflects durable frame geometry only\n  (`track_runner/tr_video_identity.py` and `track_runner/camera_motion_artifact.py`): identity cons...\n- Pair-local M1 measurement and M2 mechanics are recorded\n  (`docs/archive/pair_local_sagitta_audit.md` and `docs/archive/pair_local_promotion_gate.md`): the...",
+          "committed_at": "2026-08-22T07:08:58-05:00",
+          "full_message": "Schema-15 audit removed obsolete seams: fixed debug-sideca... (+10 more)\n\n## 2026-08-22\n- Schema-15 audit removed obsolete seams: fixed debug-sidecar key drift, removed unreachable\n  helpers/callback injection, archived the plan and five records, and retained length exceptions.\n- Six audits found one runtime seam: fixed; no affine or fixture drift; 3,885 tests passed.\n## 2026-08-21\n- Schema 15 solve artifacts own detected race-start state\n  (`track_runner/race_start.py` and `track_runner/modes/`): state travels only in `torso_box_coords...\n- Schema 15 compacts ordinary interval paths\n  (`track_runner/torso_box_coords_io.py` and `track_runner/trajectory_confidence.py`): uint8 confid...\n- WP-19/20 corpus: 11 stems reached schema 15; Lyra-Wheeling proved default bin 2.\n  Jason failed frame 36042 before Stage 1 at its documented decode boundary: `pre_existing`.\n- Stage-4 promotion is risk-ranked and budgeted\n  (`track_runner/scoring.py` and `track_runner/interval_solver.py`): promotion counts five predicat...\n- Standard target rebuilds ranking from durable solve artifacts\n  (`track_runner/modes/target.py`, `track_runner/review.py`, and `track_runner/scoring.py`): stored...\n- Pair-local interpolation uses one canonical size policy\n  (`track_runner/velocity_model.py` and `track_runner/interval_analytical.py`): centers are linear ...\n- Size consistency is zoom-invariant in scene space\n  (`track_runner/scoring.py`): scoring projects observed SOURCE boxes into scene space and compares...\n- Video identity now reflects durable frame geometry only\n  (`track_runner/tr_video_identity.py` and `track_runner/camera_motion_artifact.py`): identity cons...\n- Pair-local M1 measurement and M2 mechanics are recorded\n  (`docs/archive/pair_local_sagitta_audit.md` and `docs/archive/pair_local_promotion_gate.md`): the...",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/e30656a458cdcdbb2bc251b42c484e4577ff6131",
+          "sha": "e30656a458cdcdbb2bc251b42c484e4577ff6131",
+          "subject": "Schema-15 audit removed obsolete seams: fixed debug-sideca... (+10 more)"
+        }
+      ],
+      "default_branch": "main",
+      "description": "a Python tool that tracks a runner in track meet video and produces a cropped, stabilized \"virtual dolly camera\" output. Users place seed annotations on key frames, and the solver propagates tracking between seeds to produce a smooth cropped video that follows the athlete.",
+      "event_count": 1,
+      "language": "Python",
+      "readme": {
+        "commit": "e30656a458cdcdbb2bc251b42c484e4577ff6131",
+        "path": "README.md",
+        "sha": "0f73405d1bbfde844681b4e913191ee02f7b7d5a",
+        "source": "mirror",
+        "summary": "A Python tool for track-meet videographers that produces a cropped, stabilized virtual-dolly output following a single athlete. Users place a handful of seed annotations; the solver propagates geometry between seeds across the full race."
+      },
+      "repo": "vosslab/track-runner-virtual-dolly-cam",
+      "stars": 1,
+      "topics": []
+    },
+    {
+      "changelog": {},
+      "commit_source_url": "https://api.github.com/repos/vosslab/battery-control/commits?since=2026-08-22T05%3A00%3A00Z&until=2026-08-23T05%3A00%3A00Z&per_page=100&page=1",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-22T23:14:57-05:00",
+          "full_message": "Add 33 hourly data rows through 2026-08-22 22:00",
+          "html_url": "https://github.com/vosslab/battery-control/commit/1c28d7cea1442931befd9e524c3c50a6ad729fa9",
+          "sha": "1c28d7cea1442931befd9e524c3c50a6ad729fa9",
+          "subject": "Add 33 hourly data rows through 2026-08-22 22:00"
+        }
+      ],
+      "default_branch": "main",
+      "description": "Battery arbitrage controller for ComEd real-time pricing with EP Cube and WeMo-controlled battery systems. Manages two physically separate batteries (EP Cube 20 kWh via cloud API, WeMo-controlled battery via smart plugs), making charge/discharge/hold decisions every 3 minutes based on real-time electricity prices and solar production.",
+      "event_count": 1,
+      "language": "Python",
+      "readme": {
+        "commit": "1c28d7cea1442931befd9e524c3c50a6ad729fa9",
+        "path": "README.md",
+        "sha": "dd79800b1520a9383d4ae2ede02886deb0931f50",
+        "source": "mirror",
+        "summary": "Battery reserve controller for ComEd real-time pricing. Sets EP Cube reserve\nSoC and WeMo battery plugs every 3 minutes so stored energy is held during cheap\nhours and used during expensive grid hours."
+      },
+      "repo": "vosslab/battery-control",
+      "stars": 0,
+      "topics": []
+    }
+  ],
+  "retrieved_at": "2026-08-24T02:13:37+00:00",
+  "schema_version": 3,
+  "screenshots": [
+    {
+      "filename": "01_access_preview_allowed.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_access-01_access_preview_allowed.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_access-01_access_preview_allowed.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "0d4607e349b18d45b0c65e3dbaf372071d57659d",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/assignment_access/01_access_preview_allowed.png"
+    },
+    {
+      "filename": "01_account_security_passkey.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-shared-account-01_account_security_passkey.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-shared-account-01_account_security_passkey.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "4b11a8a4438e60f98072dd21b5aabaafb1a664a1",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/shared/account/01_account_security_passkey.png"
+    },
+    {
+      "filename": "01_assignment_list.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-delivery-01_assignment_list.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-delivery-01_assignment_list.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "fb18edee0d5576f83f2b1b50ebcc4dcb7b2b9cc0",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/delivery/01_assignment_list.png"
+    },
+    {
+      "filename": "01_assignment_overview_iphone_pro.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-allowed_assignment_overview-01_assignment_overview_iphone_pro.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-allowed_assignment_overview-01_assignment_overview_iphone_pro.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "3cdfc158fc2eb234dc20edea8725ce6da7b13568",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/access/allowed_assignment_overview/01_assignment_overview_iphone_pro.png"
+    },
+    {
+      "filename": "01_assignment_overview_laptop.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-allowed_assignment_overview-01_assignment_overview_laptop.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-allowed_assignment_overview-01_assignment_overview_laptop.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "d0ad9a918fd62a9203626d7ec5cf0b39334262e2",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/access/allowed_assignment_overview/01_assignment_overview_laptop.png"
+    },
+    {
+      "filename": "01_assignment_overview_square.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-allowed_assignment_overview-01_assignment_overview_square.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-allowed_assignment_overview-01_assignment_overview_square.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "b9d4fe9278f740fb38934a773273bce8775eb5e0",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/access/allowed_assignment_overview/01_assignment_overview_square.png"
+    },
+    {
+      "filename": "01_assignment_overview_tablet.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-allowed_assignment_overview-01_assignment_overview_tablet.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-allowed_assignment_overview-01_assignment_overview_tablet.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "048d2655db5b955b6ebd0fb25e465453b9461542",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/access/allowed_assignment_overview/01_assignment_overview_tablet.png"
+    },
+    {
+      "filename": "01_assignment_preview_denial_iphone_pro.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-assignment_preview_denial-01_assignment_preview_denial_iphone_pro.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-assignment_preview_denial-01_assignment_preview_denial_iphone_pro.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "ab59adee8fd949c9f43accc7120b314b58ff8f47",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/access/assignment_preview_denial/01_assignment_preview_denial_iphone_pro.png"
+    },
+    {
+      "filename": "01_assignment_preview_denial_laptop.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-assignment_preview_denial-01_assignment_preview_denial_laptop.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-assignment_preview_denial-01_assignment_preview_denial_laptop.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "de92e3af09c47123eaf3bdbce0867c710c34a46a",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/access/assignment_preview_denial/01_assignment_preview_denial_laptop.png"
+    },
+    {
+      "filename": "01_assignment_preview_denial_square.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-assignment_preview_denial-01_assignment_preview_denial_square.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-assignment_preview_denial-01_assignment_preview_denial_square.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "fbdea890d1f9086d9f3a2d9d5ff75e33cbdf7135",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/access/assignment_preview_denial/01_assignment_preview_denial_square.png"
+    },
+    {
+      "filename": "01_assignment_preview_denial_tablet.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-assignment_preview_denial-01_assignment_preview_denial_tablet.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-assignment_preview_denial-01_assignment_preview_denial_tablet.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "d146522f2ff8f114bd0ba789c994751c4b1a5d10",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/access/assignment_preview_denial/01_assignment_preview_denial_tablet.png"
+    },
+    {
+      "filename": "01_conflict_detected.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-grade_settings_conflict-01_conflict_detected.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-grade_settings_conflict-01_conflict_detected.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "e44a148d94b7bccba00c4b271de014740116f85c",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/grade_settings_conflict/01_conflict_detected.png"
+    },
+    {
+      "filename": "01_course_created.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-01_course_created.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-01_course_created.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "a1f1399862dc36ba336ac5acf6916d9e410edea2",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/course_authoring/01_course_created.png"
+    },
+    {
+      "filename": "01_gateway_retry.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-gateway_recovery-01_gateway_retry.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-gateway_recovery-01_gateway_retry.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "7efa2a816f0f95a0acb857b16082912b61e4e7cb",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/gateway_recovery/01_gateway_retry.png"
+    },
+    {
+      "filename": "01_instructor_active_roster.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_management-01_instructor_active_roster.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_management-01_instructor_active_roster.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "d6bf0256f8a03c794576d2c2344b8a177b0f10c5",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/course_management/01_instructor_active_roster.png"
+    },
+    {
+      "filename": "01_instructor_gradebook.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-grading-01_instructor_gradebook.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-grading-01_instructor_gradebook.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "f72108d21dae3eff7db6d43d2da9b5f5e859f891",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/grading/01_instructor_gradebook.png"
+    },
+    {
+      "filename": "01_invitation_pending.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-roster-01_invitation_pending.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-roster-01_invitation_pending.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "d255950bc8324bd6fc09e6db8260e3b3e87c1f66",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/roster/01_invitation_pending.png"
+    },
+    {
+      "filename": "01_schedule_entitlement.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_preview-01_schedule_entitlement.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_preview-01_schedule_entitlement.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "1c35856bbdd24853ff92d7500fa5cf25946de6f7",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/assignment_preview/01_schedule_entitlement.png"
+    },
+    {
+      "filename": "01_student_instructor_denial_iphone_pro.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-instructor_route_denial-01_student_instructor_denial_iphone_pro.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-instructor_route_denial-01_student_instructor_denial_iphone_pro.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "ab59adee8fd949c9f43accc7120b314b58ff8f47",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/access/instructor_route_denial/01_student_instructor_denial_iphone_pro.png"
+    },
+    {
+      "filename": "01_student_instructor_denial_laptop.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-instructor_route_denial-01_student_instructor_denial_laptop.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-instructor_route_denial-01_student_instructor_denial_laptop.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "de92e3af09c47123eaf3bdbce0867c710c34a46a",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/access/instructor_route_denial/01_student_instructor_denial_laptop.png"
+    },
+    {
+      "filename": "01_student_instructor_denial_square.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-instructor_route_denial-01_student_instructor_denial_square.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-instructor_route_denial-01_student_instructor_denial_square.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "fbdea890d1f9086d9f3a2d9d5ff75e33cbdf7135",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/access/instructor_route_denial/01_student_instructor_denial_square.png"
+    },
+    {
+      "filename": "01_student_instructor_denial_tablet.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-instructor_route_denial-01_student_instructor_denial_tablet.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-access-instructor_route_denial-01_student_instructor_denial_tablet.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "d146522f2ff8f114bd0ba789c994751c4b1a5d10",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/access/instructor_route_denial/01_student_instructor_denial_tablet.png"
+    },
+    {
+      "filename": "01_teaching_operations_groups.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-teaching_operations-01_teaching_operations_groups.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-teaching_operations-01_teaching_operations_groups.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "30f2527bb452425e5a73a8eef997faf2f97929a2",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/teaching_operations/01_teaching_operations_groups.png"
+    },
+    {
+      "filename": "01_workspace.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-content_authoring-01_workspace.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-content_authoring-01_workspace.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "3010bd14d3744dde4b4d5a212805a049bb9d8a6f",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/content_authoring/01_workspace.png"
+    },
+    {
+      "filename": "02_access_preview_denied.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_access-02_access_preview_denied.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_access-02_access_preview_denied.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "744bfc988c26d2ced4c82e5f287f4716a7341af5",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/assignment_access/02_access_preview_denied.png"
+    },
+    {
+      "filename": "02_appearance_saved.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_management-02_appearance_saved.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_management-02_appearance_saved.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "477495b7205f1eee2a92befcec5fc2f500334e30",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/course_management/02_appearance_saved.png"
+    },
+    {
+      "filename": "02_course_assignments.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-02_course_assignments.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-02_course_assignments.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "1a21f3c6ffcfd298ec39ee9904045cd78a33e098",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/course_authoring/02_course_assignments.png"
+    },
+    {
+      "filename": "02_derived_resolved.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_preview-02_derived_resolved.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_preview-02_derived_resolved.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "7c1ec402896e041fb6b176c834d3ab85aae57273",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/assignment_preview/02_derived_resolved.png"
+    },
+    {
+      "filename": "02_pending_teaching_invitation.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-shared-account-02_pending_teaching_invitation.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-shared-account-02_pending_teaching_invitation.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "3dcc08f05fbc28b29080c36e89e88778be906764",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/shared/account/02_pending_teaching_invitation.png"
+    },
+    {
+      "filename": "02_question_editor.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-content_authoring-02_question_editor.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-content_authoring-02_question_editor.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "0c4ac57fbbd6b08fc72b44c7c61a85d1fbb57239",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/content_authoring/02_question_editor.png"
+    },
+    {
+      "filename": "02_recovered_feedback.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-gateway_recovery-02_recovered_feedback.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-gateway_recovery-02_recovered_feedback.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "5248fb348d65f407317770f4d3e0fe7176550237",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/gateway_recovery/02_recovered_feedback.png"
+    },
+    {
+      "filename": "02_retry_saved.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-grade_settings_conflict-02_retry_saved.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-grade_settings_conflict-02_retry_saved.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "8281048b0d066ad3e9c2af4cdb724ba3dd2a7f01",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/grade_settings_conflict/02_retry_saved.png"
+    },
+    {
+      "filename": "02_teaching_team_invited.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-teaching_operations-02_teaching_team_invited.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-teaching_operations-02_teaching_team_invited.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "1ac1c0af3c41d383b37dd6cbcd07b117101cf51b",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/teaching_operations/02_teaching_team_invited.png"
+    },
+    {
+      "filename": "03_assignment_create.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-03_assignment_create.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-03_assignment_create.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "23f7ab5b2c54357c0512ab0a470f8e04c6e100f5",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/course_authoring/03_assignment_create.png"
+    },
+    {
+      "filename": "03_problem_ready.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-delivery-03_problem_ready.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-delivery-03_problem_ready.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "8f3b187467f1ea37c51a761ff064bbfe9f510db3",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/delivery/03_problem_ready.png"
+    },
+    {
+      "filename": "03_recovered_completion.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-gateway_recovery-03_recovered_completion.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-gateway_recovery-03_recovered_completion.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "5cc210b72dd8f78694a2dc1e3d313e518a31cd34",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/gateway_recovery/03_recovered_completion.png"
+    },
+    {
+      "filename": "03_remote_observed_iphone_pro.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-grade_settings_conflict-03_remote_observed_iphone_pro.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-grade_settings_conflict-03_remote_observed_iphone_pro.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "69d4458fe5ff939c859aa69aa9d5183fd635df76",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/grade_settings_conflict/03_remote_observed_iphone_pro.png"
+    },
+    {
+      "filename": "03_remote_observed_laptop.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-grade_settings_conflict-03_remote_observed_laptop.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-grade_settings_conflict-03_remote_observed_laptop.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "b732b7a6c86c637a491c099505d61d788bcd250d",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/grade_settings_conflict/03_remote_observed_laptop.png"
+    },
+    {
+      "filename": "03_remote_observed_square.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-grade_settings_conflict-03_remote_observed_square.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-grade_settings_conflict-03_remote_observed_square.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "3cac83cadccacc736da93fe08d96ad59763fddb0",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/grade_settings_conflict/03_remote_observed_square.png"
+    },
+    {
+      "filename": "03_remote_observed_tablet.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-grade_settings_conflict-03_remote_observed_tablet.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-grade_settings_conflict-03_remote_observed_tablet.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "a37ddca68c5569cfd8bf0b0e9e90129f497734b7",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/grade_settings_conflict/03_remote_observed_tablet.png"
+    },
+    {
+      "filename": "03_revision_conflict.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_preview-03_revision_conflict.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_preview-03_revision_conflict.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "eb57aec37d5cd15754d13e38bb12d1f9abcbaade",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/assignment_preview/03_revision_conflict.png"
+    },
+    {
+      "filename": "03_teaching_operations_retention.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-teaching_operations-03_teaching_operations_retention.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-teaching_operations-03_teaching_operations_retention.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "e2cf79f70327e29829129f58012df0d7291fbc2c",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/teaching_operations/03_teaching_operations_retention.png"
+    },
+    {
+      "filename": "03_workspace_draft_saved.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-content_authoring-03_workspace_draft_saved.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-content_authoring-03_workspace_draft_saved.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "a70a204010519c2429dc18e7f49de6eea40d85bd",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/content_authoring/03_workspace_draft_saved.png"
+    },
+    {
+      "filename": "04_fresh_session_score.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-gateway_recovery-04_fresh_session_score.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-gateway_recovery-04_fresh_session_score.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "225a680dff6589f5bd55524ff79959d64b20ac52",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/gateway_recovery/04_fresh_session_score.png"
+    },
+    {
+      "filename": "04_problem_catalog.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-04_problem_catalog.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-04_problem_catalog.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "24968c5dfcacbba841c472001610bd249a7689b2",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/course_authoring/04_problem_catalog.png"
+    },
+    {
+      "filename": "04_publication_success.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-content_authoring-04_publication_success.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-content_authoring-04_publication_success.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "211b22ea1ecbbcfaa6c52d6db6c90c8c639f099a",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/content_authoring/04_publication_success.png"
+    },
+    {
+      "filename": "04_response_selected.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-delivery-04_response_selected.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-delivery-04_response_selected.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "e640f8d8d0d88eac030bf8b887298ea96c4f9875",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/delivery/04_response_selected.png"
+    },
+    {
+      "filename": "04_revision_reloaded.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_preview-04_revision_reloaded.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_preview-04_revision_reloaded.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "328d94eaa7e77e9117a327894bfe7ac576750bfa",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/assignment_preview/04_revision_reloaded.png"
+    },
+    {
+      "filename": "05_assignment_created.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-05_assignment_created.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-05_assignment_created.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "eb1876ecf86cd3ce008d582ce6fe759859862697",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/course_authoring/05_assignment_created.png"
+    },
+    {
+      "filename": "05_feedback_correct.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-delivery-05_feedback_correct.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-delivery-05_feedback_correct.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "b48198b8979a3431eb020f284555f3da4ddd4f30",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/delivery/05_feedback_correct.png"
+    },
+    {
+      "filename": "05_library.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-content_authoring-05_library.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-content_authoring-05_library.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "7d92e4f335fbf411116803791fc851fb638cc0ed",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/content_authoring/05_library.png"
+    },
+    {
+      "filename": "05_synthetic_resolved_iphone_pro.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_preview-05_synthetic_resolved_iphone_pro.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_preview-05_synthetic_resolved_iphone_pro.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "3c774a212f6e012539cd47c288d6e295dd71a8d0",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/assignment_preview/05_synthetic_resolved_iphone_pro.png"
+    },
+    {
+      "filename": "05_synthetic_resolved_laptop.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_preview-05_synthetic_resolved_laptop.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_preview-05_synthetic_resolved_laptop.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "e71af306465602866798667004e6c6f17d2c52ea",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/assignment_preview/05_synthetic_resolved_laptop.png"
+    },
+    {
+      "filename": "05_synthetic_resolved_square.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_preview-05_synthetic_resolved_square.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_preview-05_synthetic_resolved_square.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "3e757d3a766ab5feeeb11248cb9c1c16cd5f63de",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/assignment_preview/05_synthetic_resolved_square.png"
+    },
+    {
+      "filename": "05_synthetic_resolved_tablet.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_preview-05_synthetic_resolved_tablet.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-assignment_preview-05_synthetic_resolved_tablet.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "9fe37f8e1473a36c37e33b7709d1e97cb79fb290",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/assignment_preview/05_synthetic_resolved_tablet.png"
+    },
+    {
+      "filename": "06_assignment_editor.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-06_assignment_editor.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-06_assignment_editor.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "bc3bd5b19483829bc4664da7b9323df0e0661aaf",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/course_authoring/06_assignment_editor.png"
+    },
+    {
+      "filename": "06_completion.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-delivery-06_completion.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-delivery-06_completion.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "552a37e5fc4091fadf83bdb2a79d185230f8d7f2",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/delivery/06_completion.png"
+    },
+    {
+      "filename": "06_question_detail.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-content_authoring-06_question_detail.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-content_authoring-06_question_detail.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "65f0ff28d984816e360a79e7335067cbbf7a2928",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/content_authoring/06_question_detail.png"
+    },
+    {
+      "filename": "07_assignment_published.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-07_assignment_published.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-07_assignment_published.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "437a7b3a28e1ce65e5317cddb4e569a2ec6ce1d1",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/course_authoring/07_assignment_published.png"
+    },
+    {
+      "filename": "07_repeat_run.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-delivery-07_repeat_run.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-delivery-07_repeat_run.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "0d9c2a40de4084c0965cd4920f438892a591aa11",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/delivery/07_repeat_run.png"
+    },
+    {
+      "filename": "08_assignment_overview.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-08_assignment_overview.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-08_assignment_overview.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "bad9aa091a59f83f4f45d78e5183726d0f5836d3",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/course_authoring/08_assignment_overview.png"
+    },
+    {
+      "filename": "08_fresh_session_score.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-student-delivery-08_fresh_session_score.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-student-delivery-08_fresh_session_score.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "10fea2b7e111e8733ea93be05b6cd6936ed8d797",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/student/delivery/08_fresh_session_score.png"
+    },
+    {
+      "filename": "09_fresh_session_assignment.png",
+      "media_path": "assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-09_fresh_session_assignment.png",
+      "relative_path": "../../assets/screenshots/2026-08-22/peptidyle-learning-engine-instructor-course_authoring-09_fresh_session_assignment.png",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "source_blob_sha": "1b3160bbd95c2ae57712e95188bde643f7757a4b",
+      "source_commit": "bc728045b0d828866e16ee17539fe697bdf91482",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/peptidyle-learning-engine@bc728045b0d828866e16ee17539fe697bdf91482:docs/screenshots/instructor/course_authoring/09_fresh_session_assignment.png"
+    }
+  ],
+  "source_mode": "github_public_events_owned_repository_commits_and_docs",
+  "source_url": "https://api.github.com/users/vosslab/events/public?per_page=100&page=1",
+  "timezone": "America/Chicago",
+  "username": "vosslab"
+}

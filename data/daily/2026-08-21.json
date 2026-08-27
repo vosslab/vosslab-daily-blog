@@ -1,0 +1,704 @@
+{
+  "commit_enrichment_errors": [],
+  "coverage_note": "Public GitHub Events API is bounded; every public repository owned by the account is checked for account-linked commits, README context, and dated docs/CHANGELOG.md entries when available.",
+  "events": [
+    {
+      "created_at": "2026-08-21T12:25:16Z",
+      "id": "18402837630",
+      "local_time": "2026-08-21T07:25:16-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T12:28:37Z",
+      "id": "18393205212",
+      "local_time": "2026-08-21T07:28:37-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/starter-repo-template",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T13:09:19Z",
+      "id": "18414832556",
+      "local_time": "2026-08-21T08:09:19-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/track-runner-virtual-dolly-cam",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T13:11:02Z",
+      "id": "18420212313",
+      "local_time": "2026-08-21T08:11:02-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/track-runner-virtual-dolly-cam",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T13:11:38Z",
+      "id": "18415058803",
+      "local_time": "2026-08-21T08:11:38-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/track-runner-virtual-dolly-cam",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T13:12:14Z",
+      "id": "18411372634",
+      "local_time": "2026-08-21T08:12:14-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/track-runner-virtual-dolly-cam",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T13:12:46Z",
+      "id": "18407449185",
+      "local_time": "2026-08-21T08:12:46-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/track-runner-virtual-dolly-cam",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T13:30:07Z",
+      "id": "18398424022",
+      "local_time": "2026-08-21T08:30:07-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/starter-repo-template",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T13:49:19Z",
+      "id": "18423761716",
+      "local_time": "2026-08-21T08:49:19-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T13:50:38Z",
+      "id": "18417383498",
+      "local_time": "2026-08-21T08:50:38-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/starter-repo-template",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T13:59:26Z",
+      "id": "18419470495",
+      "local_time": "2026-08-21T08:59:26-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/battery-control",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T16:17:57Z",
+      "id": "18411772751",
+      "local_time": "2026-08-21T11:17:57-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/track-runner-virtual-dolly-cam",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T16:39:54Z",
+      "id": "18413496988",
+      "local_time": "2026-08-21T11:39:54-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/battery-control",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T16:40:26Z",
+      "id": "18427089944",
+      "local_time": "2026-08-21T11:40:26-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T17:19:33Z",
+      "id": "18435058745",
+      "local_time": "2026-08-21T12:19:33-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/track-runner-virtual-dolly-cam",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T17:26:38Z",
+      "id": "18440081610",
+      "local_time": "2026-08-21T12:26:38-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/starter-repo-template",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T18:22:47Z",
+      "id": "18443828315",
+      "local_time": "2026-08-21T13:22:47-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/track-runner-virtual-dolly-cam",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T18:24:29Z",
+      "id": "18440759152",
+      "local_time": "2026-08-21T13:24:29-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T18:42:41Z",
+      "id": "18423091124",
+      "local_time": "2026-08-21T13:42:41-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/peptidyle-learning-engine",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T19:08:40Z",
+      "id": "18425095399",
+      "local_time": "2026-08-21T14:08:40-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/track-runner-virtual-dolly-cam",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T19:15:00Z",
+      "id": "18425588743",
+      "local_time": "2026-08-21T14:15:00-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/battery-control",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T20:54:50Z",
+      "id": "18434170290",
+      "local_time": "2026-08-21T15:54:50-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-21T21:12:53Z",
+      "id": "18435737194",
+      "local_time": "2026-08-21T16:12:53-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/track-runner-virtual-dolly-cam",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-22T00:54:26Z",
+      "id": "18460918305",
+      "local_time": "2026-08-21T19:54:26-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-22T00:54:56Z",
+      "id": "18460934791",
+      "local_time": "2026-08-21T19:54:56-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/ferrum-chemical-forge",
+      "type": "PushEvent"
+    },
+    {
+      "created_at": "2026-08-22T00:55:27Z",
+      "id": "18461152234",
+      "local_time": "2026-08-21T19:55:27-05:00",
+      "ref": "refs/heads/main",
+      "repo": "vosslab/attack-on-cancer",
+      "type": "PushEvent"
+    }
+  ],
+  "max_pages": 3,
+  "pages_fetched": 1,
+  "report_date": "2026-08-21",
+  "repositories": [
+    {
+      "changelog": {
+        "commit": "7be392f3f4f00147bcbde2d3574ee551195aca0e",
+        "entries": [
+          "### Fixes and Maintenance\n\n- Accepted WP-PROF-BS1-H0: a typed shared live_demo browser-suite owner and wrapper now validate\n  closed selection/configuration before allocation, create and validate generation-bound input before\n  Chromium, sanitize the Playwright environment, and record truthful lifecycle plus typed-cleanup\n  receipts with aggregated failures and private diagnostic retention.\n\n- Accepted WP-PROF-BS1-H1: run_playwright_tests.sh now owns default, --build, named\n  live_demo, approved-file, and literal-grep selections through a fresh disposable production\n   HTTPS stack. The lifecycle owns build and cleanup; WebWork/walkthrough callers retain\n  closed owner-fixed transitional commands until their later consolidation, and TLS bypass applies\n  only to the live-demo path.\n\n- Accepted WP-PROF-BS1-H2: Python ScenarioContract is the sole policy owner with strict generic\n  BrowserScenarioInputV1 and Rust Base Course receipt authority. A public-safe run namespace\n  replaces Date.now()/parallelIndex; product mutations use visible UI, route-abort fault behavior\n  moves to F1, and Avery's visible sign-out/sign-in proves teaching-team persistence.\n\n- Accepted WP-PROF-BS1-H3: typed browser-suite oracles now prove the exact disposable HTTPS\n  gateway origin, lifecycle-derived podman-compose --in-pod false provider policy, labelled\n  resources, private artifacts, and owner processes. Receipts expose safe metadata only; successful\n  cleanup leaves each final ownership inventory empty.\n\n- Accepted WP-PROF-BS1-C0: all_test.sh is the fail-fast aggregate front door, ordered as\n  environment, pytest, build, Rust, codebase, one local-stack acceptance handoff, and both diff\n  checks. Aggregate evidence has one canonical real-stack production-browser lane and two labelled\n  transitional visual-fixture lanes pending V1; the duplicate compatibility-wrapper lane is gone.\n  The evidence model and operational documentation now state that boundary and reserve fakes for\n  narrow isolated contracts.\n\n- Accepted WP-PROF-BS1-B0: the V2 browser-scenario contract now has a closed\n  sysadminRequirement, a deterministic flat catalog with an explicit legacy-live-demo bridge, and\n  a multi-scenario owner that uses one disposable stack for a complete selection and a fresh stack\n  for a focused selection. Each child receives only its own canonical input and origin-receipt path;\n  ordered public success and failure receipts record each child outcome without exposing private\n  claim material.\n\n- Accepted WP-PROF-BS1-U1: retained browser-independent Node evidence now uses literal decoder\n  payloads, direct narrow dependencies, and a test-local recording fetch. It restores\n  issued-question secrecy checks without a fake server, retains no ** imports, and\n  adds a deterministic consumer/allocation scanner that assigns every remaining mock-runtime marker\n  to its later real-stack migration owner (I1, L1, A1, S1, V1, F1, or R1).\n\n- Restored the executable mode for e2e_live_demo_browser.py, bringing its shebang\n  into alignment with the repository executable-script contract.\n\n- Moved the live-demo selector identities and generation-bound Sysadmin claim\n  context out of the common Compose topology and into the HTTPS live-demo\n  browser overlay. Ordinary local, Chapter One, WebWork, and walkthrough\n  owners now launch without demo-only inputs; the retired default-only proof\n  command no longer suggests that ordinary local state owns the live-demo\n  capability.\n\n- Increased the one-shot MinIO Client service memory envelope from 128 MiB to\n  256 MiB after the real mc pipe receipt-create operation again exited 137.\n  The narrow resource repair retained the service hardening and received\n  independent acceptance.\n- Repaired the disposable UI walkthrough environment to bootstrap and validate\n  its private ownership/passkey setup context under its declared owner policy\n  without accepting a source or ambient proof path; the browser walkthrough\n  itself does not exercise a Sysadmin passkey journey. Its interim live-demo\n  claim-context plumbing was superseded and removed when demo auth was\n  isolated to the explicit HTTPS live-demo overlay.\n- Repaired offline UI walkthrough temporary repositories so they include both canonical Compose\n  files required by the ui-walkthrough disposable-owner policy.\n- Kept the database-and-storage live-demo baseline owner independent of the\n  browser-only Sysadmin claim context. The interim ordinary-local claim-context\n  plumbing was superseded and removed when demo auth was isolated to the\n  explicit HTTPS live-demo overlay, whose TLS browser owner alone creates the\n  private, generation-bound passkey-ownership proof.\n\n### Decisions and Failures\n\n- Reprioritized WP-PROF-BS1 as the sole current professor package after accepted live-demo\n  delivery, ahead of planned frozen-scope WP-PROF-T3 and WP-PROF-T4. It establishes one\n  disposable production-browser HTTPS path for Playwright, screenshots, and acceptance, then\n  retires the parallel mock application as real scenarios and narrow unit tests take ownership of\n  meaningful behavior. The plan starts with a typed live-demo owner adapter, uses UI-created\n  namespaced state and product-visible persistence evidence, adds service receipts only for their\n  named claims, and records visual evidence through automated image evaluation. Pre-production\n  implementation may strengthen foundational boundaries directly; suite-labelled cleanup and\n  repeat-run noninterference are acceptance evidence, while image pruning is permitted lifecycle\n  hygiene.\n\n### Developer Tests and Notes\n\n- BS1-H0 Validation passed 3,251 affected tests. Its real production HTTPS live_demo scenario\n  passed under ple-live-demo-browser-46aa4964966b; successful cleanup left zero matching Podman\n  resources and no run-* private state. Final correctness review returned ACCEPT. Final security\n  rereview closed BS1-H0-SEC-001 with no P0-P3 finding.\n\n- BS1-H1 passed 21 initial focused Python, 7 Node config, and 43 corrected focused pytest tests,\n  TypeScript checks, shell/pyflakes/diff checks, and real default --build\n  ple-live-demo-browser-2898787a80e3 plus focused-grep\n  ple-live-demo-browser-3410dc98a716 runs. Each left zero matching resources and no run-*\n  state. Final correctness and security reviews returned ACCEPT with no P0-P3 finding.\n\n- BS1-H2 passed corrected 32 Python and 4 Node tests, TypeScript, Prettier, and diff checks; the\n  canonical real live_demo passed and cleaned its owned stack. Final correctness returned ACCEPT\n  with no P0-P3 finding; final security closed PASS with 34 pytest, 8 Node, TypeScript, and diff\n  evidence.\n\n- BS1-H3 passed 37 focused pytest checks, 4 Node checks, TypeScript, pyflakes, Prettier, and diff\n  validation. Two sequential fresh production HTTPS runs, ple-live-demo-browser-ba258fc76aeb and\n  ple-live-demo-browser-b0984e1ae0ea, each recorded the exact gateway origin and an empty final\n  labelled-resource, private-artifact, and owner-process inventory. Independent correctness\n  returned ACCEPT and security returned PASS with no P0-P3 finding.\n\n- BS1-C0 passed one aggregate local_stack.py acceptance run with successful labelled-resource\n  cleanup, the full 6,232-test pytest suite, shell syntax, and working-tree plus cached-diff gates.\n  The aggregate receipt names the canonical production-browser behavior lane separately from two\n  transitional visual-fixture lanes. Independent correctness returned ACCEPT and security returned\n  PASS with no P0-P3 finding.\n\n- BS1-B0 passed 42 focused Python tests, 5 Node parser tests, TypeScript compilation, Prettier,\n  pyflakes, and both diff checks. Sequential real default and focused production-browser runs used\n  distinct disposable HTTPS origins and removed their private state and all owned resources.\n  Independent correctness returned ACCEPT and security returned PASS with no P0-P3 finding.\n\n- BS1-U1 passed the retained focused Node evidence: 52 named tests (53 file-level reported passes\n  including its support module), ESLint, TypeScript, Prettier, and both diff checks. The current\n  integrated material tree passed check_codebase.sh with 278 Node tests and\n   with 6,396 tests. Independent correctness returned ACCEPT\n  and security returned PASS with no P0-P3 finding.\n\n- Final validation for the executable-mode repair passed Rust workspace checks, five TypeScript\n  checks with 322 Node tests, 6,089 pytest cases, 248 built Playwright cases, and the complete\n  disposable local-stack acceptance suite with no required skips.\n\n- Applied authority ruling A to the accepted immutable WP-PROF-LD2 allocation: migration\n  2026081809 owns exactly two narrow least-privilege execute-only brokers, safe normal Sysadmin\n  approval-candidate discovery and read-only completed-installation-generation lookup used to bind\n  configured first-ownership proof. 2026081810 is accepted and immutable only for the Student\n  pre-tenant account-course retention repair. Selector behavior and claim/passkey/account/session\n  data and semantics remain non-schema; the generation-read broker is the narrow schema\n  authorization seam for that otherwise non-schema ownership flow. This supersedes the temporary\n  P2 reopening record below, restores LD2 acceptance on 2026-08-21, advances T3 as sole current,\n  and leaves WP-RC8 parked and open. This documentation closeout does not itself prove final-goal\n  completion: final-goal completion additionally requires the complete final-material-tree Validation\n  after these record edits.\n- Reopened WP-PROF-LD2 after the independent final material review rejected a P2\n  documentation-and-migration scope contradiction. Migration 2026081809 contains both the\n  Sysadmin approval-candidate discovery broker and the restricted completed-installation-generation\n  read broker used by the ownership route. Its exact allocation scope is under authority correction;\n  2026081810 remains allocated for the narrow Student pre-tenant account-course context\n  retention-boundary repair. Neither allocation is accepted or immutable. The full\n  final-material-tree Validation and a fresh independent review are required after correction; this\n  entry does not choose between widening 1809's accepted scope and splitting a new migration.\n- Historical post-repair runtime evidence for the open WP-PROF-LD2 passed\n  check_rust.sh; check_codebase.sh (five checks and 322 Node tests);\n  pytest (6,017 tests, no skips); the baseline E2E under\n  ple_live_demo_baseline_124c398f82978266c7370838; and all eight aggregate\n  acceptance lanes. The terminal owner-locked local HTTPS Playwright journey\n  passed once under ple-live-demo-browser-d0ff0e97f4ac. Typed cleanup and\n  exact-label checks left zero containers, volumes, and networks after both\n  connected runs; both diff checks passed and no Python bytecode artifacts\n  remained. This documentation closeout does not itself prove final-goal\n  completion; final-goal completion additionally requires the complete\n  final-material-tree Validation after the scope correction. This does not claim\n  public, AWS, operator, or production deployment activation and does not\n  close WP-RC8.\n- Corrected the live-demo regeneration checklist to the KISS product contract:\n  fresh database and object-storage regeneration creates the seeded Sysadmin\n  in its original unclaimed baseline state without a credential-replay\n  requirement. Clarified that the owner-locked TLS overlay is disposable\n  connected-E2E validation, not public or production deployment activation."
+        ],
+        "path": "docs/CHANGELOG.md",
+        "sha": "baa291d33d869cdc4950b0458b4abfb9b8703158",
+        "source": "mirror"
+      },
+      "commit_source_url": "https://api.github.com/repos/vosslab/peptidyle-learning-engine/commits?since=2026-08-21T05%3A00%3A00Z&until=2026-08-22T05%3A00%3A00Z&per_page=100&page=1",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "## 2026-08-21\n- Moved the live-demo selector identities and generation-bound Sysadmin claim\n  context out of the common Compose topology and into the HTTPS live-demo browser overlay. Ordinary...\n- Increased the one-shot MinIO Client service memory envelope from 128 MiB to\n  256 MiB after the real `mc pipe` receipt-create operation again exited 137. The narrow resource r...\n- Repaired the disposable UI walkthrough environment to bootstrap and validate\n  its private ownership/passkey setup context under its declared owner policy without accepting a s...\n- Repaired offline UI walkthrough temporary repositories so they include both canonical Compose\n  files required by the `ui-walkthrough` disposable-owner policy.\n- Kept the database-and-storage live-demo baseline owner independent of the\n  browser-only Sysadmin claim context. The interim ordinary-local claim-context plumbing was supers...\n- Applied authority ruling A to the accepted immutable WP-PROF-LD2 allocation: migration\n  `2026081809` owns exactly two narrow least-privilege execute-only brokers, safe normal Sysadmin a...\n- Reopened WP-PROF-LD2 after the independent final material review rejected a P2\n  documentation-and-migration scope contradiction. Migration `2026081809` contains both the Sysadmi...\n- Historical post-repair runtime evidence for the open WP-PROF-LD2 passed\n  `./check_rust.sh`; `./check_codebase.sh` (five checks and 322 Node tests); pytest (6,017 tests, n...\n- Corrected the live-demo regeneration checklist to the KISS product contract:\n  fresh database and object-storage regeneration creates the seeded Sysadmin in its original unclai...\n## 2026-08-20\n- Split the common Compose topology from the ordinary local-development overlay. The default\n  lifecycle and local disposable owners now use base plus local development (then SMTP when selecte...",
+          "committed_at": "2026-08-21T07:25:12-05:00",
+          "full_message": "Moved the live-demo selector identities and generation-boun... (+9 more)\n\n## 2026-08-21\n- Moved the live-demo selector identities and generation-bound Sysadmin claim\n  context out of the common Compose topology and into the HTTPS live-demo browser overlay. Ordinary...\n- Increased the one-shot MinIO Client service memory envelope from 128 MiB to\n  256 MiB after the real `mc pipe` receipt-create operation again exited 137. The narrow resource r...\n- Repaired the disposable UI walkthrough environment to bootstrap and validate\n  its private ownership/passkey setup context under its declared owner policy without accepting a s...\n- Repaired offline UI walkthrough temporary repositories so they include both canonical Compose\n  files required by the `ui-walkthrough` disposable-owner policy.\n- Kept the database-and-storage live-demo baseline owner independent of the\n  browser-only Sysadmin claim context. The interim ordinary-local claim-context plumbing was supers...\n- Applied authority ruling A to the accepted immutable WP-PROF-LD2 allocation: migration\n  `2026081809` owns exactly two narrow least-privilege execute-only brokers, safe normal Sysadmin a...\n- Reopened WP-PROF-LD2 after the independent final material review rejected a P2\n  documentation-and-migration scope contradiction. Migration `2026081809` contains both the Sysadmi...\n- Historical post-repair runtime evidence for the open WP-PROF-LD2 passed\n  `./check_rust.sh`; `./check_codebase.sh` (five checks and 322 Node tests); pytest (6,017 tests, n...\n- Corrected the live-demo regeneration checklist to the KISS product contract:\n  fresh database and object-storage regeneration creates the seeded Sysadmin in its original unclai...\n## 2026-08-20\n- Split the common Compose topology from the ordinary local-development overlay. The default\n  lifecycle and local disposable owners now use base plus local development (then SMTP when selecte...",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/9339193db0705af6be15dd3c8f53de488900e76f",
+          "sha": "9339193db0705af6be15dd3c8f53de488900e76f",
+          "subject": "Moved the live-demo selector identities and generation-boun... (+9 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T08:49:09-05:00",
+          "full_message": "minor updates",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/188aff306b6e28b714efbdc54881c4c8764c8def",
+          "sha": "188aff306b6e28b714efbdc54881c4c8764c8def",
+          "subject": "minor updates"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- Accepted `WP-PROF-BS1-H0`: a typed shared `live_demo` browser-suite owner and wrapper now validate\n  closed selection/configuration before allocation, create and validate generation-bound input befo...\n- Accepted `WP-PROF-BS1-H1`: `run_playwright_tests.sh` now owns default, `--build`, named\n  `live_demo`, approved-file, and literal-grep selections through a fresh disposable production `di...\n- Accepted `WP-PROF-BS1-H2`: Python `ScenarioContract` is the sole policy owner with strict generic\n  `BrowserScenarioInputV1` and Rust Base Course receipt authority. A public-safe run namespace repl...\n- Accepted `WP-PROF-BS1-H3`: typed browser-suite oracles now prove the exact disposable HTTPS\n  gateway origin, lifecycle-derived `podman-compose --in-pod false` provider policy, labelled resou...\n- Accepted `WP-PROF-BS1-C0`: `all_test.sh` is the fail-fast aggregate front door, ordered as\n  environment, pytest, build, Rust, codebase, one local-stack acceptance handoff, and both diff che...\n- Accepted `WP-PROF-BS1-B0`: the V2 browser-scenario contract now has a closed\n  `sysadminRequirement`, a deterministic flat catalog with an explicit legacy-live-demo bridge, and...\n- Accepted `WP-PROF-BS1-U1`: retained browser-independent Node evidence now uses literal decoder\n  payloads, direct narrow dependencies, and a test-local recording fetch. It restores issued-questi...\n- Restored the executable mode for `tests/e2e/e2e_live_demo_browser.py`, bringing its shebang\n  into alignment with the repository executable-script contract.\n- Reprioritized `WP-PROF-BS1` as the sole current professor package after accepted live-demo\n  delivery, ahead of planned frozen-scope `WP-PROF-T3` and `WP-PROF-T4`. It establishes one disposa...\n- BS1-H0 Validation passed 3,251 affected tests. Its real production HTTPS `live_demo` scenario\n  passed under `ple-live-demo-browser-46aa4964966b`; successful cleanup left zero matching Podman r...\n- BS1-H1 passed 21 initial focused Python, 7 Node config, and 43 corrected focused pytest tests,\n  TypeScript checks, shell/pyflakes/diff checks, and real default `--build` `ple-live-demo-browser-...\n- BS1-H2 passed corrected 32 Python and 4 Node tests, TypeScript, Prettier, and diff checks; the\n  canonical real `live_demo` passed and cleaned its owned stack. Final correctness returned ACCEPT ...\n- BS1-H3 passed 37 focused pytest checks, 4 Node checks, TypeScript, pyflakes, Prettier, and diff",
+          "committed_at": "2026-08-21T13:42:36-05:00",
+          "full_message": "Accepted `WP-PROF-BS1-H0`: a typed shared `live_demo` brow... (+16 more)\n\n- Accepted `WP-PROF-BS1-H0`: a typed shared `live_demo` browser-suite owner and wrapper now validate\n  closed selection/configuration before allocation, create and validate generation-bound input befo...\n- Accepted `WP-PROF-BS1-H1`: `run_playwright_tests.sh` now owns default, `--build`, named\n  `live_demo`, approved-file, and literal-grep selections through a fresh disposable production `di...\n- Accepted `WP-PROF-BS1-H2`: Python `ScenarioContract` is the sole policy owner with strict generic\n  `BrowserScenarioInputV1` and Rust Base Course receipt authority. A public-safe run namespace repl...\n- Accepted `WP-PROF-BS1-H3`: typed browser-suite oracles now prove the exact disposable HTTPS\n  gateway origin, lifecycle-derived `podman-compose --in-pod false` provider policy, labelled resou...\n- Accepted `WP-PROF-BS1-C0`: `all_test.sh` is the fail-fast aggregate front door, ordered as\n  environment, pytest, build, Rust, codebase, one local-stack acceptance handoff, and both diff che...\n- Accepted `WP-PROF-BS1-B0`: the V2 browser-scenario contract now has a closed\n  `sysadminRequirement`, a deterministic flat catalog with an explicit legacy-live-demo bridge, and...\n- Accepted `WP-PROF-BS1-U1`: retained browser-independent Node evidence now uses literal decoder\n  payloads, direct narrow dependencies, and a test-local recording fetch. It restores issued-questi...\n- Restored the executable mode for `tests/e2e/e2e_live_demo_browser.py`, bringing its shebang\n  into alignment with the repository executable-script contract.\n- Reprioritized `WP-PROF-BS1` as the sole current professor package after accepted live-demo\n  delivery, ahead of planned frozen-scope `WP-PROF-T3` and `WP-PROF-T4`. It establishes one disposa...\n- BS1-H0 Validation passed 3,251 affected tests. Its real production HTTPS `live_demo` scenario\n  passed under `ple-live-demo-browser-46aa4964966b`; successful cleanup left zero matching Podman r...\n- BS1-H1 passed 21 initial focused Python, 7 Node config, and 43 corrected focused pytest tests,\n  TypeScript checks, shell/pyflakes/diff checks, and real default `--build` `ple-live-demo-browser-...\n- BS1-H2 passed corrected 32 Python and 4 Node tests, TypeScript, Prettier, and diff checks; the\n  canonical real `live_demo` passed and cleaned its owned stack. Final correctness returned ACCEPT ...\n- BS1-H3 passed 37 focused pytest checks, 4 Node checks, TypeScript, pyflakes, Prettier, and diff",
+          "html_url": "https://github.com/vosslab/peptidyle-learning-engine/commit/7be392f3f4f00147bcbde2d3574ee551195aca0e",
+          "sha": "7be392f3f4f00147bcbde2d3574ee551195aca0e",
+          "subject": "Accepted `WP-PROF-BS1-H0`: a typed shared `live_demo` brow... (+16 more)"
+        }
+      ],
+      "default_branch": "main",
+      "description": "An open platform for mastery teaching across question formats. Students retry varied problems until they can solve them consistently, then keep practicing fresh versions after completion, while grading and answer keys stay securely on the server",
+      "event_count": 3,
+      "language": "Rust",
+      "readme": {
+        "commit": "7be392f3f4f00147bcbde2d3574ee551195aca0e",
+        "path": "README.md",
+        "sha": "7739bc8a941f33b9078cb809c3846aa2a12faaba",
+        "source": "mirror",
+        "summary": "An open platform for mastery teaching across question formats. Students retry varied problems until they can solve them consistently, then keep practicing fresh versions after completion, while grading and answer keys stay securely on the server."
+      },
+      "repo": "vosslab/peptidyle-learning-engine",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "changelog": {
+        "commit": "dc8c9bb33a843a87e67ee286dfd29468d5031c8a",
+        "entries": [
+          "### Fixes and Maintenance\n\n- Added a vendored-file header to every propagated test_*.py file. It warns that local changes\n  can and will be overwritten, without identifying or linking an upstream source location."
+        ],
+        "path": "docs/CHANGELOG.md",
+        "sha": "34c084505c633507a02555d0671bc7e6eb209891",
+        "source": "mirror"
+      },
+      "commit_source_url": "https://api.github.com/repos/vosslab/starter-repo-template/commits?since=2026-08-21T05%3A00%3A00Z&until=2026-08-22T05%3A00%3A00Z&per_page=100&page=1",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T07:28:23-05:00",
+          "full_message": "graphify: pip install and ignore",
+          "html_url": "https://github.com/vosslab/starter-repo-template/commit/44a99bf9dba1ec59ab6376f17a066ec1d634b9d8",
+          "sha": "44a99bf9dba1ec59ab6376f17a066ec1d634b9d8",
+          "subject": "graphify: pip install and ignore"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- Added `/graphify-out/` to `templates/gitignore.universal`, the canonical source for the\n  propagation-managed `UNIVERSAL` `.gitignore` block. This preserves Graphify output ignores across...\n- Added the `pytestqt` to `pytest-qt` import-distribution alias to\n  `tests/test_import_requirements.py`.\n- Added canonical import-distribution aliases for `applefoundationmodels`, `bricklink`,\n  `exiftool`, `graphify`, `markdown_it`, `material`, `screencapturekit`, and `skimage`.",
+          "committed_at": "2026-08-21T08:30:04-05:00",
+          "full_message": "Added `/graphify-out/` to `templates/gitignore.universal`, ... (+2 more)\n\n- Added `/graphify-out/` to `templates/gitignore.universal`, the canonical source for the\n  propagation-managed `UNIVERSAL` `.gitignore` block. This preserves Graphify output ignores across...\n- Added the `pytestqt` to `pytest-qt` import-distribution alias to\n  `tests/test_import_requirements.py`.\n- Added canonical import-distribution aliases for `applefoundationmodels`, `bricklink`,\n  `exiftool`, `graphify`, `markdown_it`, `material`, `screencapturekit`, and `skimage`.",
+          "html_url": "https://github.com/vosslab/starter-repo-template/commit/f2068ca196a74a62c2ed7f02bdd648225529d7d8",
+          "sha": "f2068ca196a74a62c2ed7f02bdd648225529d7d8",
+          "subject": "Added `/graphify-out/` to `templates/gitignore.universal`, ... (+2 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T08:50:31-05:00",
+          "full_message": "more to remove",
+          "html_url": "https://github.com/vosslab/starter-repo-template/commit/36504111e0b86b8836c0aa901952b33ac41f8e23",
+          "sha": "36504111e0b86b8836c0aa901952b33ac41f8e23",
+          "subject": "more to remove"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "can and will be overwritten, without identifying or linking an upstream source location.",
+          "committed_at": "2026-08-21T12:26:35-05:00",
+          "full_message": "Added a vendored-file header to every propagated `test_*.py` file. It...\n\ncan and will be overwritten, without identifying or linking an upstream source location.",
+          "html_url": "https://github.com/vosslab/starter-repo-template/commit/dc8c9bb33a843a87e67ee286dfd29468d5031c8a",
+          "sha": "dc8c9bb33a843a87e67ee286dfd29468d5031c8a",
+          "subject": "Added a vendored-file header to every propagated `test_*.py` file. It..."
+        }
+      ],
+      "default_branch": "main",
+      "description": "Starter repository template for my projects. Includes style guides, AGENTS.md, agent skills, and a small set of reusable development scripts to bootstrap new repos with consistent structure and workflow.",
+      "event_count": 4,
+      "language": "Python",
+      "readme": {
+        "commit": "dc8c9bb33a843a87e67ee286dfd29468d5031c8a",
+        "path": "README.md",
+        "sha": "84797e42b0a43f94812c56fd7ebb915f5718afa6",
+        "source": "mirror",
+        "summary": "Canonical bootstrap scaffolding for new Python repositories: ready-to-use repo policy docs, Python style rules, licensing boundaries, and pytest lint checks so projects start consistent before any project-specific code is added."
+      },
+      "repo": "vosslab/starter-repo-template",
+      "stars": 1,
+      "topics": []
+    },
+    {
+      "changelog": {
+        "commit": "cee41055e54b98e3b83e0e8789d6ce415321373a",
+        "entries": [
+          "### Fixes and Maintenance\n\n- **Repository-owned pytest is organized by pipeline** (): source,\n  seed, geometry, storage, solver, tracking, crop, output, mode, and UI tests\n  now live in matching subdirectories. Top-level generic test_*.py names are\n  reserved for vendored repository-hygiene checks. Removed the checkout-size\n  and package-import-shape checks, which depended on a developer machine or\n  private import mechanics rather than durable product behavior.\n\n- **Refine preserves its prior solve on rejection**\n  (refine.py): score/geometry partitioning now stays\n  in memory until fingerprint reuse is validated. A refine request that would\n  become a full solve fails without discarding the existing torso-coordinate\n  artifact.\n\n- **Fast pytest now avoids operational and GUI-lifecycle checks** ():\n  removed checkout-size, Qt widget/event-loop, private executor, and\n  monkeypatch-routing tests that coupled the fast lane to a developer machine\n  or implementation internals. Worker budgeting retains compact behavioral\n  fit/fail/explicit-override coverage.\n\n- **Current artifact identity and validation are fail-loud**\n  (video_artifacts.py, solve.py,\n  camera_motion_artifact.py, torso_box_coords_io.py,\n  and state_io.py): incompatible source geometry now blocks\n  consumption; incompatible derived artifacts are rebuilt only through a fresh\n  solve. Camera motion requires matching estimator, analysis\n  bin, and complete source identity. Trajectory and interval-score readers\n  reject incomplete or malformed current records rather than turning them into\n  apparent completed work. Seeds remain human truth and require fresh\n  annotation for a different video.\n  The interval fingerprint now carries the one current schema tag; retired\n  schema-version sets, compatibility exports, and their implementation-shape\n  tests are removed.\n\n- **Fast tests and current documentation match the maintained product**\n  ( and ): removed codec round-trips, source-shape inventories,\n  and cache-count assertions that coupled the permanent suite to environment\n  or implementation layout. Retained tests use generated in-memory data to\n  exercise durable contracts. Usage, storage, motion, schema, crop, and CLI\n  documentation now describe the current nine-mode workflow, dolly default,\n  and current-only artifact lifecycle.\n\n- **Current-only seed, config, and diagnostics storage**\n  (state_io.py, tr_config.py, and\n  tr_schema.py): all owned seed files were already header 3,\n  active config files were normalized to header 3, and interval-score files\n  were already current nested records. Seed, config, and diagnostics loaders now\n  reject retired formats instead of silently converting them. Bin-suffixed\n  solved stores, motion NPZ files without bin_factor, and heat-map\n  half_window input now regenerate or fail clearly. Fixture-backed seed\n  conversion and the one-trajectory dolly ranking test were removed; portable\n  tests retain current schema validation, crop containment, convergence, and\n  safe fallback.\n\n- **Interval-score storage validates one current contract**\n  (state_io.py, tr_paths.py, and consuming\n  modes): the public path and APIs consistently use interval_scores while\n  the established JSON header remains part of the persisted layout. Strict\n  reader validation prevents incomplete or stale records from looking current;\n  a fresh solve writes the sole supported format.\n\n- **Current ownership is explicit and dead race-start code is gone**\n  (torso_box_coords_io.py, ,\n  tr_paths.py, and race_start.py): modes now use\n  the torso-coordinate and prediction owners directly, the duplicate generic\n  interval-path API is removed, and the unused velocity-onset detector no\n  longer ships. The maintained race-start rule remains the deterministic\n  midpoint of the Stage-1 seed transition.\n\n- **Dead convenience aliases are removed** (tr_crop.py,\n  workspace.py, and seed_color.py): crop and\n  workspace expose only live owners, and seed normalization reads the current\n  processing configuration instead of an obsolete settings-tree fallback.\n\n- **Setup writes only consumed camera configuration** (tr_config.py,\n  setup_mode.py, and tr_detection.py): the YAML\n  schema no longer requires an empty detection section or stores unused venue\n  metadata. Setup records the motion estimator and discrete zoom levels only;\n  YOLO construction uses its fixed application constants directly.\n\n- **Residual observation documentation now states the live contract**\n  (residual_motion.py): raw evidence is keyed by frame and ROI;\n  optional acceptance boxes are the sole geometric filter; and candidate\n  selection uses integrated magnitude without an invented corridor or stale\n  trace fields.\n\n- **Hermite prediction is now pair-local**\n  (velocity_model.py, interval_analytical.py,\n  interval_solver.py, solve_queue.py, and\n  solver_workers.py): human torso boxes remain position-and-size\n  anchors. Each interval uses the chord between its two endpoint boxes at both\n  Hermite ends; no neighboring seed, inferred derivative, or cross-interval\n  field enters cached geometry. The manager-era derivative comparison tests\n  were removed in favor of two small behavioral checks.\n\n- **Analyze joins the two current solve artifacts explicitly**\n  (analyze.py): solver-context reporting now pairs\n  geometry-only NPZ interval records with their matching interval-score JSON\n  records before calculating score summaries. A synthetic CLI solve followed by\n  analyze exercises the complete stored-artifact path.\n\n- **Pytest imports resolve from the retained source owners**\n  (conftest.py): the shared bootstrap uses\n  file_utils.get_repo_root() and gives deterministic precedence to the\n  repository root, , and . Package-qualified and\n  established bare local imports now collect without relying on the removed\n  walk_paths.py side effect. The import-requirements map\n  also recognizes the declared pytest-qt package's pytestqt module name.\n\n### Removals and Deprecations\n\n- **Completed plans are archived** (): the completed\n  interaction/trajectory plan and five retired Blob Walk v2 or\n  coordinate-space plans no longer appear under .\n  Their inbound Markdown links now resolve to the archive locations.\n\n- **Retired Blob Walk cost-model workstream is archived**\n  (blob_walk_v2_cost_model_ab.md): its historical links now\n  resolve from the archive, and it no longer appears as active work.\n\n- **Retired blob-walk diagnostic tests and launcher are removed**\n  ( and the former run_random_walk.sh): tests of the deleted manifest\n  reporter, M1-D heat investigation, tool path adapter, and 941-line\n  plan-era cost-model harness no longer occupy the permanent fast suite. The\n  retained Viterbi brute-force optimum and memoization behavior tests import\n  the production  modules directly. Current\n  architecture and file-structure docs no longer advertise the deleted tool;\n  the retained design-history plans now label its commands and paths as\n  retired rather than executable guidance. Two one-time implementation checks\n  were also removed from the permanent suite: an exact OpenCV-render SHA and a\n  walker-bundle dataclass-name scan. Behavioral heat-map and Stage-4 seam tests\n  remain.\n\n### Decisions and Failures\n\n- **Fixup-plan close-out uses grounded repository evidence**\n  (interaction_shell_and_trajectory_truth.md): the original\n  private-image, shared-tangent, corpus-ranking, machine-profile, and fragile\n  lifecycle gates are documented as superseded design or verification choices,\n  not missing implementation. Permanent coverage follows the repository's\n  deterministic, offline behavior-test policy; image evidence of high school\n  runners is excluded from Git.\n\n### Developer Tests and Notes\n\n-  -q passes the full portable suite.\n  Focused storage, motion, solver, UI bootstrap, typing, pyflakes, Markdown,\n  ASCII, and whitespace checks also pass."
+        ],
+        "path": "docs/CHANGELOG.md",
+        "sha": "25aa2a7227ed344b8f761799a2df78ed403a2107",
+        "source": "mirror"
+      },
+      "commit_source_url": "https://api.github.com/repos/vosslab/track-runner-virtual-dolly-cam/commits?since=2026-08-21T05%3A00%3A00Z&until=2026-08-22T05%3A00%3A00Z&per_page=100&page=1",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T08:07:57-05:00",
+          "full_message": "remove all images",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/b695685f47ef6eb8f8df6db62446bb74a22cbbc9",
+          "sha": "b695685f47ef6eb8f8df6db62446bb74a22cbbc9",
+          "subject": "remove all images"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T08:09:14-05:00",
+          "full_message": "remove images",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/51d509d75fd5f51aa8060c107e8f666dd668ea3d",
+          "sha": "51d509d75fd5f51aa8060c107e8f666dd668ea3d",
+          "subject": "remove images"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T08:10:44-05:00",
+          "full_message": "removed old blob walk v2; added to main code",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/6ebc5d28d3f07f8e65f2c9e8af6e41204bf78796",
+          "sha": "6ebc5d28d3f07f8e65f2c9e8af6e41204bf78796",
+          "subject": "removed old blob walk v2; added to main code"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T08:11:35-05:00",
+          "full_message": "removed images",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/578b77a90c3f314206b4518d099987e87edc77c6",
+          "sha": "578b77a90c3f314206b4518d099987e87edc77c6",
+          "subject": "removed images"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T08:12:11-05:00",
+          "full_message": "more deleted files",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/95d8a091a29ed322771a4cd7e606f0bb605ee6b6",
+          "sha": "95d8a091a29ed322771a4cd7e606f0bb605ee6b6",
+          "subject": "more deleted files"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T08:12:40-05:00",
+          "full_message": "removed",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/9338bb366daeef34c912d65f540c23833d07db74",
+          "sha": "9338bb366daeef34c912d65f540c23833d07db74",
+          "subject": "removed"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T08:14:00-05:00",
+          "full_message": "no fixtures, per docs/PYTEST_STYLE.md",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/6ba259c1a70acb7d6c2f9af58e15c535af67c4c8",
+          "sha": "6ba259c1a70acb7d6c2f9af58e15c535af67c4c8",
+          "subject": "no fixtures, per docs/PYTEST_STYLE.md"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T11:00:48-05:00",
+          "full_message": "removed files",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/dd89c5e7649d0d1cdd91f0c194945422de495026",
+          "sha": "dd89c5e7649d0d1cdd91f0c194945422de495026",
+          "subject": "removed files"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T11:17:48-05:00",
+          "full_message": "fix old markdown links",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/603d13c26a7e18d458e1d89cc5e5e75a8deef720",
+          "sha": "603d13c26a7e18d458e1d89cc5e5e75a8deef720",
+          "subject": "fix old markdown links"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T12:17:31-05:00",
+          "full_message": "from upstream",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/10baf8e245f82ad50fdecf909d840d96fa7e6480",
+          "sha": "10baf8e245f82ad50fdecf909d840d96fa7e6480",
+          "subject": "from upstream"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T12:18:20-05:00",
+          "full_message": "upstream files",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/cd829e65e5ec6e12f3a50411448007b6b3a16604",
+          "sha": "cd829e65e5ec6e12f3a50411448007b6b3a16604",
+          "subject": "upstream files"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T12:19:02-05:00",
+          "full_message": "from upstream",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/684a2e8c03b4d799ceb2e895d1c78e2e7d24333b",
+          "sha": "684a2e8c03b4d799ceb2e895d1c78e2e7d24333b",
+          "subject": "from upstream"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T12:19:30-05:00",
+          "full_message": "removed",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/5147f305cd0b92bb373f08875f5692d63a624af3",
+          "sha": "5147f305cd0b92bb373f08875f5692d63a624af3",
+          "subject": "removed"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "## 2026-08-21\n- Fast pytest now avoids operational and GUI-lifecycle checks (`tests/`):\n  removed checkout-size, Qt widget/event-loop, private executor, and monkeypatch-routing tests that...\n- Current artifact identity and validation are fail-loud\n  (`track_runner/modes/video_artifacts.py`, `track_runner/modes/solve.py`, `track_runner/camera_mot...\n- Interval-score storage validates one current contract\n  (`track_runner/state_io.py`, `track_runner/tr_paths.py`, and consuming modes): the public path an...\n- Setup writes only consumed camera configuration (`track_runner/tr_config.py`,\n  `track_runner/setup_mode.py`, and `track_runner/tr_detection.py`): the YAML schema no longer requ...\n- Hermite prediction is now pair-local\n  (`track_runner/velocity_model.py`, `track_runner/interval_analytical.py`, `track_runner/interval_...\n- Analyze joins the two current solve artifacts explicitly\n  (`track_runner/modes/analyze.py`): solver-context reporting now pairs geometry-only NPZ interval ...\n## 2026-08-20\n- Encode debug overlays preserve pre-race FWD/BWD absence\n  (`track_runner/modes/encode.py` and `track_runner/state_io.py`): persisted pre-race intervals del...\n- Analyze now reconstructs the same crop-only NIF edge anchors as Encode\n  (`track_runner/modes/shared.py`, `track_runner/modes/analyze.py`, and `track_runner/modes/encode....\n- Unused experimental crop overrides are removed (`track_runner/tr_crop.py` and\n  `docs/ENCODE_DESIGN.md`): the unreferenced center-lock, fixed-height, and slow-size override help...\n- Superseded seed-derivative experiment: the temporary\n  `seed_tangents.py` field and its generated-derivative tests were removed on 2026-08-21. Human tor...\n- Solve now sizes automatic worker pools from declared memory terms\n  (`track_runner/solver_workers.py`, `track_runner/modes/shared.py`, `track_runner/modes/solve.py`,...\n- M7 automatically adopts the offline virtual-dolly crop path",
+          "committed_at": "2026-08-21T13:22:44-05:00",
+          "full_message": "Fast pytest now avoids operational and GUI-lifecycle check... (+69 more)\n\n## 2026-08-21\n- Fast pytest now avoids operational and GUI-lifecycle checks (`tests/`):\n  removed checkout-size, Qt widget/event-loop, private executor, and monkeypatch-routing tests that...\n- Current artifact identity and validation are fail-loud\n  (`track_runner/modes/video_artifacts.py`, `track_runner/modes/solve.py`, `track_runner/camera_mot...\n- Interval-score storage validates one current contract\n  (`track_runner/state_io.py`, `track_runner/tr_paths.py`, and consuming modes): the public path an...\n- Setup writes only consumed camera configuration (`track_runner/tr_config.py`,\n  `track_runner/setup_mode.py`, and `track_runner/tr_detection.py`): the YAML schema no longer requ...\n- Hermite prediction is now pair-local\n  (`track_runner/velocity_model.py`, `track_runner/interval_analytical.py`, `track_runner/interval_...\n- Analyze joins the two current solve artifacts explicitly\n  (`track_runner/modes/analyze.py`): solver-context reporting now pairs geometry-only NPZ interval ...\n## 2026-08-20\n- Encode debug overlays preserve pre-race FWD/BWD absence\n  (`track_runner/modes/encode.py` and `track_runner/state_io.py`): persisted pre-race intervals del...\n- Analyze now reconstructs the same crop-only NIF edge anchors as Encode\n  (`track_runner/modes/shared.py`, `track_runner/modes/analyze.py`, and `track_runner/modes/encode....\n- Unused experimental crop overrides are removed (`track_runner/tr_crop.py` and\n  `docs/ENCODE_DESIGN.md`): the unreferenced center-lock, fixed-height, and slow-size override help...\n- Superseded seed-derivative experiment: the temporary\n  `seed_tangents.py` field and its generated-derivative tests were removed on 2026-08-21. Human tor...\n- Solve now sizes automatic worker pools from declared memory terms\n  (`track_runner/solver_workers.py`, `track_runner/modes/shared.py`, `track_runner/modes/solve.py`,...\n- M7 automatically adopts the offline virtual-dolly crop path",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/b9e200b3aa49e158b664788cbb1fa8130111d0a9",
+          "sha": "b9e200b3aa49e158b664788cbb1fa8130111d0a9",
+          "subject": "Fast pytest now avoids operational and GUI-lifecycle check... (+69 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "(`docs/archive/interaction_shell_and_trajectory_truth.md`): the original private-image, shared-ta...",
+          "committed_at": "2026-08-21T14:08:36-05:00",
+          "full_message": "Fixup-plan close-out uses grounded repository evidence\n\n(`docs/archive/interaction_shell_and_trajectory_truth.md`): the original private-image, shared-ta...",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/983aacdbe74f685ba4b7444599cfde01c36db5df",
+          "sha": "983aacdbe74f685ba4b7444599cfde01c36db5df",
+          "subject": "Fixup-plan close-out uses grounded repository evidence"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T16:12:50-05:00",
+          "full_message": "cleaner look",
+          "html_url": "https://github.com/vosslab/track-runner-virtual-dolly-cam/commit/cee41055e54b98e3b83e0e8789d6ce415321373a",
+          "sha": "cee41055e54b98e3b83e0e8789d6ce415321373a",
+          "subject": "cleaner look"
+        }
+      ],
+      "default_branch": "main",
+      "description": "a Python tool that tracks a runner in track meet video and produces a cropped, stabilized \"virtual dolly camera\" output. Users place seed annotations on key frames, and the solver propagates tracking between seeds to produce a smooth cropped video that follows the athlete.",
+      "event_count": 10,
+      "language": "Python",
+      "readme": {
+        "commit": "cee41055e54b98e3b83e0e8789d6ce415321373a",
+        "path": "README.md",
+        "sha": "0f73405d1bbfde844681b4e913191ee02f7b7d5a",
+        "source": "mirror",
+        "summary": "A Python tool for track-meet videographers that produces a cropped, stabilized virtual-dolly output following a single athlete. Users place a handful of seed annotations; the solver propagates geometry between seeds across the full race."
+      },
+      "repo": "vosslab/track-runner-virtual-dolly-cam",
+      "stars": 1,
+      "topics": []
+    },
+    {
+      "changelog": {},
+      "commit_source_url": "https://api.github.com/repos/vosslab/battery-control/commits?since=2026-08-21T05%3A00%3A00Z&until=2026-08-22T05%3A00%3A00Z&per_page=100&page=1",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T08:59:24-05:00",
+          "full_message": "Add 11 hourly data rows through 2026-08-21 07:00",
+          "html_url": "https://github.com/vosslab/battery-control/commit/7c975cdb4cca17051eaa84e5389ffaa734514fab",
+          "sha": "7c975cdb4cca17051eaa84e5389ffaa734514fab",
+          "subject": "Add 11 hourly data rows through 2026-08-21 07:00"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T11:39:52-05:00",
+          "full_message": "Add 3 hourly data rows through 2026-08-21 10:00",
+          "html_url": "https://github.com/vosslab/battery-control/commit/c1845d0a49a40b6c0733f77a0a85baa1fab1ffc1",
+          "sha": "c1845d0a49a40b6c0733f77a0a85baa1fab1ffc1",
+          "subject": "Add 3 hourly data rows through 2026-08-21 10:00"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T14:14:58-05:00",
+          "full_message": "Add 3 hourly data rows through 2026-08-21 13:00",
+          "html_url": "https://github.com/vosslab/battery-control/commit/90068893cfe32a9b4dfa4f3a5becb05affadef33",
+          "sha": "90068893cfe32a9b4dfa4f3a5becb05affadef33",
+          "subject": "Add 3 hourly data rows through 2026-08-21 13:00"
+        }
+      ],
+      "default_branch": "main",
+      "description": "Battery arbitrage controller for ComEd real-time pricing with EP Cube and WeMo-controlled battery systems. Manages two physically separate batteries (EP Cube 20 kWh via cloud API, WeMo-controlled battery via smart plugs), making charge/discharge/hold decisions every 3 minutes based on real-time electricity prices and solar production.",
+      "event_count": 3,
+      "language": "Python",
+      "readme": {
+        "commit": "90068893cfe32a9b4dfa4f3a5becb05affadef33",
+        "path": "README.md",
+        "sha": "dd79800b1520a9383d4ae2ede02886deb0931f50",
+        "source": "mirror",
+        "summary": "Battery reserve controller for ComEd real-time pricing. Sets EP Cube reserve\nSoC and WeMo battery plugs every 3 minutes so stored energy is held during cheap\nhours and used during expensive grid hours."
+      },
+      "repo": "vosslab/battery-control",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "changelog": {
+        "commit": "e42f55af8b9acd619b3765abe6532b6ef42f759d",
+        "entries": [
+          "### Behavior or Interface Changes\n- Made the default developer build publish the native and Qt wheels as one\n  immutable current pair. The shared receipt binds exact\n  wheel, native-receipt, engine-bundle, source-closure, and Qt wheel-member hashes,\n  so GUI acceptance cannot combine independently retained build outputs.\n\n### Fixes and Maintenance\n- Made Draw Bond press-time classification and native-begin failures retire the exact\n  armed intent before unexpected failures propagate unchanged. Only declared,\n  user-correctable native begin categories now use the ordinary refusal UI.\n\n- Bound the blank-canvas Draw Bond dual-wheel E2E to the entire supplied Qt package rather than\n  a hand-selected routing list. It now derives every safe regular *.py wheel\n  member and requires the isolated installed package to have the exact same members and bytes\n  before public UI acceptance runs.\n\n- Made unexpected Draw Bond endpoint, native-admission, and preview-overlay failures retire\n  their active gesture before propagating. Typed Rust refusal receipts retain their ordinary\n  user-visible recovery path; internal failures are not rewritten as refusals.\n\n- Made Draw Bond release an explicit Rust-admission route before the generic\n  existing-origin line guard. A blank-canvas NewNew gesture now redeems its final\n  opaque admission exactly once, advances native history, and keeps Draw Bond armed;\n  other line tools retain the shared durable-origin requirement.\n\n- Corrected the blank-canvas Draw Bond E2E diagnostics to read the native tab's\n  public current_snapshot property rather than treating it as a callable.\n\n- Corrected the blank-canvas native-wheel E2E provenance gate to consume the exact staged and\n  worktree source-closure receipt schemas. It now verifies non-empty per-file manifests,\n  fingerprint digests, and the selected current wheel receipt without inventing redundant\n  count or aggregate-digest fields or re-reading mutable worktree sources after publication.\n\n- Moved final native-wheel source-closure validation and the atomic current replacement into\n  one Python-owned publication transaction. The builder now records\n  the exact source files admitted by the staging copy policy, verifies the raw staged copy,\n  retains that input closure in its receipt, and refuses the current swap when a live\n  worktree change is detected before final publication. Deterministic helper and wrapper\n  fixtures prove a changed direct_bond.rs preserves the prior selected publication.\n  The real publish-publication self-test path now proves the same refusal after its staged\n  manifest is recorded and before its final live-source comparison; documentation defines\n  this as an observed-boundary integrity check rather than an editor lock.\n\n- Renamed the native-wheel publication self-test helper to a descriptive ordinary module name.\n  The helper remains private to the self-test runner by its documented responsibility rather\n  than resembling an ignored temporary file.\n\n- Replaced fragile source-rewritten wheel-publication interruption fixtures with a real\n  publisher atomic-replacement failure fixture and a wrapper-owned signal-cleanup fixture.\n\n- Proved the canonical v2 Draw Bond commit history contract with a Rust blank-canvas\n  New-New regression: one accepted C-C gesture creates exactly one undo target, while\n  Undo restores blank content and Redo restores the committed molecule.\n\n- Corrected the blank-canvas Draw Bond E2E's endpoint oracle. Its saved-CDML proof\n  remains the public semantic blankness check; the test no longer mistakes the\n  universal paper and grid projection items returned by Qt hit testing for authored\n  molecular content.\n\n- Hardened native-wheel current publication replacement with a private mode-0700 source-link stage, exact target validation at the os.replace boundary, and a fail-closed pointer state machine. An unexpected source or post-swap current state now preserves both the prior known-good payload and validated candidate; the prior payload is retired only after a final exact current verification under the cooperating-build lock. Wrapper E2E fixtures cover both races without compiling native sources.\n\n- Restored the native-wheel E2E runner's explicit private run helper import after its\n  runner/support split, preserving the isolated installed-wheel child-process boundary.\n\n- Split the native-wheel direct E2E into its public runner and a private sibling\n  support module. The runner retains CLI parsing, one resource lifecycle, and\n  installed-wheel orchestration; the support module owns validators and probes.\n  Isolated installed-wheel child commands and proof behavior remain unchanged,\n  while the shipped typing-metadata continuation now uses tab indentation.\n\n- Modularized the native-wheel builder's source-closure and publication-integrity responsibilities.\n  The stable CLI facade now delegates canonical source manifests, receipt and wheel validation,\n  sealed engine-bundle validation, and packaged native-closure assembly to a focused private module.\n\n- Hardened copied engine-bundle ABI admission. The manifest validator now requires an exact JSON\n  integer for adapter_abi_version, rejecting Boolean and floating-point values before comparing\n  the configured ABI; pure builder fixtures cover all four malformed scalar types: Boolean,\n  floating-point, string, and null.\n\n- Validated the copied CLI engine bundle against its canonical digest-bound manifest before the\n  native publication atomically selects current. The shared pure validator rejects malformed,\n  altered, missing, symlinked, and extra bundle members; the wrapper fixture proves a copied\n  adapter mutation preserves the prior selected publication.\n\n- Defined one canonical native-wheel staged source-subset manifest for receipt creation and\n  pre-swap publication validation. It captures the post-rewrite Ferrum source tree, records its\n  exact builder-owned notice and .dylibs exclusions, admits every other staged regular file,\n  and leaves wheelhouse, Cargo output, and the engine bundle outside the source boundary.\n\n- Revalidated each copied native-wheel publication immediately before its atomic current\n  pointer replacement. The builder now recomputes the completed staged Ferrum source closure\n  and checks the copied wheel filename and digest against the copied receipt; wrapper fixtures\n  prove copied wheel or receipt mutation leaves the prior publication selected.\n\n- Sealed each native-wheel build to a canonical staged Ferrum source-closure manifest. The\n  builder now compares source and staged workspaces before Maturin, retains the fingerprint in\n  its receipt, and refuses an artifact whose receipt does not match that closure and wheel.\n\n- Declared the native DocumentSession.can_undo and can_redo Boolean properties in the shipped\n  typing stub. The isolated installed-wheel E2E now proves their fresh, commit, undo, and redo\n  transitions while independently auditing the delivered stub surface.\n\n- Replaced the blank-canvas Draw Bond E2E's saved-CDML standard-library XML parsing with the\n  approved defused XML parser, retaining its empty-document and C-C graph proof.\n\n- Kept the main-window lifecycle as the sole Undo and Redo QAction refresh owner.  Its\n  pending and busy guards now combine with each active tab's Rust-owned history availability\n  without later generic action writes overriding those facts.\n\n- Made Undo and Redo action availability an independent Rust-owned session capability. The PyO3\n  binding and native Qt tab relay the exact history facts, while the selected-window actions now\n  refresh from those facts instead of inferring reachability from document snapshots or content.\n\n\n### Developer Tests and Notes\n\n- Enriched only the existing blank-canvas Draw Bond E2E history failure with\n  non-mutating Rust-owned availability, snapshot, and QAction facts, so a failed\n  installed-wheel acceptance run distinguishes native history publication from Qt action state.\n\n- Extended the deterministic native-wheel builder self-test through the stable facade. It now\n  exercises wheel-closure auditing, sealed engine-bundle construction and validation, destination\n  refusal, and the single JSON artifact-emitter protocol with local fake payloads only.\n\n- Extended deterministic history availability coverage across Rust, PyO3, and Qt. The tests now\n  prove branch discard, active-tab-only action state, and temporary pending or busy action gates\n  without altering the authoritative Rust history cursor.\n\n- Corrected the blank-canvas Draw Bond dual-wheel E2E baseline. Each disposable public New tab\n  now saves and parses as independently blank CDML; the second tab reports Undo and Redo state\n  separately before drawing, then establishes its own same-view visual lifecycle baseline.\n\n- Corrected the native-wheel builder CLI staging contract. --output-root remains the only\n  independently admitted fresh native-* root; the matching\n  --engine-bundle-dir is now parsed as its child payload and remains subject to the builder's\n  strict containment check. The focused helper self-test and build.sh native wrapper E2E prove\n  this exact handoff without relaxing retired-output rejection or publication cleanup.\n\n- Added a standalone offline dual-wheel Qt E2E for Draw Bond on a blank canvas.  It drives only public QActions, the visible viewport, and the Save As dialog; saves and parses both independent New documents as empty CDML before drawing; proves sticky QAction arming across gestures, native preview and Escape retirement through viewport captures; checks a single undo/redo history transition; parses the resulting temporary CDML for two carbon atoms and one bond; and hashes both installed wheel payloads before exercising the UI.\n### Fixes and Maintenance\n- Corrected native-wheel source-closure publication validation to fingerprint the completed\n  maturin-project staging input, including its deterministic packaging transforms. The wrapper\n  now revalidates the copied candidate against that real staging root before atomic publication;\n  its synthetic E2E fixture uses the same layout.\n- Gated the Python-binding-only local interchange runtime resolver, UTF-8 source reader, and\n  local new-document preparation seam behind python-binding. CLI and protocol builds retain\n  their shared generic interchange admission/preparation paths without compiling unused PyO3\n  adapter code.\n- Corrected the v2 Draw Bond PyO3 NewExisting receipt contract test: it now proves the terminal\n  existing endpoint remains \"b\" and independently proves a new start atom was created.\n- Repaired the feature-enabled PyO3 interchange binding test to extract native string and integer\n  values before asserting source, receipt, and replay facts.\n- Removed unused document test-only molecule ID sequence seams, eliminating their dead-code\n  warnings without changing direct-bond admission.\n- Restored the direct document-domain snap-policy import for feature-enabled direct-bond binding\n  tests after the Python-binding module split left the test facade without that type.\n- Replaced the private interchange-import summary's positional argument list with one named,\n  ownership-preserving facts struct, keeping its protocol DTO and public behavior unchanged.\n- Removed stale Python-binding split imports and unreachable local-interchange warning paths.\n- Corrected the presentation-creation gesture PyO3 preview boundary to translate native gesture\n  errors before the fallible Python-object conversion, preserving its typed public exception.\n- Corrected the local interchange PyO3 text-reader refusal conversion so an issued descriptor's typed, redacted source refusal becomes one Python error instead of a nested PyResult mapping. The existing binding coverage now exercises a missing SDF through the issued opaque route handle.",
+          "### Fixes and Maintenance\n- Split native-wheel builder publication, source-closure, and tree-digest self-test fixtures into\n  a private helper module. The wheel-closure fixture now delegates ZIP extraction through the\n  builder's existing validated member-extraction contract instead of using extractall.\n\n### Additions and New Features\n- Added Rust-owned v2 Draw Bond admission for existing and blank canvas endpoints, including atomic detached two-carbon molecule creation for blank-to-blank gestures.\n- Routed the Qt Draw Bond pointer flow through the shared endpoint classifier at both press and release, preserving Rust-owned geometry, opaque admissions, and durable bond selection.\n\n### Fixes and Maintenance\n- Restored the presentation-creation gesture test mutability contract: canonical-arrow and\n  equilibrium commit tests now mutably own their sessions, while the below-span refusal test no\n  longer declares an unused mutable session.\n- Recorded the durable design decision in HUMAN_GUIDANCE.md: correct the\n  responsible design, make narrow intended boundaries explicit, invest in adaptability when it\n  pays for itself, and avoid refinement that does not improve correctness or user value.\n- Recorded the periodic all_test.sh drift-review practice in HUMAN_GUIDANCE.md.\n  Full runs now explicitly complement focused validation by surfacing fragile or overcomplicated\n  permanent tests.\n- Kept the canvas projection facade small while preserving its deliberate public item imports\n  through __all__, so the extracted builder remains modular without silently dropping callers.\n- Split the Rust CLI command schema into commands.rs; mod.rs now remains a compact\n  parsing, dispatch, error, and test owner without deleting command behavior or Haworth routing.\n- Kept current-tab Open tests self-contained after their size-driven split. Each durable\n  behavior now owns its inline Qt setup rather than importing another test module or retaining\n  shared fixture infrastructure.\n- Restored the generic interchange source-admission Result return after a split left its\n  descriptor-input match outside the function boundary. File, stdin, and request-text\n  admission again use the one closed source-policy result.\n- Added NATIVE_WHEEL_BUILD.md as the single authority for the native\n  wheel lifecycle. It documents managed versus explicit source inputs, staging, one stable\n  publication, 20 GiB admission, locking, signal cleanup, installation, and wrapper-E2E proof;\n  build.sh --help now directs readers to it and no longer describes its managed cache as\n  persistent offline storage.\n- Closed the native-build interruption disk leak. build.sh native now records only its exact\n  invocation staging and hidden publication paths, then uses one idempotent cleanup lifecycle for\n  success, failure, TERM, INT, and HUP. It removes the managed archive cache and retired or\n  unpublished payloads without following untrusted paths, preserves the valid current pointer,\n  and releases the acquisition-owned lock last. The wrapper E2E now injects all three signals on\n  both sides of atomic publication and proves bounded postconditions.\n- Hardened native build lifecycle ownership and publication. build.sh native now assigns each\n  physical lock directory an acquisition-unique owner token, reclaims only demonstrably dead owners,\n  and never removes a replacement lock. It publishes a fully validated immutable payload through one\n  atomic current symlink replacement, preserving a valid prior or new artifact\n  across interruption while retaining the 20 GiB admission gate and staged cache cleanup.\n- Reworked build.sh native into a transactional single-publication flow. Native compilation now\n  occurs only in ; after validating the builder artifact, receipt, and\n  matching engine bundle, the wrapper atomically replaces lightweight\n  . Native preflight removes legacy native-* output plus build-owned\n  staging and managed source archives before consuming space. Explicit sealed-input and source-\n  archive roots are never removed, and a failed build retains the prior  publication.\n- Added a pre-compiler 20 GiB checkout admission gate to every non-help build.sh target. Native\n  targets reclaim their owned stale state before measurement; an over-budget checkout prints its\n  du -sh size and an actionable remediation without starting Cargo or the native builder.\n- Added a repository disk-budget pytest that measures the full checkout with\n  `du -sk and fails above 20 GiB, preventing generated build outputs from\n  silently exhausting the developer volume.\n- Repaired Qt test-module split hygiene by keeping drawing-only CDML inputs\n  with their drawing coverage, importing the shared editable input once, and\n  normalizing the native-editing test indentation.\n- Closed P0.1 implicit direct-bond endpoint classification. Draw Bond now bridges only a uniquely resolved existing atom source identity; empty space remains the sole new-carbon route, while ambiguous, missing, or invalid identity facts refuse before admission and cannot create a carbon atom.\n- Corrected PyO3 reaction-enum identity so the Python binding exposes the canonical Rust reaction role enum rather than a parallel value representation.\n- Regenerated the checked-in SMARTS protocol schema from its owning generator after the redacted DTO contract changed, preventing hand-maintained schema drift.\n- Added the M4b compiler-derived Rustdoc public-surface oracle. It verifies the approved typed ferrum-chemistry facade, including doc-hidden, macro, include, and reexport paths, so raw adapter authority cannot become public unnoticed.\n- Added release-boundary coverage proving an in-radius direct-bond projection atom with no usable source identity cancels before either endpoint bridge or Rust admission.\n- Repaired repository-hygiene source splits: script-local native-wheel helpers are recognized as local imports, extracted Qt modules retain their required imports and mixin aliases, and shared CDML test utilities remain owned by the ordinary-open module.\n- Rotated the changelog into docs/CHANGELOG-2026-08c.md, retaining the two newest complete day blocks and compacting retained Markdown entries without deleting any history.<br>- Made implicit-carbon start selection one private, bounded projection fallback for Attach Cyclohexane Ring and Draw Bond. Rendered hits still win; only one nonempty projection atom.idcommit pair with the Rust-issued opaque DirectBondAdmissionV1stale recovery, and legacy preview_mismatch conflict reporting; Rust admission tests now prove refused and abandoned candidates do not advance generated IDs or issue provisional tokens before commit.\n- Corrected the direct Draw Bond action to use its closed Qt contract regardless of saved Next atom and Next bond preferences. It now creates only normal single carbon bonds, exposes the documented accessible name and description, and cancels an in-progress Rust gesture when Qt loses mouse capture or hides the viewport.\n- Extended the direct-bond native refusal vocabulary with typed neutral-capacity and unsupported-chemistry admission categories. The public Rust gesture still represents normal single, double, and triple bonds; the Qt controller selects only the normal-single profile.\n- Corrected the Qt contract for Change Elementdialog labels, keyboard focus route, and screen-reader success or refusal behavior.\n- Tightened Change Element acceptance recovery. The installed-wheel E2E now proves that ferrum_qt.ferrum.main_window is installed from the supplied Qt wheel and matches its wheel-member SHA-256; it continues to prove the native extension provenance independently. One failed projection installation now has focused Change Element coverage for one successful refresh, exact durable selected-atom recovery, and exactly one Rust revision change. Unexpected action or refresh failures now propagate instead of being presented as an ordinary edit refusal.\n- Corrected the isolated Change Element installed-wheel E2E startup and failure cleanup. It now waits for the public local-CDML completion signal before inspecting its native tab, and cancels then drains a pending admission worker before closing the Qt host.\n- Corrected the isolated Change Element installed-wheel E2E to require explicit native and Qt wheels, install both with isolated dependency resolution, and verify the loaded root extension digest against the supplied native wheel.\n- Corrected Change Element so a Rust-accepted mutation with a failed Qt projection follows the authoritative-refresh recovery path instead of being reported as refused. Its isolated installed-wheel E2E now lives under the package tests/e2e/ fence, outside fast pytest collection.\n### Additions and New Features\n- Added ferrum haworthviewport evidence proves one commit and Escape cancellation. Closure receipts are /private/tmp/ferrum-direct-bond-candidate-admission-p1-fix.md, /private/tmp/ferrum-direct-bond-qt-receipt-review.md, /private/tmp/ferrum-direct-bond-dual-wheel-e2e.md, and /private/tmp/ferrum-direct-bond-final-acceptance-review.mdBKChem parity remain deferred.\n- Added one isolated dual-wheel, offscreen Draw Bond E2E. It loads only the supplied native and Qt wheels, verifies both installed module digests, drives the public QAction and viewport gesture, and proves normal C-C authoring plus Escape-after- admission cancellation without a committed fixture or network route.\n- Accepted the bounded selected-atom Change Element slice in the capability ledger. It commits Rust-owned set_atom_element, restores the exact durable selected atom after projection replacement, and recovers one failed presentation installation through the typed one-refresh route. Closure evidence includes the dual-wheel offscreen visual E2E, fresh dual-wheel fail-once regression, /private/tmp/ferrum-change-element-projection-boundary-fix.md, and /private/tmp/ferrum-change-element-final-acceptance-review.md. A generic atom-property editor and broader direct-bond or presentation workflows remain deferred to separate plans.\n- Added the selected-atom Change Element vertical slice. The Edit-menu action rechecks one durable selected atom, uses its bounded Element symbol: dialog, commits only Rust's set_atom_elementoffscreen receipt is packages/ferrum-chem-qt.app/tests/e2e/ e2e_native_change_element.pyOpen to retain the pristine initial tab and install descriptor-backed interchange as a new document; native CDML keeps its established pristine-tab replacement behavior.\n- Corrected the isolated Qt CML E2E to use the stable OPEN_DOCUMENT / INVALID_DOCUMENTimport modes, export, and receipt UI remain unchanged.\n- Fixed the attached-cyclohexane E2E source-isolation call matcher so the generated child program compiles its intended method-call regex.\n- Fixed the isolated attached-cyclohexane E2E child program's missing re standard-library import during source-isolation verification.\n- Fixed a generic Qt action-handoff race where a QMenu could begin closing before its QAction reached Python. The window-owned handoff now records popup terminal lifecycle from Show, then attaches the action continuation to that recorded latch so late action dispatch still settles safely.\n- Fixed shared Qt popup-latch lifecycle reuse and cleanup. Reopened menus now require their own terminal event before a deferred action can run, and destroyed transient popups release their handoff-owned latch QObject.\n### Fixes and Maintenance\n- Removed the Qt-local .cmlOpen preserves the bootstrap tab and creates one clean CML tab through the Rust-issued native route. The native-wheel E2E receipt is /private/tmp/ferrum-cml-qt-new-document-e2e-receipt.json (SHA-256 0ffbde86632859e355dacb2e7c21a54a9e7d1553d57607dd8f7dd28052b12e33); the final independent re-review is /private/tmp/ferrum-cml-qt-new-document-final-rereview.mdCML2 new-document route. It installs only the supplied native wheel into a temporary system-site-packages venv, opens inline valid and invalid CML through the ordinary queued Qt open_file_path API, and verifies one clean new tab plus one typed redacted refusal without a persistent fixture, dialog, network, or browser.\n- Accepted the bounded shared-anchor Attach Cyclohexane Ringredo, Escape, refusal, cancellation, and tab lifecycle using the exact wheel emitted by bare ./build.sh native (SHA-256 4a438e34473685700d76ae11d8489b4703bfb9c63b0549c39e278ba6ca221ddf). Evidence: /private/tmp/ferrum-cyclohexane-final-e2e-receipt.json; independent acceptance: /private/tmp/ferrum-cyclohexane-final-acceptance-rereview.mdBKChem parity, other ring families, fusion, templates, and compatibility work remain deferred.\n- Retired the false declarative attach_cyclohexane mode projection. Attach Cyclohexane Ring remains the existing Edit-menu and ribbon QAction, now owned only by its direct line-tool intent and native lifecycle; shared status reads that intent without claiming generic mode-manager ownership.\n- Promoted Attach Cyclohexane Ring to one first-class shared pointer mode. Its existing QAction is now the one registry, ribbon, declarative-resource, and line-tool client; selecting it retains the actual C6 drag intent while shared mode presentation reports attach_cyclohexane. No second native preparation, commit, or cancellation path was added.\n### Fixes and Maintenance\n- Added passive phase fences to the attached-cyclohexane root E2E menu discovery. The harness now snapshots the shared action, C6 intent, mode, and Qt action trace before traversal, after traversal, after action-group lookup, and after popup close; an unexpected dispatch reports its exact phase and event delta without resetting product state.\n- Narrowed the attached-cyclohexane root E2E startup guard to the attach QAction, its presentation mode, and line intent. Checked dock and view preferences remain passive diagnostic facts, rather than incorrectly preventing an otherwise unarmed attach workflow.\n- Extended the attached-cyclohexane root E2E's initial unarmed-action precondition with passive state facts. An unexpected checked attach action now records the presentation mode, line intent lifecycle, checked Qt actions, and action-registry identifiers before refusing the run; the test does not alter product state or command dispatch.\n- Replaced the attached-cyclohexane root E2E's offscreen popup-row pointer dispatch with the shared visible QActiongroup identity and opens then closes the real menu before trigger()window destruction, bounded replacement popups, and one watchdog; failures use the ordinary typed-refusal route and cannot escape a Qt slot.\n- Deferred each registered canvas-action handoff until a transient Qt popup has fully closed. The capture guard and its exact handler still run together; ordinary no-popup actions remain synchronous. This removes popup teardown's race with newly armed tools for every shared canvas action, including C6.\n- Repaired the common pointer-tool popup focus handoff. A viewport FocusOut now settles for one Qt turn and retires only the same still-unfocused intent, while the same intent reclaims focus after popup teardown. Genuine focus loss still cancels, and a stale callback cannot retire a replacement tool.\n- Added the focused symmetric popup-focus regression: a stale queued focus restoration cannot reclaim the viewport or alter a replacement pointer tool.\n- Corrected the attached-cyclohexane root E2E's ownership oracle to match the one approved Qt route: only line_tools.py may call the public tab bridge, and only attached_cyclohexane_tab.py may call the private session bridge. The E2E now also proves that the menu's shared checkable QAction sets the attach_cyclohexane presentation mode before its existing line-tool drag.\n- Removed the inert AttachCyclohexaneMode drag controller and its synthetic dispatcher mapping. The existing QAction, registry identity, ribbon, and ATTACH_CYCLOHEXANE_RING` presentation map remain; the production line-tool event filter is the sole C6 pointer and native-commit path. Focused Qt coverage now proves shared QAction and presentation state instead of a controller-only drag simulation.\n### Fixes and Maintenance\n- Restored the PyO3 reaction-binding split by explicitly resolving its private methods and support\n  modules as sibling files, while retaining one public facade and registration surface.",
+          "### Fixes and Maintenance\n- Extended the isolated blank-canvas Direct Bond wheel proof to byte-verify\n  the installed preview and line-tool interaction modules, so its active\n  authoring route is proven to originate from the supplied Qt wheel.\n- Hardened native wheel publication against a post-rename pointer race.  If\n  current no longer selects the just-published candidate,\n  build.sh now fails without overwriting the observed pointer; it preserves\n  the prior and candidate payloads for inspection.  The wrapper E2E injects an\n  external replacement inside the Python helper's post-replace verification\n  window and proves all known payloads remain intact.\n- Restored the direct-bond PyO3 binding facade's private sibling support-module registration after its modular split, so the feature build resolves the extracted implementation from the shared python_binding parent rather than a nonexistent nested path."
+        ],
+        "path": "docs/CHANGELOG.md",
+        "sha": "6ddf777ddccfd49c87b3fefc047429de38949f46",
+        "source": "mirror"
+      },
+      "commit_source_url": "https://api.github.com/repos/vosslab/ferrum-chemical-forge/commits?since=2026-08-21T05%3A00%3A00Z&until=2026-08-22T05%3A00%3A00Z&per_page=100&page=1",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "## 2026-08-21\n- Corrected the presentation-creation gesture PyO3 preview boundary to translate native gesture\n  errors before the fallible Python-object conversion, preserving its typed public exception.\n- Corrected the local interchange PyO3 text-reader refusal conversion so an issued descriptor's typ...\n## 2026-08-20\n- Kept the root attached-cyclohexane E2E fully unattended without changing Ferrum's interactive mod...\n- Added failure-only, redacted diagnostics to the existing ineligible-anchor attached-cyclohexane E...\n- Closed the attached-cyclohexane implicit-anchor picker test gap without new infrastructure. The f...\n- Fixed Attach Cyclohexane Ring targeting for ordinary unlabelled carbon atoms. The action preserve...\n- Corrected the focused attached-cyclohexane Qt test teardown. After its successful C6 commit, the ...\n- Added value-safe failure diagnostics to the existing root attached-cyclohexane E2E preview assert...\n- Corrected the attached-cyclohexane E2E wheel-member preflight regex so it selects the direct nati...\n- Strengthened the existing single root attached-cyclohexane E2E without adding a harness or fixtur...\n- Removed the unused public attached-cyclohexane candidate revision/digest accessor. The typed inte...\n- Corrected attached-cyclohexane pointer-move dispatch. The Qt controller now begins the Rust-owned...\n- Strengthened WP-C1's focused offline Qt lifecycle proof. The existing regular-ring module now rec...\n- Repaired WP-C1 attached-cyclohexane cancellation ownership. A Rust cancellation refusal now retai...\n- Aligned WP-B1's attached-cyclohexane bridge with its concrete cross-crate contract. The pending C...\n- Corrected WP-B1's Rust authority claim. The extension still does not register `PyPendingAttachedC...\n- Corrected WP-C1's planned literal cooperative-bridge call-site oracle: it scans only Qt productio...\n- Repaired the planned cyclohexane PyO3 opacity proof before implementation: WP-B1 requires omissio...\n- Corrected WP-B1's PyO3 authority model for the deferred-ID attached-cyclohexane capability. Its f...\n- Added WP-A2's concrete deferred-ID attached-cyclohexane document capability. It keeps the accepte...\n- Corrected the cyclohexane attachment work-package boundary after the atomic-extension review. WP-...\n- Added WP-A1's private attached-cyclohexane document-core hypothesis. It uses the settled shared-a...",
+          "committed_at": "2026-08-21T11:40:21-05:00",
+          "full_message": "Corrected the presentation-creation gesture PyO3 preview b... (+28 more)\n\n## 2026-08-21\n- Corrected the presentation-creation gesture PyO3 preview boundary to translate native gesture\n  errors before the fallible Python-object conversion, preserving its typed public exception.\n- Corrected the local interchange PyO3 text-reader refusal conversion so an issued descriptor's typ...\n## 2026-08-20\n- Kept the root attached-cyclohexane E2E fully unattended without changing Ferrum's interactive mod...\n- Added failure-only, redacted diagnostics to the existing ineligible-anchor attached-cyclohexane E...\n- Closed the attached-cyclohexane implicit-anchor picker test gap without new infrastructure. The f...\n- Fixed Attach Cyclohexane Ring targeting for ordinary unlabelled carbon atoms. The action preserve...\n- Corrected the focused attached-cyclohexane Qt test teardown. After its successful C6 commit, the ...\n- Added value-safe failure diagnostics to the existing root attached-cyclohexane E2E preview assert...\n- Corrected the attached-cyclohexane E2E wheel-member preflight regex so it selects the direct nati...\n- Strengthened the existing single root attached-cyclohexane E2E without adding a harness or fixtur...\n- Removed the unused public attached-cyclohexane candidate revision/digest accessor. The typed inte...\n- Corrected attached-cyclohexane pointer-move dispatch. The Qt controller now begins the Rust-owned...\n- Strengthened WP-C1's focused offline Qt lifecycle proof. The existing regular-ring module now rec...\n- Repaired WP-C1 attached-cyclohexane cancellation ownership. A Rust cancellation refusal now retai...\n- Aligned WP-B1's attached-cyclohexane bridge with its concrete cross-crate contract. The pending C...\n- Corrected WP-B1's Rust authority claim. The extension still does not register `PyPendingAttachedC...\n- Corrected WP-C1's planned literal cooperative-bridge call-site oracle: it scans only Qt productio...\n- Repaired the planned cyclohexane PyO3 opacity proof before implementation: WP-B1 requires omissio...\n- Corrected WP-B1's PyO3 authority model for the deferred-ID attached-cyclohexane capability. Its f...\n- Added WP-A2's concrete deferred-ID attached-cyclohexane document capability. It keeps the accepte...\n- Corrected the cyclohexane attachment work-package boundary after the atomic-extension review. WP-...\n- Added WP-A1's private attached-cyclohexane document-core hypothesis. It uses the settled shared-a...",
+          "html_url": "https://github.com/vosslab/ferrum-chemical-forge/commit/1244e2ab4d12ec2c80d5bc97c4aed0517b6373b1",
+          "sha": "1244e2ab4d12ec2c80d5bc97c4aed0517b6373b1",
+          "subject": "Corrected the presentation-creation gesture PyO3 preview b... (+28 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "## 2026-08-21\n- Validated the copied CLI engine bundle against its canonical digest-bound manifest before the\n  native publication atomically selects `current`. The shared pure validator rejects malformed, alt...\n- Defined one canonical native-wheel staged source-subset manifest for receipt creation and\n  pre-swap publication validation. It captures the post-rewrite Ferrum source tree, records its exa...\n- Revalidated each copied native-wheel publication immediately before its atomic `current`\n  pointer replacement. The builder now recomputes the completed staged Ferrum source closure and ch...\n- Sealed each native-wheel build to a canonical staged Ferrum source-closure manifest. The\n  builder now compares source and staged workspaces before Maturin, retains the fingerprint in its ...\n- Declared the native `DocumentSession.can_undo` and `can_redo` Boolean properties in the shipped\n  typing stub. The isolated installed-wheel E2E now proves their fresh, commit, undo, and redo tran...\n- Replaced the blank-canvas Draw Bond E2E's saved-CDML standard-library XML parsing with the\n  approved defused XML parser, retaining its empty-document and C-C graph proof.\n- Kept the main-window lifecycle as the sole Undo and Redo QAction refresh owner. Its\n  pending and busy guards now combine with each active tab's Rust-owned history availability withou...\n- Made Undo and Redo action availability an independent Rust-owned session capability. The PyO3\n  binding and native Qt tab relay the exact history facts, while the selected-window actions now re...\n- Extended deterministic history availability coverage across Rust, PyO3, and Qt. The tests now\n  prove branch discard, active-tab-only action state, and temporary pending or busy action gates wi...\n- Corrected the blank-canvas Draw Bond dual-wheel E2E baseline. Each disposable public New tab\n  now saves and parses as independently blank CDML; the second tab reports Undo and Redo state sepa...\n- Corrected the native-wheel builder CLI staging contract. `--output-root` remains the only\n  independently admitted fresh `build/native-staging/native-*` root; the matching `--engine-bundle-...\n- Added a standalone offline dual-wheel Qt E2E for Draw Bond on a blank canvas. It drives only publ...\n- Corrected native-wheel source-closure publication validation to fingerprint the completed",
+          "committed_at": "2026-08-21T13:24:26-05:00",
+          "full_message": "Validated the copied CLI engine bundle against its canonic... (+20 more)\n\n## 2026-08-21\n- Validated the copied CLI engine bundle against its canonical digest-bound manifest before the\n  native publication atomically selects `current`. The shared pure validator rejects malformed, alt...\n- Defined one canonical native-wheel staged source-subset manifest for receipt creation and\n  pre-swap publication validation. It captures the post-rewrite Ferrum source tree, records its exa...\n- Revalidated each copied native-wheel publication immediately before its atomic `current`\n  pointer replacement. The builder now recomputes the completed staged Ferrum source closure and ch...\n- Sealed each native-wheel build to a canonical staged Ferrum source-closure manifest. The\n  builder now compares source and staged workspaces before Maturin, retains the fingerprint in its ...\n- Declared the native `DocumentSession.can_undo` and `can_redo` Boolean properties in the shipped\n  typing stub. The isolated installed-wheel E2E now proves their fresh, commit, undo, and redo tran...\n- Replaced the blank-canvas Draw Bond E2E's saved-CDML standard-library XML parsing with the\n  approved defused XML parser, retaining its empty-document and C-C graph proof.\n- Kept the main-window lifecycle as the sole Undo and Redo QAction refresh owner. Its\n  pending and busy guards now combine with each active tab's Rust-owned history availability withou...\n- Made Undo and Redo action availability an independent Rust-owned session capability. The PyO3\n  binding and native Qt tab relay the exact history facts, while the selected-window actions now re...\n- Extended deterministic history availability coverage across Rust, PyO3, and Qt. The tests now\n  prove branch discard, active-tab-only action state, and temporary pending or busy action gates wi...\n- Corrected the blank-canvas Draw Bond dual-wheel E2E baseline. Each disposable public New tab\n  now saves and parses as independently blank CDML; the second tab reports Undo and Redo state sepa...\n- Corrected the native-wheel builder CLI staging contract. `--output-root` remains the only\n  independently admitted fresh `build/native-staging/native-*` root; the matching `--engine-bundle-...\n- Added a standalone offline dual-wheel Qt E2E for Draw Bond on a blank canvas. It drives only publ...\n- Corrected native-wheel source-closure publication validation to fingerprint the completed",
+          "html_url": "https://github.com/vosslab/ferrum-chemical-forge/commit/61ce3b39108d44a0c4ffa67593c0ce9550d85869",
+          "sha": "61ce3b39108d44a0c4ffa67593c0ce9550d85869",
+          "subject": "Validated the copied CLI engine bundle against its canonic... (+20 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "- Made the default developer build publish the native and Qt wheels as one\n  immutable `output_native_wheel/current` pair. The shared receipt binds exact wheel, native-receip...\n- Made Draw Bond press-time classification and native-begin failures retire the exact\n  armed intent before unexpected failures propagate unchanged. Only declared, user-correctable nati...\n- Bound the blank-canvas Draw Bond dual-wheel E2E to the entire supplied Qt package rather than\n  a hand-selected routing list. It now derives every safe regular `ferrum_qt/**/*.py` wheel member ...\n- Made unexpected Draw Bond endpoint, native-admission, and preview-overlay failures retire\n  their active gesture before propagating. Typed Rust refusal receipts retain their ordinary user-v...\n- Made Draw Bond release an explicit Rust-admission route before the generic\n  existing-origin line guard. A blank-canvas NewNew gesture now redeems its final opaque admission ...\n- Corrected the blank-canvas Draw Bond E2E diagnostics to read the native tab's\n  public `current_snapshot` property rather than treating it as a callable.\n- Corrected the blank-canvas native-wheel E2E provenance gate to consume the exact staged and\n  worktree source-closure receipt schemas. It now verifies non-empty per-file manifests, fingerprin...\n- Moved final native-wheel source-closure validation and the atomic `current` replacement into\n  one Python-owned publication transaction. The builder now records the exact source files admitted...\n- Renamed the native-wheel publication self-test helper to a descriptive ordinary module name.\n  The helper remains private to the self-test runner by its documented responsibility rather than r...\n- Replaced fragile source-rewritten wheel-publication interruption fixtures with a real\n  publisher atomic-replacement failure fixture and a wrapper-owned signal-cleanup fixture.\n- Proved the canonical v2 Draw Bond commit history contract with a Rust blank-canvas\n  New-New regression: one accepted C-C gesture creates exactly one undo target, while Undo restores...\n- Corrected the blank-canvas Draw Bond E2E's endpoint oracle. Its saved-CDML proof\n  remains the public semantic blankness check; the test no longer mistakes the universal paper and ...\n- Hardened native-wheel `current` publication replacement with a private mode-0700 source-link stag...",
+          "committed_at": "2026-08-21T15:54:46-05:00",
+          "full_message": "Made the default developer build publish the native and Qt... (+18 more)\n\n- Made the default developer build publish the native and Qt wheels as one\n  immutable `output_native_wheel/current` pair. The shared receipt binds exact wheel, native-receip...\n- Made Draw Bond press-time classification and native-begin failures retire the exact\n  armed intent before unexpected failures propagate unchanged. Only declared, user-correctable nati...\n- Bound the blank-canvas Draw Bond dual-wheel E2E to the entire supplied Qt package rather than\n  a hand-selected routing list. It now derives every safe regular `ferrum_qt/**/*.py` wheel member ...\n- Made unexpected Draw Bond endpoint, native-admission, and preview-overlay failures retire\n  their active gesture before propagating. Typed Rust refusal receipts retain their ordinary user-v...\n- Made Draw Bond release an explicit Rust-admission route before the generic\n  existing-origin line guard. A blank-canvas NewNew gesture now redeems its final opaque admission ...\n- Corrected the blank-canvas Draw Bond E2E diagnostics to read the native tab's\n  public `current_snapshot` property rather than treating it as a callable.\n- Corrected the blank-canvas native-wheel E2E provenance gate to consume the exact staged and\n  worktree source-closure receipt schemas. It now verifies non-empty per-file manifests, fingerprin...\n- Moved final native-wheel source-closure validation and the atomic `current` replacement into\n  one Python-owned publication transaction. The builder now records the exact source files admitted...\n- Renamed the native-wheel publication self-test helper to a descriptive ordinary module name.\n  The helper remains private to the self-test runner by its documented responsibility rather than r...\n- Replaced fragile source-rewritten wheel-publication interruption fixtures with a real\n  publisher atomic-replacement failure fixture and a wrapper-owned signal-cleanup fixture.\n- Proved the canonical v2 Draw Bond commit history contract with a Rust blank-canvas\n  New-New regression: one accepted C-C gesture creates exactly one undo target, while Undo restores...\n- Corrected the blank-canvas Draw Bond E2E's endpoint oracle. Its saved-CDML proof\n  remains the public semantic blankness check; the test no longer mistakes the universal paper and ...\n- Hardened native-wheel `current` publication replacement with a private mode-0700 source-link stag...",
+          "html_url": "https://github.com/vosslab/ferrum-chemical-forge/commit/f2097d559b1cfe8e9cb4a2b9641b00029ddcc0ec",
+          "sha": "f2097d559b1cfe8e9cb4a2b9641b00029ddcc0ec",
+          "subject": "Made the default developer build publish the native and Qt... (+18 more)"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T19:54:14-05:00",
+          "full_message": "wheel builder code",
+          "html_url": "https://github.com/vosslab/ferrum-chemical-forge/commit/626d499e72b6650fd6c6e328397538f501822b5b",
+          "sha": "626d499e72b6650fd6c6e328397538f501822b5b",
+          "subject": "wheel builder code"
+        },
+        {
+          "account_login": "vosslab",
+          "body": "",
+          "committed_at": "2026-08-21T19:54:47-05:00",
+          "full_message": "wheel builder code #2",
+          "html_url": "https://github.com/vosslab/ferrum-chemical-forge/commit/e42f55af8b9acd619b3765abe6532b6ef42f759d",
+          "sha": "e42f55af8b9acd619b3765abe6532b6ef42f759d",
+          "subject": "wheel builder code #2"
+        }
+      ],
+      "default_branch": "main",
+      "description": "A pre-alpha CDML chemical drawing platform for scientists and educators that combines a retained PySide6 desktop editor with a planned Rust chemistry backend for durable document ownership.",
+      "event_count": 5,
+      "language": "Rust",
+      "readme": {
+        "commit": "e42f55af8b9acd619b3765abe6532b6ef42f759d",
+        "path": "README.md",
+        "sha": "13d291069e4dad824d789b06180951b52af79767",
+        "source": "mirror",
+        "summary": "Ferrum is a Rust chemical-document tool for inspecting, validating, rewriting, rendering,\nconverting, and drawing durable CDML records."
+      },
+      "repo": "vosslab/ferrum-chemical-forge",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "changelog": {
+        "commit": "9c1b31d244a75536a1874a102b973706c3fc971a",
+        "entries": [
+          "### Additions and New Features\n\n- Added three current gameplay captures under : a paused Wave 1 overview, an\n  Antibody Therapy targeting close-up, and the dense Cluster Corridor.\n- Added capture_screenshots.sh and its Playwright helper for reproducible screenshot refreshes.\n\n### Behavior or Interface Changes\n\n- Added a visual proof section to the README and clarified the local preview behavior.\n\n### Decisions and Failures\n\n- Chose three static views so the route, HUD, targeting range, Antibody mark, and second scene remain\n  inspectable without autoplay motion.\n- The first sandboxed Chromium launch failed at the macOS Mach-port boundary; the approved browser\n  run completed successfully.\n- The first automated Cluster Corridor strategies lost before the transition. A deterministic\n  simulation pass tuned a capture-only tower layout that then cleared the real browser flow.\n- The existing Playwright suite still contains two stale economy expectations: Standard 500 TP and\n  560 TP after placing a Doctor. The current game correctly renders Standard 380 TP and 410 TP after\n  that Practice placement.\n\n### Developer Tests and Notes\n\n- capture_screenshots.sh rebuilt the Pages artifact and refreshed all three captures successfully.\n- check_codebase.sh passed all five checks, including eight Node tests.\n-  passed all 639 tests against the complete\n  three-screenshot tree.\n- run_playwright_tests.sh --build --timeout=10000 passed the browser smoke test and exposed the\n  two stale value assertions above.\n- The local preview and live GitHub Pages URL both served the expected game entry page."
+        ],
+        "path": "docs/CHANGELOG.md",
+        "sha": "94e62968ee03fb06901da9e6127f0f7d60389d95",
+        "source": "mirror"
+      },
+      "commit_source_url": "https://api.github.com/repos/vosslab/attack-on-cancer/commits?since=2026-08-21T05%3A00%3A00Z&until=2026-08-22T05%3A00%3A00Z&per_page=100&page=1",
+      "commits": [
+        {
+          "account_login": "vosslab",
+          "body": "- Added three current gameplay captures under `docs/screenshots/`: a paused Wave 1 overview, an\n  Antibody Therapy targeting close-up, and the dense Cluster Corridor.\n- Added `capture_screenshots.sh` and its Playwright helper for reproducible screenshot refreshes.\n- Added a visual proof section to the README and clarified the local preview behavior.\n- Chose three static views so the route, HUD, targeting range, Antibody mark, and second scene remain\n  inspectable without autoplay motion.\n- The first sandboxed Chromium launch failed at the macOS Mach-port boundary; the approved browser\n  run completed successfully.\n- The first automated Cluster Corridor strategies lost before the transition. A deterministic\n  simulation pass tuned a capture-only tower layout that then cleared the real browser flow.\n- The existing Playwright suite still contains two stale economy expectations: Standard 500 TP and\n  560 TP after placing a Doctor. The current game correctly renders Standard 380 TP and 410 TP afte...\n- `./capture_screenshots.sh` rebuilt the Pages artifact and refreshed all three captures successfully.\n- `./check_codebase.sh` passed all five checks, including eight Node tests.\n- `source source_me.sh && python3 -m pytest tests/` passed all 639 tests against the complete\n  three-screenshot tree.\n- `./run_playwright_tests.sh --build --timeout=10000` passed the browser smoke test and exposed the\n  two stale value assertions above.\n- The local preview and live GitHub Pages URL both served the expected game entry page.",
+          "committed_at": "2026-08-21T19:55:24-05:00",
+          "full_message": "Added three current gameplay captures under `docs/screensh... (+11 more)\n\n- Added three current gameplay captures under `docs/screenshots/`: a paused Wave 1 overview, an\n  Antibody Therapy targeting close-up, and the dense Cluster Corridor.\n- Added `capture_screenshots.sh` and its Playwright helper for reproducible screenshot refreshes.\n- Added a visual proof section to the README and clarified the local preview behavior.\n- Chose three static views so the route, HUD, targeting range, Antibody mark, and second scene remain\n  inspectable without autoplay motion.\n- The first sandboxed Chromium launch failed at the macOS Mach-port boundary; the approved browser\n  run completed successfully.\n- The first automated Cluster Corridor strategies lost before the transition. A deterministic\n  simulation pass tuned a capture-only tower layout that then cleared the real browser flow.\n- The existing Playwright suite still contains two stale economy expectations: Standard 500 TP and\n  560 TP after placing a Doctor. The current game correctly renders Standard 380 TP and 410 TP afte...\n- `./capture_screenshots.sh` rebuilt the Pages artifact and refreshed all three captures successfully.\n- `./check_codebase.sh` passed all five checks, including eight Node tests.\n- `source source_me.sh && python3 -m pytest tests/` passed all 639 tests against the complete\n  three-screenshot tree.\n- `./run_playwright_tests.sh --build --timeout=10000` passed the browser smoke test and exposed the\n  two stale value assertions above.\n- The local preview and live GitHub Pages URL both served the expected game entry page.",
+          "html_url": "https://github.com/vosslab/attack-on-cancer/commit/9c1b31d244a75536a1874a102b973706c3fc971a",
+          "sha": "9c1b31d244a75536a1874a102b973706c3fc971a",
+          "subject": "Added three current gameplay captures under `docs/screensh... (+11 more)"
+        }
+      ],
+      "default_branch": "main",
+      "description": "A bright browser tower-defense game for students and curious players who want to protect a Skin Tissue route with readable cancer treatments rather than memorize biology facts.",
+      "event_count": 1,
+      "language": "Python",
+      "readme": {
+        "commit": "9c1b31d244a75536a1874a102b973706c3fc971a",
+        "path": "README.md",
+        "sha": "402cb853cff4fa42bb75869d84186497e09a3b54",
+        "source": "mirror",
+        "summary": "A bright browser tower-defense game for students and curious players who want to protect a Skin\nTissue route with readable cancer treatments rather than memorize biology facts."
+      },
+      "repo": "vosslab/attack-on-cancer",
+      "stars": 0,
+      "topics": []
+    }
+  ],
+  "retrieved_at": "2026-08-24T02:01:18+00:00",
+  "schema_version": 3,
+  "screenshots": [
+    {
+      "filename": "antibody_targeting.png",
+      "media_path": "assets/screenshots/2026-08-21/attack-on-cancer-antibody_targeting.png",
+      "relative_path": "../../assets/screenshots/2026-08-21/attack-on-cancer-antibody_targeting.png",
+      "repo": "vosslab/attack-on-cancer",
+      "source_blob_sha": "bcc88a8352425598a6231970bc0dcb7e461a8c60",
+      "source_commit": "9c1b31d244a75536a1874a102b973706c3fc971a",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/attack-on-cancer@9c1b31d244a75536a1874a102b973706c3fc971a:docs/screenshots/antibody_targeting.png"
+    },
+    {
+      "filename": "cluster_corridor.png",
+      "media_path": "assets/screenshots/2026-08-21/attack-on-cancer-cluster_corridor.png",
+      "relative_path": "../../assets/screenshots/2026-08-21/attack-on-cancer-cluster_corridor.png",
+      "repo": "vosslab/attack-on-cancer",
+      "source_blob_sha": "c8b4b15b7e9db9af1bfb41f0668694973658aad7",
+      "source_commit": "9c1b31d244a75536a1874a102b973706c3fc971a",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/attack-on-cancer@9c1b31d244a75536a1874a102b973706c3fc971a:docs/screenshots/cluster_corridor.png"
+    },
+    {
+      "filename": "skin_tissue_battle.png",
+      "media_path": "assets/screenshots/2026-08-21/attack-on-cancer-skin_tissue_battle.png",
+      "relative_path": "../../assets/screenshots/2026-08-21/attack-on-cancer-skin_tissue_battle.png",
+      "repo": "vosslab/attack-on-cancer",
+      "source_blob_sha": "9b3ee3fc4b1a0113a302f6a07d0c21f270aa39df",
+      "source_commit": "9c1b31d244a75536a1874a102b973706c3fc971a",
+      "source_path": "/home/vosslab/repo-mirrors/vosslab/attack-on-cancer@9c1b31d244a75536a1874a102b973706c3fc971a:docs/screenshots/skin_tissue_battle.png"
+    }
+  ],
+  "source_mode": "github_public_events_owned_repository_commits_and_docs",
+  "source_url": "https://api.github.com/users/vosslab/events/public?per_page=100&page=1",
+  "timezone": "America/Chicago",
+  "username": "vosslab"
+}

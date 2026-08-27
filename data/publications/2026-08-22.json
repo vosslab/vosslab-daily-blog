@@ -1,0 +1,35 @@
+{
+  "canonical": {
+    "post_path": "docs/blog/posts/2026-08-22.md",
+    "release_id": "canonical-2026-08-22-2026-08-24T021338+0000-e567a0b5",
+    "state": "published",
+    "updated_at": "2026-08-24T02:13:39+00:00"
+  },
+  "collection": {
+    "event_count": 6,
+    "repository_count": 4,
+    "state": "ready",
+    "updated_at": "2026-08-24T02:13:37+00:00"
+  },
+  "editorial": {
+    "attempts": [
+      {
+        "at": "2026-08-24T02:16:23+00:00",
+        "failure_kind": "editorial_command_failed",
+        "result": "degraded"
+      },
+      {
+        "at": "2026-08-24T02:21:22+00:00",
+        "result": "promoted"
+      }
+    ],
+    "candidate_path": "data/editorial/candidates/2026-08-22.md",
+    "release_id": "editorial-2026-08-22-2026-08-24T022120+0000-686a5f2e",
+    "state": "promoted",
+    "updated_at": "2026-08-24T02:21:22+00:00"
+  },
+  "evidence_path": "data/daily/2026-08-22.json",
+  "report_date": "2026-08-22",
+  "schema_version": 1,
+  "updated_at": "2026-08-24T02:21:22+00:00"
+}

@@ -15,6 +15,7 @@ from scripts.collect_github_events import (
     changelog_entries_for_date,
     readme_context,
     read_mirror_document,
+    request_commit_screenshot_files,
     resolve_repo_checkout,
     render_post,
 )
@@ -161,6 +162,21 @@ It is a bounded snapshot, not complete commit history.
         self.assertEqual(document["commit"], head)
         self.assertTrue(document["sha"])
 
+    def test_ignores_removed_screenshot_paths(self) -> None:
+        payload = {
+            "files": [
+                {"filename": "docs/screenshots/removed.png", "status": "removed", "sha": "removed-sha"},
+                {"filename": "docs/screenshots/kept.png", "status": "modified", "sha": "kept-sha"},
+            ]
+        }
+
+        with patch("scripts.collect_github_events.http_get_json", return_value=payload):
+            files = request_commit_screenshot_files("vosslab/project", [{"sha": "evidence-sha"}])
+
+        self.assertEqual([item["filename"] for item in files], ["docs/screenshots/kept.png"])
+        self.assertEqual(files[0]["commit"], "evidence-sha")
+        self.assertEqual(files[0]["blob_sha"], "kept-sha")
+
     def test_enrichment_keeps_readme_and_dated_changelog_provenance(self) -> None:
         target = date(2026, 8, 20)
         timezone = ZoneInfo("America/Chicago")
@@ -172,14 +188,14 @@ It is a bounded snapshot, not complete commit history.
 
         with (
             patch("scripts.collect_github_events.request_repo_info", return_value={"default_branch": "main"}),
-            patch("scripts.collect_github_events.request_repo_commits", return_value=("commits-url", [{"subject": "changed"}])),
+            patch("scripts.collect_github_events.request_repo_commits", return_value=("commits-url", [{"sha": "evidence-sha", "subject": "changed"}])),
             patch("scripts.collect_github_events.request_repo_document", side_effect=document_for),
         ):
             repositories, errors = build_repository_evidence([], "vosslab", target, timezone, owned_repos=["vosslab/project"])
 
         self.assertEqual(errors, [])
-        self.assertEqual(repositories[0]["readme"], {"path": "README.md", "sha": "readme-sha", "summary": "Reader context.", "source": "github_api", "commit": ""})
-        self.assertEqual(repositories[0]["changelog"], {"path": "docs/CHANGELOG.md", "sha": "changelog-sha", "entries": ["- evidence detail"], "source": "github_api", "commit": ""})
+        self.assertEqual(repositories[0]["readme"], {"path": "README.md", "sha": "readme-sha", "summary": "Reader context.", "source": "github_api", "commit": "evidence-sha"})
+        self.assertEqual(repositories[0]["changelog"], {"path": "docs/CHANGELOG.md", "sha": "changelog-sha", "entries": ["- evidence detail"], "source": "github_api", "commit": "evidence-sha"})
 
     def test_claim_packet_carries_document_context_with_provenance(self) -> None:
         evidence = {

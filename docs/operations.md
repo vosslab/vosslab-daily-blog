@@ -26,12 +26,13 @@
 
 ## Normal flow
 
-1. At 02:00 America/Chicago, Hermes cron synchronizes the depth-1 repository checkouts under `/home/vosslab/repo-mirrors/vosslab`, then runs the deterministic canonical publisher for the previous completed Central day.
-2. The collector sends `GITHUB_TOKEN` as a Bearer authorization header and writes the dated evidence record. It reads documentation and screenshots from the exact account-linked commit in a matching mirror, with a bounded public-GitHub fallback for unavailable mirrors.
-3. The publisher writes the date's publication state, renders its canonical post, validates it, builds a staged release, and atomically switches `site`.
-4. At 02:15 America/Chicago, the systemd editorial timer reconciles one eligible date.
-5. The reconciler writes a candidate and manifest under `data/editorial/`, validates the candidate, stages an editorial release, and updates the publication record after promotion.
-6. `docs/status.md` renders from durable publication records and releases with each state transition.
+1. At 01:30 America/Chicago, `vosslab-daily-blog-mirrors.timer` refreshes the depth-1 public-repository cache under `/home/vosslab/repo-mirrors/vosslab`. This is cache warming, not a publication prerequisite.
+2. At 02:00 America/Chicago, Hermes cron runs the deterministic canonical publisher for the previous completed Central day.
+3. The collector sends `GITHUB_TOKEN` as a Bearer authorization header and writes the dated evidence record. It reads documentation and screenshots from the exact account-linked commit in a matching mirror, fetching that exact commit when needed; a missing matching mirror uses the bounded public-GitHub fallback.
+4. The publisher writes the date's publication state, renders its canonical post, validates it, builds a staged release, and atomically switches `site`. A collection failure preserves the prior content but also publishes its safe failure state to `/status/`.
+5. At 02:15 America/Chicago, the systemd editorial timer reconciles one eligible date.
+6. The reconciler writes a candidate and manifest under `data/editorial/`, validates the candidate, stages an editorial release, and updates the publication record after promotion.
+7. `docs/status.md` renders from durable publication records and releases with each state transition.
 
 ## Operator checks
 
@@ -50,6 +51,9 @@ curl --fail http://aella.local:8016/status/
 ```bash
 cd ~/nsh/vosslab-daily-blog
 
+# Process a completed date from mirror synchronization through editorial reconciliation
+scripts/process_day.sh 2026-08-19
+
 # Publish canonical content for a completed date
 .venv/bin/python scripts/daily_publish.py --date 2026-08-10
 
@@ -67,7 +71,7 @@ A successful staged build promotes an atomic release pointer. The static service
 
 ## Recovery
 
-- A collection failure writes `collection: failed` and publishes the updated status page.
+- A collection failure writes `collection: failed` while the existing served release remains unchanged.
 - A canonical staging failure preserves the previously served release and leaves the date visible in its durable state.
 - An editorial failure writes `editorial: degraded`; the published canonical post remains current.
 - The next editorial timer run reconciles pending and degraded dates in descending date order.

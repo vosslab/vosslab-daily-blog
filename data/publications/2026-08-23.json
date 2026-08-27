@@ -1,0 +1,30 @@
+{
+  "canonical": {
+    "post_path": "docs/blog/posts/2026-08-23.md",
+    "release_id": "canonical-2026-08-23-2026-08-24T070055+0000-623ba26a",
+    "state": "published",
+    "updated_at": "2026-08-24T07:00:57+00:00"
+  },
+  "collection": {
+    "event_count": 3,
+    "repository_count": 3,
+    "state": "ready",
+    "updated_at": "2026-08-24T07:00:55+00:00"
+  },
+  "editorial": {
+    "attempts": [
+      {
+        "at": "2026-08-24T07:18:25+00:00",
+        "result": "promoted"
+      }
+    ],
+    "candidate_path": "data/editorial/candidates/2026-08-23.md",
+    "release_id": "editorial-2026-08-23-2026-08-24T071823+0000-44f2fe08",
+    "state": "promoted",
+    "updated_at": "2026-08-24T07:18:25+00:00"
+  },
+  "evidence_path": "data/daily/2026-08-23.json",
+  "report_date": "2026-08-23",
+  "schema_version": 1,
+  "updated_at": "2026-08-24T07:18:25+00:00"
+}

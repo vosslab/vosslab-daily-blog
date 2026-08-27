@@ -15,7 +15,7 @@ A private work log for dated Vosslab GitHub activity, served on the local networ
 ## Daily publishing path
 
 1. The canonical publisher collects authenticated evidence for the previous completed Central day.
-2. It stores an immutable evidence record and a durable publication-state record.
+2. It stores a re-creatable dated evidence record and a durable publication-state record.
 3. It renders, validates, stages, and atomically publishes the canonical post.
 4. The editorial reconciler creates a candidate from the published date's evidence and promotes a validated revision through its own release.
 
