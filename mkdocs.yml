@@ -2,6 +2,8 @@ site_name: Vosslab Work Log
 site_description: Private-LAN daily notes from Vosslab's public GitHub activity.
 site_url: http://aella.local:8016
 site_dir: generated/check
+exclude_docs: |
+  REPO_STYLE.md
 
 repo_name: vosslab
 repo_url: https://github.com/vosslab
@@ -50,6 +52,7 @@ nav:
   - Work log: blog/index.md
   - Status: status.md
   - Operations: operations.md
+  - Architecture: CODE_ARCHITECTURE.md
 
 markdown_extensions:
   - admonition

@@ -1,162 +1,170 @@
 #!/usr/bin/env python3
-"""Validate a source-grounded, paragraph-form daily work-log candidate."""
+"""Validate one bundle-backed MkDocs daily work-log post."""
 
-from __future__ import annotations
-
-import argparse
-import json
+# Standard Library
 import re
-import sys
-from pathlib import Path
+import json
+import argparse
+
+# PIP3 modules
+import yaml
 
 
-LINK_RE = re.compile(r"\[[^\]]+\]\((https?://[^)]+)\)")
-WORD_RE = re.compile(r"[A-Za-z0-9']+")
-THEME_SLUG_RE = re.compile(r"^[a-z]{3,32}$")
+FRONT_MATTER_RE = re.compile(r"\A---\s*\n(.*?)\n---\s*\n", re.DOTALL)
+EVIDENCE_COMMENT_RE = re.compile(r"<!--\s*evidence:\s*([^>]+?)\s*-->")
+SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+FENCE_RE = re.compile(r"(^|\n)\s*(?:`{3,}|~{3,})")
 
 
+#============================================
 def parse_args() -> argparse.Namespace:
-    """Parse candidate and evidence paths."""
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--candidate", required=True)
-    parser.add_argument("--evidence", required=True)
-    return parser.parse_args()
+	"""Parse post, evidence, and bundle paths."""
+	parser = argparse.ArgumentParser(description=__doc__)
+	parser.add_argument("-c", "--candidate", dest="candidate_path", required=True)
+	parser.add_argument("-e", "--evidence", dest="evidence_path", required=True)
+	parser.add_argument("-b", "--bundle", dest="bundle_path", required=True)
+	args = parser.parse_args()
+	return args
 
 
-def allowed_urls(evidence: dict[str, object]) -> set[str]:
-    """Return source URLs that the evidence packet explicitly supports."""
-    urls = {str(evidence.get("source_url", "")).strip()}
-    for event in evidence.get("events", []):
-        repo = str(event.get("repo", "")).strip()
-        if repo:
-            urls.add(f"https://github.com/{repo}")
-    for repository in evidence.get("repositories", []):
-        repo = str(repository.get("repo", "")).strip()
-        if repo:
-            urls.add(f"https://github.com/{repo}")
-        source_url = str(repository.get("commit_source_url", "")).strip()
-        if source_url:
-            urls.add(source_url)
-        for commit in repository.get("commits", []):
-            html_url = str(commit.get("html_url", "")).strip()
-            if html_url:
-                urls.add(html_url)
-    urls.discard("")
-    return urls
+#============================================
+def parse_front_matter(post: str) -> tuple[dict, str]:
+	"""Parse opening YAML front matter and return the Markdown body."""
+	match = FRONT_MATTER_RE.search(post)
+	if not match:
+		raise RuntimeError("post must begin with YAML front matter")
+	value = yaml.safe_load(match.group(1))
+	if not isinstance(value, dict):
+		raise RuntimeError("post front matter must be a mapping")
+	body = post[match.end():]
+	return value, body
 
 
-def markdown_body(text: str) -> str:
-    """Remove YAML front matter and headings before prose checks."""
-    clean = text.strip()
-    if clean.startswith("---"):
-        parts = clean.split("---", 2)
-        if len(parts) == 3:
-            clean = parts[2]
-    return "\n".join(line for line in clean.splitlines() if not line.startswith("#")).strip()
+#============================================
+def evidence_ids_in_post(post: str) -> set[str]:
+	"""Return all packet evidence IDs named in provenance comments."""
+	identifiers = set()
+	for match in EVIDENCE_COMMENT_RE.finditer(post):
+		for value in match.group(1).split(","):
+			identifier = value.strip()
+			if identifier:
+				identifiers.add(identifier)
+	return identifiers
 
 
-def media_paths(evidence: dict[str, object]) -> set[str]:
-    """Return accepted post-relative and MkDocs source screenshot paths."""
-    paths: set[str] = set()
-    for item in evidence.get("screenshots", []):
-        for key in ("relative_path", "media_path"):
-            value = str(item.get(key, "")).strip()
-            if value:
-                paths.add(value)
-    return paths
+#============================================
+def prose_blocks(body: str) -> list[str]:
+	"""Return factual prose blocks that require provenance comments."""
+	blocks = []
+	for block in re.split(r"\n\s*\n", body.strip()):
+		text = block.strip()
+		if not text or text == "<!-- more -->":
+			continue
+		if text.startswith("#") or text.startswith("!["):
+			continue
+		if text.startswith("<!--") and text.endswith("-->"):
+			continue
+		blocks.append(text)
+	return blocks
 
 
-def validate_post(text: str, evidence: dict[str, object]) -> list[str]:
-    """Return all deterministic publication issues in one candidate article."""
-    issues = []
-    report_date = str(evidence.get("report_date", ""))
-    if f"created: {report_date}" not in text:
-        issues.append("date front matter does not match evidence")
-    slug_match = re.search(r"^slug:\s*([^\s#]+)\s*$", text, flags=re.MULTILINE)
-    if not slug_match or not THEME_SLUG_RE.fullmatch(slug_match.group(1)):
-        issues.append("article must use one single thematic word as its short slug")
-    if len(re.findall(r"^# ", text, flags=re.MULTILINE)) != 1:
-        issues.append("article must contain exactly one H1")
-
-    h2_count = len(re.findall(r"^## (?!#)", text, flags=re.MULTILINE))
-    if h2_count < 2:
-        issues.append("article must use at least two descriptive H2 sections")
-    if re.search(r"\]\(https://github\.com/[^)]+/commit/[0-9a-f]{7,40}\)", text):
-        issues.append("article exposes developer commit links; use reader-facing prose")
-
-    excerpt_parts = text.split("<!-- more -->")
-    if len(excerpt_parts) != 2:
-        issues.append("article must define one compact index excerpt")
-    else:
-        excerpt = excerpt_parts[0]
-        if re.search(r"^#{2,6}\s+", excerpt, flags=re.MULTILINE):
-            issues.append("index excerpt may not include section headings")
-        excerpt_images = len(
-            re.findall(r"^!\[[^\]]*\]\([^\n]+\)", excerpt, flags=re.MULTILINE)
-        )
-        if excerpt_images > 1:
-            issues.append("index excerpt may contain at most one image")
-        excerpt_body = markdown_body(excerpt)
-        excerpt_paragraphs = [
-            part.strip()
-            for part in re.split(r"\n\s*\n", excerpt_body)
-            if part.strip() and not part.lstrip().startswith("!")
-        ]
-        if len(excerpt_paragraphs) > 1:
-            issues.append("index excerpt may contain at most one paragraph")
-
-    body = markdown_body(text)
-    narrative = markdown_body(text.split("## Project coverage", 1)[0])
-    paragraphs = [part.strip() for part in re.split(r"\n\s*\n", body) if part.strip()]
-    prose_paragraphs = [part for part in paragraphs if not part.startswith(("- ", "* ", "> "))]
-    word_count = len(WORD_RE.findall(narrative))
-    if len(prose_paragraphs) < 3 or word_count < 180:
-        issues.append("article must be substantial paragraph-form prose")
-    if word_count > 1_000:
-        issues.append("article must remain concise for a general reader")
-    if re.search(r"^\s*[-*]\s+", body, flags=re.MULTILINE):
-        issues.append("article contains a raw event-log Markdown list")
-    if "PushEvent" in text or "## Observed public activity" in text:
-        issues.append("article contains raw event-log labels")
-    if not re.search(r"\bI\b|\bmy\b", body, flags=re.IGNORECASE):
-        issues.append("article must use a natural first-person work-log voice")
-    lower = body.lower()
-    if "bounded" not in lower or "not complete commit history" not in lower:
-        issues.append("article must preserve the bounded-source statement")
-    screenshot_count = len(evidence.get("screenshots", []))
-    if screenshot_count > 0:
-        paths = media_paths(evidence)
-        if not any(path and path in text for path in paths):
-            issues.append(
-                "article must embed a screenshot path from the evidence packet"
-            )
-
-    approved = allowed_urls(evidence)
-    for repository in evidence.get("repositories", []):
-        repo = str(repository.get("repo", "")).strip()
-        if repo and f"https://github.com/{repo}" not in text:
-            issues.append(f"article omits active repository: {repo}")
-    for url in LINK_RE.findall(text):
-        if url not in approved:
-            issues.append(f"article contains unsupported URL: {url}")
-    if not any(url in text for url in approved if "api.github.com/users/" in url):
-        issues.append("article must link the public GitHub source request")
-    return issues
+#============================================
+def validate_post(post: str, evidence: dict, bundle: dict) -> list[str]:
+	"""Return every deterministic post, front-matter, and provenance issue."""
+	issues = []
+	try:
+		front_matter, body = parse_front_matter(post)
+	except RuntimeError as error:
+		return [str(error)]
+	required = ("date", "slug", "publication_quality", "generator_run", "evidence_manifest")
+	for key in required:
+		if key not in front_matter:
+			issues.append(f"front matter is missing {key}")
+	report_date = str(bundle["report_date"])
+	if str(front_matter.get("date") or "") != report_date:
+		issues.append("front matter date does not match the bundle")
+	if evidence.get("report_date") != report_date:
+		issues.append("evidence date does not match the bundle")
+	slug = str(front_matter.get("slug") or "")
+	if not SLUG_RE.fullmatch(slug):
+		issues.append("front matter slug must use lowercase ASCII words and hyphens")
+	if front_matter.get("publication_quality") != bundle["publication_quality"]:
+		issues.append("front matter publication_quality does not match the bundle")
+	if front_matter.get("generator_run") != bundle["generator"]["run_id"]:
+		issues.append("front matter generator_run does not match the bundle")
+	if front_matter.get("evidence_manifest") != "evidence.json":
+		issues.append("front matter evidence_manifest must name evidence.json")
+	if len(re.findall(r"^#\s+\S", body, flags=re.MULTILINE)) != 1:
+		issues.append("post body must contain exactly one H1")
+	if not re.search(r"^##\s+\S", body, flags=re.MULTILINE):
+		issues.append("post body must contain at least one H2")
+	if body.count("<!-- more -->") != 1:
+		issues.append("post body must contain exactly one excerpt marker")
+	if FENCE_RE.search(body):
+		issues.append("post body contains a fenced payload")
+	if not re.search(r"\b(?:I|my)\b", body, flags=re.IGNORECASE):
+		issues.append("post body must use first-person work-log voice")
+	items = evidence.get("items")
+	if not isinstance(items, list):
+		return issues + ["evidence packet must contain an items list"]
+	known_ids = {
+		str(item.get("evidence_id") or "")
+		for item in items
+		if isinstance(item, dict)
+	}
+	used_ids = evidence_ids_in_post(body)
+	unknown = sorted(used_ids - known_ids)
+	if unknown:
+		issues.append("post cites unknown evidence IDs: " + ", ".join(unknown))
+	for block in prose_blocks(body):
+		if not EVIDENCE_COMMENT_RE.search(block):
+			issues.append("every factual prose paragraph must cite packet evidence")
+			break
+	primary_ids = {
+		item["evidence_id"]
+		for item in items
+		if isinstance(item, dict) and item.get("kind") == "dated_changelog"
+	}
+	if primary_ids and not used_ids.intersection(primary_ids):
+		issues.append("post must cite dated changelog evidence when available")
+	if not primary_ids and not used_ids:
+		issues.append("post must cite at least one evidence item")
+	image_items = {
+		str(item.get("publish_path") or ""): str(item.get("evidence_id") or "")
+		for item in items
+		if isinstance(item, dict) and item.get("kind") == "screenshot"
+	}
+	for path in re.findall(r"!\[[^\]]*\]\(([^)]+)\)", body):
+		if path not in image_items:
+			issues.append(f"post embeds an image outside bundle evidence: {path}")
+		elif image_items[path] not in used_ids:
+			issues.append(f"post image lacks its evidence citation: {path}")
+	return issues
 
 
-def main() -> int:
-    """Validate one candidate and print a promotion-friendly result."""
-    args = parse_args()
-    evidence = json.loads(Path(args.evidence).read_text(encoding="utf-8"))
-    candidate = Path(args.candidate).read_text(encoding="utf-8")
-    issues = validate_post(candidate, evidence)
-    if issues:
-        for issue in issues:
-            print(f"ERROR: {issue}", file=sys.stderr)
-        return 2
-    print("Daily post validation passed.")
-    return 0
+#============================================
+def read_json_object(path: str) -> dict:
+	"""Read one required JSON object."""
+	with open(path, "r", encoding="utf-8") as handle:
+		value = json.load(handle)
+	if not isinstance(value, dict):
+		raise RuntimeError(f"Expected one JSON object: {path}")
+	return value
+
+
+#============================================
+def main() -> None:
+	"""Validate one candidate and print a promotion-friendly result."""
+	args = parse_args()
+	with open(args.candidate_path, "r", encoding="utf-8") as handle:
+		post = handle.read()
+	evidence = read_json_object(args.evidence_path)
+	bundle = read_json_object(args.bundle_path)
+	issues = validate_post(post, evidence, bundle)
+	if issues:
+		raise RuntimeError("Daily post validation failed: " + "; ".join(issues))
+	print("Daily post validation passed.")
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+	main()
