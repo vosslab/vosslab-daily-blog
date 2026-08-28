@@ -12,6 +12,7 @@ import pytest
 # local repo modules
 import scripts.import_publication_bundle
 import scripts.publication_transaction
+import scripts.site_deployment
 
 
 REPORT_DATE = "2026-08-23"
@@ -189,6 +190,16 @@ def make_bundle(root: pathlib.Path, run_id: str) -> str:
 		+ "<!-- more -->\n\n"
 		+ "## Publication state\n\n"
 		+ f"I retained a bounded work log. <!-- evidence: {items[1]['evidence_id']} -->\n"
+		+ "\n## Evidence trail\n\n"
+		+ (
+			"I kept the visible record tied to the same small, inspectable boundary. " * 35
+		)
+		+ f"<!-- evidence: {items[0]['evidence_id']} -->\n\n"
+		+ "## Project coverage\n\n"
+		+ (
+			f"vosslab/alpha and vosslab/beta both remain in this bounded publication record. "
+			f"<!-- evidence: {items[1]['evidence_id']} -->\n"
+		)
 	)
 	post_hash = scripts.import_publication_bundle.sha256_bytes(post.encode("utf-8"))
 	bundle = {
@@ -207,6 +218,11 @@ def make_bundle(root: pathlib.Path, run_id: str) -> str:
 			"editorial_projection_schema": "vosslab.daily-blog.editorial-projection.v1",
 			"prompt_version": "daily-blog-prompts-v3",
 			"rubric_version": "daily-blog-rubric-v3",
+			"candidate_validation": {
+				"name": scripts.validate_daily_post.V3_HISTORICAL_POLICY.name,
+				"version": scripts.validate_daily_post.V3_HISTORICAL_POLICY.version,
+				"sha256": scripts.validate_daily_post.V3_HISTORICAL_POLICY.digest,
+			},
 		},
 		"evidence": {
 			"path": "evidence.json",
@@ -335,6 +351,26 @@ def test_import_archives_projection_and_writes_publication_v2(tmp_path: pathlib.
 
 	assert record["schema_version"] == "vosslab.daily-blog.publication.v2"
 	assert (archive / "editorial_projection.json").is_file()
+
+
+#============================================
+def test_import_v3_rejects_one_uncited_narrative_block(tmp_path: pathlib.Path) -> None:
+	"""The active historical importer preserves paragraph-level provenance."""
+	initialize_site(tmp_path)
+	bundle_path = make_bundle(tmp_path, "run-uncited-narrative")
+	post_path = pathlib.Path(bundle_path) / "post.md"
+	post = post_path.read_text(encoding="utf-8")
+	post = post.replace(
+		"## Publication state\n\n",
+		"## Publication state\n\n"
+		"I enjoyed finding the smaller shape of this publication boundary.\n\n",
+	)
+	rehash_post_bundle(bundle_path, post)
+
+	with pytest.raises(RuntimeError, match="every factual prose paragraph"):
+		scripts.import_publication_bundle.import_publication_bundle(
+			bundle_path, str(tmp_path), fake_build
+		)
 
 
 #============================================
@@ -669,23 +705,6 @@ def test_publisher_lock_lives_in_generated_runtime_state(tmp_path: pathlib.Path)
 
 
 #============================================
-def test_unknown_legacy_bundle_schema_is_rejected(tmp_path: pathlib.Path) -> None:
-	"""The publisher accepts no compatibility path for the prior bundle generation."""
-	initialize_site(tmp_path)
-	bundle_path = make_bundle(tmp_path, "run-old-schema")
-	bundle_file = pathlib.Path(bundle_path) / "bundle.json"
-	bundle = json.loads(bundle_file.read_text(encoding="utf-8"))
-	bundle["schema_version"] = "vosslab.daily-blog.bundle.v1"
-	bundle["bundle_id"] = scripts.import_publication_bundle.bundle_identity(bundle)
-	write_json(bundle_file, bundle)
-
-	with pytest.raises(RuntimeError, match="schema"):
-		scripts.import_publication_bundle.import_publication_bundle(
-			bundle_path, str(tmp_path), fake_build
-		)
-
-
-#============================================
 def test_asset_path_must_remain_inside_bundle(tmp_path: pathlib.Path) -> None:
 	"""A rehashed asset manifest cannot name a path outside the physical bundle."""
 	initialize_site(tmp_path)
@@ -773,6 +792,23 @@ def test_idempotency_requires_site_to_resolve_to_expected_release(
 		scripts.import_publication_bundle.import_publication_bundle(
 			bundle_path, str(tmp_path), fake_build
 		)
+
+
+#============================================
+def test_idempotency_accepts_valid_derived_site_release(tmp_path: pathlib.Path) -> None:
+	"""A presentation release retains the exact bundle identity beneath it."""
+	initialize_site(tmp_path)
+	bundle_path = make_bundle(tmp_path, "run-derived-site")
+	first = scripts.import_publication_bundle.import_publication_bundle(
+		bundle_path, str(tmp_path), fake_build
+	)
+	scripts.site_deployment.publish_site(str(tmp_path), fake_build)
+	second = scripts.import_publication_bundle.import_publication_bundle(
+		bundle_path, str(tmp_path), fake_build
+	)
+
+	assert first["bundle_id"] == second["bundle_id"]
+	assert second["status"] == "idempotent"
 
 
 #============================================

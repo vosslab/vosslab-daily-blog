@@ -3,7 +3,10 @@ site_description: Evidence-grounded field notes from Vosslab's public GitHub wor
 site_url: http://aella.local:8016
 site_dir: generated/check
 exclude_docs: |
-  REPO_STYLE.md
+  /*.md
+  !/index.md
+  !/status.md
+  /screenshots/
 
 repo_name: vosslab
 repo_url: https://github.com/vosslab
@@ -19,8 +22,9 @@ theme:
   name: material
   language: en
   font: false
+  favicon: assets/brand/vosslab-work-log-mark.svg
+  logo: assets/brand/vosslab-work-log-mark.svg
   icon:
-    logo: material/notebook-edit-outline
     repo: fontawesome/brands/github
   palette:
     - media: "(prefers-color-scheme: light)"
@@ -64,8 +68,6 @@ plugins:
 nav:
   - Work log: index.md
   - Status: status.md
-  - Operations: operations.md
-  - Architecture: CODE_ARCHITECTURE.md
 
 markdown_extensions:
   - admonition

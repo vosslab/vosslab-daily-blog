@@ -2,6 +2,7 @@
 # Propagation preserves this section.
 
 site
+/.venv/
 data/run/
 /test-results/
 

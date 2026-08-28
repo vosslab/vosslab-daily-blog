@@ -1,131 +1,130 @@
 # Code architecture
 
-## Purpose
+## Overview
 
-This repository is a local publication sink. It accepts a complete producer-owned bundle, validates
-the contract independently, proposes a complete MkDocs source tree, and installs an immutable built
-release without exposing partial work.
+This repository is the publisher half of a two-repository work-log system. It accepts a complete,
+producer-owned publication bundle, validates its evidence and editorial contract independently, and
+serves a strict MkDocs build on the local network. It preserves the last good release while bundle
+validation, source staging, or MkDocs building fails.
 
-## Repository boundary
+The producer repository owns evidence collection, generation, Git evidence, and scheduling. This
+repository owns publication validation, current MkDocs source, immutable records and releases, the
+served `site` pointer, and the static server. The complete handoff contract and recovery commands
+are documented in [operations.md](operations.md).
+
+## Major components
+
+- [scripts/import_publication_bundle.py](../scripts/import_publication_bundle.py) validates a
+  physical bundle directory, stages a proposed source tree, and installs a new content release.
+- [scripts/validate_daily_post.py](../scripts/validate_daily_post.py) and
+  [scripts/validate_editorial_projection.py](../scripts/validate_editorial_projection.py) enforce
+  deterministic post, evidence, projection, and asset rules.
+- [scripts/publication_record.py](../scripts/publication_record.py) defines the validated
+  publication-record schema. [scripts/render_publication_status.py](../scripts/render_publication_status.py)
+  derives the status page exclusively from those records.
+- [scripts/publication_transaction.py](../scripts/publication_transaction.py) owns the shared lock,
+  ordered content-release commit, rollback, and interrupted-import recovery.
+- [scripts/site_deployment.py](../scripts/site_deployment.py) owns presentation-source snapshots,
+  strict MkDocs builds, source-identified presentation releases, and atomic pointer promotion.
+  [publish_site.sh](../publish_site.sh) is its small operator entry point.
+- [mkdocs.yml](../mkdocs.yml), [docs/index.md](index.md),
+  [docs/stylesheets/extra.css](stylesheets/extra.css), and
+  [docs/assets/brand/vosslab-work-log-mark.svg](assets/brand/vosslab-work-log-mark.svg) define the
+  Material theme, newspaper presentation, and shared logo/favicon surface.
+- [deploy/vosslab-daily-blog.service](../deploy/vosslab-daily-blog.service) uses Python's static
+  HTTP server to serve the `site` symlink on port 8016. It is independent of generation and import.
+
+## Bundle import flow
 
 ```text
 vosslab-podcast                         vosslab-daily-blog
 
-evidence -> projection -> authors -> A/B referee -> bundle
-                                                   |
-                                                   v
-                                      validate -> stage -> strict build
-                                                   |
-                                                   v
-                                       source + record + release
-                                                   |
-                                                   v
-                                           atomic site pointer
+evidence -> projection -> authors -> bundle
+                                            |
+                                            v
+                                validate contract and article
+                                            |
+                                            v
+                             stage complete source + strict build
+                                            |
+                                            v
+                     immutable archive + content release + record
+                                            |
+                                            v
+                                 atomically replace site pointer
 ```
 
-The producer passes a directory path to one command. The publisher does not import producer modules
-and the producer does not edit publisher-owned source or releases.
+The importer accepts the bundle, evidence, and editorial-projection schemas named in the bundle
+contract. It independently checks canonical identities, hashes, report date and timezone, selected
+post identity, evidence authority, exact excerpts, repository coverage, provenance, and confined
+assets. Article validation then checks front matter, evidence comments, excerpts, and image
+provenance before the importer writes publisher state.
 
-## Import pipeline
+Under `generated/publisher.lock`, the importer copies `docs/` into a unique proposal below
+`generated/staging/`, applies the validated post and assets, renders `status.md` from existing plus
+proposed publication records, and runs a strict MkDocs build. The transaction module moves the
+immutable content release and audit archive into place, replaces `site` atomically, and writes the
+publication record last. Its transaction marker lets the next import recover an interrupted commit.
 
-`scripts/import_publication_bundle.py` performs four boundaries:
+## Presentation publication flow
 
-1. **Contract validation** verifies bundle v2, evidence v3, and projection v1 fields; canonical
-   identities and hashes; report identity; generator and editorial versions; two candidate
-   validation summaries; the valid A/B referee selection; evidence authority; exact projection
-   excerpts; repository coverage; provenance; and asset confinement.
-2. **Article validation** calls `scripts.validate_daily_post.validate_post` for front matter,
-   structure, first-person voice, excerpt placement, evidence comments, changelog use, and image
-   provenance. It independently rejects an unresolved `thematic-lowercase-slug` sentinel.
-3. **Complete staging** copies current MkDocs source, applies the proposed post and assets, renders
-   status, archives the bundle inputs, and performs a strict build into the same unique stage.
-4. **Atomic installation** moves the immutable release, bundle archive, and complete source into place,
-   atomically replaces the served `site` pointer, and installs the publication record last. A
-   publisher-global filesystem lock spans idempotency checks through commit; a transaction marker
-   lets startup reconcile interrupted staging before accepting another import.
+`./publish_site.sh` publishes repository-owned cosmetic or navigation changes without changing
+bundle content. The command invokes [scripts/site_deployment.py](../scripts/site_deployment.py),
+which takes the same publisher lock and first reconciles any interrupted content import.
 
-The lock is a runtime resource at `generated/publisher.lock`, not a source-tree artifact. Transaction
-marker, rollback, and crash-reconciliation ownership lives in `scripts/publication_transaction.py`;
-the importer owns validation and staging and delegates the final state transition to that module.
+Before snapshotting, the presentation publisher verifies that each importer-owned
+`docs/blog/posts/YYYY-MM-DD.md` byte-matches its archived `post.md`, and that `docs/status.md`
+matches the installed records. It also rejects symlinks in the MkDocs source. This boundary keeps
+the manual path responsible for presentation only; content, evidence assets, records, and status
+remain importer-owned.
 
-## Contract model
+The publisher snapshots `docs/` and [mkdocs.yml](../mkdocs.yml) below `generated/site-staging/`.
+It hashes the staged relative paths and bytes, builds with `python -m mkdocs build --strict`, and
+promotes the complete result as `generated/releases/site-SOURCE_ID/`. The release includes an exact
+`.deployment.json` receipt containing the schema version, source identity, release ID, build time,
+and newest base bundle ID. Promotion atomically changes `site` only after the release exists.
 
-The importer accepts only `vosslab.daily-blog.bundle.v2`,
-`vosslab.daily-blog.evidence.v3`, and
-`vosslab.daily-blog.editorial-projection.v1`. It reimplements canonical JSON hashing and evidence
-and projection identities so producer code cannot define its own validation result inside the
-publisher process.
+An unchanged snapshot reuses the same immutable presentation release. A content importer accepts a
+served presentation release only when its receipt binds it to the recorded base bundle; otherwise,
+the importer reports incomplete state instead of treating an arbitrary site pointer as valid.
 
-Evidence v3 represents every attributed commit-to-parent range and branch-tip snapshot explicitly
-and names collection bounds through `collection_limits`. The importer verifies that the declared
-ranges exactly match all parents in the typed commit records before accepting their evidence items.
+## State and recovery
 
-Editorial projection v1 binds to one evidence packet identity. Its repository cards cover every
-active evidence repository. Each exact excerpt names a known evidence item and source-content hash;
-its integer start/end offsets must be inside that source, and its text must equal the source slice.
-The bundle manifest hashes the complete projection file.
+`data/publications/YYYY-MM-DD.json` is the current validated record for a report date. It names the
+bundle identity, generator provenance, immutable archive inputs, source post, content release, and
+installation time. `data/publication_bundles/BUNDLE_ID/` retains the validated input files, while
+`generated/releases/BUNDLE_ID/` retains the content build. Both are immutable.
 
-The accepted execution contracts are `daily-blog-generator-v2`, `daily-blog-prompts-v3`, and
-`daily-blog-rubric-v3`. Both author results must carry deterministic validation summaries before
-bundle creation. The referee winner must map to a valid candidate, and that candidate hash must
-equal the exact `post.md` hash. Producer-only shadow evaluations remain outside the publication
-interface.
+Content imports use `generated/staging/`; manual presentation builds use
+`generated/site-staging/`. These directories are disposable transaction workspaces. The `site`
+symlink always identifies the complete release currently served. The static server resolves that
+symlink for each request, so either successful promotion needs no server restart.
 
-The bundle `contracts` object names `evidence_schema`, `editorial_projection_schema`,
-`prompt_version`, and `rubric_version`. The generator revision is a required 64-character lowercase
-hexadecimal fingerprint of the exact producer source/config contract; it is not assumed to be a Git
-object ID. Selected-post front matter binds `evidence_manifest: evidence.json` and
-`editorial_projection: editorial_projection.json`.
+## Verification
 
-Evidence items arrive in descending authority order:
-
-1. dated changelog
-2. changed documentation
-3. diff
-4. README context
-5. screenshot
-6. commit metadata
-
-Every item carries its content hash and acquisition provenance. Screenshot entries connect an exact
-Git blob hash to one bundle asset hash and one confined MkDocs publication path. That verified path is
-the image's provenance citation; duplicate model-authored evidence comments are not authoritative.
-
-## Publication state
-
-`data/publications/YYYY-MM-DD.json` is the current publisher-owned v2 record for one date. It names
-the bundle, generator run and revision, evidence and projection archives, source post, release, and
-import time. The status page is derived only from validated v2 publication records; an unsupported
-record schema stops the import instead of inventing a compatibility row.
-
-`data/publication_bundles/BUNDLE_ID/` retains the validated manifest, evidence, editorial
-projection, and selected post. `generated/releases/BUNDLE_ID/` retains the strict built site. Both
-paths are immutable.
-
-## Date immutability
-
-An exact installed bundle returns success without staging only when its archived manifest, evidence,
-projection, and post match the incoming bytes and `site` resolves to its expected immutable release.
-Any drift is reported as incomplete or divergent state. Any different bundle for an occupied report
-date is rejected after exact idempotency is checked.
-
-## Failure containment
-
-Validation has no publisher writes. Staging writes only below `generated/staging/`. Installation
-tracks prior source and record movement so an exception restores them and removes newly installed
-archive and release directories. The `site` pointer is atomically replaced before the publication
-record is installed last.
-
-## Static serving
-
-`deploy/vosslab-daily-blog.service` uses Python's static HTTP server on port 8016 and serves the
-`site` symlink. It binds `0.0.0.0` for LAN and Tailscale reachability. It has no generator, GitHub,
-mirror, or model dependency. Scheduling belongs to the producer repository.
+- [tests/test_publication_bundle_import.py](../tests/test_publication_bundle_import.py) covers
+  bundle validation, date immutability, idempotency, and content transaction failure preservation.
+- [tests/test_site_deployment.py](../tests/test_site_deployment.py) covers immutable presentation
+  releases, snapshot identity, pointer promotion, imported-source protection, and build failures.
+- [tests/test_brand_assets.py](../tests/test_brand_assets.py) checks the shared SVG brand surface.
+- [tests/test_markdown_links.py](../tests/test_markdown_links.py) verifies local documentation links.
+- The operator runs `./publish_site.sh` to perform a strict staged build, promote it, and check the
+  locally served homepage and status route.
 
 ## Extension points
 
-- Add a new schema beside the current contract and dispatch explicitly after both repositories
-  implement it.
-- Extend article policy in `validate_daily_post.py` with focused deterministic tests.
-- Extend projection policy in `validate_editorial_projection.py` with exact evidence-bound tests.
-- Extend publication records only through a new publication schema version.
-- Add source assets through bundle evidence; the importer remains the sole installation path.
+- Add bundle, evidence, projection, or record schemas as explicit new versions and coordinate the
+  producer change with `vosslab-podcast`.
+- Add deterministic content-policy checks beside
+  [scripts/validate_daily_post.py](../scripts/validate_daily_post.py) with focused tests.
+- Add presentation behavior in [mkdocs.yml](../mkdocs.yml),
+  [docs/stylesheets/extra.css](stylesheets/extra.css), or [docs/assets/](assets/) and publish it
+  through [publish_site.sh](../publish_site.sh).
+- Add static-service changes in
+  [deploy/vosslab-daily-blog.service](../deploy/vosslab-daily-blog.service), then reload the user
+  service as described in [operations.md](operations.md).
+
+## Known gaps
+
+- Verify the installed user-service unit remains synchronized with
+  [deploy/vosslab-daily-blog.service](../deploy/vosslab-daily-blog.service) after service changes.

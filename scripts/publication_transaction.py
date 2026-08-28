@@ -10,6 +10,7 @@ from collections.abc import Iterator
 
 # local repo modules
 import scripts.publication_record
+import scripts.site_deployment
 
 
 #============================================
@@ -118,7 +119,9 @@ def _publication_is_coherent(root: str, record: dict) -> bool:
 		for name in ("bundle.json", "evidence.json", "editorial_projection.json", "post.md")
 	):
 		return False
-	if not os.path.isfile(post_path) or not _site_points_to(root, release):
+	if not os.path.isfile(post_path) or not scripts.site_deployment.site_serves_bundle(
+		root, bundle_id
+	):
 		return False
 	with open(os.path.join(archive, "post.md"), "r", encoding="utf-8") as handle:
 		archived_post = handle.read()

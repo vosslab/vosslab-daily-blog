@@ -10,9 +10,29 @@
   v2, prompts v3, rubric v3, and publication records v2.
 - Added independent projection validation for identity, packet binding, active-repository cards,
   source-content hashes, bounded offsets, and exact source substrings.
+- Added operator-facing [INSTALL.md](INSTALL.md), [USAGE.md](USAGE.md),
+  [COOKBOOK.md](COOKBOOK.md), [TROUBLESHOOTING.md](TROUBLESHOOTING.md),
+  [FAQ.md](FAQ.md), and [DEVELOPMENT.md](DEVELOPMENT.md) guides.
+- Added [FILE_FORMATS.md](FILE_FORMATS.md) for the producer bundle, validated publication record,
+  and presentation deployment receipt contracts.
+- Added [ROADMAP.md](ROADMAP.md) for runtime consolidation, cross-repository admission policy,
+  and deployment/recovery import-boundary work with named owners.
+- Added [RELATED_PROJECTS.md](RELATED_PROJECTS.md), which records `vosslab-podcast` as the confirmed
+  companion producer and documents the bounded related-projects review.
 
 ### Behavior or Interface Changes
 
+- Versioned publisher-local post-validation policies; v3 historical bundles remain the only
+  importable contract while v4 maker-policy checks are available only through explicit direct tests.
+- Changed the daily-post evidence boundary from paragraph-level comments to narrative sections:
+  every narrative section needs a known packet citation, up to three prose blocks may omit their
+  own comment, and final Project coverage remains outside that allowance.
+- Added `publish_site.sh` as the one-command LAN presentation workflow. It strictly builds an
+  immutable source-identified release, atomically switches `site`, verifies the live root and status
+  pages, and requires no static-service restart.
+- Replaced the stock Material notebook icon with one editable Vosslab Work Log press badge used as
+  the header logo, masthead signature, and browser favicon. Its full-canvas silhouette and simplified
+  folded sheet remain legible at 16-pixel browser-tab size.
 - Expanded the site footer to link GitHub, YouTube, Bluesky, LinkedIn, Facebook, Patreon, and
   PayPal, and linked the approved Neil R. Voss site-content notice directly to CC BY 4.0.
 - Made the paginated work log the root MkDocs landing page and removed the separate blog gate while
@@ -25,12 +45,24 @@
   interpreting every generator revision as a Git object ID.
 - Make imported report dates immutable: identical bundle imports are idempotent and every different
   bundle for that date is rejected before staging.
+- Kept repository Markdown outside the built blog: reader navigation remains Work log and Status,
+  with the blog archive available through the blog plugin rather than an operator-facing guide.
+- Made Python 3.13 the publication runtime. `publish_site.sh` resolves `python3.13` from `PATH`
+  before loading the repository shell environment, so an activated Python 3.13 virtual environment
+  is optional rather than required.
 
 ### Fixes and Maintenance
 
-- Replaced the generic Material presentation with an editorial field-journal system: reusable
-  light/dark tokens, layered paper surfaces, responsive entry cards, post framing, improved tables,
-  social links, and reduced-motion and print behavior now share one stylesheet contract.
+- Recast the oversized stacked homepage masthead as a compact newspaper nameplate and tightened
+  the sheet's top spacing so the latest article begins within the opening two inches on desktop.
+- Added an exact presentation-deployment receipt and made importer idempotency recognize a derived
+  release only when it names the same base bundle. Manual publication shares the importer lock and
+  rejects drift in importer-owned posts and status before staging.
+- Corrected deployment documentation to identify a receipt-bound presentation release as a valid
+  serving target for an unchanged imported bundle.
+- Replaced the generic Material presentation with an editorial broadsheet system: reusable
+  light/dark tokens, layered page edges, a sheet-and-canvas shell, lead-story columns, print-like
+  rules, post framing, tables, social links, and print behavior now share one stylesheet contract.
 - Brightened the light-theme gold accent from `#b2781b` to `#e6b862`, raising its contrast against
   the `#1d4142` header from 2.97:1 to 6.04:1 and clearing the repository's 5.5:1 target.
 - Centralized the exact publication-v2 receipt contract in `scripts/publication_record.py`; status
@@ -58,6 +90,10 @@
 - Treat a projected screenshot's confined, hash-bound publication path as its provenance citation,
   while continuing to reject every image outside bundle evidence.
 - Synchronized shared style guides, tests, and repository support files from the starter template.
+- Refreshed the README, architecture, file-routing, operations, and agent-routing documentation to
+  describe the current producer/publisher boundary and presentation-publication path.
+- Refreshed the managed README screenshot from the live work-log landing page with reader-only
+  navigation.
 
 ### Removals and Deprecations
 
@@ -67,8 +103,23 @@
   rendering now accepts only authoritative publication v2 records and fails on unsupported schemas
   instead of synthesizing compatibility rows.
 
+### Decisions and Failures
+
+- Did not create `docs/NEWS.md` or `docs/RELEASE_HISTORY.md`: the changelog has date-only entries,
+  the required root `pyproject.toml` version authority is absent, and no release-note generator is
+  present. Resolve the version-authority gap before deriving release history from this changelog.
+- Did not create a `docs/TODO.md`; the actionable repository work is already owned and prioritized
+  in [ROADMAP.md](ROADMAP.md).
+
 ### Developer Tests and Notes
 
+- Deployment tests cover initial and changed-source immutable promotion, unchanged-source
+  idempotency, bundle binding, imported-post drift rejection, failed-build preservation, and
+  identical-bundle retries after a presentation release, plus the Python 3.13 runtime gate.
+- Brand-asset contract tests verify a scalable SVG canvas, resolved accessible naming, unique IDs,
+  and one owned source path shared by the MkDocs logo and favicon.
+- All 1193 repository tests pass under Python 3.13, and the real documentation tree completes a
+  strict MkDocs build with that interpreter.
 - All 334 focused Markdown-link, ASCII, whitespace, source-line-limit, and publication-bundle tests
   passed under Python 3.12.
 - Chromium rendering checks passed for the root work log, preserved post permalink, status table,
@@ -80,6 +131,8 @@
   checks passed.
 - All 554 Bandit, shebang, dependency-import, and absolute-import checks passed.
 - The real documentation tree completed a strict staged MkDocs build without changing `site`.
+- `publish_site.sh` successfully published and verified the corrected reader-only LAN release at
+  `http://aella.local:8016/`.
 - Corrected historical screenshot link text to match each target filename. Markdown-link lint now owns
   the rendered documentation tree rather than reinterpreting byte-identical bundle archives as
   standalone pages; immutable payload links remain protected by importer path, manifest, and hash

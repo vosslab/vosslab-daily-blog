@@ -1,109 +1,110 @@
 # Vosslab Daily Blog
 
-Publishes evidence-grounded Vosslab work logs to a private MkDocs site while preserving the last
-good release across validation and build failures.
+An evidence-grounded private-LAN work-log publisher for people who want a readable daily record of
+Vosslab work, with each article traceable to a validated, immutable release.
 
-The site is the publisher half of a two-repository workflow. `vosslab-podcast` generates one
-versioned publication bundle; this repository independently validates, imports, builds, and serves
-it on the local network.
+[Read the live work log on the LAN](http://aella.local:8016/)
 
-## What publication proves
+## A work log with receipts
 
-- Every imported post belongs to a schema-versioned, SHA-256-identified bundle.
-- Evidence authority and exact Git provenance survive the repository boundary.
-- Required front matter and paragraph-level evidence references are deterministic checks.
-- A complete proposed MkDocs source tree must pass a strict build before installation.
-- The source tree, publication record, immutable release, and `site` pointer change as one
-  transaction.
-- Identical imports are successful and idempotent; any different bundle for an imported date is
-  rejected.
+This is a private reading experience, not a public feed. It turns completed Vosslab work into a
+calm, newspaper-like daily log while retaining the evidence needed to inspect how each entry was
+published.
 
-The publication record retains the generator run, generator revision, evidence and projection
-manifests, bundle ID, source post, and immutable release identity.
+- Read the current work log at [aella.local:8016](http://aella.local:8016/).
+- Follow each article from its validated publication bundle to an immutable built release.
+- Keep the last good site readable when a later bundle, validation run, or build fails.
+- Publish visual and reader-navigation refinements without rewriting the imported blog.
 
-## Quick start
+<!-- screenshots:begin (managed by screenshot-docs) -->
+![Vosslab Work Log landing page with the newest field note visible at the top](docs/screenshots/work_log_home.png)
+<!-- screenshots:end -->
 
-Use Python 3.12 and install the publisher dependencies:
+## Know the boundary
+
+The site is the publisher half of a two-repository workflow. `vosslab-podcast` owns collection,
+evidence, generation, model execution, bundle creation, and scheduling. This repository owns the
+independent validation, MkDocs source, publication records, immutable releases, atomic `site`
+pointer, and static LAN service.
+
+The bundle is the complete interface between those responsibilities. This publisher does not collect
+GitHub activity, run models, or schedule articles; it validates and serves complete producer output.
+
+The service is intentionally private to the LAN and Tailscale interface. It is beta infrastructure,
+not a public-internet publishing service.
+
+## Publish the presentation
+
+Use this one command after changing checked-in CSS, brand assets, or reader navigation. It leaves
+imported posts and the record-derived status page under importer control.
 
 ```bash
 cd /home/vosslab/nsh/vosslab-daily-blog
-python3 -m venv .venv
+./publish_site.sh
+```
+
+The script uses `python3.13` from `PATH`. A virtual environment is optional; activate one before
+publishing when you want isolated dependencies:
+
+```bash
+python3.13 -m venv .venv
 .venv/bin/python -m pip install -r pip_requirements.txt -r pip_requirements-dev.txt
+source .venv/bin/activate
+./publish_site.sh
 ```
 
-Import one complete producer bundle:
-
-```bash
-source source_me.sh && python3 scripts/import_publication_bundle.py \
-  --bundle /home/vosslab/nsh/vosslab-podcast/out/vosslab/daily_blog/2026-08-23/RUN_ID
-```
-
-Success prints a JSON result with `status: imported`, or `status: idempotent` when the exact bundle
-is already installed. The current source post appears at `docs/blog/posts/YYYY-MM-DD.md`, the bundle
-audit copy appears under `data/publication_bundles/BUNDLE_ID/`, and the built release appears under
-`generated/releases/BUNDLE_ID/`.
-
-The normal operator path starts in the producer repository and already invokes this importer:
-
-```bash
-cd /home/vosslab/nsh/vosslab-podcast
-source source_me.sh && python3 automation/publish_daily_blog.py --date 2026-08-23
-```
-
-## Local site
-
-- `http://aella.local:8016`
-- `http://192.168.2.13:8016`
-
-`deploy/vosslab-daily-blog.service` serves the atomic `site` pointer. Generation and scheduling
-belong to `vosslab-podcast`; this repository supplies no publication timer. The static service binds
-to `0.0.0.0` so the same port is reachable from the LAN and the host's Tailscale interface.
-
-Validate the checked-in source without importing a bundle:
-
-```bash
-source source_me.sh && .venv/bin/mkdocs build --strict
-```
-
-## Publication bundle
-
-The importer accepts one physical directory containing:
+Success ends with:
 
 ```text
-bundle.json
-evidence.json
-editorial_projection.json
-post.md
-assets/
+Published and verified: http://aella.local:8016/
 ```
 
-It accepts only bundle v2, evidence v3, and editorial projection v1. It verifies artifact and
-content identities, report date, timezone, generator and editorial contract versions, two candidate
-validation summaries, a valid anonymous A/B referee selection, authority ordering, exact projection
-substrings, active-repository coverage, asset paths, Git blob provenance, front matter, and evidence
-citations.
+The command validates the source, performs a strict staged MkDocs build, writes an immutable
+source-identified release, atomically switches `site`, and verifies the live home and status pages.
+The static server follows that pointer, so a successful publish needs no service restart.
 
-The post front matter requires `date`, `slug`, `generator_run`, `evidence_manifest`, and
-`editorial_projection`. A publication date is immutable after import. Historical August 24-25
-content remains unchanged until a separately requested generation run.
+## Bring in an article
 
-The contract requires `daily-blog-generator-v2`, `daily-blog-prompts-v3`, and
-`daily-blog-rubric-v3`. Producer shadow evaluations remain outside this repository and never enter
-the importer.
+Normal daily publication starts in `vosslab-podcast`, whose scheduler creates a complete bundle and
+invokes this repository's importer. To inspect or manually import a completed bundle, use:
+
+```bash
+cd /home/vosslab/nsh/vosslab-daily-blog
+source source_me.sh && python3.13 scripts/import_publication_bundle.py \
+  --bundle /absolute/path/to/out/vosslab/daily_blog/YYYY-MM-DD/RUN_ID
+```
+
+An accepted import reports `status: imported`; retrying the exact archived bundle reports
+`status: idempotent`. A different bundle for an already imported date is rejected rather than
+silently changing history.
+
+## What the publisher protects
+
+- Bundle, evidence, and editorial-projection schemas and their content identities.
+- Article front matter, evidence references, and provenance before rendering.
+- A complete strict MkDocs build before any reader sees the proposed release.
+- Atomic promotion, so failures continue serving the last known-good release.
+- Presentation releases that are receipt-bound to the imported publication they render.
 
 ## Documentation
 
-- [docs/operations.md](docs/operations.md): import, scheduling boundary, inspection, and recovery.
-- [docs/CODE_ARCHITECTURE.md](docs/CODE_ARCHITECTURE.md): validation and atomic publication design.
-- [docs/FILE_STRUCTURE.md](docs/FILE_STRUCTURE.md): source, state, release, and test layout.
-- [docs/CHANGELOG.md](docs/CHANGELOG.md): dated repository changes.
-- [docs/E2E_TESTS.md](docs/E2E_TESTS.md): repository test conventions and end-to-end checks.
+Start here when operating or extending the publisher:
 
-## Status and license
+- [docs/INSTALL.md](docs/INSTALL.md), [docs/USAGE.md](docs/USAGE.md),
+  [docs/COOKBOOK.md](docs/COOKBOOK.md), [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md), and
+  [docs/FAQ.md](docs/FAQ.md) cover setup and operation.
+- [docs/CODE_ARCHITECTURE.md](docs/CODE_ARCHITECTURE.md),
+  [docs/FILE_STRUCTURE.md](docs/FILE_STRUCTURE.md), [docs/FILE_FORMATS.md](docs/FILE_FORMATS.md),
+  and [docs/operations.md](docs/operations.md) define the system and its contracts.
+- [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md), [docs/E2E_TESTS.md](docs/E2E_TESTS.md),
+  [docs/ROADMAP.md](docs/ROADMAP.md), [docs/RELATED_PROJECTS.md](docs/RELATED_PROJECTS.md), and
+  [docs/CHANGELOG.md](docs/CHANGELOG.md) guide extension and project decisions.
 
-Beta delivery ends at the local-network MkDocs site on port 8016. Static serving remains independent
-of generator availability, so the last good built release stays readable during producer or import
-failures.
+## Status and licenses
 
-Code is available under [LGPL-3.0](LICENSE.LGPL-3.0). Site content is available under
-[CC BY 4.0](LICENSE.CC-BY-4.0).
+The LAN service on port 8016 is a beta delivery path. Static serving is independent of generator
+availability, so readers keep access to the last good release while producer or import work is
+repaired.
+
+The publisher code is available under [LGPL-3.0](LICENSE.LGPL-3.0). Published site content is
+available under [CC BY 4.0](LICENSE.CC-BY-4.0).

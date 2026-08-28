@@ -1,27 +1,31 @@
 :root {
   --md-text-font: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --worklog-body-font: Georgia, "Times New Roman", serif;
   --worklog-display-font: Georgia, "Times New Roman", serif;
   --worklog-ink: #1f2a2e;
   --worklog-muted: #59676b;
-  --worklog-paper: #f4f0e7;
+  --worklog-canvas: #d9d2c5;
+  --worklog-sheet: #fffaf0;
   --worklog-surface: #fffdf7;
   --worklog-surface-raised: #ffffff;
   --worklog-rule: #d7cdbd;
+  --worklog-rule-strong: #8c806d;
+  --worklog-page-edge: #bcae96;
+  --worklog-page-underlay: #e7dece;
+  --worklog-grain: rgba(66, 51, 33, 0.018);
+  --worklog-sheet-glow: rgba(255, 255, 255, 0.72);
   --worklog-rust: #83372f;
   --worklog-rust-deep: #692820;
   --worklog-teal: #006b63;
   --worklog-gold: #e6b862;
-  --worklog-gold-line: rgba(230, 184, 98, 0.48);
-  --worklog-teal-soft: rgba(0, 107, 99, 0.09);
-  --worklog-teal-border: rgba(0, 107, 99, 0.42);
-  --worklog-shadow: 0 0.7rem 1.8rem rgba(49, 40, 30, 0.09);
+  --worklog-shadow: 0 1.3rem 2.8rem rgba(49, 40, 30, 0.18);
   --md-primary-fg-color: #1d4142;
   --md-primary-fg-color--light: #326361;
   --md-primary-fg-color--dark: #132f30;
   --md-primary-bg-color: #fffdf7;
   --md-accent-fg-color: var(--worklog-rust);
   --md-typeset-a-color: var(--worklog-teal);
-  --md-default-bg-color: var(--worklog-paper);
+  --md-default-bg-color: var(--worklog-canvas);
   --md-default-fg-color: var(--worklog-ink);
   --md-code-bg-color: #e9e4d9;
 }
@@ -29,17 +33,20 @@
 [data-md-color-scheme="slate"] {
   --worklog-ink: #e9e5dc;
   --worklog-muted: #b1bdbb;
-  --worklog-paper: #10191a;
-  --worklog-surface: #172325;
+  --worklog-canvas: #0a1011;
+  --worklog-sheet: #172123;
+  --worklog-surface: #1a2729;
   --worklog-surface-raised: #1b2a2c;
   --worklog-rule: #3b4c4c;
+  --worklog-rule-strong: #74817e;
+  --worklog-page-edge: #344143;
+  --worklog-page-underlay: #0e1718;
+  --worklog-grain: rgba(231, 220, 196, 0.018);
+  --worklog-sheet-glow: rgba(139, 212, 197, 0.035);
   --worklog-rust: #ef9f86;
   --worklog-rust-deep: #ffc0aa;
   --worklog-teal: #8bd4c5;
   --worklog-gold: #e6b862;
-  --worklog-gold-line: rgba(230, 184, 98, 0.4);
-  --worklog-teal-soft: rgba(139, 212, 197, 0.09);
-  --worklog-teal-border: rgba(139, 212, 197, 0.42);
   --worklog-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.24);
   --md-hue: 178;
   --md-primary-fg-color: #182f31;
@@ -48,14 +55,14 @@
   --md-primary-bg-color: #f7f2e7;
   --md-accent-fg-color: var(--worklog-rust);
   --md-typeset-a-color: var(--worklog-teal);
-  --md-default-bg-color: var(--worklog-paper);
+  --md-default-bg-color: var(--worklog-canvas);
   --md-default-bg-color--light: var(--worklog-surface);
   --md-default-fg-color: var(--worklog-ink);
   --md-code-bg-color: #223234;
 }
 
 body {
-  background: var(--worklog-paper);
+  background: var(--worklog-canvas);
 }
 
 .md-header {
@@ -72,24 +79,41 @@ body {
   letter-spacing: 0.015em;
 }
 
-.md-header__button.md-logo svg {
-  color: var(--worklog-gold);
+.md-header__button.md-logo img {
+  filter: drop-shadow(0 0.08rem 0.08rem rgba(8, 18, 18, 0.32));
+  height: 1.55rem;
+  width: 1.55rem;
 }
 
 .md-main {
   background:
-    radial-gradient(circle at 8% 5%, rgba(178, 120, 27, 0.1), transparent 24rem),
-    linear-gradient(90deg, transparent 0 98%, rgba(0, 107, 99, 0.04) 98% 100%),
-    var(--worklog-paper);
-  background-size: auto, 2.6rem 2.6rem, auto;
+    radial-gradient(circle at 8% 5%, rgba(178, 120, 27, 0.12), transparent 24rem),
+    repeating-linear-gradient(90deg, transparent 0 2.4rem, var(--worklog-grain) 2.45rem),
+    var(--worklog-canvas);
+  padding-inline: clamp(0.8rem, 2vw, 2rem);
 }
 
 .md-grid {
   max-width: 78rem;
 }
 
+.md-main__inner {
+  background-color: var(--worklog-sheet);
+  background-image:
+    radial-gradient(circle at 16% 5%, var(--worklog-sheet-glow), transparent 28rem),
+    repeating-linear-gradient(0deg, transparent 0 3px, var(--worklog-grain) 4px);
+  border: 1px solid var(--worklog-page-edge);
+  box-shadow:
+    -0.5rem 0.55rem 0 -0.22rem var(--worklog-page-underlay),
+    0.55rem 0.95rem 0 -0.28rem var(--worklog-page-underlay),
+    var(--worklog-shadow);
+  margin-block: 0.4rem 3rem;
+  min-height: calc(100vh - 7rem);
+  padding-inline: clamp(0.45rem, 1.4vw, 1.25rem);
+}
+
 .md-content__inner {
-  padding-block-start: 1.8rem;
+  padding-block-start: 0.4rem;
 }
 
 .md-content__inner::before {
@@ -98,6 +122,7 @@ body {
 
 .md-typeset {
   color: var(--worklog-ink);
+  font-family: var(--worklog-body-font);
   font-size: 0.87rem;
   line-height: 1.72;
 }
@@ -139,94 +164,66 @@ body {
 }
 
 .worklog-masthead {
-  background:
-    linear-gradient(125deg, rgba(255, 255, 255, 0.76), transparent 66%),
-    var(--worklog-surface);
-  border: 1px solid var(--worklog-rule);
-  border-block-start: 0.28rem solid var(--worklog-rust);
-  border-radius: 0.25rem 1rem 1rem 0.25rem;
-  box-shadow: var(--worklog-shadow);
-  margin-block: 0 2rem;
-  overflow: hidden;
-  padding: clamp(1.35rem, 4vw, 2.5rem);
-  position: relative;
+  align-items: center;
+  background: transparent;
+  border-block: 0.25rem double var(--worklog-ink);
+  display: grid;
+  gap: 0.12rem 0.75rem;
+  grid-template-areas:
+    "mark eyebrow"
+    "mark title";
+  grid-template-columns: 2.3rem minmax(0, 1fr);
+  margin-block: 0 0.45rem;
+  padding: 0.38rem 0.45rem;
+  text-align: start;
+}
+
+.worklog-masthead::before {
+  background: url("../assets/brand/vosslab-work-log-mark.svg") center / contain no-repeat;
+  content: "";
+  display: block;
+  grid-area: mark;
+  height: 2.15rem;
+  margin: 0;
+  width: 2.15rem;
 }
 
 .worklog-masthead::after {
-  border: 1px solid var(--worklog-gold-line);
-  border-radius: 50%;
-  content: "";
-  height: 11rem;
-  inset-block-start: -6.5rem;
-  inset-inline-end: -3.5rem;
-  position: absolute;
-  width: 11rem;
-}
-
-[data-md-color-scheme="slate"] .worklog-masthead {
-  background:
-    linear-gradient(125deg, rgba(139, 212, 197, 0.05), transparent 66%),
-    var(--worklog-surface);
+  display: none;
 }
 
 .worklog-masthead__eyebrow {
   color: var(--worklog-rust-deep);
   display: block;
-  font-size: 0.68rem;
+  font-size: 0.58rem;
   font-weight: 800;
-  letter-spacing: 0.15em;
-  margin-block-end: 0.75rem;
+  grid-area: eyebrow;
+  letter-spacing: 0.12em;
+  margin: 0;
   text-transform: uppercase;
 }
 
 .worklog-masthead h1 {
+  font-size: clamp(1.5rem, 2.5vw, 1.85rem);
+  grid-area: title;
+  letter-spacing: -0.035em;
+  line-height: 1;
   margin: 0;
-  max-width: 13ch;
-}
-
-.worklog-masthead > p:not(.worklog-masthead__signals) {
-  color: var(--worklog-muted);
-  font-size: 1rem;
-  margin-block: 1rem 0;
-  max-width: 42rem;
-}
-
-.worklog-masthead__signals {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-block: 1.25rem 0;
-}
-
-.worklog-masthead__signals span {
-  background: var(--worklog-teal-soft);
-  border: 1px solid var(--worklog-teal-border);
-  border-radius: 999px;
-  color: var(--worklog-teal);
-  font-size: 0.68rem;
-  font-weight: 750;
-  letter-spacing: 0.055em;
-  padding: 0.28rem 0.6rem;
-  text-transform: uppercase;
+  max-width: none;
 }
 
 .md-post--excerpt {
-  background: var(--worklog-surface);
-  border: 1px solid var(--worklog-rule);
-  border-inline-start: 0.25rem solid var(--worklog-teal);
-  border-radius: 0.2rem 0.8rem 0.8rem 0.2rem;
-  box-shadow: 0 0.3rem 1rem rgba(49, 40, 30, 0.05);
-  margin-block: 0 1.25rem;
-  padding: clamp(1rem, 3vw, 1.55rem);
-}
-
-[data-md-color-scheme="slate"] .md-post--excerpt {
-  box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.16);
+  background: transparent;
+  border: 0;
+  border-block-end: 1px solid var(--worklog-rule);
+  margin: 0;
+  min-width: 0;
+  padding: clamp(1rem, 2.4vw, 1.5rem) 0.15rem;
 }
 
 .md-post--excerpt:first-of-type {
-  border-inline-start-color: var(--worklog-rust);
-  box-shadow: var(--worklog-shadow);
+  border-block: 0.25rem double var(--worklog-ink);
+  padding-block: 0.5rem 1.2rem;
 }
 
 .md-post--excerpt:first-of-type::before {
@@ -236,12 +233,13 @@ body {
   font-size: 0.65rem;
   font-weight: 800;
   letter-spacing: 0.14em;
-  margin-block-end: 0.55rem;
+  margin-block-end: 0.35rem;
   text-transform: uppercase;
 }
 
 .md-post__meta {
   color: var(--worklog-muted);
+  font-family: var(--md-text-font);
   font-size: 0.72rem;
   letter-spacing: 0.025em;
 }
@@ -262,12 +260,13 @@ body {
 }
 
 .md-post--excerpt .md-post__content > p {
-  color: var(--worklog-muted);
+  color: var(--worklog-ink);
   margin-block-end: 0.8rem;
 }
 
 .md-post__action a {
   color: var(--worklog-teal);
+  font-family: var(--md-text-font);
   font-size: 0.73rem;
   font-weight: 800;
   letter-spacing: 0.055em;
@@ -280,13 +279,10 @@ body {
 }
 
 .md-content--post .md-content__inner {
-  background: var(--worklog-surface);
-  border: 1px solid var(--worklog-rule);
-  border-block-start: 0.28rem solid var(--worklog-rust);
-  border-radius: 0.25rem 0.8rem 0.8rem 0.25rem;
-  box-shadow: var(--worklog-shadow);
-  margin-block: 1.8rem 2.5rem;
-  padding: clamp(1.2rem, 4vw, 2.8rem);
+  background: transparent;
+  border-block: 0.25rem double var(--worklog-ink);
+  margin-block: 1.4rem 2.5rem;
+  padding: clamp(1.2rem, 4vw, 2.5rem) clamp(0.2rem, 2vw, 1.4rem);
 }
 
 .md-content--post .md-typeset > h1:first-of-type {
@@ -301,8 +297,8 @@ body {
 .md-typeset img {
   background: var(--worklog-surface-raised);
   border: 1px solid var(--worklog-rule);
-  border-radius: 0.45rem;
-  box-shadow: var(--worklog-shadow);
+  border-radius: 0;
+  box-shadow: 0.35rem 0.35rem 0 var(--worklog-page-underlay);
   padding: 0.3rem;
 }
 
@@ -310,7 +306,7 @@ body {
   background: var(--worklog-surface);
   border: 1px solid var(--worklog-rule);
   border-collapse: collapse;
-  box-shadow: 0 0.25rem 0.8rem rgba(49, 40, 30, 0.05);
+  box-shadow: none;
 }
 
 .md-typeset table:not([class]) th {
@@ -328,11 +324,11 @@ body {
 .md-typeset .admonition,
 .md-typeset details {
   background: var(--worklog-surface);
-  border-radius: 0.2rem 0.65rem 0.65rem 0.2rem;
+  border-radius: 0;
 }
 
 .md-typeset .md-button {
-  border-radius: 999px;
+  border-radius: 0;
   margin-block-end: 0.5rem;
 }
 
@@ -348,15 +344,66 @@ body {
   color: #bec9c7;
 }
 
+@media screen and (min-width: 60em) {
+  .md-sidebar--primary {
+    border-inline-end: 1px solid var(--worklog-rule);
+  }
+
+  .md-sidebar--secondary {
+    border-inline-start: 1px solid var(--worklog-rule);
+  }
+
+  .md-content__inner:has(> header + .md-post--excerpt) {
+    column-gap: clamp(1.2rem, 3vw, 2rem);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md-content__inner:has(> header + .md-post--excerpt) > header,
+  .md-content__inner:has(> header + .md-post--excerpt) > .md-post--excerpt:first-of-type,
+  .md-content__inner:has(> header + .md-post--excerpt) > .md-pagination {
+    grid-column: 1 / -1;
+  }
+
+  .md-content__inner > .md-post--excerpt:nth-of-type(even) {
+    border-inline-end: 1px solid var(--worklog-rule);
+    padding-inline-end: clamp(1.2rem, 3vw, 2rem);
+  }
+
+  .md-post--excerpt:first-of-type .md-post__content > p {
+    column-count: 2;
+    column-gap: 2rem;
+    column-rule: 1px solid var(--worklog-rule);
+  }
+
+  .md-post--excerpt:first-of-type .md-post__content > p::first-letter {
+    color: var(--worklog-rust-deep);
+    float: left;
+    font-family: var(--worklog-display-font);
+    font-size: 3.45rem;
+    font-weight: 700;
+    line-height: 0.78;
+    margin: 0.12em 0.12em 0 0;
+  }
+}
+
 @media screen and (max-width: 44.99em) {
   .md-main {
     background:
       radial-gradient(circle at 0 0, rgba(178, 120, 27, 0.09), transparent 18rem),
-      var(--worklog-paper);
+      var(--worklog-canvas);
+    padding-inline: 0;
+  }
+
+  .md-main__inner {
+    border-inline: 0;
+    box-shadow: none;
+    margin-block: 0;
+    padding-inline: 0;
   }
 
   .md-content__inner {
-    padding-block-start: 1.1rem;
+    padding-block-start: 0.45rem;
   }
 
   .md-typeset {
@@ -364,34 +411,31 @@ body {
   }
 
   .worklog-masthead {
-    border-radius: 0.2rem 0.65rem 0.65rem 0.2rem;
-    margin-block-end: 1.2rem;
-    padding: 1.15rem;
+    gap: 0.12rem 0.5rem;
+    grid-template-areas:
+      "mark eyebrow"
+      "mark title";
+    grid-template-columns: 1.8rem minmax(0, 1fr);
+    margin-block-end: 0.2rem;
+    padding: 0.38rem 0.15rem;
+  }
+
+  .worklog-masthead::before {
+    height: 1.65rem;
+    width: 1.65rem;
   }
 
   .worklog-masthead h1 {
-    font-size: 2.15rem;
-  }
-
-  .worklog-masthead__signals {
-    gap: 0.35rem;
-  }
-
-  .worklog-masthead__signals span {
-    font-size: 0.61rem;
+    font-size: 1.45rem;
   }
 
   .md-post--excerpt {
-    border-radius: 0.15rem 0.55rem 0.55rem 0.15rem;
-    margin-block-end: 0.85rem;
-    padding: 1rem;
+    padding: 1.05rem 0.1rem 1.25rem;
   }
 
   .md-content--post .md-content__inner {
-    border-inline: 0;
-    border-radius: 0;
     margin-block: 0 1.5rem;
-    padding: 1.1rem 0;
+    padding: 1.1rem 0.1rem;
   }
 }
 
@@ -412,8 +456,15 @@ body {
   }
 
   .md-main,
+  .md-main__inner,
   .md-content--post .md-content__inner {
     background: #ffffff;
+    border-color: #000000;
     box-shadow: none;
+    margin: 0;
+  }
+
+  .md-post--excerpt {
+    break-inside: avoid;
   }
 }

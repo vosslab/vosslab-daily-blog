@@ -1,0 +1,59 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="64"
+  height="64"
+  viewBox="0 0 64 64"
+  preserveAspectRatio="xMidYMid meet"
+  role="img"
+  aria-labelledby="work-log-mark-title work-log-mark-description"
+>
+  <title id="work-log-mark-title">Vosslab Work Log</title>
+  <desc id="work-log-mark-description">
+    A bold V printed on a folded news sheet set in a gold press badge.
+  </desc>
+  <g id="press-badge">
+    <rect
+      id="badge-field"
+      x="2"
+      y="2"
+      width="60"
+      height="60"
+      rx="10"
+      fill="#e6b862"
+      stroke="#132f30"
+      stroke-width="3"
+    />
+    <path
+      id="news-sheet"
+      d="M7 7H42L57 22V57H7Z"
+      fill="#fffaf0"
+      stroke="#132f30"
+      stroke-linejoin="miter"
+      stroke-width="3"
+    />
+    <path
+      id="folded-corner"
+      d="M42 7V22H57Z"
+      fill="#e6b862"
+      stroke="#132f30"
+      stroke-linejoin="miter"
+      stroke-width="2.5"
+    />
+  </g>
+  <g id="press-details">
+    <path
+      id="masthead-rule"
+      d="M14 16H35"
+      fill="none"
+      stroke="#83372f"
+      stroke-linecap="square"
+      stroke-width="3.5"
+    />
+    <path
+      id="letter-v"
+      d="M13 25H22L30.5 45L39 25H49L35.5 51H26.5Z"
+      fill="#1d4142"
+    />
+    <circle id="edition-dot" cx="47" cy="48" r="3" fill="#83372f" />
+  </g>
+</svg>

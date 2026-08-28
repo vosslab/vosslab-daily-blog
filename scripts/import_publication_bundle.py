@@ -18,6 +18,7 @@ import re
 import scripts.validate_daily_post
 import scripts.publication_record
 import scripts.render_publication_status
+import scripts.site_deployment
 import scripts.validate_editorial_projection
 import scripts.publication_transaction
 
@@ -169,15 +170,20 @@ def _validate_report_identity(bundle: dict) -> None:
 		contracts,
 		{
 			"evidence_schema", "editorial_projection_schema",
-			"prompt_version", "rubric_version",
+			"prompt_version", "rubric_version", "candidate_validation",
 		},
 		"Bundle contracts metadata",
 	)
 	expected = {
 		"evidence_schema": EVIDENCE_SCHEMA_VERSION,
 		"editorial_projection_schema": EDITORIAL_PROJECTION_SCHEMA_VERSION,
-		"prompt_version": PROMPT_VERSION,
-		"rubric_version": RUBRIC_VERSION,
+		"prompt_version": scripts.validate_daily_post.V3_HISTORICAL_POLICY.prompt_version,
+		"rubric_version": scripts.validate_daily_post.V3_HISTORICAL_POLICY.rubric_version,
+		"candidate_validation": {
+			"name": scripts.validate_daily_post.V3_HISTORICAL_POLICY.name,
+			"version": scripts.validate_daily_post.V3_HISTORICAL_POLICY.version,
+			"sha256": scripts.validate_daily_post.V3_HISTORICAL_POLICY.digest,
+		},
 	}
 	if any(contracts[key] != expected[key] for key in expected):
 		raise RuntimeError("Bundle contract versions are unsupported.")
@@ -698,7 +704,13 @@ def validate_bundle(bundle_path: str) -> tuple[dict, dict, dict, str]:
 	items_by_id = validate_evidence(evidence, bundle)
 	scripts.validate_editorial_projection.validate_projection(projection, evidence, bundle)
 	validate_assets(bundle_dir, bundle, items_by_id)
-	post_issues = scripts.validate_daily_post.validate_post(post, evidence, projection, bundle)
+	post_issues = scripts.validate_daily_post.validate_post(
+		post,
+		evidence,
+		projection,
+		bundle,
+		policy=scripts.validate_daily_post.V3_HISTORICAL_POLICY,
+	)
 	if post_issues:
 		raise RuntimeError("Bundle post validation failed: " + "; ".join(post_issues))
 	return bundle, evidence, projection, post
@@ -801,10 +813,9 @@ def _is_idempotent(root: str, bundle_dir: str, bundle: dict, post: str) -> bool:
 	release = os.path.join(root, "generated", "releases", bundle_id)
 	archive = os.path.join(root, "data", "publication_bundles", bundle_id)
 	post_path = os.path.join(root, "docs", "blog", "posts", f"{bundle['report_date']}.md")
-	site_link = os.path.join(root, "site")
 	if not os.path.isdir(release) or not os.path.isdir(archive) or not os.path.isfile(post_path):
 		raise RuntimeError("Existing identical publication record is incomplete.")
-	if not os.path.islink(site_link) or os.path.realpath(site_link) != os.path.realpath(release):
+	if not scripts.site_deployment.site_serves_bundle(root, bundle_id):
 		raise RuntimeError("Existing identical publication record is incomplete.")
 	for name in ("bundle.json", "evidence.json", "editorial_projection.json", "post.md"):
 		archived_path = os.path.join(archive, name)
@@ -858,7 +869,13 @@ def _prepare_stage(
 	records = scripts.render_publication_status.read_publication_records(root, record)
 	status = scripts.render_publication_status.render_status(records)
 	atomic_write_text(os.path.join(proposed_docs, "status.md"), status)
-	post_issues = scripts.validate_daily_post.validate_post(post, evidence, projection, bundle)
+	post_issues = scripts.validate_daily_post.validate_post(
+		post,
+		evidence,
+		projection,
+		bundle,
+		policy=scripts.validate_daily_post.V3_HISTORICAL_POLICY,
+	)
 	if post_issues:
 		raise RuntimeError("Staged article validation failed: " + "; ".join(post_issues))
 	archive_stage = os.path.join(stage_root, "publication_archive")

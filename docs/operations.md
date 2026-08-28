@@ -18,7 +18,9 @@ mirror synchronization, evidence interpretation, or LLM execution.
 | Imported bundle audit copy | `data/publication_bundles/BUNDLE_ID/` | bundle importer |
 | Temporary complete proposal | `generated/staging/` | bundle importer |
 | Immutable built release | `generated/releases/BUNDLE_ID/` | bundle importer |
-| Served release pointer | `site` | bundle importer |
+| Temporary presentation build | `generated/site-staging/` | manual site publisher |
+| Immutable presentation release | `generated/releases/site-SOURCE_ID/` | manual site publisher |
+| Served release pointer | `site` | importer or manual site publisher |
 | Publication schedule | `vosslab-daily-publication.timer` in `vosslab-podcast` | producer |
 | Static server | `vosslab-daily-blog.service` | publisher |
 
@@ -43,11 +45,34 @@ The static server resolves `site` for each request, so a successful release prom
 service restart. The checked-in service binds `0.0.0.0` for LAN and Tailscale access; it is not a
 public-internet deployment contract.
 
+## Publish repository presentation changes
+
+Use the repository-owned command after changing `mkdocs.yml`, CSS, brand assets, or reader
+navigation:
+
+```bash
+cd /home/vosslab/nsh/vosslab-daily-blog
+./publish_site.sh
+```
+
+The command shares `generated/publisher.lock` with bundle imports. It rejects drift in imported
+posts or the record-derived status page, snapshots `docs/` and `mkdocs.yml`, performs a strict staged
+build, and installs `generated/releases/site-SOURCE_ID/`. Each presentation release carries an exact
+`.deployment.json` receipt binding its source identity to the newest installed bundle. The `site`
+symlink changes atomically only after the complete release exists.
+
+Repeated publication of unchanged source is idempotent. The importer accepts a valid presentation
+release as serving its recorded base bundle, so an identical producer retry remains idempotent.
+Changing imported posts or `docs/status.md` remains importer-only work and fails before staging.
+
+The script verifies `http://127.0.0.1:8016/` and `/status/` after promotion. It does not restart the
+server because the running static process follows the new symlink automatically.
+
 ## Manual import
 
 ```bash
 cd /home/vosslab/nsh/vosslab-daily-blog
-source source_me.sh && python3 scripts/import_publication_bundle.py \
+source source_me.sh && python3.13 scripts/import_publication_bundle.py \
   --bundle /absolute/path/to/out/vosslab/daily_blog/YYYY-MM-DD/RUN_ID
 ```
 
@@ -55,9 +80,9 @@ The bundle path, its files, and its asset directory must be physical rather than
 importer confines every manifest path below that directory.
 
 An identical bundle returns `idempotent` only when all four archived bundle files match the incoming
-bytes, the installed source post matches, and `site` resolves to the expected immutable release. Any
-drift fails loudly. Any different bundle for an already-published report date is rejected before
-staging.
+bytes, the installed source post matches, and `site` serves that bundle through either its immutable
+bundle release or a receipt-bound presentation release. Any drift fails loudly. Any different bundle
+for an already-published report date is rejected before staging.
 
 ## Source validation
 
@@ -65,13 +90,13 @@ Validate the checked-in MkDocs source independently:
 
 ```bash
 cd /home/vosslab/nsh/vosslab-daily-blog
-source source_me.sh && .venv/bin/mkdocs build --strict
+source source_me.sh && python3.13 -m mkdocs build --strict
 ```
 
 Validate an individual bundle post directly:
 
 ```bash
-source source_me.sh && python3 scripts/validate_daily_post.py \
+source source_me.sh && python3.13 scripts/validate_daily_post.py \
   --candidate /path/to/bundle/post.md \
   --evidence /path/to/bundle/evidence.json \
   --projection /path/to/bundle/editorial_projection.json \
@@ -88,13 +113,23 @@ curl --fail http://aella.local:8016/status/
 readlink site
 ```
 
+The checked-in unit is `deploy/vosslab-daily-blog.service`. Install or refresh it only when the unit
+definition itself changes:
+
+```bash
+mkdir -p ~/.config/systemd/user
+cp deploy/vosslab-daily-blog.service ~/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user enable --now vosslab-daily-blog.service
+```
+
 Inspect one current record and its immutable inputs:
 
 ```bash
-python3 -m json.tool data/publications/2026-08-23.json
-python3 -m json.tool data/publication_bundles/BUNDLE_ID/bundle.json
-python3 -m json.tool data/publication_bundles/BUNDLE_ID/evidence.json
-python3 -m json.tool data/publication_bundles/BUNDLE_ID/editorial_projection.json
+python3.13 -m json.tool data/publications/2026-08-23.json
+python3.13 -m json.tool data/publication_bundles/BUNDLE_ID/bundle.json
+python3.13 -m json.tool data/publication_bundles/BUNDLE_ID/evidence.json
+python3.13 -m json.tool data/publication_bundles/BUNDLE_ID/editorial_projection.json
 ```
 
 ## Verification classes
@@ -104,7 +139,7 @@ binding, exact excerpts, active-repository coverage, confined asset paths, refer
 identity, date immutability, idempotency, and complete transaction rollback:
 
 ```bash
-source source_me.sh && python3 -m pytest tests/test_publication_bundle_import.py
+source source_me.sh && python3.13 -m pytest tests/test_publication_bundle_import.py
 ```
 
 The producer repository owns the durable full-flow E2E, which imports a synthetic bundle into a
@@ -134,8 +169,9 @@ service remains enabled.
 - A process crash during installation leaves no success record ahead of the source, release, and
   served pointer; the next import reconciles its transaction marker and removes orphan staging and
   `.site-next-*` links.
-- Idempotency succeeds only when `site` resolves to the record's expected immutable release and the
-  archived manifest, evidence, projection, and selected post match the incoming bytes exactly.
+- Idempotency succeeds only when `site` serves the record's bundle release or a valid receipt-bound
+  presentation release, and the archived manifest, evidence, projection, and selected post match the
+  incoming bytes exactly.
 - The publication record changes last. The static service therefore continues to expose the last good
   immutable release across validation, build, or earlier install failures.
 
@@ -154,5 +190,6 @@ readlink site
 curl --fail http://aella.local:8016/
 ```
 
-Manual edits to `site` or an immutable release bypass the publication contract. Repair source or the
-bundle and use the importer instead.
+Manual edits to `site` or an immutable release bypass the publication contract. Repair presentation
+source with a strict build followed by `publish_site.sh`; repair importer-owned content through a
+new producer bundle and the importer.
