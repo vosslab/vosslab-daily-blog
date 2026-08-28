@@ -1,29 +1,16 @@
-# Vosslab Work Log
+<div class="worklog-masthead" markdown>
 
-A private work log built from versioned, evidence-grounded publication bundles and served on the
-local network at [`aella.local:8016`](http://aella.local:8016).
+<span class="worklog-masthead__eyebrow">Vosslab / daily work log</span>
 
-## What appears here
+# Field notes from the workbench
 
-- One post selected from two independently generated, deterministically validated candidates.
-- An evidence-bound editorial projection with exact source excerpts for both authors.
-- A status page with each imported date's generator run and bundle identity.
+Evidence-grounded notes from Vosslab's public GitHub work, published to this private-LAN journal.
+The newest entry appears first.
 
-!!! info "Evidence boundary"
+<p class="worklog-masthead__signals">
+  <span>Evidence bound</span>
+  <span>Daily cadence</span>
+  <span>Last good release preserved</span>
+</p>
 
-    Each post arrives with authority-ranked evidence and exact Git provenance. Matching dated
-    changelog sections are the primary narrative authority; documentation, diffs, README context,
-    screenshots, and commit metadata provide supporting detail.
-
-## Daily publishing path
-
-1. The producer refreshes durable repositories and resolves one Central-calendar day's exact Git
-   activity.
-2. Two isolated authors write from the same bounded evidence packet and deterministic validation
-   decides which candidates are eligible.
-3. An independent referee selects one anonymous candidate through a complete A/B mapping.
-4. This site verifies the complete bundle, stages its full MkDocs source tree, builds strictly, and
-   atomically switches the served release.
-
-[Browse the work log](blog/index.md){ .md-button .md-button--primary }
-[View publication status](status.md){ .md-button }
+</div>

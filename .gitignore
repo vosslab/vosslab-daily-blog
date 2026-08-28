@@ -1,12 +1,9 @@
 # === LOCAL REPOSITORY RULES === [ADD CUSTOM IGNORES HERE]
 # Propagation preserves this section.
 
-.venv/
-site/
 site
-*.pyc
 data/run/
-generated/
+/test-results/
 
 # === UNIVERSAL === [PROPAGATED - LOCAL EDITS OVERWRITTEN]
 .DS_Store

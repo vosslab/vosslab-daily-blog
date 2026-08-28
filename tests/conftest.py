@@ -49,10 +49,15 @@ collect_ignore = ["e2e", "playwright"]
 #   }
 REPO_HYGIENE_FILTERS = {
 	"all": ["archive/**"],
+	# Generated publication prose is immutable UTF-8 content. The importer owns
+	# its exact bytes; repository hygiene must never rewrite it in place.
 	"ascii_compliance": [
-		"docs/blog/posts/2026-08-22.md",
-		"docs/blog/posts/2026-08-23.md",
+		"data/publication_bundles/**",
+		"docs/blog/posts/**",
 	],
+	# Link lint owns rendered MkDocs sources. Bundle archives retain source-page
+	# relative links and are protected by importer confinement and hash checks.
+	"markdown_links": ["data/publication_bundles/**"],
 }
 
 

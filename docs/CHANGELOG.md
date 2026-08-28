@@ -58,11 +58,6 @@
   rendering now accepts only authoritative publication v2 records and fails on unsupported schemas
   instead of synthesizing compatibility rows.
 
-### Decisions and Failures
-
-- Left six pre-existing Markdown-link violations unchanged in historical August 19-25 posts and
-  editorial candidates because they are outside this contract redesign.
-
 ### Developer Tests and Notes
 
 - All 35 focused importer and status tests passed under Python 3.12, including projection tampering, exact
@@ -71,15 +66,18 @@
   checks passed.
 - All 554 Bandit, shebang, dependency-import, and absolute-import checks passed.
 - The real documentation tree completed a strict staged MkDocs build without changing `site`.
-- The full publisher test command reported 1073 passing tests; six existing Markdown-link failures
-  remain in historical August 19-25 posts and candidates. The real MkDocs source completed a strict
-  build.
+- Corrected historical screenshot link text to match each target filename. Markdown-link lint now owns
+  the rendered documentation tree rather than reinterpreting byte-identical bundle archives as
+  standalone pages; immutable payload links remain protected by importer path, manifest, and hash
+  validation. Generated publication prose and immutable bundle archives are excluded from mutating
+  ASCII hygiene, while the rendered source tree retains link lint. The full publisher test command
+  now reports 1080 passing tests with no failures. The real MkDocs source completed a strict build.
 - A clean live import for report date 2026-08-26 completed from generator run
-  `20260827T235958Z-944f3d5aad` and bundle
-  `e7b0ac649fa4fb09c63dba9a66e61c13c2933efe9b73d8607e071c50550f88e8`. The final post title is
-  "Making authority visible in working software"; the archived post, projection, and evidence are
-  byte-identical to the producer bundle, and the served release pointer and live HTTP route resolve
-  to that exact bundle.
+  `20260828T003950Z-bdee87fdc1` and bundle
+  `d6d06817bec1b057411b10d135400e0db8024a7f750f603bd45c630d783c5799`. The final post title is
+  "Making the Interface Tell the Truth"; the archived manifest, post, projection, and evidence are
+  byte-identical to the producer bundle, all ten assets are installed, and the served release
+  pointer and live thematic HTTP route resolve to that exact bundle.
 
 ## 2026-08-26
 

@@ -1,5 +1,5 @@
 site_name: Vosslab Work Log
-site_description: Private-LAN daily notes from Vosslab's public GitHub activity.
+site_description: Evidence-grounded field notes from Vosslab's public GitHub work.
 site_url: http://aella.local:8016
 site_dir: generated/check
 exclude_docs: |
@@ -15,41 +15,50 @@ theme:
   name: material
   language: en
   font: false
+  icon:
+    logo: material/notebook-edit-outline
+    repo: fontawesome/brands/github
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
-      accent: teal
+      primary: custom
+      accent: custom
       toggle:
-        icon: material/brightness-7
+        icon: material/weather-night
         name: Use dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
-      accent: teal
+      primary: custom
+      accent: custom
       toggle:
-        icon: material/brightness-4
+        icon: material/weather-sunny
         name: Use light mode
   features:
+    - content.footer
     - navigation.instant
     - navigation.instant.progress
+    - navigation.indexes
+    - navigation.path
     - navigation.top
     - search.suggest
     - search.highlight
     - content.code.copy
+    - toc.follow
 
 plugins:
   - search
   - blog:
-      blog_dir: blog
-      post_dir: "{blog}/posts"
+      blog_dir: .
+      post_dir: blog/posts
+      post_url_format: blog/{date}/{slug}
       post_excerpt: required
       authors: false
       categories: false
+      archive_url_format: blog/archive/{date}
+      pagination_per_page: 6
 
 nav:
-  - Home: index.md
-  - Work log: blog/index.md
+  - Work log: index.md
   - Status: status.md
   - Operations: operations.md
   - Architecture: CODE_ARCHITECTURE.md
@@ -67,3 +76,13 @@ markdown_extensions:
 
 extra_css:
   - stylesheets/extra.css
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/vosslab
+      name: Vosslab on GitHub
+    - icon: fontawesome/brands/bluesky
+      link: https://bsky.app/profile/neilvosslab.bsky.social
+      name: Neil Voss on Bluesky

@@ -83,7 +83,7 @@ source source_me.sh && python3 scripts/validate_daily_post.py \
 ```bash
 systemctl --user status vosslab-daily-blog.service
 systemctl --user status vosslab-daily-publication.timer
-curl --fail http://aella.local:8016/blog/
+curl --fail http://aella.local:8016/
 curl --fail http://aella.local:8016/status/
 readlink site
 ```
