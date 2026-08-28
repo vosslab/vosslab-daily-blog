@@ -13,6 +13,10 @@
 
 ### Behavior or Interface Changes
 
+- Expanded the site footer to link GitHub, YouTube, Bluesky, LinkedIn, Facebook, Patreon, and
+  PayPal, and linked the approved Neil R. Voss site-content notice directly to CC BY 4.0.
+- Made the paginated work log the root MkDocs landing page and removed the separate blog gate while
+  preserving established post and archive permalinks under `/blog/`.
 - Accept only complete bundles produced after two author validation summaries and a valid anonymous
   A/B referee selection.
 - Rename evidence `budgets` to `collection_limits`, require the projection artifact in post front
@@ -24,6 +28,11 @@
 
 ### Fixes and Maintenance
 
+- Replaced the generic Material presentation with an editorial field-journal system: reusable
+  light/dark tokens, layered paper surfaces, responsive entry cards, post framing, improved tables,
+  social links, and reduced-motion and print behavior now share one stylesheet contract.
+- Brightened the light-theme gold accent from `#b2781b` to `#e6b862`, raising its contrast against
+  the `#1d4142` header from 2.97:1 to 6.04:1 and clearing the repository's 5.5:1 target.
 - Centralized the exact publication-v2 receipt contract in `scripts/publication_record.py`; status
   rendering and crash-recovery markers now reject unknown, incomplete, malformed, or misnamed
   records before they can participate in a transaction.
@@ -60,6 +69,11 @@
 
 ### Developer Tests and Notes
 
+- All 334 focused Markdown-link, ASCII, whitespace, source-line-limit, and publication-bundle tests
+  passed under Python 3.12.
+- Chromium rendering checks passed for the root work log, preserved post permalink, status table,
+  light and dark schemes, reduced motion, computed card styles, and a 390-pixel viewport without
+  horizontal overflow. Desktop and mobile screenshots were reviewed in both color schemes.
 - All 35 focused importer and status tests passed under Python 3.12, including projection tampering, exact
   excerpt integrity, date immutability, idempotency, and complete transaction rollback.
 - All 443 focused importer, typing, pyflakes, indentation, ASCII, whitespace, and source-line-limit

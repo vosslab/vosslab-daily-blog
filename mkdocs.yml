@@ -9,7 +9,11 @@ repo_name: vosslab
 repo_url: https://github.com/vosslab
 edit_uri: ""
 
-copyright: Copyright © Vosslab
+copyright: >
+  Copyright &copy; 2026 Neil R. Voss. Site content is licensed under
+  <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">
+    CC BY 4.0
+  </a>.
 
 theme:
   name: material
@@ -83,6 +87,21 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/vosslab
       name: Vosslab on GitHub
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/neilvosslab
+      name: Neil Voss on YouTube
     - icon: fontawesome/brands/bluesky
       link: https://bsky.app/profile/neilvosslab.bsky.social
       name: Neil Voss on Bluesky
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/vosslab
+      name: Neil Voss on LinkedIn
+    - icon: fontawesome/brands/facebook
+      link: https://www.facebook.com/neilvosslab
+      name: Neil Voss on Facebook
+    - icon: fontawesome/brands/patreon
+      link: https://www.patreon.com/vosslab
+      name: Support Vosslab on Patreon
+    - icon: fontawesome/brands/paypal
+      link: https://paypal.me/vosslab
+      name: Support Vosslab with PayPal
