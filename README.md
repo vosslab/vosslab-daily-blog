@@ -15,11 +15,11 @@ it on the local network.
 - A complete proposed MkDocs source tree must pass a strict build before installation.
 - The source tree, publication record, immutable release, and `site` pointer change as one
   transaction.
-- Identical imports are successful and idempotent; a final bundle can supersede its provisional
-  date.
+- Identical imports are successful and idempotent; any different bundle for an imported date is
+  rejected.
 
-The publication record retains the generator run, generator revision, evidence manifest, bundle ID,
-quality, source post, and immutable release identity.
+The publication record retains the generator run, generator revision, evidence and projection
+manifests, bundle ID, source post, and immutable release identity.
 
 ## Quick start
 
@@ -56,7 +56,8 @@ source source_me.sh && python3 automation/publish_daily_blog.py --date 2026-08-2
 - `http://192.168.2.13:8016`
 
 `deploy/vosslab-daily-blog.service` serves the atomic `site` pointer. Generation and scheduling
-belong to `vosslab-podcast`; this repository supplies no publication timer.
+belong to `vosslab-podcast`; this repository supplies no publication timer. The static service binds
+to `0.0.0.0` so the same port is reachable from the LAN and the host's Tailscale interface.
 
 Validate the checked-in source without importing a bundle:
 
@@ -71,22 +72,24 @@ The importer accepts one physical directory containing:
 ```text
 bundle.json
 evidence.json
+editorial_projection.json
 post.md
 assets/
 ```
 
-It accepts the current v1 bundle and v2 evidence schemas. It verifies the bundle identity,
-artifact hashes, report date, timezone, generator and editorial contract versions, two candidate
-validation summaries, structured referee result, authority ordering, evidence item identities,
-asset paths, Git blob provenance, front matter, evidence citations, and publication quality.
+It accepts only bundle v2, evidence v3, and editorial projection v1. It verifies artifact and
+content identities, report date, timezone, generator and editorial contract versions, two candidate
+validation summaries, a valid anonymous A/B referee selection, authority ordering, exact projection
+substrings, active-repository coverage, asset paths, Git blob provenance, front matter, and evidence
+citations.
 
-The post front matter requires `date`, `slug`, `publication_quality`, `generator_run`, and
-`evidence_manifest`. A final publication is stable: a different later bundle cannot silently replace
-it. Historical August 24-25 content remains unchanged until a separately requested generation run.
+The post front matter requires `date`, `slug`, `generator_run`, `evidence_manifest`, and
+`editorial_projection`. A publication date is immutable after import. Historical August 24-25
+content remains unchanged until a separately requested generation run.
 
-The current v1 bundle contract requires the producer's `daily-blog-prompts-v2` and
-`daily-blog-rubric-v2` editorial versions. Producer shadow evaluations remain outside this
-repository and never enter the importer.
+The contract requires `daily-blog-generator-v2`, `daily-blog-prompts-v3`, and
+`daily-blog-rubric-v3`. Producer shadow evaluations remain outside this repository and never enter
+the importer.
 
 ## Documentation
 
@@ -98,7 +101,7 @@ repository and never enter the importer.
 
 ## Status and license
 
-Beta delivery ends at the private local MkDocs site on port 8016. Static serving remains independent
+Beta delivery ends at the local-network MkDocs site on port 8016. Static serving remains independent
 of generator availability, so the last good built release stays readable during producer or import
 failures.
 

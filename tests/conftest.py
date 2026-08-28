@@ -50,8 +50,6 @@ collect_ignore = ["e2e", "playwright"]
 REPO_HYGIENE_FILTERS = {
 	"all": ["archive/**"],
 	"ascii_compliance": [
-		"data/editorial/candidates/2026-08-22.md",
-		"data/editorial/candidates/2026-08-23.md",
 		"docs/blog/posts/2026-08-22.md",
 		"docs/blog/posts/2026-08-23.md",
 	],

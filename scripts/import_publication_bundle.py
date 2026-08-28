@@ -16,6 +16,10 @@ import re
 
 # local repo modules
 import scripts.validate_daily_post
+import scripts.publication_record
+import scripts.render_publication_status
+import scripts.validate_editorial_projection
+import scripts.publication_transaction
 
 
 #============================================
@@ -40,9 +44,12 @@ def repository_root(start_path: str) -> str:
 
 
 REPO_ROOT = repository_root(__file__)
-BUNDLE_SCHEMA_VERSION = "vosslab.daily-blog.bundle.v1"
-EVIDENCE_SCHEMA_VERSION = "vosslab.daily-blog.evidence.v2"
-PUBLICATION_SCHEMA_VERSION = "vosslab.daily-blog.publication.v1"
+BUNDLE_SCHEMA_VERSION = "vosslab.daily-blog.bundle.v2"
+EVIDENCE_SCHEMA_VERSION = "vosslab.daily-blog.evidence.v3"
+EDITORIAL_PROJECTION_SCHEMA_VERSION = (
+	scripts.validate_editorial_projection.EDITORIAL_PROJECTION_SCHEMA_VERSION
+)
+PUBLICATION_SCHEMA_VERSION = scripts.publication_record.PUBLICATION_SCHEMA_VERSION
 AUTHORITY_ORDER = {
 	"dated_changelog": 600,
 	"changed_documentation": 500,
@@ -59,9 +66,9 @@ AUTHORITY_LEVELS = {
 	"screenshot": "visual_support",
 	"commit_metadata": "locator_provenance",
 }
-GENERATOR_VERSION = "daily-blog-generator-v1"
-PROMPT_VERSION = "daily-blog-prompts-v2"
-RUBRIC_VERSION = "daily-blog-rubric-v2"
+GENERATOR_VERSION = "daily-blog-generator-v2"
+PROMPT_VERSION = "daily-blog-prompts-v3"
+RUBRIC_VERSION = "daily-blog-rubric-v3"
 HEX_DIGITS = frozenset("0123456789abcdef")
 RUN_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
 
@@ -119,10 +126,13 @@ def _is_lower_hex(value: object, lengths: set[int]) -> bool:
 
 #============================================
 def _require_keys(value: dict, required: set[str], label: str) -> None:
-	"""Require every named contract field in one JSON object."""
+	"""Require the exact named contract fields in one JSON object."""
 	missing = sorted(required - set(value))
 	if missing:
 		raise RuntimeError(f"{label} is missing required fields: {', '.join(missing)}")
+	extra = sorted(set(value) - required)
+	if extra:
+		raise RuntimeError(f"{label} has unsupported fields: {', '.join(extra)}")
 
 
 #============================================
@@ -148,8 +158,8 @@ def _validate_report_identity(bundle: dict) -> None:
 	_require_keys(generator, {"run_id", "revision", "version"}, "Bundle generator metadata")
 	if not isinstance(generator["run_id"], str) or not RUN_ID_RE.fullmatch(generator["run_id"]):
 		raise RuntimeError("Bundle generator run ID must use a safe bounded identifier.")
-	if not _is_lower_hex(generator["revision"], {40, 64}):
-		raise RuntimeError("Bundle generator revision must be an exact Git object ID.")
+	if not _is_lower_hex(generator["revision"], {64}):
+		raise RuntimeError("Bundle generator revision must be a 64-hex source/config fingerprint.")
 	if generator["version"] != GENERATOR_VERSION:
 		raise RuntimeError("Unsupported generator version.")
 	contracts = bundle["contracts"]
@@ -157,11 +167,15 @@ def _validate_report_identity(bundle: dict) -> None:
 		raise RuntimeError("Bundle contracts metadata must be an object.")
 	_require_keys(
 		contracts,
-		{"evidence_schema", "prompt_version", "rubric_version"},
+		{
+			"evidence_schema", "editorial_projection_schema",
+			"prompt_version", "rubric_version",
+		},
 		"Bundle contracts metadata",
 	)
 	expected = {
 		"evidence_schema": EVIDENCE_SCHEMA_VERSION,
+		"editorial_projection_schema": EDITORIAL_PROJECTION_SCHEMA_VERSION,
 		"prompt_version": PROMPT_VERSION,
 		"rubric_version": RUBRIC_VERSION,
 	}
@@ -171,7 +185,7 @@ def _validate_report_identity(bundle: dict) -> None:
 
 #============================================
 def _validate_editorial_manifest(bundle: dict) -> None:
-	"""Validate anonymous candidate summaries and the structured referee result."""
+	"""Validate two deterministic candidates and the final A/B referee selection."""
 	candidates = bundle["candidates"]
 	if not isinstance(candidates, list) or len(candidates) != 2:
 		raise RuntimeError("Bundle must contain exactly two candidate validation summaries.")
@@ -180,11 +194,13 @@ def _validate_editorial_manifest(bundle: dict) -> None:
 			raise RuntimeError("Bundle candidate summaries must be objects.")
 		_require_keys(
 			candidate,
-			{"candidate_id", "post_hash", "valid", "issues"},
+			{"candidate_id", "post_hash", "projection_id", "valid", "issues"},
 			"Bundle candidate summary",
 		)
 		if candidate["candidate_id"] != f"candidate_{index}":
 			raise RuntimeError("Bundle candidate IDs must use canonical anonymous ordering.")
+		if candidate["projection_id"] != bundle["editorial_projection"]["projection_id"]:
+			raise RuntimeError("Bundle candidate projection does not match the editorial projection.")
 		if not _is_lower_hex(candidate["post_hash"], {64}):
 			raise RuntimeError("Bundle candidate post hash must be SHA-256.")
 		if type(candidate["valid"]) is not bool:
@@ -202,10 +218,15 @@ def _validate_editorial_manifest(bundle: dict) -> None:
 		raise RuntimeError("Bundle referee result must be an object.")
 	_require_keys(
 		referee,
-		{"winner", "reason", "evidence_quality", "confidence", "anonymous_mapping"},
+		{
+			"projection_id", "winner", "reason", "evidence_quality",
+			"confidence", "anonymous_mapping",
+		},
 		"Bundle referee result",
 	)
-	if referee["winner"] not in {"A", "B", "NONE"}:
+	if referee["projection_id"] != bundle["editorial_projection"].get("projection_id"):
+		raise RuntimeError("Bundle referee projection does not match the editorial projection.")
+	if referee["winner"] not in {"A", "B"}:
 		raise RuntimeError("Bundle referee winner is unsupported.")
 	if not isinstance(referee["reason"], str) or not 0 < len(referee["reason"].strip()) <= 500:
 		raise RuntimeError("Bundle referee reason must be concise and non-empty.")
@@ -215,22 +236,29 @@ def _validate_editorial_manifest(bundle: dict) -> None:
 	if type(confidence) not in {int, float} or not 0 <= confidence <= 1:
 		raise RuntimeError("Bundle referee confidence must be a number from zero through one.")
 	mapping = referee["anonymous_mapping"]
-	if not isinstance(mapping, dict) or set(mapping) - {"A", "B"}:
-		raise RuntimeError("Bundle referee mapping must contain anonymous A/B labels.")
+	if not isinstance(mapping, dict) or not mapping or set(mapping) - {"A", "B"}:
+		raise RuntimeError("Bundle referee requires an anonymous A/B mapping.")
 	if len(set(mapping.values())) != len(mapping) or any(
 		value not in {"candidate_1", "candidate_2"} for value in mapping.values()
 	):
 		raise RuntimeError("Bundle referee mapping must identify distinct candidate summaries.")
-	if referee["winner"] in {"A", "B"}:
-		selected_id = mapping.get(referee["winner"])
-		selected = next(
-			(candidate for candidate in candidates if candidate["candidate_id"] == selected_id),
-			None,
-		)
-		if selected is None or selected["valid"] is not True:
-			raise RuntimeError("Bundle referee winner must map to a valid candidate.")
-		if selected["post_hash"] != bundle["post"].get("sha256"):
-			raise RuntimeError("Bundle final post is not the exact referee-selected candidate.")
+	summaries_by_id = {candidate["candidate_id"]: candidate for candidate in candidates}
+	if any(
+		summaries_by_id[candidate_id]["valid"] is not True
+		for candidate_id in mapping.values()
+	):
+		raise RuntimeError("Bundle referee mapping may contain only valid candidates.")
+	if referee["winner"] not in mapping:
+		raise RuntimeError("Bundle referee winner must be present in its anonymous mapping.")
+	selected_id = mapping[referee["winner"]]
+	selected = next(
+		(candidate for candidate in candidates if candidate["candidate_id"] == selected_id),
+		None,
+	)
+	if selected is None or selected["valid"] is not True:
+		raise RuntimeError("Bundle referee winner must map to a valid candidate.")
+	if selected["post_hash"] != bundle["post"].get("sha256"):
+		raise RuntimeError("Bundle post is not the exact referee-selected candidate.")
 
 
 #============================================
@@ -460,7 +488,7 @@ def validate_evidence(evidence: dict, bundle: dict) -> dict[str, dict]:
 	_require_keys(
 		evidence,
 		{
-			"schema_version", "report_date", "timezone", "complete", "budgets",
+			"schema_version", "report_date", "timezone", "complete", "collection_limits",
 			"mirrors", "activity", "items", "packet_id",
 		},
 		"Evidence packet",
@@ -473,8 +501,8 @@ def validate_evidence(evidence: dict, bundle: dict) -> dict[str, dict]:
 		raise RuntimeError("Evidence timezone does not match the bundle.")
 	if evidence.get("complete") is not True:
 		raise RuntimeError("Publication bundle evidence must be complete.")
-	if not isinstance(evidence["budgets"], dict):
-		raise RuntimeError("Evidence budgets must be an object.")
+	if not isinstance(evidence["collection_limits"], dict):
+		raise RuntimeError("Evidence collection limits must be an object.")
 	if not isinstance(evidence["mirrors"], list) or not isinstance(evidence["activity"], list):
 		raise RuntimeError("Evidence mirrors and activity must be lists.")
 	commits_by_repository = _validate_provenance_records(evidence)
@@ -617,22 +645,24 @@ def validate_assets(bundle_dir: str, bundle: dict, items_by_id: dict[str, dict])
 
 
 #============================================
-def validate_bundle(bundle_path: str) -> tuple[dict, dict, str]:
+def validate_bundle(bundle_path: str) -> tuple[dict, dict, dict, str]:
 	"""Validate the complete current bundle contract and return its core artifacts."""
 	bundle_dir = secure_bundle_dir(bundle_path)
 	bundle_file = secure_child(bundle_dir, "bundle.json")
 	evidence_file = secure_child(bundle_dir, "evidence.json")
+	projection_file = secure_child(bundle_dir, "editorial_projection.json")
 	post_file = secure_child(bundle_dir, "post.md")
 	bundle = read_json_object(bundle_file)
 	evidence = read_json_object(evidence_file)
+	projection = read_json_object(projection_file)
 	with open(post_file, "r", encoding="utf-8") as handle:
 		post = handle.read()
 	_require_keys(
 		bundle,
 		{
 			"schema_version", "bundle_id", "report_date", "timezone",
-			"publication_quality", "created_at", "generator", "contracts",
-			"evidence", "post", "assets", "candidates", "referee",
+			"created_at", "generator", "contracts", "evidence",
+			"editorial_projection", "post", "assets", "candidates", "referee",
 		},
 		"Publication bundle",
 	)
@@ -640,34 +670,38 @@ def validate_bundle(bundle_path: str) -> tuple[dict, dict, str]:
 		raise RuntimeError("Unsupported publication bundle schema.")
 	if bundle_identity(bundle) != bundle.get("bundle_id"):
 		raise RuntimeError("Publication bundle identity does not match its manifest.")
-	if not isinstance(bundle["post"], dict) or not isinstance(bundle["evidence"], dict):
-		raise RuntimeError("Bundle post and evidence manifests must be objects.")
+	if not all(
+		isinstance(bundle[key], dict)
+		for key in ("post", "evidence", "editorial_projection")
+	):
+		raise RuntimeError("Bundle artifact manifests must be objects.")
 	_validate_report_identity(bundle)
 	_validate_editorial_manifest(bundle)
-	if bundle.get("publication_quality") not in {"final", "provisional"}:
-		raise RuntimeError("Unsupported publication quality.")
-	if bundle["publication_quality"] == "final" and bundle["referee"].get("winner") not in {"A", "B"}:
-		raise RuntimeError("Final bundles require an approved anonymous candidate.")
-	if bundle["publication_quality"] == "provisional" and bundle["referee"].get("winner") != "NONE":
-		raise RuntimeError("Provisional bundles require a NONE referee result.")
 	if bundle.get("post", {}).get("path") != "post.md":
 		raise RuntimeError("Bundle post path must name post.md.")
 	if bundle.get("evidence", {}).get("path") != "evidence.json":
 		raise RuntimeError("Bundle evidence path must name evidence.json.")
+	if bundle["editorial_projection"].get("path") != "editorial_projection.json":
+		raise RuntimeError("Bundle projection path must name editorial_projection.json.")
 	if hash_value(evidence) != bundle["evidence"].get("sha256"):
 		raise RuntimeError("Bundle evidence hash does not match evidence.json.")
 	if not _is_lower_hex(bundle["evidence"].get("sha256"), {64}):
 		raise RuntimeError("Bundle evidence hash must be SHA-256.")
+	if hash_value(projection) != bundle["editorial_projection"].get("sha256"):
+		raise RuntimeError("Bundle projection hash does not match editorial_projection.json.")
+	if not _is_lower_hex(bundle["editorial_projection"].get("sha256"), {64}):
+		raise RuntimeError("Bundle projection hash must be SHA-256.")
 	if sha256_bytes(post.encode("utf-8")) != bundle["post"].get("sha256"):
 		raise RuntimeError("Bundle post hash does not match post.md.")
 	if not _is_lower_hex(bundle["post"].get("sha256"), {64}):
 		raise RuntimeError("Bundle post hash must be SHA-256.")
 	items_by_id = validate_evidence(evidence, bundle)
+	scripts.validate_editorial_projection.validate_projection(projection, evidence, bundle)
 	validate_assets(bundle_dir, bundle, items_by_id)
-	post_issues = scripts.validate_daily_post.validate_post(post, evidence, bundle)
+	post_issues = scripts.validate_daily_post.validate_post(post, evidence, projection, bundle)
 	if post_issues:
 		raise RuntimeError("Bundle post validation failed: " + "; ".join(post_issues))
-	return bundle, evidence, post
+	return bundle, evidence, projection, post
 
 
 #============================================
@@ -685,64 +719,6 @@ def _load_current_record(root: str, report_date: str) -> dict | None:
 	if os.path.islink(path):
 		raise RuntimeError("Current publication record must be one physical file.")
 	return read_json_object(path)
-
-
-#============================================
-def _quality_rank(value: dict) -> int:
-	"""Return replacement precedence for one bundle or publication record."""
-	quality = value.get("publication_quality")
-	return {"provisional": 1, "final": 2}.get(quality, 0)
-
-
-#============================================
-def _read_publication_records(root: str, proposed: dict) -> list[dict]:
-	"""Read publication records and replace the proposed date in memory."""
-	directory = os.path.join(root, "data", "publications")
-	records_by_date = {}
-	if os.path.isdir(directory):
-		for name in os.listdir(directory):
-			if not name.endswith(".json"):
-				continue
-			path = os.path.join(directory, name)
-			if os.path.islink(path) or not os.path.isfile(path):
-				continue
-			record = read_json_object(path)
-			date_text = str(record.get("report_date") or name[:-5])
-			records_by_date[date_text] = record
-	records_by_date[proposed["report_date"]] = proposed
-	records = [records_by_date[key] for key in sorted(records_by_date, reverse=True)]
-	return records
-
-
-#============================================
-def render_status(records: list[dict]) -> str:
-	"""Render the local status page from current and historical records."""
-	lines = [
-		"# Publication status",
-		"",
-		"| Report date | Quality | Generator run | Bundle |",
-		"| --- | --- | --- | --- |",
-	]
-	for record in records[:30]:
-		date_text = str(record.get("report_date") or "unknown")
-		if record.get("schema_version") == PUBLICATION_SCHEMA_VERSION:
-			quality = str(record["publication_quality"])
-			run_id = str(record["generator_run"])
-			bundle_id = str(record["bundle_id"])[:12]
-		else:
-			quality = "legacy"
-			run_id = "historical"
-			bundle_id = "historical"
-		lines.append(f"| {date_text} | {quality} | {run_id} | {bundle_id} |")
-	lines.extend(
-		[
-			"",
-			"A final bundle may supersede a provisional bundle for the same report date. "
-			+ "Bundle validation and strict staged builds complete before this page changes.",
-			"",
-		]
-	)
-	return "\n".join(lines)
 
 
 #============================================
@@ -791,11 +767,13 @@ def _publication_record(bundle: dict) -> dict:
 		"schema_version": PUBLICATION_SCHEMA_VERSION,
 		"report_date": bundle["report_date"],
 		"timezone": bundle["timezone"],
-		"publication_quality": bundle["publication_quality"],
 		"bundle_id": bundle_id,
 		"generator_run": bundle["generator"]["run_id"],
 		"generator_revision": bundle["generator"]["revision"],
 		"evidence_manifest": f"data/publication_bundles/{bundle_id}/evidence.json",
+		"editorial_projection_manifest": (
+			f"data/publication_bundles/{bundle_id}/editorial_projection.json"
+		),
 		"post_path": f"docs/blog/posts/{bundle['report_date']}.md",
 		"release_id": bundle_id,
 		"imported_at": utc_now(),
@@ -805,24 +783,40 @@ def _publication_record(bundle: dict) -> dict:
 
 #============================================
 def _copy_bundle_archive(bundle_dir: str, archive_stage: str) -> None:
-	"""Stage the durable manifest, evidence, and exact selected post."""
+	"""Stage the manifest, evidence, projection, and exact selected post."""
 	os.makedirs(archive_stage)
-	for name in ("bundle.json", "evidence.json", "post.md"):
+	for name in ("bundle.json", "evidence.json", "editorial_projection.json", "post.md"):
 		shutil.copy2(secure_child(bundle_dir, name), os.path.join(archive_stage, name))
 
 
 #============================================
-def _is_idempotent(root: str, bundle: dict, post: str) -> bool:
+def _is_idempotent(root: str, bundle_dir: str, bundle: dict, post: str) -> bool:
 	"""Return whether the exact bundle is already the complete installed release."""
 	record = _load_current_record(root, bundle["report_date"])
 	if not record or record.get("bundle_id") != bundle["bundle_id"]:
 		return False
+	if record.get("release_id") != bundle["bundle_id"]:
+		raise RuntimeError("Existing identical publication record is incomplete.")
 	bundle_id = bundle["bundle_id"]
 	release = os.path.join(root, "generated", "releases", bundle_id)
 	archive = os.path.join(root, "data", "publication_bundles", bundle_id)
 	post_path = os.path.join(root, "docs", "blog", "posts", f"{bundle['report_date']}.md")
+	site_link = os.path.join(root, "site")
 	if not os.path.isdir(release) or not os.path.isdir(archive) or not os.path.isfile(post_path):
 		raise RuntimeError("Existing identical publication record is incomplete.")
+	if not os.path.islink(site_link) or os.path.realpath(site_link) != os.path.realpath(release):
+		raise RuntimeError("Existing identical publication record is incomplete.")
+	for name in ("bundle.json", "evidence.json", "editorial_projection.json", "post.md"):
+		archived_path = os.path.join(archive, name)
+		source_path = secure_child(bundle_dir, name)
+		if not os.path.isfile(archived_path):
+			raise RuntimeError("Existing identical publication archive is incomplete.")
+		with open(source_path, "rb") as handle:
+			source_contents = handle.read()
+		with open(archived_path, "rb") as handle:
+			archived_contents = handle.read()
+		if source_contents != archived_contents:
+			raise RuntimeError("Existing identical publication archive has different content.")
 	with open(post_path, "r", encoding="utf-8") as handle:
 		installed_post = handle.read()
 	if installed_post != post:
@@ -837,6 +831,7 @@ def _prepare_stage(
 	bundle_dir: str,
 	bundle: dict,
 	evidence: dict,
+	projection: dict,
 	post: str,
 	build_function: object,
 ) -> tuple[str, dict]:
@@ -860,14 +855,16 @@ def _prepare_stage(
 		os.makedirs(os.path.dirname(destination), exist_ok=True)
 		shutil.copy2(secure_child(bundle_dir, asset["path"]), destination)
 	record = _publication_record(bundle)
-	status = render_status(_read_publication_records(root, record))
+	records = scripts.render_publication_status.read_publication_records(root, record)
+	status = scripts.render_publication_status.render_status(records)
 	atomic_write_text(os.path.join(proposed_docs, "status.md"), status)
-	post_issues = scripts.validate_daily_post.validate_post(post, evidence, bundle)
+	post_issues = scripts.validate_daily_post.validate_post(post, evidence, projection, bundle)
 	if post_issues:
 		raise RuntimeError("Staged article validation failed: " + "; ".join(post_issues))
 	archive_stage = os.path.join(stage_root, "publication_archive")
 	_copy_bundle_archive(bundle_dir, archive_stage)
 	atomic_write_text(os.path.join(stage_root, "publication.json"), stable_json_text(record))
+	scripts.publication_transaction.write_transaction_marker(stage_root, record)
 	site_dir = os.path.join(stage_root, "site")
 	build_function(stage_root, site_dir, root)
 	if not os.path.isfile(os.path.join(site_dir, "index.html")):
@@ -887,71 +884,8 @@ def _new_stage_root(root: str, bundle_id: str) -> str:
 
 #============================================
 def _commit_stage(root: str, stage_root: str, record: dict) -> None:
-	"""Install source, records, archive, release, and served pointer transactionally."""
-	bundle_id = record["bundle_id"]
-	report_date = record["report_date"]
-	release = os.path.join(root, "generated", "releases", bundle_id)
-	archive = os.path.join(root, "data", "publication_bundles", bundle_id)
-	record_path = _publication_record_path(root, report_date)
-	docs_path = os.path.join(root, "docs")
-	site_link = os.path.join(root, "site")
-	if os.path.lexists(release) or os.path.lexists(archive):
-		raise RuntimeError("Immutable release or publication archive already exists.")
-	os.makedirs(os.path.dirname(release), exist_ok=True)
-	os.makedirs(os.path.dirname(archive), exist_ok=True)
-	os.makedirs(os.path.dirname(record_path), exist_ok=True)
-	previous_docs = os.path.join(stage_root, "previous_docs")
-	previous_record = os.path.join(stage_root, "previous_publication.json")
-	previous_site = os.path.join(stage_root, "previous_site")
-	release_installed = False
-	archive_installed = False
-	docs_installed = False
-	record_installed = False
-	site_moved = False
-	previous_docs_moved = False
-	previous_record_moved = False
-	try:
-		os.replace(os.path.join(stage_root, "site"), release)
-		release_installed = True
-		os.replace(os.path.join(stage_root, "publication_archive"), archive)
-		archive_installed = True
-		if os.path.exists(record_path):
-			os.replace(record_path, previous_record)
-			previous_record_moved = True
-		os.replace(os.path.join(stage_root, "publication.json"), record_path)
-		record_installed = True
-		os.replace(docs_path, previous_docs)
-		previous_docs_moved = True
-		os.replace(os.path.join(stage_root, "docs"), docs_path)
-		docs_installed = True
-		if os.path.lexists(site_link) and not os.path.islink(site_link):
-			os.replace(site_link, previous_site)
-			site_moved = True
-		next_link = os.path.join(root, f".site-next-{uuid.uuid4().hex}")
-		os.symlink(os.path.relpath(release, root), next_link)
-		os.replace(next_link, site_link)
-	except Exception:
-		if docs_installed and os.path.exists(docs_path):
-			shutil.rmtree(docs_path)
-		if previous_docs_moved and os.path.exists(previous_docs):
-			os.replace(previous_docs, docs_path)
-		if record_installed and os.path.exists(record_path):
-			os.unlink(record_path)
-		if previous_record_moved and os.path.exists(previous_record):
-			os.replace(previous_record, record_path)
-		if site_moved and os.path.exists(previous_site):
-			os.replace(previous_site, site_link)
-		if archive_installed and os.path.exists(archive):
-			shutil.rmtree(archive)
-		if release_installed and os.path.exists(release):
-			shutil.rmtree(release)
-		raise
-	if os.path.exists(previous_docs):
-		shutil.rmtree(previous_docs)
-	if os.path.exists(previous_record):
-		os.unlink(previous_record)
-	if os.path.exists(previous_site):
-		shutil.rmtree(previous_site)
+	"""Install one prepared stage through the durable transaction helper."""
+	scripts.publication_transaction.commit_stage(root, stage_root, record)
 
 
 #============================================
@@ -962,44 +896,44 @@ def import_publication_bundle(
 ) -> dict:
 	"""Validate, stage, strictly build, and atomically install one bundle."""
 	bundle_dir = secure_bundle_dir(bundle_path)
-	bundle, evidence, post = validate_bundle(bundle_dir)
-	if _is_idempotent(root, bundle, post):
-		return {
-			"status": "idempotent",
+	with scripts.publication_transaction.publisher_lock(root):
+		scripts.publication_transaction.reconcile_interrupted_staging(root)
+		bundle, evidence, projection, post = validate_bundle(bundle_dir)
+		if _is_idempotent(root, bundle_dir, bundle, post):
+			return {
+				"status": "idempotent",
+				"bundle_id": bundle["bundle_id"],
+				"report_date": bundle["report_date"],
+			}
+		current = _load_current_record(root, bundle["report_date"])
+		if current:
+			raise RuntimeError("A different bundle cannot replace an already-published report date.")
+		stage_root = _new_stage_root(root, bundle["bundle_id"])
+		try:
+			stage_root, record = _prepare_stage(
+				root,
+				stage_root,
+				bundle_dir,
+				bundle,
+				evidence,
+				projection,
+				post,
+				build_function,
+			)
+			_commit_stage(root, stage_root, record)
+		except Exception:
+			if stage_root and os.path.exists(stage_root):
+				shutil.rmtree(stage_root)
+			raise
+		if os.path.exists(stage_root):
+			shutil.rmtree(stage_root)
+		result = {
+			"status": "imported",
 			"bundle_id": bundle["bundle_id"],
 			"report_date": bundle["report_date"],
+			"release_id": bundle["bundle_id"],
 		}
-	current = _load_current_record(root, bundle["report_date"])
-	if current and _quality_rank(bundle) < _quality_rank(current):
-		raise RuntimeError("A provisional bundle cannot supersede a final publication.")
-	if current and _quality_rank(current) == 2:
-		raise RuntimeError("A different bundle cannot supersede an existing final publication.")
-	stage_root = _new_stage_root(root, bundle["bundle_id"])
-	try:
-		stage_root, record = _prepare_stage(
-			root,
-			stage_root,
-			bundle_dir,
-			bundle,
-			evidence,
-			post,
-			build_function,
-		)
-		_commit_stage(root, stage_root, record)
-	except Exception:
-		if stage_root and os.path.exists(stage_root):
-			shutil.rmtree(stage_root)
-		raise
-	if os.path.exists(stage_root):
-		shutil.rmtree(stage_root)
-	result = {
-		"status": "imported",
-		"bundle_id": bundle["bundle_id"],
-		"report_date": bundle["report_date"],
-		"publication_quality": bundle["publication_quality"],
-		"release_id": bundle["bundle_id"],
-	}
-	return result
+		return result
 
 
 #============================================

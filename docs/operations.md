@@ -22,25 +22,26 @@ mirror synchronization, evidence interpretation, or LLM execution.
 | Publication schedule | `vosslab-daily-publication.timer` in `vosslab-podcast` | producer |
 | Static server | `vosslab-daily-blog.service` | publisher |
 
-Historical `data/daily/`, editorial, and run records remain audit material from the previous
-publisher design. New v1 imports use only publication records and bundle archives.
-
 ## Normal flow
 
 1. The producer passes one complete physical bundle directory to
    `scripts/import_publication_bundle.py`.
-2. The importer validates bundle v1 and evidence v2, canonical bundle identity, hashes, date and
-   timezone, every attributed commit-parent range and branch-tip snapshot, evidence authority and
-   provenance, assets, candidate summaries, referee result, and post.
+2. The importer validates bundle v2, evidence v3, editorial projection v1, canonical identities,
+   hashes, date and timezone, every attributed commit-parent range and branch-tip snapshot,
+   evidence authority and provenance, exact excerpts, assets, two candidate validation summaries,
+   the valid A/B referee selection, and the selected post.
 3. It copies the complete current `docs/` tree into a unique staging directory and installs the
    proposed post and assets there.
 4. It renders the proposed status page from current publication records plus the proposed record.
 5. The article validator runs again against staging, followed by a strict MkDocs build.
-6. The importer installs the built release, bundle archive, publication record, and complete source
-   tree, then atomically switches `site` as the final operation.
+6. The importer installs the built release, bundle archive, and complete source tree, then atomically
+   switches `site`, and installs the publication record last.
+7. The importer-global filesystem lock covers idempotency, date immutability, staging, and commit.
+   Startup reconciliation rolls back interrupted staged transactions before another import proceeds.
 
 The static server resolves `site` for each request, so a successful release promotion needs no
-service restart.
+service restart. The checked-in service binds `0.0.0.0` for LAN and Tailscale access; it is not a
+public-internet deployment contract.
 
 ## Manual import
 
@@ -53,9 +54,10 @@ source source_me.sh && python3 scripts/import_publication_bundle.py \
 The bundle path, its files, and its asset directory must be physical rather than symlinked. The
 importer confines every manifest path below that directory.
 
-An identical bundle returns `idempotent`. A different final bundle can supersede a provisional
-record for the same date. A provisional bundle or different final bundle cannot replace an existing
-final publication.
+An identical bundle returns `idempotent` only when all four archived bundle files match the incoming
+bytes, the installed source post matches, and `site` resolves to the expected immutable release. Any
+drift fails loudly. Any different bundle for an already-published report date is rejected before
+staging.
 
 ## Source validation
 
@@ -72,6 +74,7 @@ Validate an individual bundle post directly:
 source source_me.sh && python3 scripts/validate_daily_post.py \
   --candidate /path/to/bundle/post.md \
   --evidence /path/to/bundle/evidence.json \
+  --projection /path/to/bundle/editorial_projection.json \
   --bundle /path/to/bundle/bundle.json
 ```
 
@@ -91,12 +94,14 @@ Inspect one current record and its immutable inputs:
 python3 -m json.tool data/publications/2026-08-23.json
 python3 -m json.tool data/publication_bundles/BUNDLE_ID/bundle.json
 python3 -m json.tool data/publication_bundles/BUNDLE_ID/evidence.json
+python3 -m json.tool data/publication_bundles/BUNDLE_ID/editorial_projection.json
 ```
 
 ## Verification classes
 
-Permanent pytest coverage protects bundle-schema dispatch, artifact hashes, confined asset paths,
-referee-selected post identity, idempotency, quality precedence, and complete transaction rollback:
+Permanent pytest coverage protects schema dispatch, artifact hashes, projection identity and packet
+binding, exact excerpts, active-repository coverage, confined asset paths, referee-selected post
+identity, date immutability, idempotency, and complete transaction rollback:
 
 ```bash
 source source_me.sh && python3 -m pytest tests/test_publication_bundle_import.py
@@ -112,18 +117,26 @@ Their results belong in the producer ownership record rather than this permanent
 Only the producer's `vosslab-daily-publication.timer` schedules publication. The publisher retains
 only `deploy/vosslab-daily-blog.service` for static serving.
 
-Before enabling the producer timer, disable the former Hermes cron, mirror timer, and editorial
-timer. Complete and record the producer's historical editorial review, then verify the user timer
-list contains one publication schedule and that the static service remains enabled.
+The former Hermes cron, mirror timer, and editorial timer are retired. On August 27, 2026, the
+operator explicitly activated the producer timer to restore publication while the historical
+editorial comparisons remained pending. The producer now owns a durable oldest-first cursor for
+missed dates. Verify the user timer list contains one publication schedule and that the static
+service remains enabled.
 
 ## Failure guarantees
 
-- Schema, path, hash, provenance, front-matter, or post validation failure occurs before staging.
+- Schema, path, hash, provenance, projection, front-matter, or post validation failure occurs before
+  staging.
 - A staged article or strict MkDocs build failure removes the proposed stage and leaves current
   source and serving unchanged.
 - An install failure restores the prior source tree and publication record and removes newly placed
   release and archive directories.
-- The served pointer changes last. The static service therefore continues to expose the last good
+- A process crash during installation leaves no success record ahead of the source, release, and
+  served pointer; the next import reconciles its transaction marker and removes orphan staging and
+  `.site-next-*` links.
+- Idempotency succeeds only when `site` resolves to the record's expected immutable release and the
+  archived manifest, evidence, projection, and selected post match the incoming bytes exactly.
+- The publication record changes last. The static service therefore continues to expose the last good
   immutable release across validation, build, or earlier install failures.
 
 ## Recovery

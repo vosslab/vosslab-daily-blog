@@ -5,10 +5,9 @@ local network at [`aella.local:8016`](http://aella.local:8016).
 
 ## What appears here
 
-- A final post selected from two independently generated, deterministically validated candidates.
-- A provisional work log when complete evidence is more reliable than the available editorial
-  candidates or referee result.
-- A status page with each imported date's quality, generator run, and bundle identity.
+- One post selected from two independently generated, deterministically validated candidates.
+- An evidence-bound editorial projection with exact source excerpts for both authors.
+- A status page with each imported date's generator run and bundle identity.
 
 !!! info "Evidence boundary"
 
@@ -22,7 +21,7 @@ local network at [`aella.local:8016`](http://aella.local:8016).
    activity.
 2. Two isolated authors write from the same bounded evidence packet and deterministic validation
    decides which candidates are eligible.
-3. An independent referee selects an anonymous candidate or the deterministic provisional account.
+3. An independent referee selects one anonymous candidate through a complete A/B mapping.
 4. This site verifies the complete bundle, stages its full MkDocs source tree, builds strictly, and
    atomically switches the served release.
 

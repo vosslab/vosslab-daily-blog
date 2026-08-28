@@ -1,19 +1,7 @@
 # Publication status
 
-Latest tracked report date: `2026-08-25`.
+| Report date | Generator run | Bundle |
+| --- | --- | --- |
+| 2026-08-26 | 20260828T003950Z-bdee87fdc1 | d6d06817bec1 |
 
-| Report date | Collection | Canonical post | Editorial revision |
-| --- | --- | --- | --- |
-| 2026-08-25 | ready | staging | pending |
-| 2026-08-24 | ready | published | degraded |
-| 2026-08-23 | ready | published | promoted |
-| 2026-08-22 | ready | published | promoted |
-| 2026-08-21 | ready | published | pending |
-| 2026-08-20 | ready | published | promoted |
-| 2026-08-19 | ready | published | promoted |
-| 2026-08-18 | ready | published | degraded |
-| 2026-08-17 | ready | published | pending |
-| 2026-08-16 | empty | published | pending |
-| 2026-08-09 | ready | published | promoted |
-
-The canonical post is the reader-visible daily record. Editorial revisions promote after their own validated release succeeds.
+An identical bundle is idempotent. Any different bundle for an already-published report date is rejected before staging.

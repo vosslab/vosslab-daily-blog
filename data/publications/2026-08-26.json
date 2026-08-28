@@ -1,0 +1,13 @@
+{
+  "bundle_id": "d6d06817bec1b057411b10d135400e0db8024a7f750f603bd45c630d783c5799",
+  "editorial_projection_manifest": "data/publication_bundles/d6d06817bec1b057411b10d135400e0db8024a7f750f603bd45c630d783c5799/editorial_projection.json",
+  "evidence_manifest": "data/publication_bundles/d6d06817bec1b057411b10d135400e0db8024a7f750f603bd45c630d783c5799/evidence.json",
+  "generator_revision": "9aa3fdbb7c6676ef15da4aaebe20a35577f3989db14953bf55bd52f0b3456786",
+  "generator_run": "20260828T003950Z-bdee87fdc1",
+  "imported_at": "2026-08-28T00:47:03Z",
+  "post_path": "docs/blog/posts/2026-08-26.md",
+  "release_id": "d6d06817bec1b057411b10d135400e0db8024a7f750f603bd45c630d783c5799",
+  "report_date": "2026-08-26",
+  "schema_version": "vosslab.daily-blog.publication.v2",
+  "timezone": "America/Chicago"
+}
