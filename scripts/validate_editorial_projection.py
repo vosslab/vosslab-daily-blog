@@ -1,11 +1,13 @@
 """Validate one exact, evidence-bound editorial projection."""
 
 # Standard Library
-import json
 import hashlib
 
+# local repo modules
+import scripts.canonical_json
 
-EDITORIAL_PROJECTION_SCHEMA_VERSION = "vosslab.daily-blog.editorial-projection.v1"
+
+EDITORIAL_PROJECTION_SCHEMA_VERSION = "vosslab.daily-blog.editorial-projection.v2"
 AUTHORITY_ORDER = [
 	"dated_changelog",
 	"changed_documentation",
@@ -19,15 +21,13 @@ AUTHORITY_ORDER = [
 #============================================
 def canonical_json_bytes(value: object) -> bytes:
 	"""Return deterministic UTF-8 JSON bytes for hashing."""
-	text = json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True)
-	return text.encode("utf-8")
+	return scripts.canonical_json.compact_json_bytes(value)
 
 
 #============================================
 def hash_value(value: object) -> str:
 	"""Hash one JSON-compatible value canonically."""
-	digest = hashlib.sha256(canonical_json_bytes(value)).hexdigest()
-	return digest
+	return scripts.canonical_json.hash_value(value)
 
 
 #============================================
@@ -61,6 +61,7 @@ def _validate_repository_cards(projection: dict, evidence: dict) -> None:
 		if isinstance(activity, dict)
 	}
 	card_repositories = []
+	card_order = []
 	for card in cards:
 		if not isinstance(card, dict):
 			raise RuntimeError("Projection repository cards must be objects.")
@@ -68,7 +69,8 @@ def _validate_repository_cards(projection: dict, evidence: dict) -> None:
 			card,
 			{
 				"repository", "repository_url", "commit_count",
-				"commit_shas", "commit_subjects",
+				"commit_shas", "commit_subjects", "created_at",
+				"created_in_report_window", "is_fork", "story_signals",
 			},
 			"Projection repository card",
 		)
@@ -80,6 +82,20 @@ def _validate_repository_cards(projection: dict, evidence: dict) -> None:
 			raise RuntimeError("Projection repository card has no active evidence repository.")
 		if card["repository_url"] != activity["repository_url"]:
 			raise RuntimeError("Projection repository card URL does not match evidence activity.")
+		lifecycle = activity["lifecycle_events"][0]
+		if (
+			card["created_at"] != lifecycle["occurred_at"]
+			or card["created_in_report_window"] is not lifecycle["occurred_in_report_window"]
+			or card["is_fork"] is not activity["is_fork"]
+		):
+			raise RuntimeError("Projection repository card lifecycle does not match evidence activity.")
+		expected_signals = (
+			["new_source_repository"]
+			if card["created_in_report_window"] and not card["is_fork"]
+			else []
+		)
+		if card["story_signals"] != expected_signals:
+			raise RuntimeError("Projection repository card story signals are inconsistent.")
 		commits = activity["commits"]
 		if type(card["commit_count"]) is not int or card["commit_count"] != len(commits):
 			raise RuntimeError("Projection repository card commit count does not match activity.")
@@ -101,10 +117,13 @@ def _validate_repository_cards(projection: dict, evidence: dict) -> None:
 		):
 			raise RuntimeError("Projection commit subject exceeds its declared limit.")
 		card_repositories.append(repository)
+		card_order.append((0 if expected_signals else 1, repository.casefold()))
 	if len(set(card_repositories)) != len(card_repositories):
 		raise RuntimeError("Projection repository cards contain duplicate repositories.")
 	if set(card_repositories) != set(activity_by_repository):
 		raise RuntimeError("Projection cards must cover all active evidence repositories.")
+	if card_order != sorted(card_order):
+		raise RuntimeError("Projection repository cards do not follow story-first order.")
 
 
 #============================================

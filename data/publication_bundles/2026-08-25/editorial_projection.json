@@ -1,0 +1,438 @@
+{
+  "excerpts": [
+    {
+      "authority_level": "primary_narrative",
+      "authority_rank": 600,
+      "commit": "9bf71d5fb7b71bf21ca10b4a7fce28cc391932e1",
+      "content": "## 2026-08-25\n\n### Additions and New Features\n\n- Added a minimal MkDocs Material configuration and site homepage.\n- Added term-first Fall 2026 pages for BIOL 318/418, BIOL 351/451, and BIOL 480 using the supplied\n  section, meeting, prerequisite, and catalog information.\n- Added separate shared `POLICIES.md` and `STUDENT_RESOURCES.md` sources plus reusable course and\n  term templates.\n- Added a manifest-driven `pipeline/build_syllabi.py` exporter, accessible Pandoc reference DOCX,\n  tagged PDF conversion, optional term ZIP archives, and the `pipeline/build_site.py` build front\n  door.\n- Added a GitHub Pages workflow, focused exporter tests, a real export E2E gate, and a\n  desktop/mobile Playwright and axe accessibility smoke.\n- Added installation, authoring, HCI, contrast-audit, implementation-plan, and Fall 2026 content\n  review documentation.\n- Added self-hosted Atkinson Hyperlegible Next upright and italic variable WOFF2 files with the SIL\n  Open Font License.\n- Added a print-specific syllabus stylesheet and WeasyPrint renderer for direct PDF output from\n  semantic standalone HTML.\n- Added direct Python-Markdown rendering ",
+      "content_hash": "92cdee48b52cc03a465d932292efbe6616cadf2cff015341fd3bd3fc9cd26594",
+      "end": 1143,
+      "evidence_id": "ev-18f41c4d87a42956",
+      "excerpt_id": "ex-1c013460702df796",
+      "kind": "dated_changelog",
+      "path": "docs/CHANGELOG.md",
+      "repository": "vosslab/syllabus",
+      "source_content_hash": "f6dd7e796d9f4402503a95c72adca5420ebca2c75c8b8af0fd5ab20c56e32216",
+      "start": 0
+    },
+    {
+      "authority_level": "technical_support",
+      "authority_rank": 400,
+      "commit": "7ac6ccdabacdad8a86d67c9501470f0e65bec2f0",
+      "content": "Changed paths:\n- data/hourly_history.csv\n\nPatch:\ndiff --git a/data/hourly_history.csv b/data/hourly_history.csv\nindex 71d4194..c79e4cc 100644\n--- a/data/hourly_history.csv\n+++ b/data/hourly_history.csv\n@@ -3418,3 +3418,59 @@ hour_start,season,comed_price,comed_price_median,comed_cutoff,start_soc,end_soc,\n 2026-08-22 20:00,summer,3.7,3.5,5.8,86,85,2.420,0.000,2.580,0.000,0.200,below_cutoff,self_consumption,100,29,False\n 2026-08-22 21:00,summer,2.9,3.4,5.7,85,85,0.820,0.000,0.740,0.000,0.000,below_cutoff,self_consumption,100,30,False\n 2026-08-22 22:00,summer,2.2,3.4,5.7,85,85,0.790,0.000,0.700,0.000,0.000,below_cutoff,self_consumption,100,30,False\n+2026-08-22 23:00,summer,2.1,3.4,6.5,85,85,0.780,0.000,0.690,0.000,0.000,below_cutoff,self_consumption,100,29,False\n+2026-08-23 00:00,summer,2.1,3.4,6.5,85,85,0.770,0.000,0.680,0.000,0.000,below_cutoff,self_consumption,100,30,False\n+2026-08-23 01:00,summer,2.2,3.4,6.5,85,85,0.760,0.000,0.670,0.000,0.000,below_cutoff,self_consumption,100,29,False\n+2026-08-23 02:00,summer,2.3,3.4,6.5,85,85,2.960,0.000,2.870,0.000,0.000,below_cutoff,self_consumption,100,30,False\n+2026-08-23 03:00,summer,",
+      "content_hash": "3bbe992d6590012499b8db763d7992dd98e12851e54c027b8b21cc38ed835809",
+      "end": 1143,
+      "evidence_id": "ev-9e61f42febb68c36",
+      "excerpt_id": "ex-dd0964b64fbb70f4",
+      "kind": "diff",
+      "path": "",
+      "repository": "vosslab/battery-control",
+      "source_content_hash": "81c74bf7463580ac145137edef3a681316dbbe499d9e42244ea571455d9ea564",
+      "start": 0
+    },
+    {
+      "authority_level": "primary_narrative",
+      "authority_rank": 600,
+      "commit": "2106507525c43882da63f0471d05f3f03872d4fc",
+      "content": "## 2026-08-25\n\n### Fixes and Maintenance\n\n- Removed named Arial font overrides from generated questions, review pages, debug pages, and\n  canvas labels so normal text inherits the host site's typography; replaced the DNA gel image's\n  Arial Narrow candidate with the existing PT Sans fallback, removed generic sans-serif overrides\n  from ordinary HTML and inline SVG labels, and normalized intentional fixed-width content from\n  Courier-first stacks to generic monospace.\n- Removed clock-dependent, inventory, prompt-copy, and HTML-fragment smoke tests that did not meet\n  the permanent pytest checklist; moved the repo-wide Bandit scan to a direct maintainer script so\n  the fast pytest lane no longer launches an external security subprocess.\n",
+      "content_hash": "b1b7e12780f5c0ba5988f414841661ad21b09aa1548cc8bc283c543963ecf487",
+      "end": 745,
+      "evidence_id": "ev-ce598d3b8b5ebe23",
+      "excerpt_id": "ex-df69570d331a65e3",
+      "kind": "dated_changelog",
+      "path": "docs/CHANGELOG.md",
+      "repository": "vosslab/biology-problems",
+      "source_content_hash": "b1b7e12780f5c0ba5988f414841661ad21b09aa1548cc8bc283c543963ecf487",
+      "start": 0
+    },
+    {
+      "authority_level": "primary_narrative",
+      "authority_rank": 600,
+      "commit": "e8bd31615225eab24b66f0b2ab862fe674dc9956",
+      "content": "## 2026-08-25\n\n### Additions and New Features\n\n- Added [run_web_server.sh](../run_web_server.sh) as the repository-aware local preview command.\n  It resolves the Git root, loads [source_me.sh](../source_me.sh), serves MkDocs at\n  `http://127.0.0.1:8000/`, opens the browser, and cleans up automatically after five minutes\n  while preserving early server failures.\n- Routed the README and usage-guide preview examples through the new script and documented the\n  Python 3.12 module command for direct static builds.\n\n### Behavior or Interface Changes\n\n- Replaced MkDocs Material's externally loaded Roboto text face with self-hosted Atkinson\n  Hyperlegible Next variable fonts. The upright and italic web fonts cover weights 200 through\n  800, apply through Material's `--md-text-font` token, and ship with their SIL Open Font License.\n- Disabled Material's automatic Google Fonts loading so the site typography has no external font\n  request and uses the bundled files on GitHub Pages.\n\n### Fixes and Maintenance\n\n- Extended the Atkinson text font through the daily puzzle roots and embedded selftest content.\n  Daily puzzles now inherit the si",
+      "content_hash": "5be88bf0a433aa9f75553d616cfbeba2472d077f285595536de8dfcd7380d380",
+      "end": 1143,
+      "evidence_id": "ev-51daef1c9ba76fe3",
+      "excerpt_id": "ex-7a9fa98cc5cdc2b7",
+      "kind": "dated_changelog",
+      "path": "docs/CHANGELOG.md",
+      "repository": "vosslab/biology-problems-website",
+      "source_content_hash": "980c3de59621bfe56c923c136467168aa0281e561fc548e8dfbc31d737144e00",
+      "start": 0
+    },
+    {
+      "authority_level": "primary_narrative",
+      "authority_rank": 600,
+      "commit": "12b4c0da61cb0aa36f3efc4720bb938d7023fc32",
+      "content": "## 2026-08-25\n\n### Fixes and Maintenance\n\n- Completed the durable `document_object_id` migration for projection,\n  property, Haworth, render-interaction, molecule report/export, and reaction\n  consumers. Ferrum now has one opaque document-object identity contract with\n  no source-ID compatibility layer.\n\n- Separated transient presentation-preview replay from committed render-plan\n  replay. Arrow authoring now redeems the canonical durable receipt field, and\n  its public E2E reports unexpected modal or refusal failures promptly.\n\n- Added `materialize_compact_group` as the precise molecule-diagnostics\n  recovery for an unexpanded compact group.\n\n- Completed Rust-owned reaction authoring transitions: dedicated\n  create/replace/delete commands redeem through generic transitions, member\n  movement uses generic direct-root translation, and authoring choices nest in\n  `RenderInteractionObservationV1`.\n\n- Split the direct-root PyO3 binding into cohesive query, DTO, session,\n  conversion, and error modules. Tests now parse XML safely, use canonical\n  source-owned CDML and durable observed IDs, and acknowledge the stale\n  user-template",
+      "content_hash": "5e737a05a99de69bb0b38db9422e1eee5903f3c2ddb75460b1c6abbcf3eb8845",
+      "end": 1143,
+      "evidence_id": "ev-ecdaafed6eb2e135",
+      "excerpt_id": "ex-c98e64b9765ffd80",
+      "kind": "dated_changelog",
+      "path": "docs/CHANGELOG.md",
+      "repository": "vosslab/ferrum-chemical-forge",
+      "source_content_hash": "c4c9ae1acb6c0ba788b1b228234d7fa2a5587b8360e492eb8b636336d6172346",
+      "start": 0
+    },
+    {
+      "authority_level": "primary_narrative",
+      "authority_rank": 600,
+      "commit": "b3582c994fe668bd9fecc458d3137bf330a29d55",
+      "content": "## 2026-08-25\n\n### Fixes and Maintenance\n\n- Established the audited `WP-PROF-B2` domain and browser-contract foundation for explicit\n  curriculum adoption. Validated server-only assignment and course semantic baselines bind exact\n  publication pins, authored order, pools, defaults, and relative schedules; structural equality\n  governs equivalence while a canonical digest supplies immutable evidence. Target-term resolution\n  uses calendar-day offsets and existing course-zone authority. Operation-specific answer-free\n  previews and results bind truthful destinations; every write command derives from its exact\n  preview, fast-forward apply accepts only an eligible preview, and outcome-specific recovery types\n  make incompatible actions unrepresentable. Bounded streaming decoders protect assignment\n  witnesses and replacement choices. The six-pass audit and independent approval resolved every\n  contract, documentation, style, legacy, readability, and permanent-test finding. All 146\n  `question_model` tests, two doctests, TypeScript compilation, formatting, strict Clippy, source\n  limits, Markdown links, and diff hygiene pass.\n- A",
+      "content_hash": "6df39305348d9d249c4a6967a9609f388af170869bfd954790d1939a056c3718",
+      "end": 1143,
+      "evidence_id": "ev-0cc79e212b929d0d",
+      "excerpt_id": "ex-f036ab7bccc157b7",
+      "kind": "dated_changelog",
+      "path": "docs/CHANGELOG.md",
+      "repository": "vosslab/peptidyle-learning-engine",
+      "source_content_hash": "9502b31c79a6f152d115455d23753341a7ad218aa8bd50894a4966767007c8ce",
+      "start": 0
+    },
+    {
+      "authority_level": "primary_narrative",
+      "authority_rank": 600,
+      "commit": "5a76404a031e4749c38e9919eee5bbdc47e95f78",
+      "content": "## 2026-08-25\n\n### Fixes and Maintenance\n\n- Isolated HTML self-test controls by item CRC, made MULTI_FIB answer attributes safe for quotes,\n  restored the MA empty-selection message, rejected Boolean and non-finite numeric answers, and\n  made direct empty-bank saves fail before creating an output file. Added focused regressions for\n  each failure without changing result strings, image handling, or inherited host-page fonts.\n  The shared HTML wrapper now also removes trailing spaces and tabs from every emitted line. Audit\n  follow-up removed an unreachable empty-bank branch, documented the NUM validation contract, and\n  pruned two implementation-text-coupled tests.\n\n### Developer Tests and Notes\n\n- Targeted HTML output, media, validation, pyflakes, typing, and repository whitespace gates: 752\n  passed. Full repository suite: 3072 passed.\n",
+      "content_hash": "5bae4a04d3dc72fcb5471649b441e69862c6e3be27b0a73ed06fc1d829b3b9ad",
+      "end": 849,
+      "evidence_id": "ev-44f2ea36336431ed",
+      "excerpt_id": "ex-3f3f26b048cf57aa",
+      "kind": "dated_changelog",
+      "path": "docs/CHANGELOG.md",
+      "repository": "vosslab/qti-package-maker",
+      "source_content_hash": "5bae4a04d3dc72fcb5471649b441e69862c6e3be27b0a73ed06fc1d829b3b9ad",
+      "start": 0
+    },
+    {
+      "authority_level": "primary_narrative",
+      "authority_rank": 600,
+      "commit": "33887f8bdbbbcc34e38626136e6267f8e7ac976a",
+      "content": "## 2026-08-25\n\n### Additions and New Features\n- Add a configurable filename-model provider layer backed by Ollama and Apple's\n  official `apple-fm-sdk`.\n- Default filename generation to the installed `qwen3.5:27b` Ollama model with\n  thinking enabled.\n- Add focused filename unit tests and a six-case live semantic evaluator for\n  model and prompt comparisons.\n- Create `screenshot_lib/` for reusable pipeline modules; keep `tools/` for\n  standalone commands and remove all imports from `tools/`.\n\n### Behavior or Interface Changes\n- Keep Ollama model identity in `DEFAULT_FILENAME_MODEL` as the single\n  configuration authority; remove the unused per-call model override path.\n- Rewrite the filename LLM instructions around desired actions: interpret OCR\n  and captions as evidence, select representative thematic terms, use neutral\n  functional language, format a snake_case slug, and return it in XML.\n- Rewrite operational agent guidance around the intended configuration and\n  verification paths while omitting unwanted alternatives.\n- Keep the existing filename-selection rules and Moondream-versus-ViT source\n  guidance while changing t",
+      "content_hash": "5f6e2dbebb8dddee11b53c0a943bd67e4edf76e7363e7790eaa4f03374ddf2e3",
+      "end": 1143,
+      "evidence_id": "ev-d1975a09ed44d196",
+      "excerpt_id": "ex-fb359941d9016d9f",
+      "kind": "dated_changelog",
+      "path": "docs/CHANGELOG.md",
+      "repository": "vosslab/screenshot-ai-renamer-macos",
+      "source_content_hash": "1517fb498509f92920d884016fe7536bc49ce76a6d3f850d89bf517530c818fe",
+      "start": 0
+    },
+    {
+      "authority_level": "primary_narrative",
+      "authority_rank": 600,
+      "commit": "0ee435b4ed6c0f7489597edcc7d920b24eef9fe2",
+      "content": "## 2026-08-25\n\n### Behavior or Interface Changes\n\n- `devel/rotate_changelog.py` now begins automatic rotation only after the active changelog\n  exceeds 800 lines. It partitions older day blocks into 800-900-line target archives, keeps\n  every archive strictly below 1000 lines, and refuses an oversized day block before writing.\n- Added a vendored-file notice to every root `docs/*.md` file that propagation overwrites in\n  consumer repositories. Changelogs and noexist documentation remain consumer-owned.\n\n### Developer Tests and Notes\n\n- `source source_me.sh && python3 -m pytest tests/meta/test_rotate_changelog.py\n  tests/test_source_file_line_limit.py` passed: 157 tests. The existing archive files contain\n  610, 895, and 914 lines, respectively.\n- `source source_me.sh && python3 -m pytest tests/` passed: 1,792 tests.\n- `source source_me.sh && python3 -m pytest tests/meta/test_vendored_docs.py\n  tests/test_markdown_links.py tests/test_ascii_compliance.py` passed: 204 tests.\n",
+      "content_hash": "df0dba016e356850abdf25a89aa0eae61ad4a349ea5a1dedd197fcd9796747f4",
+      "end": 986,
+      "evidence_id": "ev-306feb84aa3d91e5",
+      "excerpt_id": "ex-b8dce1281c2ac21a",
+      "kind": "dated_changelog",
+      "path": "docs/CHANGELOG.md",
+      "repository": "vosslab/starter-repo-template",
+      "source_content_hash": "df0dba016e356850abdf25a89aa0eae61ad4a349ea5a1dedd197fcd9796747f4",
+      "start": 0
+    },
+    {
+      "authority_level": "primary_narrative",
+      "authority_rank": 600,
+      "commit": "9ec927eb47595034ccb0fb34b4d52544d83dc472",
+      "content": "## 2026-08-25\n\n### Behavior or Interface Changes\n\n- Reorganized the SVG ingestion normalizer as the focused `tools/svg_normalizer/`\n  package. The stable `tools/normalize_svg_v3.py` command is now a thin CLI\n  launcher, while callers import the module that owns the required API.\n\n### Fixes and Maintenance\n\n- Split the oversized Python generators, validators, scene-lint rules, manual\n  renderer, stepper state/operations, SVG audit, and normalizer tests into\n  cohesive modules. All eleven requested Python surfaces are now below the\n  1,000-line limit, with their specific line-limit exceptions removed.\n- Corrected the normalizer package boundaries and direct consumers, including\n  editor-cruft cleanup, transform identity ownership, pattern classification,\n  and the scene semantic-inspection geometry imports.\n- Corrected pyflakes issues in scene-lint findings output and manual interaction\n  rendering while preserving the repository's direct-module import convention.\n- Updated the SVG consistency plan, embedded-interface audit, and architecture\n  maps for the normalizer package and extracted pipeline helpers. Retired-test\n  refere",
+      "content_hash": "6149ad6f180eb364c88c2e31fdb57ab8050f891142ac051496eefd992820f116",
+      "end": 1143,
+      "evidence_id": "ev-645410a4accf0f87",
+      "excerpt_id": "ex-4930b702b487e1b0",
+      "kind": "dated_changelog",
+      "path": "docs/CHANGELOG.md",
+      "repository": "vosslab/virtual-lab-protocol-simulation",
+      "source_content_hash": "5662e2e09732e4718cfe00a091a518ecb3e21d3e05bc08d6a5e23de00560a5f8",
+      "start": 0
+    },
+    {
+      "authority_level": "visual_support",
+      "authority_rank": 200,
+      "commit": "d4403992a86a3042d9a60fe2980e0ce0d31907e2",
+      "content": "Commit-selected image docs/screenshots/instructor/assignment_preview/03_revision_conflict.png is available to the article at ../../assets/publications/2026-08-25/a92437e07ca8-03_revision_conflict.png.",
+      "content_hash": "92b44f098930dd4c0f37ffe93e946a7f4d5c0d8e6630c78a3a8dbd4e43cb835e",
+      "end": 200,
+      "evidence_id": "ev-08997bf317865457",
+      "excerpt_id": "ex-0d2e8a9e052a66c0",
+      "kind": "screenshot",
+      "path": "docs/screenshots/instructor/assignment_preview/03_revision_conflict.png",
+      "repository": "vosslab/peptidyle-learning-engine",
+      "source_content_hash": "92b44f098930dd4c0f37ffe93e946a7f4d5c0d8e6630c78a3a8dbd4e43cb835e",
+      "start": 0
+    },
+    {
+      "authority_level": "visual_support",
+      "authority_rank": 200,
+      "commit": "d4403992a86a3042d9a60fe2980e0ce0d31907e2",
+      "content": "Commit-selected image docs/screenshots/instructor/assignment_access/01_access_preview_allowed.png is available to the article at ../../assets/publications/2026-08-25/48c23638277f-01_access_preview_allowed.png.",
+      "content_hash": "8e116670659b1d539778bbd05a31989459a841940aee9f0214ab4df4abe815a1",
+      "end": 209,
+      "evidence_id": "ev-865b061285d54530",
+      "excerpt_id": "ex-d2fc020d9b58e7ce",
+      "kind": "screenshot",
+      "path": "docs/screenshots/instructor/assignment_access/01_access_preview_allowed.png",
+      "repository": "vosslab/peptidyle-learning-engine",
+      "source_content_hash": "8e116670659b1d539778bbd05a31989459a841940aee9f0214ab4df4abe815a1",
+      "start": 0
+    },
+    {
+      "authority_level": "visual_support",
+      "authority_rank": 200,
+      "commit": "d4403992a86a3042d9a60fe2980e0ce0d31907e2",
+      "content": "Commit-selected image docs/screenshots/instructor/assignment_preview/01_schedule_entitlement.png is available to the article at ../../assets/publications/2026-08-25/d182a2d5a293-01_schedule_entitlement.png.",
+      "content_hash": "dfd2f771afd620120460e41c5cbf5e406792bc1262c0ababfac3b4e498726e28",
+      "end": 206,
+      "evidence_id": "ev-cbc143841a879c00",
+      "excerpt_id": "ex-474fd03aa6293e3d",
+      "kind": "screenshot",
+      "path": "docs/screenshots/instructor/assignment_preview/01_schedule_entitlement.png",
+      "repository": "vosslab/peptidyle-learning-engine",
+      "source_content_hash": "dfd2f771afd620120460e41c5cbf5e406792bc1262c0ababfac3b4e498726e28",
+      "start": 0
+    },
+    {
+      "authority_level": "visual_support",
+      "authority_rank": 200,
+      "commit": "d4403992a86a3042d9a60fe2980e0ce0d31907e2",
+      "content": "Commit-selected image docs/screenshots/instructor/assignment_access/02_access_preview_denied.png is available to the article at ../../assets/publications/2026-08-25/066951ef79ff-02_access_preview_denied.png.",
+      "content_hash": "fabbc9944717e1e542deaa0519aeea07e704a8d1569fa071e20453ecfdfe55df",
+      "end": 207,
+      "evidence_id": "ev-ed91371e064aa54d",
+      "excerpt_id": "ex-9bb4ce4360654e54",
+      "kind": "screenshot",
+      "path": "docs/screenshots/instructor/assignment_access/02_access_preview_denied.png",
+      "repository": "vosslab/peptidyle-learning-engine",
+      "source_content_hash": "fabbc9944717e1e542deaa0519aeea07e704a8d1569fa071e20453ecfdfe55df",
+      "start": 0
+    }
+  ],
+  "packet_id": "9e16cd490f4f9157a6f7d8968852ab21b3d419f905d39d44bb4877efda9a4171",
+  "projection_id": "bc9b904bf9829c9a461c426784a2dc0ea2e4a906168bab44903d73016a24759a",
+  "projection_limits": {
+    "commit_subject_chars": 480,
+    "context_chars": 60000,
+    "excerpt_chars": 6000
+  },
+  "report_date": "2026-08-25",
+  "repositories": [
+    {
+      "commit_count": 13,
+      "commit_shas": [
+        "561041c4a3f0a8e4b3545cdec305f7317f152ec3",
+        "db3c4334090d620f88bbdde32baad94d0d39b9fc",
+        "4cddfc21907985e2ef94d782c4e5033eada9b844",
+        "dc5ed31521769fd716dd4210c861d07b8eaf891c",
+        "3978f390882d98aea64d8a284128ee6d163a828a",
+        "924304d99b454a832f1706a67a83edea7679cb97",
+        "70eb4af171529081e745375f9e0e223dd1046cc6",
+        "7dd530a3efa37c90c16d28410ab2a581ac8865f1",
+        "8f2f1b4e534ddbe7ca47f76905fc8d4b9fefd428",
+        "2b611d2080562ef8d78259c7a5b9a8466cf29eb0",
+        "9ef92c3fd1862b25ff4a665c27b18aab685d1019"
+      ],
+      "commit_subjects": [
+        "first commit",
+        "remove content",
+        "one more",
+        "Added term-first Fall 2026 pages for BIOL 318/418, BIOL 35... (+61 more)",
+        "Replaced the thin repository README with a content-first landing page...",
+        "nonthign",
+        "Changed Pages deployment to run after every successful `mai... (+1 more)",
+        "Strengthened the complete PDF heading hierarchy so each lin... (+1 more)",
+        "Added restricted Markdown fragment embedding so instructor... (+40 more)",
+        "updates",
+        "Removed the parallel Markdown and manifest template tree; ... (+12 more"
+      ],
+      "created_at": "2026-08-25T16:15:33Z",
+      "created_in_report_window": true,
+      "is_fork": false,
+      "repository": "vosslab/syllabus",
+      "repository_url": "https://github.com/vosslab/syllabus",
+      "story_signals": [
+        "new_source_repository"
+      ]
+    },
+    {
+      "commit_count": 1,
+      "commit_shas": [
+        "7ac6ccdabacdad8a86d67c9501470f0e65bec2f0"
+      ],
+      "commit_subjects": [
+        "Add 56 hourly data rows through 2026-08-25 06:00"
+      ],
+      "created_at": "2026-03-05T18:18:23Z",
+      "created_in_report_window": false,
+      "is_fork": false,
+      "repository": "vosslab/battery-control",
+      "repository_url": "https://github.com/vosslab/battery-control",
+      "story_signals": []
+    },
+    {
+      "commit_count": 1,
+      "commit_shas": [
+        "2106507525c43882da63f0471d05f3f03872d4fc"
+      ],
+      "commit_subjects": [
+        "Removed named Arial font overrides from generated questions... (+1 more)"
+      ],
+      "created_at": "2021-09-29T20:42:59Z",
+      "created_in_report_window": false,
+      "is_fork": false,
+      "repository": "vosslab/biology-problems",
+      "repository_url": "https://github.com/vosslab/biology-problems",
+      "story_signals": []
+    },
+    {
+      "commit_count": 4,
+      "commit_shas": [
+        "67ca508978863b7e042a2ca91ad9b2fef44ad13c",
+        "e8bd31615225eab24b66f0b2ab862fe674dc9956",
+        "90b802f6bc9d3765b58bbca903ae734bf7617c7c",
+        "c41427f1c7a12a747a009a0ae4010498172738e8"
+      ],
+      "commit_subjects": [
+        "Added run_web_server.sh as the repository-aware local previ... (+7 more)",
+        "Extended the Atkinson text font through the daily puzzle roots and em...",
+        "deploy: 67ca508978863b7e042a2ca91ad9b2fef44ad13c",
+        "deploy: e8bd31615225eab24b66f0b2ab862fe674dc9956"
+      ],
+      "created_at": "2025-01-23T15:39:10Z",
+      "created_in_report_window": false,
+      "is_fork": false,
+      "repository": "vosslab/biology-problems-website",
+      "repository_url": "https://github.com/vosslab/biology-problems-website",
+      "story_signals": []
+    },
+    {
+      "commit_count": 6,
+      "commit_shas": [
+        "606e0dd49c0ebb1c2a4d733796f66205d53bc124",
+        "3e91a5ebbe3bf7ceb8d8e6db63517ea02f9cfa50",
+        "a3f59436ac6d439c620f7f5ec071aae3a368a45d",
+        "4a5f105ac236769d257fa48af812b9eb05c310ec",
+        "e5239d846bc72aed046476e4ddf67aab70eefea7",
+        "12b4c0da61cb0aa36f3efc4720bb938d7023fc32"
+      ],
+      "commit_subjects": [
+        "Added typed live-atom revision and digest fence translatio... (+31 more)",
+        "vendored",
+        "Stabilized the public CLI verb E2E around Ferrum's durable... (+15 more)",
+        "Completed the durable `document_object_id` migration for pr... (+4 more)",
+        "minor",
+        "new file"
+      ],
+      "created_at": "2026-08-03T20:46:48Z",
+      "created_in_report_window": false,
+      "is_fork": false,
+      "repository": "vosslab/ferrum-chemical-forge",
+      "repository_url": "https://github.com/vosslab/ferrum-chemical-forge",
+      "story_signals": []
+    },
+    {
+      "commit_count": 5,
+      "commit_shas": [
+        "bd6f2e1425ec4c1dde8fa45c2e29ac6ac76a60f6",
+        "d4403992a86a3042d9a60fe2980e0ce0d31907e2",
+        "aba6be2ad53502e42d0bbf799d73171b83c90174",
+        "24d50163ef301e0b2b8716b9a25b008013b1947d",
+        "b3582c994fe668bd9fecc458d3137bf330a29d55"
+      ],
+      "commit_subjects": [
+        "Accepted WP-PROF-D1 question discovery on the canonical liv... (+3 more)",
+        "Accepted WP-PROF-D2 live problem curation and advanced the ... (+3 more)",
+        "updated",
+        "Established the `WP-PROF-B2` domain foundation for explicit... (+7 more)",
+        "updates"
+      ],
+      "created_at": "2026-08-06T19:08:05Z",
+      "created_in_report_window": false,
+      "is_fork": false,
+      "repository": "vosslab/peptidyle-learning-engine",
+      "repository_url": "https://github.com/vosslab/peptidyle-learning-engine",
+      "story_signals": []
+    },
+    {
+      "commit_count": 1,
+      "commit_shas": [
+        "5a76404a031e4749c38e9919eee5bbdc47e95f78"
+      ],
+      "commit_subjects": [
+        "Isolated HTML self-test controls by item CRC, made MULTI_FI... (+1 more)"
+      ],
+      "created_at": "2025-01-15T21:28:41Z",
+      "created_in_report_window": false,
+      "is_fork": false,
+      "repository": "vosslab/qti-package-maker",
+      "repository_url": "https://github.com/vosslab/qti-package-maker",
+      "story_signals": []
+    },
+    {
+      "commit_count": 3,
+      "commit_shas": [
+        "c0a8e55850fff34345a5e075f71875368256ec5e",
+        "368b6c966b8a86aaed3c97de0a7b6521a02568b5",
+        "33887f8bdbbbcc34e38626136e6267f8e7ac976a"
+      ],
+      "commit_subjects": [
+        "updates from template repo",
+        "Add a configurable filename-model provider layer backed by... (+18 more)",
+        "Keep Ollama model identity in `DEFAULT_FILENAME_MODEL` as ... (+11 more)"
+      ],
+      "created_at": "2025-03-07T15:28:27Z",
+      "created_in_report_window": false,
+      "is_fork": false,
+      "repository": "vosslab/screenshot-ai-renamer-macos",
+      "repository_url": "https://github.com/vosslab/screenshot-ai-renamer-macos",
+      "story_signals": []
+    },
+    {
+      "commit_count": 1,
+      "commit_shas": [
+        "0ee435b4ed6c0f7489597edcc7d920b24eef9fe2"
+      ],
+      "commit_subjects": [
+        "`devel/rotate_changelog.py` now begins automatic rotation o... (+4 more)"
+      ],
+      "created_at": "2026-02-14T14:58:17Z",
+      "created_in_report_window": false,
+      "is_fork": false,
+      "repository": "vosslab/starter-repo-template",
+      "repository_url": "https://github.com/vosslab/starter-repo-template",
+      "story_signals": []
+    },
+    {
+      "commit_count": 7,
+      "commit_shas": [
+        "b299fe26403fa765ea73f5983e1ba01f6ee1df2e",
+        "e8c76890e2a9605429ffcf9850ecdc2e23919a8b",
+        "d5cae1ac8ca3ae05ad9b9cc20e594e79ea3d30a6",
+        "4715482753bb38a40604afb81caa73ea222975b8",
+        "988bd8a105fb3b64c0ba2ef23dd9269906e2d13c",
+        "c9d145ea23a5d430e40649312b93474d71b4d590",
+        "9ec927eb47595034ccb0fb34b4d52544d83dc472"
+      ],
+      "commit_subjects": [
+        "from repo template",
+        "Human review rejected the flattened water-bath redraw. Both... (+2 more)",
+        "update from upstream",
+        "these promote legacy content",
+        "remove",
+        "remove legacy tests",
+        "Reorganized the SVG ingestion normalizer as the focused `to... (+6 more)"
+      ],
+      "created_at": "2026-04-07T01:04:58Z",
+      "created_in_report_window": false,
+      "is_fork": false,
+      "repository": "vosslab/virtual-lab-protocol-simulation",
+      "repository_url": "https://github.com/vosslab/virtual-lab-protocol-simulation",
+      "story_signals": []
+    }
+  ],
+  "schema_version": "vosslab.daily-blog.editorial-projection.v2",
+  "timezone": "America/Chicago"
+}

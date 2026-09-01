@@ -10,12 +10,13 @@ import pytest
 
 # local repo modules
 import scripts.publication_record
+import scripts.publication_article_projection
 import scripts.render_publication_status
 import scripts.site_deployment
 
 
 REPORT_DATE = "2026-08-23"
-BUNDLE_ID = "a" * 64
+BUNDLE_SHA256 = "a" * 64
 
 
 #============================================
@@ -49,30 +50,59 @@ def _fake_build(stage_root: str, site_dir: str, _root: str) -> None:
 		handle.write(index_source)
 	with open(os.path.join(site_dir, "status", "index.html"), "w", encoding="utf-8") as handle:
 		handle.write("status")
+	post_path = os.path.join(stage_root, "docs", "blog", "posts", f"{REPORT_DATE}.md")
+	if os.path.isfile(post_path):
+		with open(post_path, encoding="utf-8") as handle:
+			post = handle.read()
+		rendered = scripts.publication_article_projection.render_staged_post_body(
+			post,
+			os.path.join(stage_root, "mkdocs.yml"),
+		)
+		article_dir = os.path.join(site_dir, "article")
+		os.makedirs(article_dir)
+		with open(os.path.join(article_dir, "index.html"), "w", encoding="utf-8") as handle:
+			handle.write(
+				f'<time datetime="{REPORT_DATE} 00:00:00+00:00"></time>'
+				f'<article class="md-content__inner md-typeset">{rendered}</article>'
+			)
 
 
 #============================================
 def _install_publication_record(root: pathlib.Path) -> dict:
 	"""Install one complete publication receipt and matching source post."""
-	post = "# Imported post\n"
+	post = (
+		"---\ndate: 2026-08-23\nslug: imported\n---\n\n"
+		"# Imported post\n\nGrounded retained material.\n"
+	)
 	post_path = root / "docs" / "blog" / "posts" / f"{REPORT_DATE}.md"
 	post_path.write_text(post, encoding="utf-8")
-	archive = root / "data" / "publication_bundles" / BUNDLE_ID
+	archive = root / "data" / "publication_bundles" / REPORT_DATE
 	archive.mkdir(parents=True)
 	(archive / "post.md").write_text(post, encoding="utf-8")
 	record = {
 		"schema_version": scripts.publication_record.PUBLICATION_SCHEMA_VERSION,
 		"report_date": REPORT_DATE,
 		"timezone": "America/Chicago",
-		"bundle_id": BUNDLE_ID,
+		"bundle_sha256": BUNDLE_SHA256,
+		"article_body_sha256": scripts.publication_article_projection.article_body_sha256(
+			scripts.publication_article_projection.source_article_projection(
+				post,
+				str(root / "mkdocs.yml"),
+			)
+		),
+		"best_artifact_id": "artifact-" + "c" * 24,
 		"generator_run": "test-run",
 		"generator_revision": "b" * 64,
-		"evidence_manifest": f"data/publication_bundles/{BUNDLE_ID}/evidence.json",
+		"evidence_manifest": f"data/publication_bundles/{REPORT_DATE}/evidence.json",
 		"editorial_projection_manifest": (
-			f"data/publication_bundles/{BUNDLE_ID}/editorial_projection.json"
+			f"data/publication_bundles/{REPORT_DATE}/editorial_projection.json"
 		),
+		"publication_surface_manifest": (
+			f"data/publication_bundles/{REPORT_DATE}/publication_surface.json"
+		),
+		"publication_surface_id": "d" * 64,
+		"publication_surface_sha256": "e" * 64,
 		"post_path": f"docs/blog/posts/{REPORT_DATE}.md",
-		"release_id": BUNDLE_ID,
 		"imported_at": "2026-08-24T12:00:00Z",
 	}
 	record_dir = root / "data" / "publications"
@@ -124,12 +154,15 @@ def test_site_deployment_requires_python_313() -> None:
 
 
 #============================================
-def test_site_release_preserves_base_bundle_identity(tmp_path: pathlib.Path) -> None:
+def test_site_release_preserves_base_report_date(tmp_path: pathlib.Path) -> None:
 	_initialize_source(tmp_path)
-	_install_publication_record(tmp_path)
+	record = _install_publication_record(tmp_path)
+	legacy = {key: record[key] for key in scripts.publication_record.HISTORICAL_PUBLICATION_RECORD_FIELDS}
+	legacy["schema_version"] = scripts.publication_record.HISTORICAL_PUBLICATION_SCHEMA_VERSION
+	_write_json(tmp_path / "data" / "publications" / f"{REPORT_DATE}.json", legacy)
 	scripts.site_deployment.publish_site(str(tmp_path), _fake_build)
-	assert scripts.site_deployment.site_serves_bundle(str(tmp_path), BUNDLE_ID)
-	assert not scripts.site_deployment.site_serves_bundle(str(tmp_path), "c" * 64)
+	assert scripts.site_deployment.site_serves_publication(str(tmp_path), REPORT_DATE)
+	assert not scripts.site_deployment.site_serves_publication(str(tmp_path), "2026-08-22")
 
 
 #============================================
@@ -153,5 +186,32 @@ def test_failed_build_preserves_served_pointer(tmp_path: pathlib.Path) -> None:
 
 	with pytest.raises(RuntimeError, match="synthetic build failure"):
 		scripts.site_deployment.publish_site(str(tmp_path), failed_build)
+
+	assert os.readlink(tmp_path / "site") == original_target
+
+
+#============================================
+def test_wrong_rebuilt_article_preserves_served_pointer(tmp_path: pathlib.Path) -> None:
+	"""A redeploy cannot promote a dated page that drops a sealed article body."""
+	_initialize_source(tmp_path)
+	_install_publication_record(tmp_path)
+	scripts.site_deployment.publish_site(str(tmp_path), _fake_build)
+	original_target = os.readlink(tmp_path / "site")
+
+	def wrong_article_build(_stage_root: str, site_dir: str, _root: str) -> None:
+		os.makedirs(site_dir)
+		with open(os.path.join(site_dir, "index.html"), "w", encoding="utf-8") as handle:
+			handle.write("presentation index")
+		article_dir = os.path.join(site_dir, "article")
+		os.makedirs(article_dir)
+		with open(os.path.join(article_dir, "index.html"), "w", encoding="utf-8") as handle:
+			handle.write(
+				f'<time datetime="{REPORT_DATE} 00:00:00+00:00"></time>'
+				'<article class="md-content__inner md-typeset"><h1>Imported post</h1>'
+				'<p>Wrong reader body.</p></article>'
+			)
+
+	with pytest.raises(RuntimeError, match="does not retain"):
+		scripts.site_deployment.publish_site(str(tmp_path), wrong_article_build)
 
 	assert os.readlink(tmp_path / "site") == original_target

@@ -11,8 +11,10 @@ dependencies needed to validate bundles, build MkDocs, and run the repository-ow
 - `systemd --user` only when this host should serve the LAN site on port 8016.
 
 The producer repository, `vosslab-podcast`, owns bundle generation and scheduling. This repository
-accepts an already complete publication bundle; it does not need producer credentials or model
-runtime configuration.
+accepts an already complete `vosslab.daily-blog.bundle.v9` bundle; it does not need producer
+credentials or model runtime configuration. A new import includes the producer's canonical
+`publication_surface.json`, which defines the survivor-scoped evidence, repositories, and images
+that the publisher may admit.
 
 ## Install dependencies
 
@@ -31,9 +33,9 @@ source .venv/bin/activate
 ./publish_site.sh
 ```
 
-`pip_requirements.txt` installs MkDocs Material and YAML support. The development requirements add
-pytest and repository hygiene tools. The repository is not packaged for `pip install`; run its
-scripts from the checkout after sourcing `source_me.sh`.
+`pip_requirements.txt` installs MkDocs Material, direct Markdown, and YAML support. The development
+requirements add pytest and repository hygiene tools. The repository is not packaged for `pip install`;
+run its scripts from the checkout after sourcing `source_me.sh`.
 
 ## Verify install
 

@@ -43,6 +43,7 @@ theme:
         name: Use light mode
   features:
     - content.footer
+    - navigation.tabs
     - navigation.instant
     - navigation.instant.progress
     - navigation.indexes

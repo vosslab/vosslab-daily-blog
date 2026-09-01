@@ -1,6 +1,6 @@
 """Final-only bundle validation, idempotency, and transaction tests."""
-
 # Standard Library
+import hashlib
 import os
 import json
 import pathlib
@@ -11,20 +11,19 @@ import pytest
 
 # local repo modules
 import scripts.import_publication_bundle
+import scripts.bundle_snapshot
+import scripts.maker_activation
+import scripts.publication_record
 import scripts.publication_transaction
 import scripts.site_deployment
-
-
+import scripts.publication_article_projection
+import scripts.publication_surface
 REPORT_DATE = "2026-08-23"
-
-
-#============================================
+ASSET_NAME = "alpha.bin"
+ASSET_BYTES = b"offline screenshot bytes"
 def write_json(path: pathlib.Path, value: dict) -> None:
 	"""Write one stable inline JSON test artifact."""
-	path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-
-
-#============================================
+	path.write_bytes(scripts.canonical_json.stable_json_bytes(value))
 def initialize_site(root: pathlib.Path) -> None:
 	"""Create a minimal publisher-owned source and prior served release."""
 	(root / "docs" / "blog" / "posts").mkdir(parents=True)
@@ -39,18 +38,20 @@ def initialize_site(root: pathlib.Path) -> None:
 	(old_release / "index.html").write_text("old release", encoding="utf-8")
 	(root / "generated" / "staging").mkdir()
 	(root / "site").symlink_to("generated/releases/old")
-
-
-#============================================
 def make_repository_evidence(repository: str, suffix: str) -> tuple[dict, dict, dict]:
 	"""Return matching mirror, activity, and evidence-item records."""
+	owner, name = repository.split("/", 1)
 	commit_id = suffix * 40
 	parent_id = chr(ord(suffix) + 1) * 40
 	content = f"{repository} moved publication ownership into one exact contract."
 	mirror = {
 		"repository": repository,
 		"repository_url": f"https://github.com/{repository}",
-		"cache_path": f"/cache/{repository.replace('/', '-')}",
+		"clone_url": f"https://github.com/{repository}.git",
+		"created_at": "2020-01-01T00:00:00Z",
+		"is_fork": False,
+		"roster_id": "e" * 64,
+		"cache_path": f"/cache/{owner}/{name}",
 		"refresh_result": "refreshed",
 		"refresh_error": "",
 		"default_revision": commit_id,
@@ -78,6 +79,15 @@ def make_repository_evidence(repository: str, suffix: str) -> tuple[dict, dict, 
 		],
 		"revision_ranges": [{"base_commit": parent_id, "final_commit": commit_id}],
 		"snapshot_commits": [commit_id],
+		"is_fork": False,
+		"lifecycle_events": [
+			{
+				"event_type": "repository_created",
+				"source": "github_owner_roster",
+				"occurred_at": "2020-01-01T00:00:00Z",
+				"occurred_in_report_window": False,
+			}
+		],
 	}
 	item = {
 		"evidence_id": "",
@@ -98,21 +108,64 @@ def make_repository_evidence(repository: str, suffix: str) -> tuple[dict, dict, 
 	item["evidence_id"] = scripts.import_publication_bundle.evidence_item_identity(item)
 	return mirror, activity, item
 
-
-#============================================
 def make_bundle(root: pathlib.Path, run_id: str) -> str:
-	"""Write one complete inline final-only contract bundle without media assets."""
+	"""Write one complete inline final-only contract bundle with one declared asset."""
+	activation = scripts.maker_activation.load_maker_activation()
 	bundle_dir = root / f"bundle-{run_id}"
 	(bundle_dir / "assets").mkdir(parents=True)
+	repository_roster = {
+		"schema_version": "vosslab.daily-blog.repository-roster.v1",
+		"owner": "vosslab",
+		"repositories": [
+			{
+				"repository": repository,
+				"repository_url": f"https://github.com/{repository}",
+				"clone_url": f"https://github.com/{repository}.git",
+				"created_at": "2020-01-01T00:00:00Z",
+				"is_fork": False,
+			}
+			for repository in ("vosslab/alpha", "vosslab/beta", "vosslab/quiet-repository")
+		],
+	}
+	roster_content = dict(repository_roster)
+	repository_roster["roster_id"] = scripts.import_publication_bundle.hash_value(roster_content)
 	records = [
 		make_repository_evidence("vosslab/alpha", "a"),
 		make_repository_evidence("vosslab/beta", "c"),
 	]
 	mirrors = [record[0] for record in records]
+	for mirror in mirrors:
+		mirror["roster_id"] = repository_roster["roster_id"]
 	activity = [record[1] for record in records]
 	items = [record[2] for record in records]
+	asset_item = dict(records[0][2])
+	asset_item.update(
+		{
+			"kind": "screenshot",
+			"authority_level": "visual_support",
+			"authority_rank": 200,
+			"asset_path": f"assets/{ASSET_NAME}",
+			"publish_path": f"../../assets/publications/{REPORT_DATE}/{ASSET_NAME}",
+		}
+	)
+	asset_item["evidence_id"] = scripts.import_publication_bundle.evidence_item_identity(asset_item)
+	items.append(asset_item)
+	unselected_asset_item = dict(asset_item)
+	unselected_asset_item.update({
+		"asset_path": "assets/unselected.bin",
+		"publish_path": f"../../assets/publications/{REPORT_DATE}/unselected.bin",
+	})
+	unselected_asset_item["content"] += " This screenshot remains outside the survivor surface."
+	unselected_asset_item["content_hash"] = scripts.import_publication_bundle.sha256_bytes(
+		unselected_asset_item["content"].encode("utf-8")
+	)
+	unselected_asset_item["evidence_id"] = scripts.import_publication_bundle.evidence_item_identity(
+		unselected_asset_item
+	)
+	items.append(unselected_asset_item)
+	(bundle_dir / "assets" / ASSET_NAME).write_bytes(ASSET_BYTES)
 	evidence = {
-		"schema_version": "vosslab.daily-blog.evidence.v3",
+		"schema_version": "vosslab.daily-blog.evidence.v4",
 		"report_date": REPORT_DATE,
 		"timezone": "America/Chicago",
 		"complete": True,
@@ -129,11 +182,17 @@ def make_bundle(root: pathlib.Path, run_id: str) -> str:
 			"commit_count": len(record[1]["commits"]),
 			"commit_shas": [record[1]["commits"][0]["sha"]],
 			"commit_subjects": [record[1]["commits"][0]["message"]],
+			"created_at": record[1]["lifecycle_events"][0]["occurred_at"],
+			"created_in_report_window": False,
+			"is_fork": False,
+			"story_signals": [],
 		}
 		for record in records
 	]
 	excerpts = []
 	for item in items:
+		if item["asset_path"] == "assets/unselected.bin":
+			continue
 		start = item["content"].index("moved")
 		end = len(item["content"])
 		content = item["content"][start:end]
@@ -161,7 +220,7 @@ def make_bundle(root: pathlib.Path, run_id: str) -> str:
 		)
 		excerpts.append(excerpt)
 	projection = {
-		"schema_version": "vosslab.daily-blog.editorial-projection.v1",
+		"schema_version": "vosslab.daily-blog.editorial-projection.v2",
 		"projection_id": "",
 		"packet_id": evidence["packet_id"],
 		"report_date": REPORT_DATE,
@@ -186,7 +245,7 @@ def make_bundle(root: pathlib.Path, run_id: str) -> str:
 		+ "editorial_projection: editorial_projection.json\n"
 		+ "---\n\n"
 		+ "# Exact evidence preserves the publication boundary\n\n"
-		+ f"I kept the account tied to exact objects. <!-- evidence: {items[0]['evidence_id']} -->\n\n"
+		+ f"I kept the account tied to [vosslab/alpha](https://github.com/vosslab/alpha) exact objects. <!-- evidence: {items[0]['evidence_id']} -->\n\n"
 		+ "<!-- more -->\n\n"
 		+ "## Publication state\n\n"
 		+ f"I retained a bounded work log. <!-- evidence: {items[1]['evidence_id']} -->\n"
@@ -195,6 +254,7 @@ def make_bundle(root: pathlib.Path, run_id: str) -> str:
 			"I kept the visible record tied to the same small, inspectable boundary. " * 35
 		)
 		+ f"<!-- evidence: {items[0]['evidence_id']} -->\n\n"
+		+ f"![Selected proof]({asset_item['publish_path']})\n\n"
 		+ "## Project coverage\n\n"
 		+ (
 			f"vosslab/alpha and vosslab/beta both remain in this bounded publication record. "
@@ -202,9 +262,31 @@ def make_bundle(root: pathlib.Path, run_id: str) -> str:
 		)
 	)
 	post_hash = scripts.import_publication_bundle.sha256_bytes(post.encode("utf-8"))
+	surface = {
+		"schema_version": "vosslab.daily-blog.publication-surface.v1",
+		"surface_id": "",
+		"report_date": REPORT_DATE,
+		"timezone": "America/Chicago",
+		"aggregate_packet_id": evidence["packet_id"],
+		"source_packet_ids": scripts.publication_surface.reconstruct_source_packet_ids(evidence),
+		"repositories": sorted(record["repository"] for record in repositories),
+		"source_artifacts": [
+			{"kind": "DailyOutline", "artifact_id": "artifact-" + "b" * 24, "content_hash": "b" * 64},
+			{"kind": "RepoStory", "artifact_id": "artifact-" + "c" * 24, "content_hash": "c" * 64},
+		],
+		"editorial_projection_id": projection["projection_id"],
+		"allowed_evidence_ids": sorted({excerpt["evidence_id"] for excerpt in excerpts}),
+		"allowed_images": [{
+			"evidence_id": asset_item["evidence_id"],
+			"asset_path": asset_item["asset_path"],
+			"publish_path": asset_item["publish_path"],
+		}],
+	}
+	surface["surface_id"] = scripts.publication_surface.surface_id(surface)
 	bundle = {
-		"schema_version": "vosslab.daily-blog.bundle.v2",
-		"bundle_id": "",
+		"schema_version": scripts.import_publication_bundle.BUNDLE_SCHEMA_VERSION,
+		"bundle_sha256": "",
+		"best_artifact_id": "artifact-" + "a" * 24,
 		"report_date": REPORT_DATE,
 		"timezone": "America/Chicago",
 		"created_at": "2026-08-24T08:00:00Z",
@@ -214,64 +296,97 @@ def make_bundle(root: pathlib.Path, run_id: str) -> str:
 			"version": "daily-blog-generator-v2",
 		},
 		"contracts": {
-			"evidence_schema": "vosslab.daily-blog.evidence.v3",
-			"editorial_projection_schema": "vosslab.daily-blog.editorial-projection.v1",
-			"prompt_version": "daily-blog-prompts-v3",
-			"rubric_version": "daily-blog-rubric-v3",
-			"candidate_validation": {
-				"name": scripts.validate_daily_post.V3_HISTORICAL_POLICY.name,
-				"version": scripts.validate_daily_post.V3_HISTORICAL_POLICY.version,
-				"sha256": scripts.validate_daily_post.V3_HISTORICAL_POLICY.digest,
-			},
+			"evidence_schema": "vosslab.daily-blog.evidence.v4",
+			"editorial_projection_schema": "vosslab.daily-blog.editorial-projection.v2",
+			"prompt_version": "daily-blog-prompts-v4",
+			"rubric_version": "daily-blog-rubric-v4",
+		"candidate_validation": {
+				"name": scripts.validate_daily_post.V4_MAKER_POLICY.name,
+				"version": scripts.validate_daily_post.V4_MAKER_POLICY.version,
+			"sha256": scripts.validate_daily_post.V4_MAKER_POLICY.digest,
 		},
+		"publication_source_safety": scripts.publication_source_safety.policy_identity(),
+	},
 		"evidence": {
 			"path": "evidence.json",
 			"packet_id": evidence["packet_id"],
 			"sha256": scripts.import_publication_bundle.hash_value(evidence),
+		},
+		"repository_roster": {
+			"path": "repository_roster.json",
+			"roster_id": repository_roster["roster_id"],
+			"sha256": scripts.import_publication_bundle.hash_value(repository_roster),
 		},
 		"editorial_projection": {
 			"path": "editorial_projection.json",
 			"projection_id": projection["projection_id"],
 			"sha256": scripts.import_publication_bundle.hash_value(projection),
 		},
-		"post": {"path": "post.md", "sha256": post_hash},
-		"assets": [],
-		"candidates": [
-			{
-				"candidate_id": "candidate_1",
-				"post_hash": post_hash,
-				"projection_id": projection["projection_id"],
-				"valid": True,
-				"issues": [],
-			},
-			{
-				"candidate_id": "candidate_2",
-				"post_hash": scripts.import_publication_bundle.sha256_bytes(
-					f"alternate {run_id}".encode("utf-8")
-				),
-				"projection_id": projection["projection_id"],
-				"valid": True,
-				"issues": [],
-			},
-		],
-		"referee": {
-			"projection_id": projection["projection_id"],
-			"winner": "A",
-			"reason": "Candidate A best reflects the exact evidence.",
-			"evidence_quality": "high",
-			"confidence": 0.9,
-			"anonymous_mapping": {"A": "candidate_1", "B": "candidate_2"},
+		"publication_surface": {
+			"path": "publication_surface.json",
+			"surface_id": surface["surface_id"],
+			"sha256": scripts.import_publication_bundle.hash_value(surface),
 		},
+		"post": {
+			"path": "post.md",
+			"sha256": post_hash,
+			"artifact_id": "artifact-" + "a" * 24,
+		},
+		"assets": [
+			{
+				"path": asset_item["asset_path"],
+				"sha256": scripts.import_publication_bundle.sha256_bytes(ASSET_BYTES),
+				"git_blob_hash": asset_item["blob_hash"],
+				"evidence_id": asset_item["evidence_id"],
+				"publish_path": asset_item["publish_path"],
+			}
+		],
+		"maker_activation": {
+			"activation_id": activation["activation_id"],
+			"editorial_prompt_contract_sha256": activation["editorial_prompt_contract_sha256"],
+		},
+		"editorial_prompt_contract": activation["editorial_prompt_contract"],
 	}
-	bundle["bundle_id"] = scripts.import_publication_bundle.bundle_identity(bundle)
+	bundle["bundle_sha256"] = scripts.import_publication_bundle.bundle_sha256(bundle)
 	write_json(bundle_dir / "evidence.json", evidence)
+	write_json(bundle_dir / "repository_roster.json", repository_roster)
 	write_json(bundle_dir / "editorial_projection.json", projection)
+	write_json(bundle_dir / "publication_surface.json", surface)
 	(bundle_dir / "post.md").write_text(post, encoding="utf-8")
 	write_json(bundle_dir / "bundle.json", bundle)
 	return str(bundle_dir)
-
-
-#============================================
+def bundle_transfer(bundle_path: str) -> bytes:
+	"""Encode one existing offline bundle as the producer stdin transport."""
+	bundle_root = pathlib.Path(bundle_path)
+	bundle = json.loads((bundle_root / "bundle.json").read_text(encoding="utf-8"))
+	paths = (
+		"bundle.json",
+		"editorial_projection.json",
+		"evidence.json",
+		"publication_surface.json",
+		"post.md",
+		"repository_roster.json",
+		*(asset["path"] for asset in bundle["assets"]),
+	)
+	contents_by_path = {path: (bundle_root / path).read_bytes() for path in paths}
+	entries = [
+		{"path": path, "size": len(contents_by_path[path]),
+			"sha256": hashlib.sha256(contents_by_path[path]).hexdigest()}
+		for path in sorted(paths)
+	]
+	header = {
+		"schema_version": scripts.bundle_snapshot.TRANSFER_SCHEMA_VERSION,
+		"report_date": bundle["report_date"],
+		"bundle_sha256": bundle["bundle_sha256"],
+		"entries": entries,
+	}
+	header_bytes = json.dumps(header, ensure_ascii=True, separators=(",", ":"), sort_keys=True).encode("utf-8")
+	return (
+		scripts.bundle_snapshot.TRANSFER_MAGIC
+		+ len(header_bytes).to_bytes(8, "big")
+		+ header_bytes
+		+ b"".join(contents_by_path[path] for path in sorted(paths))
+	)
 def rehash_projection_bundle(bundle_path: str, projection: dict) -> None:
 	"""Rehash an intentionally changed projection and its enclosing bundle."""
 	bundle_dir = pathlib.Path(bundle_path)
@@ -284,14 +399,8 @@ def rehash_projection_bundle(bundle_path: str, projection: dict) -> None:
 	bundle["editorial_projection"]["sha256"] = scripts.import_publication_bundle.hash_value(
 		projection
 	)
-	for candidate in bundle["candidates"]:
-		candidate["projection_id"] = projection["projection_id"]
-	bundle["referee"]["projection_id"] = projection["projection_id"]
-	bundle["bundle_id"] = scripts.import_publication_bundle.bundle_identity(bundle)
+	bundle["bundle_sha256"] = scripts.import_publication_bundle.bundle_sha256(bundle)
 	write_json(bundle_dir / "bundle.json", bundle)
-
-
-#============================================
 def rehash_post_bundle(bundle_path: str, post: str) -> None:
 	"""Rehash an intentionally changed selected post and enclosing bundle."""
 	bundle_dir = pathlib.Path(bundle_path)
@@ -299,20 +408,24 @@ def rehash_post_bundle(bundle_path: str, post: str) -> None:
 	(bundle_dir / "post.md").write_text(post, encoding="utf-8")
 	bundle = json.loads((bundle_dir / "bundle.json").read_text(encoding="utf-8"))
 	bundle["post"]["sha256"] = post_hash
-	bundle["candidates"][0]["post_hash"] = post_hash
-	bundle["bundle_id"] = scripts.import_publication_bundle.bundle_identity(bundle)
+	bundle["bundle_sha256"] = scripts.import_publication_bundle.bundle_sha256(bundle)
 	write_json(bundle_dir / "bundle.json", bundle)
-
-
-#============================================
-def fake_build(_stage_root: str, site_dir: str, _root: str) -> None:
-	"""Create the minimal built release expected by the transaction."""
+def fake_build(stage_root: str, site_dir: str, _root: str) -> None:
+	"""Create one dated reader article with the staged Markdown body."""
 	os.makedirs(site_dir)
+	post_path = os.path.join(stage_root, "docs", "blog", "posts", f"{REPORT_DATE}.md")
+	with open(post_path, encoding="utf-8") as handle:
+		post = handle.read()
+	rendered = scripts.publication_article_projection.render_staged_post_body(
+		post,
+		os.path.join(stage_root, "mkdocs.yml"),
+	)
 	with open(os.path.join(site_dir, "index.html"), "w", encoding="utf-8") as handle:
-		handle.write("new release")
+		handle.write(
+			f'<time datetime="{REPORT_DATE} 00:00:00+00:00"></time>'
+			f'<article class="md-content__inner md-typeset">{rendered}</article>'
+		)
 
-
-#============================================
 def publication_snapshot(root: pathlib.Path) -> dict:
 	"""Return the complete publisher transaction state."""
 	post_path = root / "docs" / "blog" / "posts" / f"{REPORT_DATE}.md"
@@ -334,28 +447,38 @@ def publication_snapshot(root: pathlib.Path) -> dict:
 	}
 	return value
 
-
-#============================================
-def test_import_archives_projection_and_writes_publication_v2(tmp_path: pathlib.Path) -> None:
-	"""A valid final-only import retains the projection and records no quality state."""
+def test_import_archives_only_bytes_accepted_during_validation(
+	tmp_path: pathlib.Path,
+	monkeypatch: pytest.MonkeyPatch,
+) -> None:
+	"""A source swap after validation cannot alter the archive or published asset."""
 	initialize_site(tmp_path)
 	bundle_path = make_bundle(tmp_path, "run-one")
+	source_asset = pathlib.Path(bundle_path) / "assets" / ASSET_NAME
 
-	result = scripts.import_publication_bundle.import_publication_bundle(
-		bundle_path, str(tmp_path), fake_build
+	def swap_source_after_validation(_root: str) -> None:
+		source_asset.write_bytes(b"swapped after validation")
+
+	monkeypatch.setattr(
+		scripts.publication_transaction,
+		"reconcile_interrupted_staging",
+		swap_source_after_validation,
 	)
-	record = json.loads(
-		(tmp_path / "data" / "publications" / f"{REPORT_DATE}.json").read_text(encoding="utf-8")
+	scripts.import_publication_bundle.import_publication_bundle(
+		bundle_path,
+		str(tmp_path),
+		fake_build,
 	)
-	archive = tmp_path / "data" / "publication_bundles" / result["bundle_id"]
+	archive = tmp_path / "data" / "publication_bundles" / REPORT_DATE
+	published_asset = tmp_path / "docs" / "assets" / "publications" / REPORT_DATE / ASSET_NAME
+	assert (
+		(archive / "assets" / ASSET_NAME).read_bytes()
+		== published_asset.read_bytes()
+		== ASSET_BYTES
+	)
 
-	assert record["schema_version"] == "vosslab.daily-blog.publication.v2"
-	assert (archive / "editorial_projection.json").is_file()
-
-
-#============================================
-def test_import_v3_rejects_one_uncited_narrative_block(tmp_path: pathlib.Path) -> None:
-	"""The active historical importer preserves paragraph-level provenance."""
+def test_import_v4_accepts_one_uncited_maker_reflection(tmp_path: pathlib.Path) -> None:
+	"""The maker policy permits one reflective paragraph without a citation."""
 	initialize_site(tmp_path)
 	bundle_path = make_bundle(tmp_path, "run-uncited-narrative")
 	post_path = pathlib.Path(bundle_path) / "post.md"
@@ -366,14 +489,11 @@ def test_import_v3_rejects_one_uncited_narrative_block(tmp_path: pathlib.Path) -
 		"I enjoyed finding the smaller shape of this publication boundary.\n\n",
 	)
 	rehash_post_bundle(bundle_path, post)
+	result = scripts.import_publication_bundle.import_publication_bundle(
+		bundle_path, str(tmp_path), fake_build
+	)
+	assert result["status"] == "imported"
 
-	with pytest.raises(RuntimeError, match="every factual prose paragraph"):
-		scripts.import_publication_bundle.import_publication_bundle(
-			bundle_path, str(tmp_path), fake_build
-		)
-
-
-#============================================
 def test_generator_source_fingerprint_accepts_64_hex_identity(
 	tmp_path: pathlib.Path,
 ) -> None:
@@ -383,71 +503,109 @@ def test_generator_source_fingerprint_accepts_64_hex_identity(
 	bundle_file = pathlib.Path(bundle_path) / "bundle.json"
 	bundle = json.loads(bundle_file.read_text(encoding="utf-8"))
 	bundle["generator"]["revision"] = "0" * 64
-	bundle["bundle_id"] = scripts.import_publication_bundle.bundle_identity(bundle)
+	bundle["bundle_sha256"] = scripts.import_publication_bundle.bundle_sha256(bundle)
 	write_json(bundle_file, bundle)
-
 	result = scripts.import_publication_bundle.import_publication_bundle(
 		bundle_path, str(tmp_path), fake_build
 	)
 	record = json.loads(
 		(tmp_path / "data" / "publications" / f"{REPORT_DATE}.json").read_text(encoding="utf-8")
 	)
-
 	assert result["status"] == "imported"
 	assert record["generator_revision"] == "0" * 64
+#============================================
+def test_bundle_rejects_rechecksummed_noncanonical_json_before_staging(
+	tmp_path: pathlib.Path,
+) -> None:
+	"""An equivalent manifest still needs its one canonical archival byte form."""
+	initialize_site(tmp_path)
+	bundle_path = make_bundle(tmp_path, "run-noncanonical-json")
+	bundle_file = pathlib.Path(bundle_path) / "bundle.json"
+	bundle = json.loads(bundle_file.read_text(encoding="utf-8"))
+	bundle["bundle_sha256"] = scripts.import_publication_bundle.bundle_sha256(bundle)
+	bundle_file.write_text(json.dumps(bundle, indent=2, sort_keys=True), encoding="utf-8")
+	with pytest.raises(RuntimeError, match="canonical JSON bytes"):
+		scripts.import_publication_bundle.import_publication_bundle(
+			bundle_path, str(tmp_path), fake_build
+		)
+#============================================
+def test_bundle_rejects_duplicate_core_json_members_before_staging(
+	tmp_path: pathlib.Path,
+) -> None:
+	"""An ambiguous retained evidence object cannot become a publication archive."""
+	initialize_site(tmp_path)
+	bundle_path = make_bundle(tmp_path, "run-duplicate-json-member")
+	evidence_path = pathlib.Path(bundle_path) / "evidence.json"
+	evidence_path.write_bytes(b'{"schema_version":"one","schema_version":"two"}')
+	with pytest.raises(RuntimeError, match="valid canonical JSON"):
+		scripts.import_publication_bundle.import_publication_bundle(
+			bundle_path, str(tmp_path), fake_build
+		)
+
+def test_transfer_snapshot_imports_the_same_sealed_bundle(tmp_path: pathlib.Path) -> None:
+	"""The stdin transport reaches the ordinary validation and publication boundary."""
+	initialize_site(tmp_path)
+	bundle_path = make_bundle(tmp_path, "run-stdin-transfer")
+	snapshot = scripts.bundle_snapshot.BundleSnapshot.from_transfer_bytes(bundle_transfer(bundle_path))
+	result = scripts.import_publication_bundle.import_publication_snapshot(snapshot, str(tmp_path), fake_build)
+	assert result["status"] == "imported"
+	assert (tmp_path / "data" / "publication_bundles" / REPORT_DATE / "post.md").is_file()
 
 
 #============================================
-def test_generator_revision_rejects_40_hex_legacy_identity(
+def test_surface_stages_only_selected_aggregate_screenshot(tmp_path: pathlib.Path) -> None:
+	"""One selected screenshot imports although aggregate evidence has another one."""
+	initialize_site(tmp_path)
+	bundle_path = make_bundle(tmp_path, "run-selected-surface-image")
+	scripts.import_publication_bundle.import_publication_bundle(
+		bundle_path, str(tmp_path), fake_build
+	)
+	archive = tmp_path / "data" / "publication_bundles" / REPORT_DATE / "assets"
+	installed = tmp_path / "docs" / "assets" / "publications" / REPORT_DATE
+	assert (archive / ASSET_NAME).is_file()
+	assert (installed / ASSET_NAME).is_file()
+	assert not (archive / "unselected.bin").exists()
+	assert not (installed / "unselected.bin").exists()
+
+
+#============================================
+def test_surface_rejects_post_reference_to_unselected_aggregate_screenshot(
 	tmp_path: pathlib.Path,
 ) -> None:
-	"""The v2 publisher does not retain the former Git-length generator revision contract."""
+	"""Post image admission remains exactly the selected survivor image scope."""
 	initialize_site(tmp_path)
-	bundle_path = make_bundle(tmp_path, "run-legacy-generator-revision")
-	bundle_file = pathlib.Path(bundle_path) / "bundle.json"
-	bundle = json.loads(bundle_file.read_text(encoding="utf-8"))
-	bundle["generator"]["revision"] = "f" * 40
-	bundle["bundle_id"] = scripts.import_publication_bundle.bundle_identity(bundle)
-	write_json(bundle_file, bundle)
+	bundle_path = make_bundle(tmp_path, "run-unselected-surface-image")
+	post_path = pathlib.Path(bundle_path) / "post.md"
+	post = post_path.read_text(encoding="utf-8").replace(
+		f"../../assets/publications/{REPORT_DATE}/{ASSET_NAME}",
+		f"../../assets/publications/{REPORT_DATE}/unselected.bin",
+	)
+	rehash_post_bundle(bundle_path, post)
 
-	with pytest.raises(RuntimeError, match="64-hex"):
+	with pytest.raises(RuntimeError, match="post validation failed"):
 		scripts.import_publication_bundle.import_publication_bundle(
 			bundle_path, str(tmp_path), fake_build
 		)
 
 
 #============================================
-def test_identical_reimport_is_idempotent(tmp_path: pathlib.Path) -> None:
-	"""The exact installed bundle remains a successful no-op."""
+
+def test_idempotency_rejects_tampered_archived_asset(tmp_path: pathlib.Path) -> None:
+	"""A bundle checksum cannot hide asset-byte drift in the date-owned archive."""
 	initialize_site(tmp_path)
-	bundle_path = make_bundle(tmp_path, "run-idempotent")
+	bundle_path = make_bundle(tmp_path, "run-archive-drift")
 	scripts.import_publication_bundle.import_publication_bundle(
 		bundle_path, str(tmp_path), fake_build
 	)
-
-	result = scripts.import_publication_bundle.import_publication_bundle(
-		bundle_path, str(tmp_path), fake_build
-	)
-
-	assert result["status"] == "idempotent"
-
-
-#============================================
-def test_idempotency_rejects_changed_archive_bytes(tmp_path: pathlib.Path) -> None:
-	"""A bundle ID cannot hide byte drift in the publisher-owned immutable archive."""
-	initialize_site(tmp_path)
-	bundle_path = make_bundle(tmp_path, "run-archive-drift")
-	result = scripts.import_publication_bundle.import_publication_bundle(
-		bundle_path, str(tmp_path), fake_build
-	)
-	archived_evidence = (
+	archived_asset = (
 		tmp_path
 		/ "data"
 		/ "publication_bundles"
-		/ result["bundle_id"]
-		/ "evidence.json"
+		/ REPORT_DATE
+		/ "assets"
+		/ ASSET_NAME
 	)
-	archived_evidence.write_text("{}\n", encoding="utf-8")
+	archived_asset.write_bytes(b"tampered archive asset")
 
 	with pytest.raises(RuntimeError, match="archive has different content"):
 		scripts.import_publication_bundle.import_publication_bundle(
@@ -456,8 +614,25 @@ def test_idempotency_rejects_changed_archive_bytes(tmp_path: pathlib.Path) -> No
 
 
 #============================================
+def test_idempotency_rejects_tampered_archived_publication_surface(tmp_path: pathlib.Path) -> None:
+	"""The survivor authority is an exact archived idempotency input."""
+	initialize_site(tmp_path)
+	bundle_path = make_bundle(tmp_path, "run-archive-surface-drift")
+	scripts.import_publication_bundle.import_publication_bundle(
+		bundle_path, str(tmp_path), fake_build
+	)
+	archived_surface = (
+		tmp_path / "data" / "publication_bundles" / REPORT_DATE / "publication_surface.json"
+	)
+	archived_surface.write_bytes(b"{}\n")
+
+	with pytest.raises(RuntimeError, match="archive has different content"):
+		scripts.import_publication_bundle.import_publication_bundle(
+			bundle_path, str(tmp_path), fake_build
+		)
+
 def test_conflicting_bundle_for_published_date_is_rejected(tmp_path: pathlib.Path) -> None:
-	"""A report date is immutable after any different final-only bundle is installed."""
+	"""A report date changes only through the explicit replacement path."""
 	initialize_site(tmp_path)
 	first = make_bundle(tmp_path, "run-first")
 	second = make_bundle(tmp_path, "run-conflict")
@@ -471,24 +646,31 @@ def test_conflicting_bundle_for_published_date_is_rejected(tmp_path: pathlib.Pat
 
 	assert publication_snapshot(tmp_path) == original
 
-
-#============================================
-def test_projection_file_tampering_is_rejected_before_staging(tmp_path: pathlib.Path) -> None:
-	"""Projection bytes cannot change behind their bundle manifest hash."""
+def test_confirmed_replacement_installs_one_new_date_owned_publication(
+	tmp_path: pathlib.Path,
+) -> None:
+	"""Explicit replacement leaves only the new date-owned publication active."""
 	initialize_site(tmp_path)
-	bundle_path = make_bundle(tmp_path, "run-projection-tamper")
-	projection_path = pathlib.Path(bundle_path) / "editorial_projection.json"
-	projection = json.loads(projection_path.read_text(encoding="utf-8"))
-	projection["excerpts"][0]["content"] = "fabricated"
-	write_json(projection_path, projection)
+	first = make_bundle(tmp_path, "run-first")
+	second = make_bundle(tmp_path, "run-replacement")
+	scripts.import_publication_bundle.import_publication_bundle(first, str(tmp_path), fake_build)
+	record_path = tmp_path / "data" / "publications" / f"{REPORT_DATE}.json"
+	current = json.loads(record_path.read_text(encoding="utf-8"))
+	legacy = {key: current[key] for key in scripts.publication_record.HISTORICAL_PUBLICATION_RECORD_FIELDS}
+	legacy["schema_version"] = scripts.publication_record.HISTORICAL_PUBLICATION_SCHEMA_VERSION
+	write_json(record_path, legacy)
+	scripts.import_publication_bundle.import_publication_bundle(
+		second, str(tmp_path), fake_build, replace_existing=True
+	)
+	record = json.loads(record_path.read_text(encoding="utf-8"))
+	archive = tmp_path / "data" / "publication_bundles" / REPORT_DATE
+	post_path = tmp_path / "docs" / "blog" / "posts" / f"{REPORT_DATE}.md"
 
-	with pytest.raises(RuntimeError, match="projection hash"):
-		scripts.import_publication_bundle.import_publication_bundle(
-			bundle_path, str(tmp_path), fake_build
-		)
+	assert scripts.publication_record.validate_publication_record(record) == record
+	assert (archive / "post.md").read_bytes() == post_path.read_bytes() == (
+		pathlib.Path(second) / "post.md"
+	).read_bytes()
 
-
-#============================================
 def test_projection_packet_binding_cannot_be_rehashed_away(tmp_path: pathlib.Path) -> None:
 	"""A self-consistent projection must still bind to the exact evidence packet."""
 	initialize_site(tmp_path)
@@ -503,8 +685,6 @@ def test_projection_packet_binding_cannot_be_rehashed_away(tmp_path: pathlib.Pat
 			bundle_path, str(tmp_path), fake_build
 		)
 
-
-#============================================
 def test_projection_cards_cover_every_active_repository(tmp_path: pathlib.Path) -> None:
 	"""A rehashed projection cannot omit an active evidence repository."""
 	initialize_site(tmp_path)
@@ -518,6 +698,7 @@ def test_projection_cards_cover_every_active_repository(tmp_path: pathlib.Path) 
 		scripts.import_publication_bundle.import_publication_bundle(
 			bundle_path, str(tmp_path), fake_build
 		)
+
 
 
 @pytest.mark.parametrize(
@@ -548,79 +729,6 @@ def test_projection_exact_excerpt_integrity(
 			bundle_path, str(tmp_path), fake_build
 		)
 
-
-#============================================
-def test_two_author_validation_summaries_are_required(
-	tmp_path: pathlib.Path,
-) -> None:
-	"""A bundle cannot exist before both author routes complete deterministic validation."""
-	initialize_site(tmp_path)
-	bundle_path = make_bundle(tmp_path, "run-invalid-author")
-	bundle_file = pathlib.Path(bundle_path) / "bundle.json"
-	bundle = json.loads(bundle_file.read_text(encoding="utf-8"))
-	bundle["candidates"].pop()
-	bundle["bundle_id"] = scripts.import_publication_bundle.bundle_identity(bundle)
-	write_json(bundle_file, bundle)
-
-	with pytest.raises(RuntimeError, match="exactly two"):
-		scripts.import_publication_bundle.import_publication_bundle(
-			bundle_path, str(tmp_path), fake_build
-		)
-
-
-#============================================
-def test_referee_mapping_excludes_failed_candidate_validation(tmp_path: pathlib.Path) -> None:
-	"""The referee cannot receive a candidate that failed deterministic validation."""
-	initialize_site(tmp_path)
-	bundle_path = make_bundle(tmp_path, "run-invalid-mapped-author")
-	bundle_file = pathlib.Path(bundle_path) / "bundle.json"
-	bundle = json.loads(bundle_file.read_text(encoding="utf-8"))
-	bundle["candidates"][1]["valid"] = False
-	bundle["candidates"][1]["issues"] = ["deterministic validation failed"]
-	bundle["bundle_id"] = scripts.import_publication_bundle.bundle_identity(bundle)
-	write_json(bundle_file, bundle)
-
-	with pytest.raises(RuntimeError, match="only valid candidates"):
-		scripts.import_publication_bundle.import_publication_bundle(
-			bundle_path, str(tmp_path), fake_build
-		)
-
-
-#============================================
-def test_referee_requires_an_ab_selection(tmp_path: pathlib.Path) -> None:
-	"""Publication requires a selected winner in the anonymous candidate mapping."""
-	initialize_site(tmp_path)
-	bundle_path = make_bundle(tmp_path, "run-invalid-referee")
-	bundle_file = pathlib.Path(bundle_path) / "bundle.json"
-	bundle = json.loads(bundle_file.read_text(encoding="utf-8"))
-	bundle["referee"]["anonymous_mapping"] = {}
-	bundle["bundle_id"] = scripts.import_publication_bundle.bundle_identity(bundle)
-	write_json(bundle_file, bundle)
-
-	with pytest.raises(RuntimeError, match="anonymous A/B mapping"):
-		scripts.import_publication_bundle.import_publication_bundle(
-			bundle_path, str(tmp_path), fake_build
-		)
-
-
-#============================================
-def test_referee_selection_binds_to_the_editorial_projection(tmp_path: pathlib.Path) -> None:
-	"""A referee decision from another projection cannot select the published post."""
-	initialize_site(tmp_path)
-	bundle_path = make_bundle(tmp_path, "run-referee-projection")
-	bundle_file = pathlib.Path(bundle_path) / "bundle.json"
-	bundle = json.loads(bundle_file.read_text(encoding="utf-8"))
-	bundle["referee"]["projection_id"] = "0" * 64
-	bundle["bundle_id"] = scripts.import_publication_bundle.bundle_identity(bundle)
-	write_json(bundle_file, bundle)
-
-	with pytest.raises(RuntimeError, match="referee projection"):
-		scripts.import_publication_bundle.import_publication_bundle(
-			bundle_path, str(tmp_path), fake_build
-		)
-
-
-#============================================
 def test_candidate_front_matter_rejects_unknown_contract_fields(
 	tmp_path: pathlib.Path,
 ) -> None:
@@ -639,8 +747,6 @@ def test_candidate_front_matter_rejects_unknown_contract_fields(
 			bundle_path, str(tmp_path), fake_build
 		)
 
-
-#============================================
 def test_candidate_front_matter_requires_projection_manifest(tmp_path: pathlib.Path) -> None:
 	"""Every selected post names the editorial projection used by both authors."""
 	initialize_site(tmp_path)
@@ -657,8 +763,6 @@ def test_candidate_front_matter_requires_projection_manifest(tmp_path: pathlib.P
 			bundle_path, str(tmp_path), fake_build
 		)
 
-
-#============================================
 def test_generic_date_derived_work_log_title_is_rejected(tmp_path: pathlib.Path) -> None:
 	"""A date plus generic Work log wording is not a descriptive publication title."""
 	initialize_site(tmp_path)
@@ -666,7 +770,7 @@ def test_generic_date_derived_work_log_title_is_rejected(tmp_path: pathlib.Path)
 	post_path = pathlib.Path(bundle_path) / "post.md"
 	post = post_path.read_text(encoding="utf-8").replace(
 		"# Exact evidence preserves the publication boundary",
-		"# Work log for August 23, 2026",
+		"# Work log for 2026-08-23",
 	)
 	rehash_post_bundle(bundle_path, post)
 
@@ -675,8 +779,6 @@ def test_generic_date_derived_work_log_title_is_rejected(tmp_path: pathlib.Path)
 			bundle_path, str(tmp_path), fake_build
 		)
 
-
-#============================================
 def test_unresolved_slug_placeholder_is_rejected(tmp_path: pathlib.Path) -> None:
 	"""The publisher rejects an output-contract sentinel that escaped the producer adapter."""
 	initialize_site(tmp_path)
@@ -693,43 +795,6 @@ def test_unresolved_slug_placeholder_is_rejected(tmp_path: pathlib.Path) -> None
 			bundle_path, str(tmp_path), fake_build
 		)
 
-
-#============================================
-def test_publisher_lock_lives_in_generated_runtime_state(tmp_path: pathlib.Path) -> None:
-	"""Locking cannot dirty the repository root during normal publisher operation."""
-	with scripts.publication_transaction.publisher_lock(str(tmp_path)):
-		lock_path = tmp_path / "generated" / "publisher.lock"
-		assert lock_path.is_file()
-
-	assert not (tmp_path / ".publisher.lock").exists()
-
-
-#============================================
-def test_asset_path_must_remain_inside_bundle(tmp_path: pathlib.Path) -> None:
-	"""A rehashed asset manifest cannot name a path outside the physical bundle."""
-	initialize_site(tmp_path)
-	bundle_path = make_bundle(tmp_path, "run-asset-path")
-	bundle_file = pathlib.Path(bundle_path) / "bundle.json"
-	bundle = json.loads(bundle_file.read_text(encoding="utf-8"))
-	bundle["assets"] = [
-		{
-			"path": "../escape.png",
-			"sha256": "a" * 64,
-			"git_blob_hash": "b" * 40,
-			"evidence_id": "ev-outside",
-			"publish_path": f"../../assets/publications/{REPORT_DATE}/escape.png",
-		}
-	]
-	bundle["bundle_id"] = scripts.import_publication_bundle.bundle_identity(bundle)
-	write_json(bundle_file, bundle)
-
-	with pytest.raises(RuntimeError, match="asset path"):
-		scripts.import_publication_bundle.import_publication_bundle(
-			bundle_path, str(tmp_path), fake_build
-		)
-
-
-#============================================
 def test_failed_staged_build_preserves_complete_publication_state(
 	tmp_path: pathlib.Path,
 ) -> None:
@@ -737,43 +802,33 @@ def test_failed_staged_build_preserves_complete_publication_state(
 	initialize_site(tmp_path)
 	bundle_path = make_bundle(tmp_path, "run-build-failure")
 	original = publication_snapshot(tmp_path)
-
 	def failed_build(_stage_root: str, _site_dir: str, _root: str) -> None:
 		raise RuntimeError("synthetic strict build failure")
-
 	with pytest.raises(RuntimeError, match="synthetic strict build failure"):
 		scripts.import_publication_bundle.import_publication_bundle(
 			bundle_path, str(tmp_path), failed_build
 		)
-
 	assert publication_snapshot(tmp_path) == original
-
-
 #============================================
 def test_install_failure_restores_complete_publication_state(
 	tmp_path: pathlib.Path,
 	monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-	"""A failure after immutable moves restores every publisher-owned boundary."""
+	"""A failed date-owned exchange restores every publisher-owned boundary."""
 	initialize_site(tmp_path)
 	bundle_path = make_bundle(tmp_path, "run-install-failure")
 	original = publication_snapshot(tmp_path)
-	real_replace = scripts.import_publication_bundle.os.replace
-
-	def fail_docs_install(source: str, destination: str) -> None:
-		if os.path.basename(source) == "docs" and destination == str(tmp_path / "docs"):
+	real_exchange = scripts.atomic_paths.exchange_directories
+	def fail_docs_exchange(first: str, second: str) -> None:
+		if str(tmp_path / "docs") in (first, second):
 			raise RuntimeError("synthetic source install failure")
-		real_replace(source, destination)
-
-	monkeypatch.setattr(scripts.import_publication_bundle.os, "replace", fail_docs_install)
+		real_exchange(first, second)
+	monkeypatch.setattr(scripts.atomic_paths, "exchange_directories", fail_docs_exchange)
 	with pytest.raises(RuntimeError, match="synthetic source install failure"):
 		scripts.import_publication_bundle.import_publication_bundle(
 			bundle_path, str(tmp_path), fake_build
 		)
-
 	assert publication_snapshot(tmp_path) == original
-
-
 #============================================
 def test_idempotency_requires_site_to_resolve_to_expected_release(
 	tmp_path: pathlib.Path,
@@ -787,16 +842,13 @@ def test_idempotency_requires_site_to_resolve_to_expected_release(
 	site = tmp_path / "site"
 	site.unlink()
 	site.symlink_to("generated/releases/old")
-
 	with pytest.raises(RuntimeError, match="publication record is incomplete"):
-		scripts.import_publication_bundle.import_publication_bundle(
-			bundle_path, str(tmp_path), fake_build
-		)
-
-
+			scripts.import_publication_bundle.import_publication_bundle(
+				bundle_path, str(tmp_path), fake_build
+			)
 #============================================
 def test_idempotency_accepts_valid_derived_site_release(tmp_path: pathlib.Path) -> None:
-	"""A presentation release retains the exact bundle identity beneath it."""
+	"""A presentation release retains the exact publication date beneath it."""
 	initialize_site(tmp_path)
 	bundle_path = make_bundle(tmp_path, "run-derived-site")
 	first = scripts.import_publication_bundle.import_publication_bundle(
@@ -806,11 +858,8 @@ def test_idempotency_accepts_valid_derived_site_release(tmp_path: pathlib.Path) 
 	second = scripts.import_publication_bundle.import_publication_bundle(
 		bundle_path, str(tmp_path), fake_build
 	)
-
-	assert first["bundle_id"] == second["bundle_id"]
+	assert first["bundle_sha256"] == second["bundle_sha256"]
 	assert second["status"] == "idempotent"
-
-
 #============================================
 def test_temp_site_link_is_removed_when_pointer_switch_fails(
 	tmp_path: pathlib.Path,
@@ -821,22 +870,17 @@ def test_temp_site_link_is_removed_when_pointer_switch_fails(
 	bundle_path = make_bundle(tmp_path, "run-temp-link-cleanup")
 	original = publication_snapshot(tmp_path)
 	real_replace = scripts.import_publication_bundle.os.replace
-
 	def fail_site_switch(source: str, destination: str) -> None:
 		if os.path.basename(source).startswith(".site-next-"):
 			raise RuntimeError("synthetic site switch failure")
 		real_replace(source, destination)
-
 	monkeypatch.setattr(scripts.import_publication_bundle.os, "replace", fail_site_switch)
 	with pytest.raises(RuntimeError, match="synthetic site switch failure"):
 		scripts.import_publication_bundle.import_publication_bundle(
 			bundle_path, str(tmp_path), fake_build
 		)
-
 	assert publication_snapshot(tmp_path) == original
 	assert not tuple(tmp_path.glob(".site-next-*"))
-
-
 #============================================
 def test_concurrent_imports_serialize_before_idempotency_and_commit(
 	tmp_path: pathlib.Path,
@@ -889,8 +933,6 @@ def test_concurrent_imports_serialize_before_idempotency_and_commit(
 	assert results["first"]["status"] == "imported"
 	assert isinstance(errors["second"], RuntimeError)
 	assert len(calls) == 1
-
-
 #============================================
 def test_crashed_commit_is_reconciled_before_next_import(
 	tmp_path: pathlib.Path,
@@ -925,8 +967,6 @@ def test_crashed_commit_is_reconciled_before_next_import(
 
 	assert result["status"] == "imported"
 	assert not tuple((tmp_path / "generated" / "staging").iterdir())
-
-
 #============================================
 @pytest.mark.parametrize(
 	("field", "message"),
@@ -950,44 +990,6 @@ def test_rehashed_projection_cannot_exceed_declared_limits(
 	rehash_projection_bundle(bundle_path, projection)
 
 	with pytest.raises(RuntimeError, match=message):
-		scripts.import_publication_bundle.import_publication_bundle(
-			bundle_path, str(tmp_path), fake_build
-		)
-
-
-#============================================
-def test_candidate_projection_identity_is_bound_to_bundle(
-	tmp_path: pathlib.Path,
-) -> None:
-	"""Each candidate summary must describe the exact projection it was judged against."""
-	initialize_site(tmp_path)
-	bundle_path = make_bundle(tmp_path, "run-candidate-projection")
-	bundle_file = pathlib.Path(bundle_path) / "bundle.json"
-	bundle = json.loads(bundle_file.read_text(encoding="utf-8"))
-	bundle["candidates"][0]["projection_id"] = "0" * 64
-	bundle["bundle_id"] = scripts.import_publication_bundle.bundle_identity(bundle)
-	write_json(bundle_file, bundle)
-
-	with pytest.raises(RuntimeError, match="candidate projection"):
-		scripts.import_publication_bundle.import_publication_bundle(
-			bundle_path, str(tmp_path), fake_build
-		)
-
-
-#============================================
-def test_bundle_object_contract_rejects_unknown_fields(
-	tmp_path: pathlib.Path,
-) -> None:
-	"""The v2 bundle contract rejects fields from an unrecognized producer revision."""
-	initialize_site(tmp_path)
-	bundle_path = make_bundle(tmp_path, "run-exact-fields")
-	bundle_file = pathlib.Path(bundle_path) / "bundle.json"
-	bundle = json.loads(bundle_file.read_text(encoding="utf-8"))
-	bundle["candidates"][0]["unexpected"] = True
-	bundle["bundle_id"] = scripts.import_publication_bundle.bundle_identity(bundle)
-	write_json(bundle_file, bundle)
-
-	with pytest.raises(RuntimeError, match="unsupported fields"):
 		scripts.import_publication_bundle.import_publication_bundle(
 			bundle_path, str(tmp_path), fake_build
 		)

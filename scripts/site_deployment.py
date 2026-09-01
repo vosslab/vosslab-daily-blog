@@ -14,13 +14,15 @@ import subprocess
 
 # local repo modules
 import scripts.publication_record
+import scripts.publication_article_projection
+import scripts.repository_paths
 import scripts.render_publication_status
 
 
-DEPLOYMENT_SCHEMA_VERSION = "vosslab.daily-blog.site-deployment.v1"
+DEPLOYMENT_SCHEMA_VERSION = "vosslab.daily-blog.site-deployment.v2"
 DEPLOYMENT_RECORD_FIELDS = frozenset(
 	{
-		"base_bundle_id",
+		"base_report_date",
 		"built_at",
 		"release_id",
 		"schema_version",
@@ -32,28 +34,7 @@ SITE_RELEASE_PREFIX = "site-"
 SUPPORTED_PYTHON = (3, 13)
 
 
-#============================================
-def repository_root(start_path: str) -> str:
-	"""Resolve the publisher repository root through Git."""
-	start = os.path.dirname(os.path.abspath(start_path))
-	result = subprocess.run(
-		["git", "-C", start, "rev-parse", "--show-toplevel"],
-		check=False,
-		text=True,
-		stdout=subprocess.PIPE,
-		stderr=subprocess.PIPE,
-		timeout=60,
-	)
-	if result.returncode:
-		message = result.stderr.strip() or result.stdout.strip()
-		raise RuntimeError(f"Publisher repository root is unavailable: {message}")
-	root = result.stdout.strip()
-	if not os.path.isabs(root):
-		raise RuntimeError("Publisher repository root must be absolute.")
-	return root
-
-
-REPO_ROOT = repository_root(__file__)
+REPO_ROOT = scripts.repository_paths.repository_root(__file__)
 
 
 #============================================
@@ -85,7 +66,7 @@ def _read_publication_records(root: str) -> list[dict]:
 		if os.path.islink(path) or not os.path.isfile(path):
 			raise RuntimeError(f"Publication record path is not a physical file: {path}")
 		with open(path, "r", encoding="utf-8") as handle:
-			record = scripts.publication_record.validate_publication_record(json.load(handle))
+			record = scripts.publication_record.validate_existing_publication_record(json.load(handle))
 		expected_date = os.path.splitext(name)[0]
 		if record["report_date"] != expected_date:
 			raise RuntimeError("Publication record date does not match its path.")
@@ -97,14 +78,13 @@ def _read_publication_records(root: str) -> list[dict]:
 def _verify_imported_source(root: str, records: list[dict]) -> None:
 	"""Reject drift in importer-owned posts and the derived status page."""
 	for record in records:
-		bundle_id = record["bundle_id"]
 		report_date = record["report_date"]
 		post_path = os.path.join(root, "docs", "blog", "posts", f"{report_date}.md")
 		archive_path = os.path.join(
 			root,
 			"data",
 			"publication_bundles",
-			bundle_id,
+			report_date,
 			"post.md",
 		)
 		if not os.path.isfile(post_path) or not os.path.isfile(archive_path):
@@ -121,6 +101,31 @@ def _verify_imported_source(root: str, records: list[dict]) -> None:
 		installed_status = handle.read()
 	if installed_status != expected_status:
 		raise RuntimeError("Publication status has drifted from installed records.")
+
+
+#============================================
+def _verify_staged_articles(stage_root: str, site_dir: str, records: list[dict]) -> None:
+	"""Require every rebuilt reader article to match its sealed body receipt."""
+	config_path = os.path.join(stage_root, "mkdocs.yml")
+	for record in records:
+		post_path = os.path.join(stage_root, record["post_path"])
+		with open(post_path, encoding="utf-8") as handle:
+			post = handle.read()
+		projection = scripts.publication_article_projection.source_article_projection(
+			post,
+			config_path,
+		)
+		digest = scripts.publication_article_projection.article_body_sha256(projection)
+		if (
+			record["schema_version"] == scripts.publication_record.PUBLICATION_SCHEMA_VERSION
+			and digest != record["article_body_sha256"]
+		):
+			raise RuntimeError("Staged post body does not match its publication receipt.")
+		scripts.publication_article_projection.verify_built_article(
+			site_dir,
+			record["report_date"],
+			projection,
+		)
 
 
 #============================================
@@ -220,12 +225,16 @@ def validate_deployment_record(record: object) -> dict:
 	expected_release = f"{SITE_RELEASE_PREFIX}{source_identity_value}"
 	if record["release_id"] != expected_release:
 		raise RuntimeError("Site deployment release identity is inconsistent.")
-	base_bundle_id = record["base_bundle_id"]
-	if base_bundle_id != "" and (
-		not isinstance(base_bundle_id, str)
-		or LOWER_SHA256_RE.fullmatch(base_bundle_id) is None
-	):
-		raise RuntimeError("Site deployment base bundle identity is invalid.")
+	base_report_date = record["base_report_date"]
+	if base_report_date != "":
+		if not isinstance(base_report_date, str):
+			raise RuntimeError("Site deployment base report date is invalid.")
+		try:
+			parsed_date = datetime.date.fromisoformat(base_report_date)
+		except ValueError as error:
+			raise RuntimeError("Site deployment base report date is invalid.") from error
+		if parsed_date.isoformat() != base_report_date:
+			raise RuntimeError("Site deployment base report date is invalid.")
 	built_at = record["built_at"]
 	if not isinstance(built_at, str) or not built_at.endswith("Z"):
 		raise RuntimeError("Site deployment timestamp is invalid.")
@@ -248,12 +257,12 @@ def _read_deployment_record(release: str) -> dict:
 
 
 #============================================
-def site_serves_bundle(root: str, bundle_id: str) -> bool:
-	"""Return whether site serves the bundle directly or through a derived release."""
+def site_serves_publication(root: str, report_date: str) -> bool:
+	"""Return whether site serves one report date directly or through a presentation release."""
 	site_link = os.path.join(root, "site")
 	if not os.path.islink(site_link):
 		return False
-	expected_release = os.path.join(root, "generated", "releases", bundle_id)
+	expected_release = os.path.join(root, "generated", "releases", report_date)
 	if os.path.realpath(site_link) == os.path.realpath(expected_release):
 		return True
 	target = os.path.realpath(site_link)
@@ -268,8 +277,7 @@ def site_serves_bundle(root: str, bundle_id: str) -> bool:
 		raise RuntimeError("Served site release path disagrees with its receipt.")
 	if not os.path.isfile(os.path.join(target, "index.html")):
 		raise RuntimeError("Served site release has no index.")
-	serves_bundle = record["base_bundle_id"] == bundle_id
-	return serves_bundle
+	return record["base_report_date"] == report_date
 
 
 #============================================
@@ -302,14 +310,14 @@ def _promote_release(
 	root: str,
 	stage_site: str,
 	source_identity_value: str,
-	base_bundle_id: str,
+	base_report_date: str,
 ) -> dict:
 	"""Install or reuse one immutable presentation release and switch site."""
 	release_id = f"{SITE_RELEASE_PREFIX}{source_identity_value}"
 	release = os.path.join(root, "generated", "releases", release_id)
 	record = {
 		"schema_version": DEPLOYMENT_SCHEMA_VERSION,
-		"base_bundle_id": base_bundle_id,
+		"base_report_date": base_report_date,
 		"built_at": utc_now(),
 		"release_id": release_id,
 		"source_identity": source_identity_value,
@@ -321,8 +329,8 @@ def _promote_release(
 		installed_record = _read_deployment_record(release)
 		if installed_record["source_identity"] != source_identity_value:
 			raise RuntimeError("Immutable site release identity has different content.")
-		if installed_record["base_bundle_id"] != base_bundle_id:
-			raise RuntimeError("Immutable site release covers a different base bundle.")
+		if installed_record["base_report_date"] != base_report_date:
+			raise RuntimeError("Immutable site release covers a different report date.")
 		status = "idempotent"
 	else:
 		os.makedirs(os.path.dirname(release), exist_ok=True)
@@ -334,7 +342,7 @@ def _promote_release(
 		"status": status,
 		"release_id": release_id,
 		"source_identity": source_identity_value,
-		"base_bundle_id": base_bundle_id,
+		"base_report_date": base_report_date,
 		"site": os.path.relpath(release, root),
 	}
 	return result
@@ -343,7 +351,7 @@ def _promote_release(
 #============================================
 def publish_site(root: str, build_function: object) -> dict:
 	"""Snapshot, strictly build, and atomically promote the current presentation."""
-	# Import here so publication_transaction can use site_serves_bundle without a cycle.
+	# Import here so the transaction module and presentation publisher share one lock without a cycle.
 	import scripts.publication_transaction
 
 	with scripts.publication_transaction.publisher_lock(root):
@@ -360,12 +368,13 @@ def publish_site(root: str, build_function: object) -> dict:
 			build_function(stage_root, stage_site, root)
 			if not os.path.isfile(os.path.join(stage_site, "index.html")):
 				raise RuntimeError("Strict build did not produce a site index.")
-			base_bundle_id = records[0]["bundle_id"] if records else ""
+			_verify_staged_articles(stage_root, stage_site, records)
+			base_report_date = records[0]["report_date"] if records else ""
 			result = _promote_release(
 				root,
 				stage_site,
 				source_identity_value,
-				base_bundle_id,
+				base_report_date,
 			)
 		finally:
 			if os.path.isdir(stage_root):

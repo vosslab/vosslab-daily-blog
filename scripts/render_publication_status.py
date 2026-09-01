@@ -39,7 +39,9 @@ def read_publication_records(root: str, proposed: dict) -> list[dict]:
 			path = os.path.join(directory, name)
 			if os.path.islink(path) or not os.path.isfile(path):
 				continue
-			record = validate_publication_record(read_json_object(path))
+			record = scripts.publication_record.validate_existing_publication_record(
+				read_json_object(path)
+			)
 			expected_date = os.path.splitext(name)[0]
 			if record["report_date"] != expected_date:
 				raise RuntimeError("Publication record date does not match its path.")
@@ -56,20 +58,19 @@ def render_status(records: list[dict]) -> str:
 	lines = [
 		"# Publication status",
 		"",
-		"| Report date | Generator run | Bundle |",
-		"| --- | --- | --- |",
+		"| Report date | Generator run |",
+		"| --- | --- |",
 	]
 	for value in records[:30]:
-		record = validate_publication_record(value)
+		record = scripts.publication_record.validate_existing_publication_record(value)
 		date_text = record["report_date"]
 		run_id = record["generator_run"]
-		bundle_id = record["bundle_id"][:12]
-		lines.append(f"| {date_text} | {run_id} | {bundle_id} |")
+		lines.append(f"| {date_text} | {run_id} |")
 	lines.extend(
 		[
 			"",
-			"An identical bundle is idempotent. Any different bundle for an already-published "
-			+ "report date is rejected before staging.",
+			"Each report date has one current publication. Confirmed replacements are installed "
+			+ "atomically.",
 			"",
 		]
 	)

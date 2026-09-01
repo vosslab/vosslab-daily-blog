@@ -33,6 +33,7 @@ own publication. The deployment module validates the resolved interpreter before
 | Change | Primary owner | Required companion work |
 | --- | --- | --- |
 | Bundle, evidence, editorial-projection, or record contract | validators and importer | Coordinate an explicit versioned change with `vosslab-podcast`, then add focused contract tests. |
+| Incoming bundle filesystem boundary | `scripts/bundle_snapshot.py` | Preserve one held no-follow snapshot; test root, roster, asset, and symlink replacement behavior. |
 | Import transaction, recovery, or release lifecycle | `scripts/publication_transaction.py` and importer | Prove failure preservation and retry behavior in `tests/test_publication_bundle_import.py`. |
 | Presentation snapshot, source identity, or promotion | `scripts/site_deployment.py` | Add deployment tests and run a strict staged build. |
 | Theme, reader navigation, logo, or public site content | `mkdocs.yml` and `docs/` | Run the strict build, then use `./publish_site.sh` when the checked-in presentation is ready. |

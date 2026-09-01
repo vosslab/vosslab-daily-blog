@@ -11,9 +11,14 @@ import scripts.validate_daily_post
 def validation_inputs() -> tuple[dict, dict, dict]:
 	"""Return one minimum valid publisher validation packet."""
 	evidence_id = "ev-maker-work"
-	evidence = {"report_date": "2026-08-23", "items": []}
+	evidence = {
+		"report_date": "2026-08-23",
+		"activity": [{"repository": "Alpha"}],
+		"items": [],
+	}
 	projection = {
 		"excerpts": [{"evidence_id": evidence_id, "kind": "dated_changelog"}],
+		"repositories": [{"repository": "Alpha", "repository_url": ""}],
 	}
 	bundle = {
 		"report_date": "2026-08-23",
@@ -83,10 +88,10 @@ def test_evidenced_opening_allows_one_uncited_narrative_block() -> None:
 	"""An opening may pair one reflection with one cited factual block."""
 	issues = validate(
 		"# Making a smaller boundary\n\n"
-		"I enjoyed finding the smaller shape of this validation boundary.\n\n"
 		"I connected the published post to its source evidence. "
 		"<!-- evidence: ev-maker-work -->\n\n"
 		"<!-- more -->\n\n"
+		"I enjoyed finding the smaller shape of this validation boundary.\n\n"
 		"## Project coverage\n\n"
 		"Alpha shipped its focused change.\n"
 	)
@@ -114,12 +119,12 @@ def test_three_uncited_narrative_blocks_pass() -> None:
 	"""The structural allowance accepts exactly three uncited prose blocks."""
 	issues = validate(
 		"# Making a smaller boundary\n\n"
-		"I enjoyed finding the smaller shape of this validation boundary.\n\n"
-		"I was surprised by how much room that gave the story.\n\n"
-		"I learned that evidence can support a paragraph without owning every sentence.\n\n"
 		"I connected the published post to its source evidence. "
 		"<!-- evidence: ev-maker-work -->\n\n"
 		"<!-- more -->\n\n"
+		"I enjoyed finding the smaller shape of this validation boundary.\n\n"
+		"I was surprised by how much room that gave the story.\n\n"
+		"I learned that evidence can support a paragraph without owning every sentence.\n\n"
 		"## Project coverage\n\n"
 		"Alpha shipped its focused change.\n"
 	)
@@ -176,10 +181,11 @@ def test_nonfinal_project_coverage_leaves_afterword_in_narrative() -> None:
 #============================================
 def v3_post() -> str:
 	"""Return a direct-validation post satisfying the historical policy."""
+	opening = "I " + " ".join(["evidence"] * 80) + " <!-- evidence: ev-maker-work -->"
 	paragraph = "I " + " ".join(["evidence"] * 180) + " <!-- evidence: ev-maker-work -->"
 	body = (
 		"# Making the boundary durable\n\n"
-		+ paragraph
+		+ opening
 		+ "\n\n<!-- more -->\n\n## First pass\n\n"
 		+ paragraph
 		+ "\n\n## Second pass\n\n"
@@ -233,13 +239,27 @@ def test_direct_v3_aug_26_fixture_passes() -> None:
 
 
 #============================================
-def test_v3_policy_allows_an_evidenced_afterword() -> None:
-	"""The historical variant does not turn a later H2 into a v4-only rejection."""
+def test_v3_requires_project_coverage_as_the_final_h2() -> None:
+	"""Historical coverage is final at H2 level while lower headings remain permitted."""
 	evidence, projection, _unused = validation_inputs()
 	post = v3_post().replace(
 		"Alpha remains covered. <!-- evidence: ev-maker-work -->\n",
 		"Alpha remains covered. <!-- evidence: ev-maker-work -->\n\n"
 		"## Afterword\n\nI kept one final note. <!-- evidence: ev-maker-work -->\n",
+	)
+	issues = scripts.validate_daily_post.validate_post(post, evidence, projection, v3_bundle())
+
+	assert "post must finish with one Project coverage H2 section" in issues
+
+
+#============================================
+def test_v3_allows_a_lower_heading_after_final_project_coverage() -> None:
+	"""The historical afterword boundary does not reject lower H3 structure."""
+	evidence, projection, _unused = validation_inputs()
+	post = v3_post().replace(
+		"Alpha remains covered. <!-- evidence: ev-maker-work -->\n",
+		"Alpha remains covered. <!-- evidence: ev-maker-work -->\n\n"
+		"### Quiet afterword\n\nI kept one final note. <!-- evidence: ev-maker-work -->\n",
 	)
 	issues = scripts.validate_daily_post.validate_post(post, evidence, projection, v3_bundle())
 
@@ -308,14 +328,115 @@ def test_optional_project_coverage_rule_gates_all_coverage_checks() -> None:
 		rules,
 	)
 	body = "I " + " ".join(["made"] * 310) + " <!-- evidence: ev-maker-work -->"
-	issues = scripts.validate_daily_post._v4_shape_issues(
+	issues = scripts.validate_daily_post._shape_issues(
 		body,
+		{"activity": [{"repository": "vosslab/alpha"}]},
 		{"repositories": [{"repository": "vosslab/alpha", "repository_url": ""}]},
 		{"ev-maker-work"},
 		policy,
 	)
 
 	assert not issues
+
+
+#============================================
+def test_shape_validator_combines_h2_bounds_with_paragraph_evidence() -> None:
+	"""One policy can relax H2 shape while retaining paragraph-level evidence."""
+	rules = dict(scripts.validate_daily_post.V3_HISTORICAL_POLICY.rules)
+	rules["min_narrative_h2"] = 0
+	rules["max_narrative_h2"] = 12
+	policy = scripts.validate_daily_post._registered_policy(
+		"combined-h2-paragraph", "v1", "prompt", "rubric", rules
+	)
+	body = (
+		"I " + " ".join(["made"] * 350) + "\n\n"
+		"## Project coverage\n\nAlpha remains covered. <!-- evidence: ev-maker-work -->\n"
+	)
+	issues = scripts.validate_daily_post._shape_issues(
+		body,
+		{"activity": [{"repository": "Alpha"}]},
+		{"repositories": []},
+		{"ev-maker-work"},
+		policy,
+	)
+
+	assert "every factual prose paragraph must cite packet evidence" in issues
+	assert "post must contain two through four narrative H2 sections" not in issues
+
+
+#============================================
+def test_shape_validator_applies_compact_coverage_without_a_policy_family() -> None:
+	"""Coverage caps take effect when declared on an otherwise historical policy."""
+	rules = dict(scripts.validate_daily_post.V3_HISTORICAL_POLICY.rules)
+	rules["coverage_max_blocks"] = 1
+	rules["coverage_max_words"] = 200
+	policy = scripts.validate_daily_post._registered_policy(
+		"combined-compact-coverage", "v1", "prompt", "rubric", rules
+	)
+	body = v3_post().split("---\n", 2)[2].replace(
+		"Alpha remains covered. <!-- evidence: ev-maker-work -->\n",
+		"Alpha remains covered. <!-- evidence: ev-maker-work -->\n\n"
+		"Beta remains covered. <!-- evidence: ev-maker-work -->\n",
+	)
+	issues = scripts.validate_daily_post._shape_issues(
+		body,
+		{"activity": [{"repository": "Alpha"}, {"repository": "Beta"}]},
+		{"repositories": []},
+		{"ev-maker-work"},
+		policy,
+	)
+
+	assert "Project coverage must use one compact paragraph or list" in issues
+
+
+#============================================
+def test_shape_validator_applies_declared_word_reader_model() -> None:
+	"""Changing only word_count_mode changes the same shape decision."""
+	rules = dict(scripts.validate_daily_post.V4_MAKER_POLICY.rules)
+	rules["require_final_project_coverage"] = False
+	rules["require_first_narrative_repository_link"] = False
+	rules["require_section_evidence"] = False
+	rules["min_narrative_words"] = 10
+	rules["max_narrative_words"] = 10
+	rules["word_count_mode"] = "legacy_source"
+	legacy_policy = scripts.validate_daily_post._registered_policy(
+		"combined-source-words", "v1", "prompt", "rubric", rules
+	)
+	body = "[one](https://example.test/two-three) <span title=\"four\">five</span>"
+	inputs = ({"activity": []}, {"repositories": []}, set())
+	legacy_issues = scripts.validate_daily_post._shape_issues(
+		body, *inputs, legacy_policy
+	)
+	rules["word_count_mode"] = "reader_visible_markdown"
+	visible_policy = scripts.validate_daily_post._registered_policy(
+		"combined-visible-words", "v1", "prompt", "rubric", rules
+	)
+	visible_issues = scripts.validate_daily_post._shape_issues(
+		body, *inputs, visible_policy
+	)
+
+	assert not legacy_issues
+	assert "post narrative must contain 10 through 10 visible words" in visible_issues
+
+
+#============================================
+def test_shape_validator_enforces_zero_uncited_budget_without_paragraph_rule() -> None:
+	"""An explicit zero allowance remains meaningful outside paragraph validation."""
+	rules = dict(scripts.validate_daily_post.V4_MAKER_POLICY.rules)
+	rules["require_final_project_coverage"] = False
+	rules["require_first_narrative_repository_link"] = False
+	rules["require_section_evidence"] = False
+	rules["min_narrative_words"] = 0
+	rules["max_uncited_narrative_blocks"] = 0
+	policy = scripts.validate_daily_post._registered_policy(
+		"combined-zero-uncited", "v1", "prompt", "rubric", rules
+	)
+	issues = scripts.validate_daily_post._shape_issues(
+		"I kept one uncited maker note.", {"activity": []},
+		{"repositories": []}, set(), policy,
+	)
+
+	assert "post contains too many uncited narrative prose blocks" in issues
 
 
 #============================================
@@ -371,8 +492,9 @@ def test_v3_word_budget_excludes_heading_words(limit: int) -> None:
 		+ "## Project coverage\n\n"
 		+ "Alpha remains covered. <!-- evidence: ev-maker-work -->\n"
 	)
-	issues = scripts.validate_daily_post._v3_shape_issues(
+	issues = scripts.validate_daily_post._shape_issues(
 		body,
+		{"activity": []},
 		{"repositories": []},
 		{"ev-maker-work"},
 		scripts.validate_daily_post.V3_HISTORICAL_POLICY,
@@ -418,9 +540,9 @@ def test_policy_tuple_and_caller_built_policy_are_rejected() -> None:
 def test_policy_digests_bind_the_complete_declared_rule_set() -> None:
 	"""A policy digest changes when a behavior-affecting rule changes."""
 	policy = scripts.validate_daily_post.V4_MAKER_POLICY
-	assert policy.digest == "1bbca12465f37c32d5c0dc728b45633bf9969d21532467b7abe7584902505bb1"
+	assert policy.digest == "3a4b7148579e509b6c32fa19b31d107dc4278eb5f721b2a01353a1a9a51264ee"
 	assert scripts.validate_daily_post.V3_HISTORICAL_POLICY.digest == (
-		"e1df6f1a9bea8b6459a15140669e726320a99e411ad1a4677aa5c555ca7fbe0f"
+		"aada487814ca0080d4a49648440ee6614e5f3a3628be6197ffafcef242969324"
 	)
 	changed_rules = dict(policy.rules)
 	changed_rules["max_uncited_narrative_blocks"] = 4
@@ -441,3 +563,239 @@ def test_policy_digests_bind_the_complete_declared_rule_set() -> None:
 			"daily-blog-rubric-v3",
 			invalid_rules,
 		)
+
+
+#============================================
+def test_opening_policy_accepts_exact_pre_excerpt_boundaries() -> None:
+	"""One short opening before one marker remains the exact valid shape."""
+	post = post_with_body(
+		"# Specific title\n\nI made a small boundary.\n\n<!-- more -->\n\n"
+		"## Project coverage\n\nAlpha remains covered.\n"
+	)
+	front_matter, body = scripts.validate_daily_post.parse_front_matter(post)
+
+	assert front_matter["slug"] == "maker-work"
+	assert not scripts.validate_daily_post._opening_issues(
+		post, body, scripts.validate_daily_post.V4_MAKER_POLICY
+	)
+
+
+#============================================
+@pytest.mark.parametrize(
+	("opening", "expected"),
+	(
+		("I made one note.\n\n<!-- more -->", None),
+		("I made one note.\n\n<!-- more -->\n\n<!-- more -->", "excerpt marker"),
+		("I made one note.\n\nI made another note.\n\n<!-- more -->", "one prose block"),
+		("## Too early\n\nI made one note.\n\n<!-- more -->", "must not contain an H2"),
+		(" ".join(["word"] * 101) + "\n\n<!-- more -->", "word budget"),
+	),
+)
+def test_opening_policy_rejects_each_cross_boundary(
+	opening: str,
+	expected: str | None,
+) -> None:
+	"""Opening admission keeps marker, block, H2, and word limits independent."""
+	body = "# Specific title\n\n" + opening + "\n\n## Project coverage\n\nAlpha remains covered."
+	post = post_with_body(body)
+	_unused, parsed_body = scripts.validate_daily_post.parse_front_matter(post)
+	issues = scripts.validate_daily_post._opening_issues(
+		post, parsed_body, scripts.validate_daily_post.V4_MAKER_POLICY
+	)
+
+	if expected is None:
+		assert not issues
+	else:
+		assert any(expected in issue for issue in issues)
+
+
+#============================================
+def test_opening_policy_rejects_candidate_at_24001_characters() -> None:
+	"""The maximum candidate length is enforced by the immutable policy field."""
+	prefix = "# Specific title\n\n"
+	suffix = "\n\n<!-- more -->\n\n## Project coverage\n"
+	payload_size = 24001 - len(post_with_body(prefix + suffix))
+	body = prefix + ("x" * payload_size) + suffix
+	post = post_with_body(body)
+	_unused, parsed_body = scripts.validate_daily_post.parse_front_matter(post)
+	issues = scripts.validate_daily_post._opening_issues(
+		post, parsed_body, scripts.validate_daily_post.V4_MAKER_POLICY
+	)
+
+	assert len(post) == 24001
+	assert "post exceeds the candidate character budget" in issues
+
+
+#============================================
+@pytest.mark.parametrize(
+	("rule", "value"),
+	(
+		("coverage_repository_scope", "unknown"),
+		("coverage_repository_scope", 1),
+		("word_count_mode", "unknown"),
+		("word_count_mode", False),
+	),
+)
+def test_registered_policy_rejects_invalid_enum_rules(rule: str, value: object) -> None:
+	"""Every behavior enum must be present and belong to its closed vocabulary."""
+	rules = dict(scripts.validate_daily_post.V4_MAKER_POLICY.rules)
+	rules[rule] = value
+
+	with pytest.raises(RuntimeError, match="enum rules"):
+		scripts.validate_daily_post._registered_policy(
+			"invalid-enum", "v2", "prompt", "rubric", rules
+		)
+
+
+#============================================
+def test_registered_policy_rejects_missing_enum_rules() -> None:
+	"""A policy digest cannot omit its coverage or reader-model behavior."""
+	rules = dict(scripts.validate_daily_post.V4_MAKER_POLICY.rules)
+	del rules["word_count_mode"]
+
+	with pytest.raises(RuntimeError, match="incomplete"):
+		scripts.validate_daily_post._registered_policy(
+			"missing-enum", "v2", "prompt", "rubric", rules
+		)
+
+
+#============================================
+@pytest.mark.parametrize(
+	("rule", "value", "message"),
+	(
+		("max_candidate_chars", 0, "candidate character limit"),
+		("required_excerpt_marker_count", -1, "nonnegative integers"),
+		("required_opening_prose_blocks", "one", "nonnegative integers"),
+		("max_opening_h2", False, "nonnegative integers"),
+		("max_opening_words", -1, "nonnegative integers"),
+	),
+)
+def test_registered_policy_rejects_malformed_opening_rules(
+	rule: str,
+	value: object,
+	message: str,
+) -> None:
+	"""Every immutable opening field rejects malformed or unsafe policy records."""
+	rules = dict(scripts.validate_daily_post.V4_MAKER_POLICY.rules)
+	rules[rule] = value
+
+	with pytest.raises(RuntimeError, match=message):
+		scripts.validate_daily_post._registered_policy(
+			"invalid-opening", "v3", "prompt", "rubric", rules
+		)
+
+
+#============================================
+def test_registered_policy_rejects_opening_limits_without_one_marker() -> None:
+	"""Opening constraints cannot survive an ambiguous excerpt-marker cardinality."""
+	rules = dict(scripts.validate_daily_post.V4_MAKER_POLICY.rules)
+	rules["required_excerpt_marker_count"] = 0
+
+	with pytest.raises(RuntimeError, match="require one excerpt marker"):
+		scripts.validate_daily_post._registered_policy(
+			"invalid-marker", "v3", "prompt", "rubric", rules
+		)
+
+
+#============================================
+def test_opening_policy_allows_zero_markers_only_with_zero_opening_limits() -> None:
+	"""A non-opening policy does not attempt to parse a nonexistent excerpt marker."""
+	rules = dict(scripts.validate_daily_post.V4_MAKER_POLICY.rules)
+	rules["required_excerpt_marker_count"] = 0
+	rules["required_opening_prose_blocks"] = 0
+	rules["max_opening_h2"] = 0
+	rules["max_opening_words"] = 0
+	policy = scripts.validate_daily_post._registered_policy(
+		"zero-marker", "v3", "prompt", "rubric", rules
+	)
+	post = post_with_body("# Specific title\n\nI made a small boundary.\n")
+	_unused, body = scripts.validate_daily_post.parse_front_matter(post)
+
+	assert not scripts.validate_daily_post._opening_issues(post, body, policy)
+
+
+#============================================
+def test_v3_uses_packet_activity_for_project_coverage() -> None:
+	"""Historical coverage names every activity repository, not projection selection."""
+	body = v3_post().replace("Alpha remains covered", "packet-alpha remains covered")
+	issues = scripts.validate_daily_post._shape_issues(
+		body.split("---\n", 2)[2],
+		{"activity": [{"repository": "packet-alpha"}]},
+		{"repositories": [{"repository": "projection-beta"}]},
+		{"ev-maker-work"},
+		scripts.validate_daily_post.V3_HISTORICAL_POLICY,
+	)
+
+	assert not issues
+
+
+#============================================
+def test_v4_uses_projected_repositories_for_project_coverage() -> None:
+	"""Maker coverage names its editorial projection, not every packet activity row."""
+	body = "I " + " ".join(["made"] * 300) + " <!-- evidence: ev-maker-work -->\n\n"
+	body += "## Project coverage\n\nprojection-beta remains covered.\n"
+	issues = scripts.validate_daily_post._shape_issues(
+		body,
+		{"activity": [{"repository": "packet-alpha"}]},
+		{"repositories": [{"repository": "projection-beta", "repository_url": ""}]},
+		{"ev-maker-work"},
+		scripts.validate_daily_post.V4_MAKER_POLICY,
+	)
+
+	assert not issues
+
+
+#============================================
+def test_v3_counts_historical_markdown_source() -> None:
+	"""Historical budgets retain link destinations and raw tags from source Markdown."""
+	source = "[one](https://example.test/two-three) <span title=\"four\">five</span>"
+
+	assert scripts.validate_daily_post.policy_word_count(
+		source, scripts.validate_daily_post.V3_HISTORICAL_POLICY
+	) == 10
+
+
+#============================================
+def test_v4_counts_only_reader_visible_markdown() -> None:
+	"""Maker budgets exclude link targets and raw HTML attributes."""
+	source = "[one](https://example.test/two-three) <span title=\"four\">five</span>"
+
+	assert scripts.validate_daily_post.policy_word_count(
+		source, scripts.validate_daily_post.V4_MAKER_POLICY
+	) == 2
+
+
+#============================================
+@pytest.mark.parametrize(
+	("title", "expected"),
+	(
+		("Work log", True),
+		("Daily work log for 2026-08-23", True),
+		("2026-08-23 daily work log", True),
+		("Work log on August 23 2026", False),
+		("Making the receipt boundary legible", False),
+	),
+)
+def test_generic_work_log_title_matches_producer_normalization(
+	title: str,
+	expected: bool,
+) -> None:
+	"""Publisher title normalization matches the producer's closed generic-title set."""
+	body = "# " + title + "\n"
+
+	assert scripts.validate_daily_post.generic_work_log_title(body, "2026-08-23") is expected
+
+
+#============================================
+@pytest.mark.parametrize("evidence", ({}, {"activity": [{}]}, {"activity": ["alpha"]}))
+def test_malformed_coverage_scope_fails_closed(evidence: dict) -> None:
+	"""Coverage validation does not silently omit malformed policy-selected names."""
+	issues = scripts.validate_daily_post._shape_issues(
+		v3_post().split("---\n", 2)[2],
+		evidence,
+		{"repositories": []},
+		{"ev-maker-work"},
+		scripts.validate_daily_post.V3_HISTORICAL_POLICY,
+	)
+
+	assert "Project coverage repository scope is malformed" in issues

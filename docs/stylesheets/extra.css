@@ -79,6 +79,29 @@ body {
   letter-spacing: 0.015em;
 }
 
+.md-tabs {
+  background: var(--md-primary-fg-color);
+  border-block-end: 1px solid color-mix(in srgb, var(--worklog-gold) 65%, transparent);
+}
+
+.md-tabs__link {
+  color: color-mix(in srgb, var(--md-primary-bg-color) 78%, transparent);
+  font-family: var(--md-text-font);
+  font-size: 0.76rem;
+  font-weight: 750;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.md-tabs__link:focus-visible,
+.md-tabs__link:hover {
+  color: var(--md-primary-bg-color);
+}
+
+.md-tabs__link--active {
+  color: var(--worklog-gold);
+}
+
 .md-header__button.md-logo img {
   filter: drop-shadow(0 0.08rem 0.08rem rgba(8, 18, 18, 0.32));
   height: 1.55rem;
@@ -345,6 +368,23 @@ body {
 }
 
 @media screen and (min-width: 60em) {
+  /* Reader pages use the top tab bar; documentation pages keep their side navigation. */
+  body:has(.worklog-masthead) .md-main__inner,
+  body:has(.md-content--post) .md-main__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body:has(.worklog-masthead) .md-sidebar,
+  body:has(.md-content--post) .md-sidebar {
+    display: none;
+  }
+
+  body:has(.worklog-masthead) .md-content,
+  body:has(.md-content--post) .md-content {
+    grid-column: 1;
+    max-width: none;
+  }
+
   .md-sidebar--primary {
     border-inline-end: 1px solid var(--worklog-rule);
   }

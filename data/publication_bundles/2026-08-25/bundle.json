@@ -1,0 +1,112 @@
+{
+  "assets": [
+    {
+      "evidence_id": "ev-ed91371e064aa54d",
+      "git_blob_hash": "fed9134688d0127fcb1326d2456e90b8e4ceaa48",
+      "path": "assets/066951ef79ff-02_access_preview_denied.png",
+      "publish_path": "../../assets/publications/2026-08-25/066951ef79ff-02_access_preview_denied.png",
+      "sha256": "066951ef79ff6336ea4469586356ebb8216b1d07b92e3bd7759a4a3f7f7a0345"
+    },
+    {
+      "evidence_id": "ev-865b061285d54530",
+      "git_blob_hash": "c8c3e39bab553eea55d1ffac3a13ed4a9d414a42",
+      "path": "assets/48c23638277f-01_access_preview_allowed.png",
+      "publish_path": "../../assets/publications/2026-08-25/48c23638277f-01_access_preview_allowed.png",
+      "sha256": "48c23638277ffeca2231abd963df777d9b301aae6d15e8548463770cdd89f5de"
+    },
+    {
+      "evidence_id": "ev-08997bf317865457",
+      "git_blob_hash": "5a3c841041c9483ef19d3e5c145ccc6fb4d1660b",
+      "path": "assets/a92437e07ca8-03_revision_conflict.png",
+      "publish_path": "../../assets/publications/2026-08-25/a92437e07ca8-03_revision_conflict.png",
+      "sha256": "a92437e07ca8f0517183af3c33c5c5bf407ac443dfce3790992abde991358feb"
+    },
+    {
+      "evidence_id": "ev-cbc143841a879c00",
+      "git_blob_hash": "57e8009b287dc6c5ea24e941d6740b1b38e17bd9",
+      "path": "assets/d182a2d5a293-01_schedule_entitlement.png",
+      "publish_path": "../../assets/publications/2026-08-25/d182a2d5a293-01_schedule_entitlement.png",
+      "sha256": "d182a2d5a293d2082dd9dc983239930765565607ccd8434253ca9012d5209b4d"
+    }
+  ],
+  "best_artifact_id": "artifact-e6be644d0fadc79c8a6966d8",
+  "bundle_sha256": "05412ec6ee562ad6fbc20b4e81ca4f170c23edae43dc87413b458c757daecc19",
+  "contracts": {
+    "candidate_validation": {
+      "name": "v4-maker",
+      "sha256": "3a4b7148579e509b6c32fa19b31d107dc4278eb5f721b2a01353a1a9a51264ee",
+      "version": "v3"
+    },
+    "editorial_projection_schema": "vosslab.daily-blog.editorial-projection.v2",
+    "evidence_schema": "vosslab.daily-blog.evidence.v4",
+    "prompt_version": "daily-blog-prompts-v4",
+    "publication_source_safety": {
+      "sha256": "d50166736d79be7f7715cc0f7585fac71dfb2aecc1c631b10e01aeca2fb63c6b",
+      "version": "publication_source_safety.v1"
+    },
+    "rubric_version": "daily-blog-rubric-v4"
+  },
+  "created_at": "2026-09-01T01:07:34Z",
+  "editorial_projection": {
+    "path": "editorial_projection.json",
+    "projection_id": "bc9b904bf9829c9a461c426784a2dc0ea2e4a906168bab44903d73016a24759a",
+    "sha256": "0193b1c602623dd0321c0d344b843cab3b038398ec18d0c01d4f55c22c23ccca"
+  },
+  "editorial_prompt_contract": {
+    "candidate_validation": {
+      "name": "v4-maker",
+      "sha256": "3a4b7148579e509b6c32fa19b31d107dc4278eb5f721b2a01353a1a9a51264ee",
+      "version": "v3"
+    },
+    "contract_name": "v4-three-examples-corpus-v2",
+    "examples": {
+      "blocks": [
+        "aug-23",
+        "corpus-quiet-til",
+        "corpus-selectivity-ghostty"
+      ],
+      "name": "v4-three-examples-corpus-v2",
+      "sha256": "effc2bf2673c2167d4a764239100c07a0f3b1dea1b52b957ffb9bf394371cfa5"
+    },
+    "prompt_version": "daily-blog-prompts-v4",
+    "rubric_version": "daily-blog-rubric-v4",
+    "templates": {
+      "author": "539085277515db41f44376abc5b761e826eaf26ea4bee5da228086281cd2fd4b",
+      "referee": "33863d4be6f1f89200a65da46bfa9480054628d17ecb122eddb328b03607c070",
+      "repair": "ae234d9648d73c64615ffebf9c816d845237b27d35f67e24a68185ea15d6c147",
+      "rubric": "5a4562d9a995320f9b74c4dc69a58985bdc50dd37761c5c8563a0536c5ad3cad"
+    }
+  },
+  "evidence": {
+    "packet_id": "9e16cd490f4f9157a6f7d8968852ab21b3d419f905d39d44bb4877efda9a4171",
+    "path": "evidence.json",
+    "sha256": "98d71254c1624b2b411155b37fdbd4e32bb52cbb64469f96ce75d2eafc9edf19"
+  },
+  "generator": {
+    "revision": "50444974a56fd6e5a01e20849eae0631621cd2309b2ff608373930f3dd4318d0",
+    "run_id": "20260901T005316Z-b8907d6ec5",
+    "version": "daily-blog-generator-v2"
+  },
+  "maker_activation": {
+    "activation_id": "daily-blog-maker-activation-6b104be9c6907eeeffcf330f6b10173857b39c6b05baa46d4cf009a67daa7547",
+    "editorial_prompt_contract_sha256": "2fdae757fad5392adc1dd50cbadf13ff535871485220f1b0b52a19ff5d98cf47"
+  },
+  "post": {
+    "artifact_id": "artifact-e6be644d0fadc79c8a6966d8",
+    "path": "post.md",
+    "sha256": "69b22a7d0a647a9d264f876fb6709ab16f97a8152c596a6281eff1cbe8d07463"
+  },
+  "publication_surface": {
+    "path": "publication_surface.json",
+    "sha256": "9f4930e2e9eaf6de8f6c34a6ad98e2614f62bf245ed3d7172fc9cb7930c94b95",
+    "surface_id": "d247e07e48919cdab5154061c70f73cbf5771d4cb2e8cc7a654860e4d809c246"
+  },
+  "report_date": "2026-08-25",
+  "repository_roster": {
+    "path": "repository_roster.json",
+    "roster_id": "0f79bcfea4d3fb783258df4a37effef5996b6fdb9736ff6944fd17051570b8a1",
+    "sha256": "d17667f27cb28a0e297a3e01a5e336fdf42a13f6a5f717b36283da3c1e96ace8"
+  },
+  "schema_version": "vosslab.daily-blog.bundle.v9",
+  "timezone": "America/Chicago"
+}

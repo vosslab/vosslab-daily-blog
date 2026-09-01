@@ -1,5 +1,158 @@
 # Changelog
 
+## 2026-08-31
+
+### Behavior or Interface Changes
+
+- Advanced the sealed producer handoff to `vosslab.daily-blog.bundle.v9`. New imports carry a
+  canonical survivor-scoped `publication_surface.json`; its identity, evidence IDs, repository
+  coverage, and structured image paths bind the accepted post, archive, staged assets, receipt,
+  and rendered-page image verification to one authority.
+- Advanced new publication receipts to `vosslab.daily-blog.publication.v6`; exact v5 and v3
+  receipts remain read-only installed-history inputs for presentation verification.
+
+### Fixes and Maintenance
+
+- Made the portable publication surface the exact image and evidence authority at every publisher
+  boundary. Bundle admission, asset staging, installed-record verification, and built-page article
+  image checks now accept precisely the survivor-selected assets and evidence, rather than a wider
+  aggregate packet projection.
+
+### Developer Tests and Notes
+
+- Focused producer and publisher boundary coverage passed. The publisher's Python 3.13 suite passes
+  1,462 tests, and the strict staged MkDocs build verifies the installed publication surface.
+
+## 2026-08-30
+
+### Behavior or Interface Changes
+
+- Advanced the only accepted producer input to
+  `vosslab.daily-blog.bundle.v8`. The importer now validates the sealed
+  Stage-8 selected post and artifact identity directly, while candidate and
+  referee deliberation stays producer-owned run history.
+- Documented the sealed `--bundle-stdin` producer handoff: canonical checksum-bound entries, a
+  128 MiB complete-envelope cap, and preserved `--bundle` physical-directory support for manual
+  operator imports.
+- Advanced new publication receipts to `vosslab.daily-blog.publication.v5`, binding the selected
+  artifact and `article_body_sha256` for the canonical reader-visible article projection. Both import
+  and presentation deployment revalidate that projection against the staged built page.
+- Added the bound `publication_source_safety.v1` contract to new bundle-v8 imports. Its canonical
+  35-case executable corpus has SHA-256
+  `d50166736d79be7f7715cc0f7585fac71dfb2aecc1c631b10e01aeca2fb63c6b`. The publisher independently
+  checks canonical post markup and link targets before staging, while the existing staged
+  reader-body verification independently proves that the built article preserves the sealed ordered
+  source body.
+
+### Fixes and Maintenance
+
+- Bounded the held descriptor snapshot of incoming bundle artifacts with the
+  shared publication storage envelopes: 128 KiB JSON, 2 MiB post, and 8 MiB
+  per declared asset. The importer now seals `bundle.json` first, rejects
+  undeclared or nonregular asset children without retaining their bytes, and
+  lets later validation, staging, and archival consume that one snapshot.
+- Recorded the exact historical publication-v3 compatibility boundary: it remains readable and
+  redeployable only; new imports are strict v5 and a date replacement upgrades the record.
+- Made core bundle JSON admission match later archive-integrity verification: duplicate object
+  members, nonstandard numeric values, and any noncanonical byte serialization now fail before
+  staging, including manually submitted checksum-consistent bundles.
+
+### Developer Tests and Notes
+
+- Focused sealed-import, source-safety, and repository-roster boundary tests pass for the
+  direct v8 manifest.
+- Focused importer tests cover oversized core and declared-asset rejection,
+  plus undeclared asset rejection before staging. The controlled producer
+  publication E2E also passed with the protected producer blog contract hash
+  unchanged.
+- The producer's August 28 closeout proof exercised the then-current bundle v7 and the
+  publication-v5 import boundary twice in a disposable copy of this publisher.
+  It did not mutate the real site or make a live editorial-prose-quality claim.
+- The completed August 28 operational receipt replaced the date-owned publication with producer
+  run `20260831T023101Z-00f0b92468`, selected artifact
+  `artifact-55ac6377bb909fb95ebbcfa1`, and manifest SHA-256
+  `38a796c05c4b12f91860dc5322f0b7c051e6b7ba43b7540f2bf2fb6384b68798`. The v5 record, archived
+  bundle, and installed post bind exactly; page verification confirmed rendered-page SHA-256
+  `c443aa25614504ca7ff508b7a397769404933869c420e41a8efebbcd1e4457a0` and the semantic time date.
+  This live receipt is operational evidence, not a permanent test fixture.
+
+## 2026-08-29
+
+### Fixes and Maintenance
+
+- Added `scripts/bundle_snapshot.py` as the sole held no-follow source snapshot for incoming bundles.
+  Import, roster validation, idempotency, archive, and public staging consume its sealed five core
+  artifacts and exact declared asset bytes, preventing root or asset replacement and external
+  symlink redirection after validation begins.
+- Advanced the producer/publisher boundary to bundle v6 and publication record v4. The importer
+  now requires one digest-bound `best_artifact_id` that exactly matches the selected post manifest,
+  and persists that identity in the date-owned record for recovery, idempotency, and status reads.
+
+### Developer Tests and Notes
+
+- Final closure verification passed: Python 3.13.5 suite 1,362 passed with 0 failures, hygiene 310
+  passed, and the strict disposable MkDocs build passed. The producer-owned publication, 12-case
+  crash, and schedule E2Es plus four independent audits accepted the complete boundary.
+
+## 2026-08-28
+
+### Behavior or Interface Changes
+
+- Activated the maker publisher boundary. The importer now accepts bundle v5 bound to
+  `v4-three-examples-corpus-v2` and maker activation
+  `daily-blog-maker-activation-6b104be9c6907eeeffcf330f6b10173857b39c6b05baa46d4cf009a67daa7547`.
+- Advanced the independent import boundary to bundle v4. Each validated bundle seals the exact
+  `repository_roster.json` that the importer validates against evidence and projection provenance.
+- Made `report_date` the sole publication identity. Publication record v3 stores `bundle_sha256`
+  only as an integrity checksum, and the archive and content release use stable date-owned paths.
+- Added explicit date replacement. Exact reimports remain idempotent; an authorized replacement
+  exchanges each stable date-owned directory without a remove-then-install gap, switches `site`,
+  writes the publication record last, and removes rollback content after commit.
+- Advanced the independent import boundary to evidence v4 and editorial projection v2. The
+  importer validates one shared roster identity, canonical GitHub URLs, owner-qualified cache
+  paths, repository creation and fork lifecycle, first-report-day state, story signals, and
+  story-first card order.
+- Moved reader navigation from a documentation-style side rail to a compact top tab bar. The Work
+  log tab remains the root landing page, its archive remains reachable through the blog plugin, and
+  Status keeps the full operator-facing navigation surface.
+- Before the later same-day maker activation, advanced the publisher's independent candidate-validation
+  records to policy v3. The then-active import-only `v3-historical` digest was
+  `aada487814ca0080d4a49648440ee6614e5f3a3628be6197ffafcef242969324`; the direct-test-only
+  `v4-maker` digest is
+  `3a4b7148579e509b6c32fa19b31d107dc4278eb5f721b2a01353a1a9a51264ee`. Both declare a
+  24,000-character candidate cap, one excerpt marker, one opening prose block, no pre-marker H2,
+  and a 100-word opening cap. Policy versions 1 and 2 reject without compatibility behavior.
+- Before the later same-day activation, the importer was pinned to exact active v3 policy v3. That
+  superseded boundary kept v4 available only as an explicit local-validator test policy.
+
+### Fixes and Maintenance
+
+- Split repository lifecycle validation into `scripts/validate_repository_lifecycle.py` so the
+  importer retains a focused, independently testable ownership boundary.
+- Split sealed owner-roster validation into `scripts/validate_repository_roster.py`; the importer
+  remains below the source-size gate while retaining strict roster, hash, and evidence agreement.
+- Split Git-root discovery and CLI parsing into `scripts/repository_paths.py` and
+  `scripts/publication_import_cli.py`, keeping repository ownership and operator input separate from
+  the import transaction.
+- Aligned Project coverage H2 handling with producer behavior, including raw heading handling and
+  the v4 compact-coverage boundary.
+- Removed the duplicate function separator found by the final independent audit.
+- Added Linux `renameat2(RENAME_EXCHANGE)` and macOS `renameatx_np(RENAME_SWAP)` ownership for
+  directory replacement. Transaction recovery fingerprints staged release, archive, and docs trees
+  before deciding which exchanges to reverse after interruption.
+
+### Developer Tests and Notes
+
+- Accepted the producer/publisher F5 evidence: the real August 26 page passed strict MkDocs build at
+  `blog/2026/08/26/letting-cancer-clicker-show-its-mutations/index.html`, 11 assets matched
+  archived/public bytes, and the 12-case crash-recovery matrix passed. F7 later accepted on August 29.
+- The complete publisher suite passes 1,278 tests, the real documentation tree passes a strict
+  Python 3.13 MkDocs build, and the producer-owned cross-repository E2E imports an
+  evidence-v4/projection-v2 bundle into a temporary strict publisher.
+- The producer owns the executable offline prompt-experiment lifecycle E2E and all non-publishing
+  v4 experiment execution. This publisher change does not run a route, publish a bundle, or decide
+  activation.
+
 ## 2026-08-27
 
 ### Additions and New Features
@@ -24,9 +177,10 @@
 
 - Versioned publisher-local post-validation policies; v3 historical bundles remain the only
   importable contract while v4 maker-policy checks are available only through explicit direct tests.
-- Changed the daily-post evidence boundary from paragraph-level comments to narrative sections:
-  every narrative section needs a known packet citation, up to three prose blocks may omit their
-  own comment, and final Project coverage remains outside that allowance.
+- Added experimental v4 direct-validator coverage for section-level citations: every narrative
+  section needs a known packet citation, up to three prose blocks may omit their own comment, and
+  final Project coverage remains outside that allowance. This does not change the active v3 importer,
+  which retains paragraph-level evidence comments.
 - Added `publish_site.sh` as the one-command LAN presentation workflow. It strictly builds an
   immutable source-identified release, atomically switches `site`, verifies the live root and status
   pages, and requires no static-service restart.

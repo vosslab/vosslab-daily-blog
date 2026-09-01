@@ -1,0 +1,154 @@
+{
+  "aggregate_packet_id": "c26204727adbe349c10a0928e968901d26c4910cf65c3f49ef61539e71c17f4c",
+  "allowed_evidence_ids": [
+    "ev-0a5f1426b6ecad72",
+    "ev-1202c31302dc0a9e",
+    "ev-1874f7e0c78daea5",
+    "ev-2c76683ef36a97ce",
+    "ev-2edcf6a5683d4916",
+    "ev-37ddd80589088438",
+    "ev-399767c95599017a",
+    "ev-478791093de94a9e",
+    "ev-52ffb6980417c81d",
+    "ev-582feaaaf53bd6f8",
+    "ev-6578acaba3624dc0",
+    "ev-81cba88e3ed5be4f",
+    "ev-8fc77801d629c745",
+    "ev-950552478507094c",
+    "ev-9539b3084b0dba11",
+    "ev-b2f109125e9027da",
+    "ev-c613c4e1f7e97960",
+    "ev-d2537153f7683310",
+    "ev-dc1b3204d00fe489",
+    "ev-de184bef33818939",
+    "ev-e140959ea0f1de14"
+  ],
+  "allowed_images": [
+    {
+      "asset_path": "assets/43467225bb81-cancer_clicker_colony.png",
+      "evidence_id": "ev-e140959ea0f1de14",
+      "publish_path": "../../assets/publications/2026-08-27/43467225bb81-cancer_clicker_colony.png"
+    }
+  ],
+  "editorial_projection_id": "cb157d22b32fd9e9b605a717d455129ebe2318d74ee53c55200235f77c6a239e",
+  "report_date": "2026-08-27",
+  "repositories": [
+    "vosslab/battery-control",
+    "vosslab/biology-problems",
+    "vosslab/cancer-clicker",
+    "vosslab/cancer-clicker-ng",
+    "vosslab/ferrum-chemical-forge",
+    "vosslab/image-gen-interface",
+    "vosslab/local-llm-wrapper",
+    "vosslab/peptidyle-learning-engine",
+    "vosslab/protein-image-grader",
+    "vosslab/screenshot-ai-renamer-macos",
+    "vosslab/starter-repo-template",
+    "vosslab/syllabus",
+    "vosslab/virtual-lab-protocol-simulation",
+    "vosslab/vosslab-daily-blog",
+    "vosslab/vosslab-podcast"
+  ],
+  "schema_version": "vosslab.daily-blog.publication-surface.v1",
+  "source_artifacts": [
+    {
+      "artifact_id": "artifact-00a5b49507d4eac60289ee7a",
+      "content_hash": "2d7c20fe837c469b4c49c65c3f774c97517587249c2672600162501c25ba4522",
+      "kind": "RepoStory"
+    },
+    {
+      "artifact_id": "artifact-01ee4ca78ca8113279000fd2",
+      "content_hash": "6e1d88e5f516b8598a8bd9f4ce79422b995d4fabb122b0515a44fba2636dfc05",
+      "kind": "RepoStory"
+    },
+    {
+      "artifact_id": "artifact-28f275210f2f63e4d178f470",
+      "content_hash": "5248472878a268bb0c79315d746d112da27e5064c61b53333fa9225b504781af",
+      "kind": "RepoStory"
+    },
+    {
+      "artifact_id": "artifact-43eb8311a1611feaf0bd27e7",
+      "content_hash": "ee7ffdec0fe39bcd01c110d98d7be52c346616e1b780e5b39f8e21939e4af665",
+      "kind": "RepoStory"
+    },
+    {
+      "artifact_id": "artifact-48adaf873ba37b96ef4e74ed",
+      "content_hash": "14a7549f64c959f428527060200f62c302f978bfeb3d10aca4199ccc32814a13",
+      "kind": "RepoStory"
+    },
+    {
+      "artifact_id": "artifact-56b24160bccb95ec400b217a",
+      "content_hash": "0c1f663f2952cafc64a80af67fca377b7755fa9f6e66187f45a9b821010282e7",
+      "kind": "RepoStory"
+    },
+    {
+      "artifact_id": "artifact-58e62c4fdd690e960bb7227f",
+      "content_hash": "e1b5b3d4b8fcc586de91d8ea03ad384d1006c8125a9632350133cec2d82c7992",
+      "kind": "DailyOutline"
+    },
+    {
+      "artifact_id": "artifact-804d163948ea76003f19baf7",
+      "content_hash": "dea4c9c976c3469b89f27aba9cbfc61ec988ec3f8d82f6016197d023a49e9c90",
+      "kind": "RepoStory"
+    },
+    {
+      "artifact_id": "artifact-8438a59b6afc4f8b2f1a8a24",
+      "content_hash": "04663751411d1025da3846de072ca7c1317f34eaf029f6f2d2e4a4fc893faee8",
+      "kind": "RepoStory"
+    },
+    {
+      "artifact_id": "artifact-8b394987c4e1a0133c80a596",
+      "content_hash": "190f34c558ce534baf39387d96518f844a35a1e84207f3ab7b72a9c84ade4daf",
+      "kind": "RepoStory"
+    },
+    {
+      "artifact_id": "artifact-a1f623d11f9583a5549445d4",
+      "content_hash": "6c39ef21885c4c7f4ea22acd457ede2d38ebee730aa46db3844f331511c5e857",
+      "kind": "RepoStory"
+    },
+    {
+      "artifact_id": "artifact-a62caa858d6ba5e57a5f62a2",
+      "content_hash": "17dfa4a1244514dd834fc2ccd850d564f39f48ea005231ab546a14f35fe8c13f",
+      "kind": "RepoStory"
+    },
+    {
+      "artifact_id": "artifact-be7325dbf81ee16ce0a1d15d",
+      "content_hash": "bb55d09e564219701c353091eebab4e7b33674c53392b10c7329734877c3321b",
+      "kind": "RepoStory"
+    },
+    {
+      "artifact_id": "artifact-c2482cf87e431616dea3cf12",
+      "content_hash": "9175b7a60417f39d24b455b2b96400c45bb06fa13a77bab8329e30f4ce36a82b",
+      "kind": "RepoStory"
+    },
+    {
+      "artifact_id": "artifact-e1977b7548c682af8107b293",
+      "content_hash": "960dde3c5f860817c88eebbd1d56366ab8d36f7d04566d4998d5a98251dad447",
+      "kind": "RepoStory"
+    },
+    {
+      "artifact_id": "artifact-f3252b1c6c166c0222d1a191",
+      "content_hash": "abdad47935430dcf572df11acccf5202f620d0c82da666c6018d5d184e9e7f16",
+      "kind": "RepoStory"
+    }
+  ],
+  "source_packet_ids": [
+    "0c7d1334d5447de92d09594e00f24c75dc7c97cb9f96c47de1954eb84d089185",
+    "0d94a85aa67165a7fce80d82b0ddf5866bd2bdd7a916b3a20af0fa3e9a55a631",
+    "153351e0c156ba4ae228fc779137bd0f0511b914e51191a1f0e9d5d58c10e481",
+    "28999fafa92fbefa187044085287e063c4d8e85a9238b9d143dc35d5132aac60",
+    "2a7d0406711c0f26f3b251b14675199c39040b3852c409656fed9dd0dc68c9ce",
+    "3778e634b75f14ad95eb8bce61ba01ea4c29c0ecbdbecb99e92672a5112f47ff",
+    "41cf565b23437950e040d302b1df9b8016785b908f320020e951d094a88824b6",
+    "5982bf184691002ba8a9a3b7ddcb3e3d489e7cade35e00fe65e55a4a21a118b1",
+    "69dc3890d4b0f47a02ce241e163dfc7ec232e2e9b94e08a28df8157fa0bc9fbc",
+    "7112872b59fd805323e77b5ef00d920d69df050c3522d93acb302eda0d6a4b0e",
+    "73896d1082832772a82a2ce2f104d47fdbfae1695e7526826c0b4c5eb4cce8b2",
+    "7483c63ca61ad71191a38d724f3d2dfbb97bdf72bb1be32b31bc59a99687a98c",
+    "93ac3e75d6b6c83cb23cb32a5a2b980bfa87c1db4edd176bb4072e81eba040ee",
+    "95e7e0a8f508f8638e0d8e770535ee9798caaf9e8313a354c2ba35d697118368",
+    "c6ccc770a604e8c146d1b68a7b03cb8fc42591fca439b1a5e6cc25be5138d4f5"
+  ],
+  "surface_id": "9be6c4856b638247c85dbd74c925b9df9027589eef303fad7ef490c536999598",
+  "timezone": "America/Chicago"
+}

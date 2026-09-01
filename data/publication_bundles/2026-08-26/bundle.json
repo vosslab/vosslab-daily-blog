@@ -71,7 +71,7 @@
       "sha256": "d2c28c47691709e3d2d463ae880d05e796cc29d2db471d0940e2a393be2f84d9"
     }
   ],
-  "bundle_id": "d6d06817bec1b057411b10d135400e0db8024a7f750f603bd45c630d783c5799",
+  "bundle_sha256": "d6d06817bec1b057411b10d135400e0db8024a7f750f603bd45c630d783c5799",
   "candidates": [
     {
       "candidate_id": "candidate_1",
