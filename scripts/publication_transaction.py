@@ -109,19 +109,40 @@ def commit_stage(root: str, stage_root: str, receipt: dict) -> None:
 	staged_site = os.path.join(stage_root, "site")
 	site_link = os.path.join(root, "site")
 	os.makedirs(os.path.dirname(release), exist_ok=True)
-	if os.path.lexists(release):
-		scripts.atomic_paths.exchange_directories(release, staged_site)
-	else:
-		os.replace(staged_site, release)
-	scripts.atomic_paths.exchange_directories(docs_path, staged_docs)
 	next_link = os.path.join(root, f".site-next-{os.path.basename(stage_root)}")
+	release_existed = os.path.lexists(release)
+	release_installed = False
+	docs_installed = False
+	previous_site_target = os.readlink(site_link) if os.path.islink(site_link) else None
 	try:
+		if release_existed:
+			scripts.atomic_paths.exchange_directories(release, staged_site)
+		else:
+			os.replace(staged_site, release)
+		release_installed = True
+		scripts.atomic_paths.exchange_directories(docs_path, staged_docs)
+		docs_installed = True
 		os.symlink(os.path.relpath(release, root), next_link)
 		os.replace(next_link, site_link)
+		if not _post_matches(root, receipt):
+			raise RuntimeError("Installed Markdown bytes differ from the producer delivery.")
+		if not scripts.site_deployment.site_serves_publication(root, report_date):
+			raise RuntimeError("Rendered release does not contain the delivered publication.")
+	except BaseException:
+		if previous_site_target is not None:
+			rollback_link = f"{next_link}-rollback"
+			if os.path.lexists(rollback_link):
+				os.unlink(rollback_link)
+			os.symlink(previous_site_target, rollback_link)
+			os.replace(rollback_link, site_link)
+		if docs_installed:
+			scripts.atomic_paths.exchange_directories(docs_path, staged_docs)
+		if release_installed:
+			if release_existed:
+				scripts.atomic_paths.exchange_directories(release, staged_site)
+			else:
+				os.replace(release, staged_site)
+		raise
 	finally:
 		if os.path.lexists(next_link):
 			os.unlink(next_link)
-	if not _post_matches(root, receipt):
-		raise RuntimeError("Installed Markdown bytes differ from the producer delivery.")
-	if not scripts.site_deployment.site_serves_publication(root, report_date):
-		raise RuntimeError("Rendered release does not contain the delivered publication.")

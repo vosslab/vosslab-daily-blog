@@ -15,7 +15,6 @@ import re
 import sys
 
 # local repo modules
-import scripts.publication_record
 import scripts.validate_daily_post
 import scripts.site_deployment
 import scripts.validate_editorial_projection
@@ -707,23 +706,6 @@ def _validate_snapshot(
 
 
 #============================================
-def _publication_record_path(root: str, report_date: str) -> str:
-	"""Return the current publisher-owned record for one date."""
-	return os.path.join(root, "data", "publications", f"{report_date}.json")
-
-
-#============================================
-def _load_current_record(root: str, report_date: str) -> dict | None:
-	"""Load the current date record when present."""
-	path = _publication_record_path(root, report_date)
-	if not os.path.isfile(path):
-		return None
-	if os.path.islink(path):
-		raise RuntimeError("Current publication record must be one physical file.")
-	return read_json_object(path)
-
-
-#============================================
 def strict_mkdocs_build(stage_root: str, site_dir: str, root: str) -> None:
 	"""Run one strict MkDocs build against the complete staged source tree."""
 	venv_mkdocs = os.path.join(root, ".venv", "bin", "mkdocs")
@@ -759,36 +741,31 @@ def _is_idempotent(
 	post: bytes,
 	sealed_contents: dict[str, bytes],
 ) -> bool:
-	"""Return whether the exact bundle is already the complete installed release."""
-	record = _load_current_record(root, bundle["report_date"])
-	if not record or record.get("bundle_sha256") != bundle["bundle_sha256"]:
-		return False
+	"""Return whether the final producer bytes are already rendered for this date."""
 	report_date = bundle["report_date"]
 	release = os.path.join(root, "generated", "releases", report_date)
-	archive = os.path.join(root, "data", "publication_bundles", report_date)
 	post_path = os.path.join(root, "docs", "blog", "posts", f"{report_date}.md")
-	if not os.path.isdir(release) or not os.path.isdir(archive) or not os.path.isfile(post_path):
-		raise RuntimeError("Existing identical publication record is incomplete.")
-	if not scripts.site_deployment.site_serves_publication(root, report_date):
-		raise RuntimeError("Existing identical publication record is incomplete.")
-	names = (
-		"bundle.json", "evidence.json", "repository_roster.json", "daily_active_roster.json",
-		"editorial_projection.json", "publication_surface.json", "post.md",
-	)
-	for name in names + tuple(asset["path"] for asset in bundle["assets"]):
-		archived_path = os.path.join(archive, name)
-		if not os.path.isfile(archived_path):
-			raise RuntimeError("Existing identical publication archive is incomplete.")
-		source_contents = sealed_contents[name]
-		with open(archived_path, "rb") as handle:
-			archived_contents = handle.read()
-		if source_contents != archived_contents:
-			raise RuntimeError("Existing identical publication archive has different content.")
+	if not os.path.isdir(release) or not os.path.isfile(post_path):
+		return False
 	with open(post_path, "rb") as handle:
-		installed_post = handle.read()
-	if installed_post != post:
-		raise RuntimeError("Existing identical publication record has different post content.")
-	return True
+		if handle.read() != post:
+			return False
+	asset_directory = os.path.join(root, "docs", "assets", "publications", report_date)
+	expected = {
+		pathlib.PurePosixPath(asset["path"]).name: sealed_contents[asset["path"]]
+		for asset in bundle["assets"]
+	}
+	actual = set(os.listdir(asset_directory)) if os.path.isdir(asset_directory) else set()
+	if actual != set(expected):
+		return False
+	for name, contents in expected.items():
+		path = os.path.join(asset_directory, name)
+		if os.path.islink(path) or not os.path.isfile(path):
+			return False
+		with open(path, "rb") as handle:
+			if handle.read() != contents:
+				return False
+	return scripts.site_deployment.site_serves_publication(root, report_date)
 
 
 #============================================
@@ -887,18 +864,13 @@ def _import_validated_bundle(
 				"bundle_sha256": bundle["bundle_sha256"],
 				"report_date": bundle["report_date"],
 			}
-		current = _load_current_record(root, bundle["report_date"])
-		if current:
-			scripts.publication_record.validate_existing_publication_record(current)
-			if not replace_existing:
-				raise scripts.publication_import_protocol.ImportProtocolError(
-					"publication_conflict", "preflight",
-					"A different bundle cannot replace an already-published report date."
-				)
+		current = os.path.isfile(os.path.join(
+			root, "docs", "blog", "posts", f"{bundle['report_date']}.md"
+		))
 		stage_root = _new_stage_root(root, bundle["report_date"])
 		try:
 			try:
-				stage_root, record = scripts.publication_staging.prepare_stage(
+				stage_root, receipt = scripts.publication_staging.prepare_stage(
 					root,
 					stage_root,
 					bundle,
@@ -915,7 +887,7 @@ def _import_validated_bundle(
 					"staged_build_failed", "stage", str(error),
 				) from error
 			try:
-				_commit_stage(root, stage_root, record)
+				_commit_stage(root, stage_root, receipt)
 			except RuntimeError as error:
 				raise scripts.publication_import_protocol.ImportProtocolError(
 					"commit_failed", "commit", str(error),

@@ -13,9 +13,7 @@ import datetime
 import subprocess
 
 # local repo modules
-import scripts.publication_record
 import scripts.repository_paths
-import scripts.render_publication_status
 
 
 DEPLOYMENT_SCHEMA_VERSION = "vosslab.daily-blog.site-deployment.v2"
@@ -49,71 +47,6 @@ def stable_json_text(value: object) -> str:
 	"""Return deterministic pretty JSON with one trailing newline."""
 	text = json.dumps(value, ensure_ascii=True, indent=2, sort_keys=True) + "\n"
 	return text
-
-
-#============================================
-def _read_publication_records(root: str) -> list[dict]:
-	"""Read every validated installed publication record newest first."""
-	directory = os.path.join(root, "data", "publications")
-	if not os.path.isdir(directory):
-		return []
-	records = []
-	for name in sorted(os.listdir(directory), reverse=True):
-		if not name.endswith(".json"):
-			continue
-		path = os.path.join(directory, name)
-		if os.path.islink(path) or not os.path.isfile(path):
-			raise RuntimeError(f"Publication record path is not a physical file: {path}")
-		with open(path, "r", encoding="utf-8") as handle:
-			record = scripts.publication_record.validate_existing_publication_record(json.load(handle))
-		expected_date = os.path.splitext(name)[0]
-		if record["report_date"] != expected_date:
-			raise RuntimeError("Publication record date does not match its path.")
-		records.append(record)
-	return records
-
-
-#============================================
-def _verify_imported_source(root: str, records: list[dict]) -> None:
-	"""Reject drift in importer-owned posts and the derived status page."""
-	for record in records:
-		report_date = record["report_date"]
-		post_path = os.path.join(root, "docs", "blog", "posts", f"{report_date}.md")
-		archive_path = os.path.join(
-			root,
-			"data",
-			"publication_bundles",
-			report_date,
-			"post.md",
-		)
-		if not os.path.isfile(post_path) or not os.path.isfile(archive_path):
-			raise RuntimeError("Imported post receipt is incomplete.")
-		with open(post_path, "rb") as handle:
-			post_bytes = handle.read()
-		with open(archive_path, "rb") as handle:
-			archive_bytes = handle.read()
-		if post_bytes != archive_bytes:
-			raise RuntimeError(f"Imported post has drifted from its bundle: {report_date}")
-	status_path = os.path.join(root, "docs", "status.md")
-	expected_status = scripts.render_publication_status.render_status(records)
-	with open(status_path, "r", encoding="utf-8") as handle:
-		installed_status = handle.read()
-	if installed_status != expected_status:
-		raise RuntimeError("Publication status has drifted from installed records.")
-
-
-#============================================
-def _verify_staged_articles(stage_root: str, site_dir: str, records: list[dict]) -> None:
-	"""Verify source-byte placement while leaving Markdown interpretation to MkDocs."""
-	for record in records:
-		post_path = os.path.join(stage_root, record["post_path"])
-		with open(post_path, "rb") as handle:
-			digest = hashlib.sha256(handle.read()).hexdigest()
-		if (
-			record["schema_version"] == scripts.publication_record.PUBLICATION_SCHEMA_VERSION
-			and digest != record["article_body_sha256"]
-		):
-			raise RuntimeError("Staged post bytes do not match its publication receipt.")
 
 
 #============================================
@@ -344,8 +277,6 @@ def publish_site(root: str, build_function: object) -> dict:
 
 	with scripts.publication_transaction.publisher_lock(root):
 		scripts.publication_transaction.reconcile_interrupted_staging(root)
-		records = _read_publication_records(root)
-		_verify_imported_source(root, records)
 		stage_parent = _clear_stale_site_staging(root)
 		stage_root = os.path.join(stage_parent, f"publish-{uuid.uuid4().hex}")
 		os.makedirs(stage_root)
@@ -356,8 +287,13 @@ def publish_site(root: str, build_function: object) -> dict:
 			build_function(stage_root, stage_site, root)
 			if not os.path.isfile(os.path.join(stage_site, "index.html")):
 				raise RuntimeError("Strict build did not produce a site index.")
-			_verify_staged_articles(stage_root, stage_site, records)
-			base_report_date = records[0]["report_date"] if records else ""
+			post_directory = os.path.join(stage_root, "docs", "blog", "posts")
+			dates = sorted(
+				os.path.splitext(name)[0]
+				for name in os.listdir(post_directory)
+				if re.fullmatch(r"\d{4}-\d{2}-\d{2}\.md", name)
+			)
+			base_report_date = dates[-1] if dates else ""
 			result = _promote_release(
 				root,
 				stage_site,
