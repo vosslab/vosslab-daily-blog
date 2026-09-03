@@ -113,48 +113,6 @@ def test_replacement_authorizes_only_occupied_date_transition(
 		assert result["status"] == expected_status
 
 
-def test_transfer_snapshot_validation_stays_read_only(
-	monkeypatch: pytest.MonkeyPatch,
-	tmp_path: pathlib.Path,
-) -> None:
-	"""The sealed stdin preflight validates the real bundle without publisher mutation."""
-	bundle_path = test_publication_bundle_import.make_bundle(tmp_path, "run-stdin-validation")
-	snapshot = scripts.bundle_snapshot.BundleSnapshot.from_transfer_bytes(
-		test_publication_bundle_import.bundle_transfer(bundle_path)
-	)
-	publisher_root = tmp_path / "publisher-state"
-	test_publication_bundle_import.initialize_site(publisher_root)
-	before = test_publication_bundle_import.publication_snapshot(publisher_root)
-	bundle = json.loads((pathlib.Path(bundle_path) / "bundle.json").read_text(encoding="utf-8"))
-
-	def touched_publisher_path(*_args: object, **_kwargs: object) -> None:
-		raise AssertionError("validation must not enter the publisher transaction path")
-
-	monkeypatch.setattr(
-		scripts.import_publication_bundle.scripts.publication_transaction,
-		"publisher_lock", touched_publisher_path,
-	)
-	monkeypatch.setattr(
-		scripts.import_publication_bundle.scripts.publication_transaction,
-		"reconcile_interrupted_staging", touched_publisher_path,
-	)
-	monkeypatch.setattr(
-		scripts.import_publication_bundle.scripts.publication_staging,
-		"prepare_stage", touched_publisher_path,
-	)
-	monkeypatch.setattr(scripts.import_publication_bundle, "_new_stage_root", touched_publisher_path)
-	monkeypatch.setattr(scripts.import_publication_bundle, "_commit_stage", touched_publisher_path)
-	receipt = scripts.import_publication_bundle.validate_publication_snapshot(snapshot)
-	assert receipt == {
-		"best_artifact_id": bundle["best_artifact_id"],
-		"bundle_sha256": bundle["bundle_sha256"],
-		"report_date": bundle["report_date"],
-		"schema_version": "vosslab.daily-blog.import-validation.v1",
-		"status": "valid",
-	}
-	assert test_publication_bundle_import.publication_snapshot(publisher_root) == before
-
-
 def test_identical_authorized_reimport_is_idempotent(tmp_path: pathlib.Path) -> None:
 	"""Replacement authorization leaves an exact installed bundle a no-op."""
 	test_publication_bundle_import.initialize_site(tmp_path)

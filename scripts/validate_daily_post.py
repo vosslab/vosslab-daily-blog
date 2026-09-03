@@ -539,7 +539,6 @@ def _opening_issues(post: str, body: str, policy: PostValidationPolicy) -> list[
 	return issues
 
 
-#============================================
 def _shape_issues(
 	body: str,
 	evidence: dict,

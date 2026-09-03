@@ -55,6 +55,7 @@ def transfer_entries() -> list[tuple[str, bytes]]:
 	"""Return the smallest path-complete transport payload in sorted order."""
 	return sorted([
 		("bundle.json", b"{}"),
+		("daily_active_roster.json", b"{}"),
 		("editorial_projection.json", b"{}"),
 		("evidence.json", b"{}"),
 		("publication_surface.json", b"{}"),

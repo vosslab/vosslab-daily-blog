@@ -23,12 +23,6 @@ def parse_args() -> argparse.Namespace:
 		action="store_true",
 		help="Read one sealed producer publication bundle transfer from standard input.",
 	)
-	bundle_input.add_argument(
-		"--validate-bundle-stdin",
-		dest="validate_bundle_stdin",
-		action="store_true",
-		help="Validate one sealed producer transfer without staging or importing it.",
-	)
 	parser.add_argument(
 		"--replace-existing",
 		dest="replace_existing",

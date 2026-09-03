@@ -10,6 +10,9 @@ origin belongs there too. Rules: [REPO_STYLE.md](REPO_STYLE.md).
 
 ## Decision priority
 
+- once the final blog post is created, all the previous steps become unneeded; a fresh run would replace them. But before the final blog post is 
+  created, the previous steps are needed for tracing issues.
+
 ## Review expectations
 
 ## Working style

@@ -14,7 +14,6 @@ import subprocess
 
 # local repo modules
 import scripts.publication_record
-import scripts.publication_article_projection
 import scripts.repository_paths
 import scripts.render_publication_status
 
@@ -105,27 +104,16 @@ def _verify_imported_source(root: str, records: list[dict]) -> None:
 
 #============================================
 def _verify_staged_articles(stage_root: str, site_dir: str, records: list[dict]) -> None:
-	"""Require every rebuilt reader article to match its sealed body receipt."""
-	config_path = os.path.join(stage_root, "mkdocs.yml")
+	"""Verify source-byte placement while leaving Markdown interpretation to MkDocs."""
 	for record in records:
 		post_path = os.path.join(stage_root, record["post_path"])
-		with open(post_path, encoding="utf-8") as handle:
-			post = handle.read()
-		projection = scripts.publication_article_projection.source_article_projection(
-			post,
-			config_path,
-		)
-		digest = scripts.publication_article_projection.article_body_sha256(projection)
+		with open(post_path, "rb") as handle:
+			digest = hashlib.sha256(handle.read()).hexdigest()
 		if (
 			record["schema_version"] == scripts.publication_record.PUBLICATION_SCHEMA_VERSION
 			and digest != record["article_body_sha256"]
 		):
-			raise RuntimeError("Staged post body does not match its publication receipt.")
-		scripts.publication_article_projection.verify_built_article(
-			site_dir,
-			record["report_date"],
-			projection,
-		)
+			raise RuntimeError("Staged post bytes do not match its publication receipt.")
 
 
 #============================================

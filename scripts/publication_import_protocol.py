@@ -5,7 +5,6 @@ import json
 
 
 FAILURE_SCHEMA_VERSION = "vosslab.daily-blog.import-failure.v1"
-VALIDATION_SCHEMA_VERSION = "vosslab.daily-blog.import-validation.v1"
 MAX_FAILURE_BYTES = 1024
 FAILURE_CATEGORIES = frozenset({
 	"snapshot_rejected",
@@ -53,18 +52,6 @@ def failure_envelope(error: BaseException, phase: str = "preflight") -> bytes:
 	if len(contents) > MAX_FAILURE_BYTES:
 		raise RuntimeError("Publication import failure envelope exceeds its envelope.")
 	return contents
-
-
-#============================================
-def validation_receipt(bundle: dict) -> dict:
-	"""Build the exact identity-bound success receipt for stdin validation."""
-	return {
-		"best_artifact_id": bundle["best_artifact_id"],
-		"bundle_sha256": bundle["bundle_sha256"],
-		"report_date": bundle["report_date"],
-		"schema_version": VALIDATION_SCHEMA_VERSION,
-		"status": "valid",
-	}
 
 
 #============================================

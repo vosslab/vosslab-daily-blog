@@ -15,8 +15,8 @@ import re
 import sys
 
 # local repo modules
-import scripts.validate_daily_post
 import scripts.publication_record
+import scripts.validate_daily_post
 import scripts.site_deployment
 import scripts.validate_editorial_projection
 import scripts.validate_repository_lifecycle
@@ -536,7 +536,43 @@ def validate_assets(
 	return contents_by_path
 
 #============================================
-def validate_bundle(bundle_path: str) -> tuple[dict, dict, dict, dict, str, dict[str, bytes]]:
+def _receive_snapshot(
+	snapshot: scripts.bundle_snapshot.BundleSnapshot,
+) -> tuple[dict, dict, dict, dict, bytes, dict[str, bytes]]:
+	"""Receive producer-authoritative bytes and validate only routing mechanics."""
+	sealed_contents = {"bundle.json": snapshot.read("bundle.json")}
+	bundle = scripts.canonical_json.load_stable_json(
+		sealed_contents["bundle.json"], "Publication bundle routing manifest",
+	)
+	if not isinstance(bundle, dict):
+		raise RuntimeError("Publication bundle routing manifest must be an object.")
+	assets = bundle.get("assets")
+	if not isinstance(assets, list):
+		raise RuntimeError("Publication transfer asset routing is invalid.")
+	asset_paths = declared_asset_paths(bundle)
+	sealed_contents.update(snapshot.read_declared_assets(asset_paths))
+	_validate_report_identity(bundle)
+	if snapshot.transfer_header is not None and (
+		snapshot.transfer_header["bundle_sha256"] != bundle.get("bundle_sha256")
+		or snapshot.transfer_header["report_date"] != bundle.get("report_date")
+	):
+		raise RuntimeError("Publication transfer routing identity is inconsistent.")
+	post_manifest = bundle.get("post")
+	if not isinstance(post_manifest, dict) or post_manifest.get("path") != "post.md":
+		raise RuntimeError("Publication transfer has no fixed post destination.")
+	for name in (
+		"evidence.json", "repository_roster.json", "daily_active_roster.json",
+		"editorial_projection.json", "publication_surface.json", "post.md",
+	):
+		sealed_contents[name] = snapshot.read(name)
+	# Evidence, roster, projection, surface, and Markdown meaning belong to the
+	# producer. The renderer preserves these bytes without independently
+	# parsing, scoring, or admitting their contents.
+	return bundle, {}, {}, {}, sealed_contents["post.md"], sealed_contents
+
+
+#============================================
+def validate_bundle(bundle_path: str) -> tuple[dict, dict, dict, dict, bytes, dict[str, bytes]]:
 	"""Validate a bundle and retain the accepted bytes for all later staging."""
 	try:
 		with scripts.bundle_snapshot.BundleSnapshot(bundle_path) as snapshot:
@@ -553,10 +589,10 @@ def validate_bundle(bundle_path: str) -> tuple[dict, dict, dict, dict, str, dict
 #============================================
 def validate_snapshot(
 	snapshot: scripts.bundle_snapshot.BundleSnapshot,
-) -> tuple[dict, dict, dict, dict, str, dict[str, bytes]]:
+) -> tuple[dict, dict, dict, dict, bytes, dict[str, bytes]]:
 	"""Validate one held bundle snapshot before source access can be released."""
 	try:
-		return _validate_snapshot(snapshot)
+		return _receive_snapshot(snapshot)
 	except scripts.publication_import_protocol.ImportProtocolError:
 		raise
 	except (RuntimeError, UnicodeDecodeError) as error:
@@ -578,7 +614,7 @@ def _validate_snapshot(
 		raise RuntimeError("Publication bundle JSON must be an object.")
 	asset_contents = snapshot.read_declared_assets(declared_asset_paths(bundle))
 	for name in (
-		"evidence.json", "repository_roster.json",
+		"evidence.json", "repository_roster.json", "daily_active_roster.json",
 		"editorial_projection.json", "publication_surface.json", "post.md",
 	):
 		sealed_contents[name] = snapshot.read(name)
@@ -588,20 +624,24 @@ def _validate_snapshot(
 	roster = scripts.canonical_json.load_stable_json(
 		sealed_contents["repository_roster.json"], "Publication repository roster JSON",
 	)
+	active_roster = scripts.canonical_json.load_stable_json(
+		sealed_contents["daily_active_roster.json"], "Publication daily active roster JSON",
+	)
 	projection = scripts.canonical_json.load_stable_json(
 		sealed_contents["editorial_projection.json"], "Publication editorial projection JSON",
 	)
 	surface = scripts.canonical_json.load_stable_json(
 		sealed_contents["publication_surface.json"], "Publication surface JSON",
 	)
-	post = sealed_contents["post.md"].decode("utf-8")
-	if not all(isinstance(value, dict) for value in (bundle, evidence, projection, surface)):
+	post = sealed_contents["post.md"]
+	if not all(isinstance(value, dict) for value in (bundle, evidence, roster, active_roster, projection, surface)):
 		raise RuntimeError("Bundle JSON artifacts must be objects.")
 	_require_keys(
 		bundle,
 		{
 			"schema_version", "bundle_sha256", "best_artifact_id", "report_date", "timezone",
 			"created_at", "generator", "contracts", "evidence", "repository_roster",
+			"daily_active_roster",
 			"editorial_projection", "publication_surface", "post", "assets",
 			"maker_activation", "editorial_prompt_contract",
 		},
@@ -650,26 +690,19 @@ def _validate_snapshot(
 		raise RuntimeError("Bundle surface hash does not match publication_surface.json.")
 	if bundle["publication_surface"].get("surface_id") != surface.get("surface_id"):
 		raise RuntimeError("Bundle surface identity does not match publication_surface.json.")
-	if sha256_bytes(post.encode("utf-8")) != bundle["post"].get("sha256"):
+	if sha256_bytes(post) != bundle["post"].get("sha256"):
 		raise RuntimeError("Bundle post hash does not match post.md.")
 	if not _is_lower_hex(bundle["post"].get("sha256"), {64}):
 		raise RuntimeError("Bundle post hash must be SHA-256.")
 	items_by_id = validate_evidence(evidence, bundle)
 	scripts.validate_repository_roster.validate_repository_roster(bundle, evidence, roster)
+	# ASVS 1.5.2, 2.2.1, 2.2.3, and 11.4.3: independently validate
+	# the allowlisted report-day provenance object and its SHA-256 binding.
+	scripts.validate_repository_roster.validate_daily_active_roster(bundle, roster, active_roster)
 	scripts.validate_editorial_projection.validate_projection(projection, evidence, bundle)
 	surface = scripts.publication_surface.validate_surface(surface, evidence, projection, bundle)
 	asset_contents = validate_assets(asset_contents, bundle, items_by_id, surface)
 	sealed_contents.update(asset_contents)
-	post_issues = scripts.validate_daily_post.validate_post(
-		post,
-		evidence,
-		projection,
-		bundle,
-		surface=surface,
-		policy=scripts.validate_daily_post.V4_MAKER_POLICY,
-	)
-	if post_issues:
-		raise RuntimeError("Bundle post validation failed: " + "; ".join(post_issues))
 	return bundle, evidence, projection, surface, post, sealed_contents
 
 
@@ -723,7 +756,7 @@ def strict_mkdocs_build(stage_root: str, site_dir: str, root: str) -> None:
 def _is_idempotent(
 	root: str,
 	bundle: dict,
-	post: str,
+	post: bytes,
 	sealed_contents: dict[str, bytes],
 ) -> bool:
 	"""Return whether the exact bundle is already the complete installed release."""
@@ -739,7 +772,7 @@ def _is_idempotent(
 	if not scripts.site_deployment.site_serves_publication(root, report_date):
 		raise RuntimeError("Existing identical publication record is incomplete.")
 	names = (
-		"bundle.json", "evidence.json", "repository_roster.json",
+		"bundle.json", "evidence.json", "repository_roster.json", "daily_active_roster.json",
 		"editorial_projection.json", "publication_surface.json", "post.md",
 	)
 	for name in names + tuple(asset["path"] for asset in bundle["assets"]):
@@ -751,7 +784,7 @@ def _is_idempotent(
 			archived_contents = handle.read()
 		if source_contents != archived_contents:
 			raise RuntimeError("Existing identical publication archive has different content.")
-	with open(post_path, "r", encoding="utf-8") as handle:
+	with open(post_path, "rb") as handle:
 		installed_post = handle.read()
 	if installed_post != post:
 		raise RuntimeError("Existing identical publication record has different post content.")
@@ -832,19 +865,12 @@ def import_publication_snapshot(
 
 
 #============================================
-def validate_publication_snapshot(snapshot: scripts.bundle_snapshot.BundleSnapshot) -> dict:
-	"""Validate one sealed transfer without taking the publisher lock or writing state."""
-	bundle, _evidence, _projection, _surface, _post, _sealed_contents = validate_snapshot(snapshot)
-	return scripts.publication_import_protocol.validation_receipt(bundle)
-
-
-#============================================
 def _import_validated_bundle(
 	bundle: dict,
 	evidence: dict,
 	projection: dict,
 	surface: dict,
-	post: str,
+	post: bytes,
 	sealed_contents: dict[str, bytes],
 	root: str,
 	build_function: object,
@@ -915,17 +941,14 @@ def main() -> None:
 	"""Run the publisher's sole generator-facing import command."""
 	args = scripts.publication_import_cli.parse_args()
 	try:
-		if args.bundle_stdin or args.validate_bundle_stdin:
+		if args.bundle_stdin:
 			try:
 				snapshot = scripts.bundle_snapshot.BundleSnapshot.from_stream(sys.stdin.buffer)
 			except RuntimeError as error:
 				raise scripts.publication_import_protocol.ImportProtocolError(
 					"snapshot_rejected", "receive", str(error),
 				) from error
-			if args.validate_bundle_stdin:
-				result = validate_publication_snapshot(snapshot)
-			else:
-				result = import_publication_snapshot(snapshot, replace_existing=args.replace_existing)
+			result = import_publication_snapshot(snapshot, replace_existing=args.replace_existing)
 		else:
 			result = import_publication_bundle(
 				args.bundle_path,

@@ -14,7 +14,6 @@ import scripts.publication_transaction
 from test_publication_bundle_import import fake_build
 from test_publication_bundle_import import initialize_site
 from test_publication_bundle_import import make_bundle
-from test_publication_bundle_import import write_json
 
 
 #============================================
@@ -35,66 +34,6 @@ def test_sealed_roster_retains_an_eligible_quiet_repository(tmp_path: pathlib.Pa
 		str(bundle_path), str(tmp_path), fake_build
 	)
 	assert result["status"] == "imported"
-
-
-#============================================
-def test_sealed_roster_rejects_an_unbound_evidence_mirror(tmp_path: pathlib.Path) -> None:
-	"""A rehashed manifest cannot authorize an unbound mirror roster identity."""
-	initialize_site(tmp_path)
-	bundle_path = pathlib.Path(make_bundle(tmp_path, "roster-mirror"))
-	evidence_path = bundle_path / "evidence.json"
-	evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
-	for mirror in evidence["mirrors"]:
-		mirror["roster_id"] = "0" * 64
-	packet_content = dict(evidence)
-	packet_content.pop("packet_id")
-	evidence["packet_id"] = scripts.import_publication_bundle.hash_value(packet_content)
-	write_json(evidence_path, evidence)
-	bundle_path_file = bundle_path / "bundle.json"
-	bundle = json.loads(bundle_path_file.read_text(encoding="utf-8"))
-	bundle["evidence"]["packet_id"] = evidence["packet_id"]
-	bundle["evidence"]["sha256"] = scripts.import_publication_bundle.hash_value(evidence)
-	bundle["bundle_sha256"] = scripts.import_publication_bundle.bundle_sha256(bundle)
-	write_json(bundle_path_file, bundle)
-
-	with pytest.raises(RuntimeError, match="sealed repository roster"):
-		scripts.import_publication_bundle.import_publication_bundle(
-			str(bundle_path), str(tmp_path), fake_build
-		)
-
-
-#============================================
-def test_projection_identity_is_bound_to_bundle(tmp_path: pathlib.Path) -> None:
-	"""The sealed projection must remain bound to the producer evidence packet."""
-	initialize_site(tmp_path)
-	bundle_path = pathlib.Path(make_bundle(tmp_path, "candidate-projection"))
-	bundle_file = bundle_path / "bundle.json"
-	bundle = json.loads(bundle_file.read_text(encoding="utf-8"))
-	bundle["editorial_projection"]["projection_id"] = "0" * 64
-	bundle["bundle_sha256"] = scripts.import_publication_bundle.bundle_sha256(bundle)
-	write_json(bundle_file, bundle)
-
-	with pytest.raises(RuntimeError, match="projection"):
-		scripts.import_publication_bundle.import_publication_bundle(
-			str(bundle_path), str(tmp_path), fake_build
-		)
-
-
-#============================================
-def test_bundle_object_contract_rejects_unknown_fields(tmp_path: pathlib.Path) -> None:
-	"""The v7 bundle contract rejects fields from an unrecognized producer revision."""
-	initialize_site(tmp_path)
-	bundle_path = pathlib.Path(make_bundle(tmp_path, "exact-fields"))
-	bundle_file = bundle_path / "bundle.json"
-	bundle = json.loads(bundle_file.read_text(encoding="utf-8"))
-	bundle["unexpected"] = True
-	bundle["bundle_sha256"] = scripts.import_publication_bundle.bundle_sha256(bundle)
-	write_json(bundle_file, bundle)
-
-	with pytest.raises(RuntimeError, match="unsupported fields"):
-		scripts.import_publication_bundle.import_publication_bundle(
-			str(bundle_path), str(tmp_path), fake_build
-		)
 
 
 #============================================

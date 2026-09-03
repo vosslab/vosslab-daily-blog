@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-09-03
+
+### Behavior or Interface Changes
+
+- Removed the display repository's no-write publication-admission preflight. The producer now owns
+  bundle meaning and publication correctness and verifies the rendering receipt after delivery.
+- Reduced bundle receipt to routing mechanics: confined file placement, MkDocs build, deployment,
+  and rendered publication verification. Evidence, roster, projection, citations, front matter,
+  and prose meaning are no longer display-repository admission decisions.
+- Made MkDocs the first component to interpret producer-supplied Markdown. The receiver writes the
+  supplied `post.md` bytes verbatim and publishes arbitrary content when the configured build accepts
+  it.
+
+### Developer Tests and Notes
+
+- Focused import, transport, and bundle-snapshot coverage passed 44 tests.
+
 ## 2026-08-31
 
 ### Behavior or Interface Changes

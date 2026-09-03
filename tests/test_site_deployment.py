@@ -189,29 +189,3 @@ def test_failed_build_preserves_served_pointer(tmp_path: pathlib.Path) -> None:
 
 	assert os.readlink(tmp_path / "site") == original_target
 
-
-#============================================
-def test_wrong_rebuilt_article_preserves_served_pointer(tmp_path: pathlib.Path) -> None:
-	"""A redeploy cannot promote a dated page that drops a sealed article body."""
-	_initialize_source(tmp_path)
-	_install_publication_record(tmp_path)
-	scripts.site_deployment.publish_site(str(tmp_path), _fake_build)
-	original_target = os.readlink(tmp_path / "site")
-
-	def wrong_article_build(_stage_root: str, site_dir: str, _root: str) -> None:
-		os.makedirs(site_dir)
-		with open(os.path.join(site_dir, "index.html"), "w", encoding="utf-8") as handle:
-			handle.write("presentation index")
-		article_dir = os.path.join(site_dir, "article")
-		os.makedirs(article_dir)
-		with open(os.path.join(article_dir, "index.html"), "w", encoding="utf-8") as handle:
-			handle.write(
-				f'<time datetime="{REPORT_DATE} 00:00:00+00:00"></time>'
-				'<article class="md-content__inner md-typeset"><h1>Imported post</h1>'
-				'<p>Wrong reader body.</p></article>'
-			)
-
-	with pytest.raises(RuntimeError, match="does not retain"):
-		scripts.site_deployment.publish_site(str(tmp_path), wrong_article_build)
-
-	assert os.readlink(tmp_path / "site") == original_target
