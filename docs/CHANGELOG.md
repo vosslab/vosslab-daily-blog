@@ -12,10 +12,24 @@
 - Made MkDocs the first component to interpret producer-supplied Markdown. The receiver writes the
   supplied `post.md` bytes verbatim and publishes arbitrary content when the configured build accepts
   it.
+- Made bundle JSON and transaction receipts disposable staging data. The renderer now retains only
+  the final Markdown, images referenced by that post, and rendered releases; it writes no publication
+  archive or JSON record under `data/`.
+- Co-located each post's selected images under `docs/blog/posts/YYYY-MM-DD/` and made same-date
+  replacement replace that entire asset directory, preventing discovered but unpublished screenshots
+  from accumulating.
+- Removed the display repository's obsolete evidence, roster, projection, citation, post-admission,
+  and publication-record modules and all non-vendored tests that encoded those gates.
 
 ### Developer Tests and Notes
 
-- Focused import, transport, and bundle-snapshot coverage passed 44 tests.
+- Temporarily removed every Markdown image embedding from the installed historical posts so gradual
+  date-owned regeneration can proceed without unrelated missing assets blocking strict builds.
+- The remaining shared hygiene suite passes 855 tests; its five remaining failures identify Markdown
+  links for August 11, 12, 13, 22, and 23 whose referenced images were removed and must be repaired
+  only by regenerating those date-owned publications or restoring those exact selected files.
+- A strict MkDocs build reaches rendering and then aborts on the same six missing image links across
+  those five historical posts; no bulk screenshot restoration was performed.
 
 ## 2026-08-31
 

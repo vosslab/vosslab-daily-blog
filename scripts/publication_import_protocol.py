@@ -8,12 +8,11 @@ FAILURE_SCHEMA_VERSION = "vosslab.daily-blog.import-failure.v1"
 MAX_FAILURE_BYTES = 1024
 FAILURE_CATEGORIES = frozenset({
 	"snapshot_rejected",
-	"publication_conflict",
 	"staged_build_failed",
 	"commit_failed",
 	"publisher_implementation_defect",
 })
-FAILURE_PHASES = frozenset({"receive", "validate", "preflight", "stage", "commit"})
+FAILURE_PHASES = frozenset({"receive", "stage", "commit"})
 
 
 #============================================
@@ -31,7 +30,7 @@ class ImportProtocolError(RuntimeError):
 
 
 #============================================
-def failure_envelope(error: BaseException, phase: str = "preflight") -> bytes:
+def failure_envelope(error: BaseException, phase: str = "receive") -> bytes:
 	"""Return one bounded, text-free error envelope for an automated caller."""
 	if isinstance(error, ImportProtocolError):
 		category = error.category
@@ -40,7 +39,7 @@ def failure_envelope(error: BaseException, phase: str = "preflight") -> bytes:
 		category = "publisher_implementation_defect"
 		resolved_phase = phase
 	if resolved_phase not in FAILURE_PHASES:
-		resolved_phase = "preflight"
+		resolved_phase = "receive"
 	payload = {
 		"category": category,
 		"phase": resolved_phase,

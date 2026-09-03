@@ -64,7 +64,7 @@ def prepare_stage(
 	os.makedirs(os.path.dirname(post_path), exist_ok=True)
 	_atomic_write_bytes(post_path, post)
 	asset_directory = os.path.join(
-		proposed_docs, "assets", "publications", bundle["report_date"]
+		proposed_docs, "blog", "posts", bundle["report_date"]
 	)
 	if os.path.lexists(asset_directory):
 		if os.path.islink(asset_directory) or not os.path.isdir(asset_directory):
@@ -74,8 +74,8 @@ def prepare_stage(
 		name = pathlib.PurePosixPath(asset["path"]).name
 		destination = os.path.join(
 			proposed_docs,
-			"assets",
-			"publications",
+			"blog",
+			"posts",
 			bundle["report_date"],
 			name,
 		)

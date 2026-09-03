@@ -27,11 +27,6 @@ TRANSFER_SCHEMA_VERSION = "vosslab.daily-blog.bundle-transfer.v1"
 TRANSFER_MAGIC = (TRANSFER_SCHEMA_VERSION + "\n").encode("ascii")
 CORE_PATHS = frozenset({
 	"bundle.json",
-	"daily_active_roster.json",
-	"evidence.json",
-	"repository_roster.json",
-	"editorial_projection.json",
-	"publication_surface.json",
 	"post.md",
 })
 HEX_DIGITS = frozenset("0123456789abcdef")
